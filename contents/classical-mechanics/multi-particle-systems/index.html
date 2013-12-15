@@ -15,18 +15,41 @@ title: Geometric Physics • Classical Mechanics • Multi Particle Systems
       We are given that the total linear momentum of the system of particles is zero:
       <div class="well well-sm">$\sum_{i} \vec{p}_{i} = 0$</div>
       Let $\vec{r}_{i}$ be the displacement from the origin of the $i$th particle. Then the angular momentum of the $i$th particle about the origin is
-      <div class="well well-sm">$j_{i} = \vec{r}_{i} \wedge \vec{p}_{i}$.</div>
+      <div class="well well-sm">$l_{i} = \vec{r}_{i} \wedge \vec{p}_{i}$.</div>
       The total angular momentum of the system of particles about the origin is
       <div class="well well-sm">$\begin{eqnarray*}
-        J &amp; = &amp; \sum_{i} j_{i} \\
+        L &amp; = &amp; \sum_{i} l_{i} \\
           &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i}\end{eqnarray*}$
       </div>
-      The total angular momentum of the system of particles about a point A with displacement $\vec{a}$ from the origin is
+      The total angular momentum of the system of particles about a point $A$ with displacement $\vec{a}$ from the origin is
       <div class="well well-sm">$\begin{eqnarray*}
-        J_{A} &amp; = &amp; \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
+        L_{A} &amp; = &amp; \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
               &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i} - \sum_{i} \vec{a} \wedge \vec{p}_{i} \\
-              &amp; = &amp; J - \vec{a} \wedge \sum_{i} \vec{p}_{i} \\
-              &amp; = &amp; J.\blacksquare\end{eqnarray*}$
+              &amp; = &amp; L - \vec{a} \wedge \sum_{i} \vec{p}_{i} \\
+              &amp; = &amp; L.\blacksquare\end{eqnarray*}$
+      </div>
+    </p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><b>Theorem.</b> <em>The rate of change of the total angular momentum of a system of particles about a fixed point is equal to the sum of the torques about that point.</em></h3>
+  </div>
+  <div class="panel-body">
+    <p><i>Proof</i>. Let the fixed point be labelled $A$ and have a displacement $\vec{a}$ from the origin.<br/>
+      We are given that the point $A$ is fixed:
+      <div class="well well-sm">$\Large\frac{d}{dt}$$\vec{a} = 0$</div>
+      Let $\vec{r}_{i}$ and $\vec{p}_{i}$ be the displacement from the origin and linear momentum of the $i$th particle respectively.<br/>
+      The total angular momentum of the system of partices about the point $A$ is
+      <div class="well well-sm">$L_{A} = \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i}$</div>
+      Differentiating with respect to time gives the rate of change of the total angular momentum:
+      <div class="well well-sm">$\begin{eqnarray*}
+        \frac{d}{dt} L_{A} &amp; = &amp; \frac{d}{dt} \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
+              &amp; = &amp; \sum_{i} (\vec{v}_{i} - \frac{d}{dt} \vec{a}) \wedge \vec{p}_{i} + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \frac{d}{dt} \vec{p}_{i} \\
+              &amp; = &amp; 0 + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{F}_{i} \\
+              &amp; = &amp; \sum_{i} N_{i, A} \\
+              &amp; = &amp; N_{A}.\blacksquare\end{eqnarray*}$
       </div>
     </p>
   </div>
