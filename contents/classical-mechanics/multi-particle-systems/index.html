@@ -3,3 +3,35 @@ layout: master
 title: Geometric Physics • Classical Mechanics • Multi Particle Systems
 ---
 <h1>Multi Particle Systems</h1>
+
+<h3>Angular Momentum</h3>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Independence of the moment Point when the total linear momentum is zero.</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      <em>If the total linear momentum of a system of particles is zero, the total angular momentum is independent of the point about which the moments are taken.</em>
+    </p>
+    <p>
+      Let $\vec{p}_{i}$ be the linear momentum of the $i$th particle.<br/>
+      We are given that the total linear momentum of the system of particles is zero
+      <div class="well well-sm">$\sum_{i} \vec{p}_{i} = 0$</div>
+      Let $\vec{r}_{i}$ and $\vec{p}_{i}$ be the displacement from the origin and the linear momentum of the $i$th particle respectively. Then the angular momentum of the $i$th particle about the origin is
+      <div class="well well-sm">$j_{i} = \vec{r}_{i} \wedge \vec{p}_{i}$.</div>
+      The total angular momentum of the system of particles about the origin is
+      <div class="well well-sm">$\begin{eqnarray*}
+        J &amp; = &amp; \sum_{i} j_{i} \\
+          &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i}\end{eqnarray*}$
+      </div>
+      The total angular momentum of the system of particles about a point A is
+      <div class="well well-sm">$\begin{eqnarray*}
+        J_{A} &amp; = &amp; \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
+              &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i} - \sum_{i} \vec{a} \wedge \vec{p}_{i} \\
+              &amp; = &amp; J - \vec{a} \wedge \sum_{i} \vec{p}_{i} \\
+              &amp; = &amp; J.\end{eqnarray*}$
+      </div>
+    </p>
+  </div>
+</div>
