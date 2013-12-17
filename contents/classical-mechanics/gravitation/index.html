@@ -4,9 +4,15 @@ title: Geometric Physics • Classical Mechanics • Gravitation
 ---
 <h1>Gravitation</h1>
 
-<h3>Isaac Newton and Gravitation</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Introduction</h3>
+  </div>
+  <div class="panel-body">
+    <p>Isaac Newton was prompted to produce a mathematical description for planetary motion by Robert Hooke. Hooke suggested that planets may effectively perform elliptic orbits if their motion was a combination of straight tangential motion together with a falling towards the sun. Hooke was unable to complete the mathematical steps required. Newton accounted for Kepler's Laws with his Universal Law of Gravitation.</p>
+  </div>
+</div>
 
-<p>Isaac Newton was prompted to produce a mathematical description for planetary motion by Robert Hooke. Hooke suggested that planets may effectively perform elliptic orbits if their motion was a combination of straight tangential motion together with a falling towards the sun. Hooke was unable to complete the mathematical steps required. Newton accounted for Kepler's Laws with his "Universal" Law of Gravitation.</p>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -15,10 +21,78 @@ title: Geometric Physics • Classical Mechanics • Gravitation
   <div class="panel-body">
     <p>The following video highlights some confusion that can happen regarding the difference between gravitational forces and the accelerations that they produce.</p>
     <iframe width="560" height="315" src="//www.youtube.com/embed/_mCC-68LyZM?rel=0" frameborder="0" allowfullscreen></iframe>
+    <ol>
+      <li>Do two different objects take the same amount of time to fall a given distance?</li>
+      <li>How does the speed of a freely falling object change with time?</li>
+      <li>How does the gravitational force depend on the mass?</li>
+      <li>Why do two different objects take the same amount of time to fall a given distance when the forces are unequal?</li>
+    </ol>
   </div>
 </div>
 
-<h3>How to "derive" the Universal Law of Gravitation from Kepler's observations</h3>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tycho Brahe, Johannes Kepler and Planetary Motion</h3>
+  </div>
+  <div class="panel-body">
+    <p>The historical developments leading to Kepler's Laws.</p>
+    <iframe width="480" height="360" src="//www.youtube.com/embed/eJnre94EmYA?rel=0" frameborder="0" allowfullscreen></iframe>
+    <ol>
+      <li>What is the Ptolemaic model?</li>
+      <li>What is the Copernican heliocentric model?</li>
+      <li>How did Brahe's ideas compare to those of Ptolemy and Copernicus?</li>
+      <li>Describe how Kepler's ideas differed from the Copernican model.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Orbits and Kepler's Laws</h3>
+  </div>
+  <div class="panel-body">
+    <iframe width="480" height="360" src="//www.youtube.com/embed/dRT3m2Wzyh4?rel=0" frameborder="0" allowfullscreen></iframe>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Kepler's First Law</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          Each planet's orbit about the Sun is an ellipse.
+        </p>
+        <p>
+          The Sun's center is always located at one focus of the orbital ellipse.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Kepler's Second Law</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          The imaginary line joining a planet and the Sun sweeps equal areas of space during equal time intervals as the planet orbits.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Kepler's Third Law</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          The squares of the orbital periods are directly proportional to the cubes of the semi-major axes of their orbits.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<h3>Deriving the Universal Law of Gravitation from Kepler's observations</h3>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -27,7 +101,29 @@ title: Geometric Physics • Classical Mechanics • Gravitation
   <div class="panel-body">
     <p>
     </p>
-    <p>Kepler's Second Law is obeyed if the forces on a planet are directed towards the sun.</p>
+    <p>We show that Kepler's Second Law is obeyed if the force on the planet is directed towards the sun.</p>
+    <p>Let $\vec{r}$ be the displacement of the planet from the sun.</p>
+    <p>Suppose that the planet moves a small amount $\Delta \vec{r}$ in a time interval $\Delta t$.</p>
+    <p>Then the planet approximately sweeps out an area $\Delta A = \frac{1}{2} \vec{r} \wedge \Delta \vec{r}$ in time $\Delta t.$</p>
+    <p>Hence, $\Delta A / \Delta t = \frac{1}{2} \vec{r} \wedge \bar{v}$, where $\bar{v} = \Delta \vec{r} / \Delta t$ is the average velocity in the time interval $\Delta t$.</p>
+    <p>If we shrink the time interval $\Delta t$ we get $d A / d t = \frac{1}{2} \vec{r} \wedge \vec{v}$, for the rate of change of the area.</p>
+    <p>If the planet has mass $m$ and linear momentum $\vec{p} = m\vec{v}$, then the rate of change of area is</p>
+    <p>$dA / dt = \frac{1}{2m} L$, where $L = \vec{r} \wedge \vec{p}$ is the angular momentum of the planet about the sun.</p>
+    <p>So if we assume that the mass of the planet is constant, Kepler's Second Law is equivalent to the statement $dL / dt = 0$; the rate of change of angular momentum is zero, or the angular momentum is conserved in time.</p>
+    <p>But</p>
+    <p>
+      $
+      \begin{eqnarray}
+        0 &amp; = &amp; dL / dt \\
+          &amp; = &amp; d (\vec{r} \wedge \vec{p}) / dt \\
+          &amp; = &amp; \vec{v} \wedge \vec{p} + \vec{r} \wedge \vec{F} \\
+          &amp; = &amp; \vec{r} \wedge \vec{F}
+      \end{eqnarray}
+      $
+    </p>
+    <p>, where $\vec{F}$ is the force acting on the planet.</p>
+    <p>It follows from the properties of the wedge product that $\vec{F}$ must be a scalar multiple of $\vec{r}$.</p>
+    <p>The acceleration of the planet is in the direction of the force and is towards the sun. $\blacksquare$</p>
   </div>
 </div>
 
@@ -67,6 +163,8 @@ title: Geometric Physics • Classical Mechanics • Gravitation
   </div>
 </div>
 
+<h3>Using the Universal Law of Gravitation</h3>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Calculating Gravitational Attraction</h3>
@@ -77,6 +175,8 @@ title: Geometric Physics • Classical Mechanics • Gravitation
     </p>
   </div>
 </div>
+
+<h3>Standing on the shoulers of Newton</h3>
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -96,7 +196,7 @@ title: Geometric Physics • Classical Mechanics • Gravitation
   </div>
   <div class="panel-body">
     <p>
-      Modern theoretical physicists are working on new foundations for Gravity that are either consistent with Quantum Mechanics or suggest how each theory may need reworking...
+      A modern theoretical physicists talks about the search for a better explaination for gravity...
     </p>
     <iframe width="560" height="315" src="//www.youtube.com/embed/hByJBdQXjXU?rel=0" frameborder="0" allowfullscreen></iframe>
   </div>
