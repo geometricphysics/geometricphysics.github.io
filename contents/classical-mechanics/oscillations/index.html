@@ -1,0 +1,95 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Oscillations
+---
+<h1>Oscillations</h1>
+
+<h3>Simple Harmonic Motion</h3>
+
+<p>$f_{spring} = -k \times extension$ (Hooke's Law for an <em>ideal</em> or <em>linear</em> spring).</p>
+<p>k is a positive scalar called the <em>spring constant</em>.</p>
+<p>The minus sign causes the force to accelerate particle in the direction of the <em>equilibrium position</em>, so the force $f_{spring}$ is called a <em>restoring force</em>.</p>
+
+<h3>Potential Energy</h3>
+
+<p>The stored <em>elastic potential energy</em> is the work done by a force against the spring to cause a displacement.</p>
+<p>
+  $
+  \begin{eqnarray}
+    U(x) &amp; = &amp; \int_{0}^{x} \mathbf{f}_{external} \cdot d\mathbf{x} \\
+         &amp; = &amp; - \int_{0}^{x} \mathbf{f}_{spring} \cdot d\mathbf{x} \\
+         &amp; = &amp; - \int_{0}^{x} - k \mathbf{x} \cdot d\mathbf{x} \\
+         &amp; = &amp; \frac{k \mathbf{x}^{2}}{2} \\
+  \end{eqnarray}
+  $
+</p>
+
+<h3>Kinematics</h3>
+
+<p>Period, $T$</p>
+<p>Frequency, $f = 1 / T$</p>
+<p>Angular Frequency, $\omega = \tau / T = \tau f$</p>
+<p>
+  Let $m$ be the mass of a particle attached to a spring with spring constant $k$.
+</p>
+<p>
+  The equation of motion of the particle is<br/><br/>
+  $
+  \begin{eqnarray}
+    m \mathbf{\ddot{x}} &amp; = &amp; - k \mathbf{x} \\
+  \end{eqnarray}
+  $
+</p>
+<p>
+  The general solution is <br/><br/>
+  $
+  \begin{eqnarray}
+    \mathbf{x} &amp; = &amp; \mathbf{A} sin (\sqrt{\frac{k}{m}} t) + \mathbf{B} cos (\sqrt{\frac{k}{m}} t) \\
+  \end{eqnarray}
+  $
+</p>
+<p>
+  So the <em>angular frequency</em>, $\omega$, is given by<br/><br/>
+  $
+  \begin{eqnarray}
+    \omega &amp; = &amp; \sqrt{\frac{k}{m}} \\
+  \end{eqnarray}
+  $
+</p>
+
+<h3>Pendulum</h3>
+
+<p>
+  A <em>simple pendulum</em> consists of a weight of mass $m$ attached to a string or massless rod that swings without friction, about the vertical equilibrium position. The restoring force is provided by gravity.
+</p>
+<p>
+  If $L$ is the length of the pendulum, $m$ is the mass of the weight, $g$ is the acceleration due to gravity, and $\theta$ is the angular displacement of the pendulum from vertical then<br/><br/>
+  $
+  \begin{eqnarray}
+    T cos \theta &amp; = &amp; m g \\
+  \end{eqnarray}
+  $
+</p>
+<p>
+  $
+  \begin{eqnarray}
+    T sin \theta &amp; = &amp; - m L \ddot{\theta} \\
+  \end{eqnarray}
+  $
+</p>
+<p>
+  For small displacements, $sin \theta \approx \theta$ and $cos \theta \approx 1$, giving<br/></br>
+  $
+  \begin{eqnarray}
+    \ddot{\theta} &amp; = &amp; - \frac{g}{L} \theta \\
+  \end{eqnarray}
+  $
+</p>
+<p>
+  $\theta$ performs simple harmonic motion with period<br/></br>
+  $
+  \begin{eqnarray}
+    T &amp; = &amp; \tau \sqrt{\frac{L}{g}} \\
+  \end{eqnarray}
+  $
+</p>
