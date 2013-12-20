@@ -135,15 +135,40 @@ title: Geometric Physics • Classical Mechanics • Gravitation
     <p>
     </p>
     <p>Kepler's Third Law is obeyed if the strength of the force is inversely proportional to the square of the distance between the particles.</p>
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">The dependence on mass</h3>
-  </div>
-  <div class="panel-body">
+    <p>We can easily derive the $1 / R^{2}$ dependence of Newton's Universal Law of Gravitation in the case of circular orbits (treating the elliptical case requires a bit more mathematical machinary).</p>
+    <p>Kepler's Third Law, written mathematically is<br/><br/>
+      $T^{2} = k(M) R^{3}$,<br/><br/>
+      where $T$ is the period and $R$ is the radius, and $k$ is a function that may depend on the mass of the central body, but certainly does not depend on the radius.
+    </p>
     <p>
+      The key to finding the form of the force law is that the force, $f$ that keeps the planet traveling in a circle must be equal to the mass, $m$, of the planet times its acceleration $v^{2} / R$. Therefore,<br/><br/>
+      $
+      \begin{eqnarray}
+        f &amp; = &amp; m v^{2} / R \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      But we know that the speed $v$ is related to the radius $R$ by $vT = \tau R$, where $\tau$ is one turn or $2 \pi$.
+    </p>
+    <p>
+      The expression for f now becomes<br/><br/>
+      $
+      \begin{eqnarray}
+        f &amp; = &amp; m (\tau R)^{2} / R T^{2} \\
+          &amp; = &amp; m \tau^{2} R / T^{2} \\
+          &amp; = &amp; m \tau^{2} R / k(M) R^{3} \\
+          &amp; = &amp; m \tau^{2} / k(M) R^{2} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      By symmetry and Newton's 3rd Law, if $f$ depends on the mass of the planet, $m$, then it must also depend in the same way on the mass of the central body, $M$.<br/><br/>
+      $
+      \begin{eqnarray}
+        f &amp; = &amp; \frac{G m M}{R^{2}}
+      \end{eqnarray}
+      $.
     </p>
     <p>The Law of Gravitation is said to be "Universal" because every massive particle is affected by the force and every massive particle creates a force around it.</p>
   </div>
@@ -158,7 +183,7 @@ title: Geometric Physics • Classical Mechanics • Gravitation
       An experimental verification of the Gravitation law was first performed by Henry Cavendish. In addition, by controlling the masses and separation, the fundamental constant $G$ can be determined.
     </p>
     <p>
-      $G = 6.670 * 10^{-11} newton • m^{2}/kg^{2}$
+      $G = 6.67 * 10^{-11} N \cdot m^{2}/kg^{2}$
     </p>
   </div>
 </div>
@@ -172,6 +197,29 @@ title: Geometric Physics • Classical Mechanics • Gravitation
   <div class="panel-body">
     <p>
       <iframe width="560" height="315" src="//www.youtube.com/embed/SN1Q5ru2fI0?rel=0" frameborder="0" allowfullscreen></iframe>
+    </p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">The gravitational attraction due to body</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      So far we have been using Newton's Universal Law for Gravitation without worrying too much about the fact that it was derived as a formula for the force between two particles i.e. points. We might argue that this is a reasonable approximation if the points are so far apart that they may effectively be treated as points.
+    </p>
+    <p>
+      However, we can do better. Newton became aware of this issue in the Principia and proved some useful theorems concerning uniform spherical bodies.
+    </p>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Theorem: The gravitational force outside and due to a uniform spherical body is as if all the mass were concentrated at its center</h3>
+  </div>
+  <div class="panel-body">
+    <p>
     </p>
   </div>
 </div>
