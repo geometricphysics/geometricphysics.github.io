@@ -214,12 +214,86 @@ title: Geometric Physics • Classical Mechanics • Gravitation
     </p>
   </div>
 </div>
+
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Theorem: The gravitational force outside and due to a uniform spherical body is as if all the mass were concentrated at its center</h3>
+    <h3 class="panel-title">Theorem: The gravitational force outside and due to a uniform spherical shell is as if all the mass were concentrated at its center</h3>
   </div>
   <div class="panel-body">
     <p>
+      Use Spherical Polar Coordinates $(r, \theta, \phi)$ to take advantage of the spherical symmetry in the system.
+    </p>
+    <p>
+      The mass, $dM$, of an element of area, $dA$, of a spherical shell of radius $r$ with mass density $\sigma$ is<br/><br/>
+      $
+      \begin{eqnarray}
+        dM &amp; = &amp; \sigma dA \\
+           &amp; = &amp; \sigma r^{2} sin \theta d\theta d\phi
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The total mass of the shell is found by integrating the mass element over the entire sphere boundary:<br/><br/>
+      $
+      \begin{eqnarray}
+        M &amp; = &amp; \int_{\partial sphere} dM \\
+           &amp; = &amp; \sigma r^{2} \int_{0}^{\tau/2}sin \theta d\theta \int_{0}^{\tau} d\phi \\
+           &amp; = &amp; \sigma r^{2} [-cos \theta]_{0}^{\tau/2} [\phi]_{0}^{\tau} \\
+           &amp; = &amp; \sigma \, 2 \, \tau \, r^{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Now consider a mass $m$ placed on the z-axis at $R \hat{z}$, with $R > r$. The mass element $dM$ will exert a force on the mass $m$ and by symmetry all components in the $xy$ plane will cancel. The increment of force remaining on the particle is<br/><br/>
+      $
+      \begin{eqnarray}
+        d\mathbf{F} &amp; = &amp; - \frac{G m dM}{s^{2}} \mathbf{\hat{z}} \\
+                    &amp; = &amp; - \frac{G m M cos \alpha sin \theta d\theta d\phi}{2 \tau s^{2}} \mathbf{\hat{z}} \\
+      \end{eqnarray}
+      $<br/><br/>
+      where $s$ is the separation between the partcle and the mass element, and $\alpha$ is the angle between the direction of the force increment and $\mathbf{\hat{z}}$.
+    </p>
+    <p>
+      Integrate the increment of force over the shell to obtain the total force<br/><br/>
+      $
+      \begin{eqnarray}
+        \mathbf{F} &amp; = &amp; - G m M \mathbf{\hat{z}} \frac{1}{2} \int_{0}^{\frac{\tau}{2}} \frac{cos \alpha sin \theta d\theta}{s^{2}} \frac{1}{\tau} \int_{0}^{\tau} d\phi \\
+                   &amp; = &amp; - G m M \mathbf{\hat{z}} \frac{1}{2} \int_{0}^{\frac{\tau}{2}} \frac{cos \alpha sin \theta d\theta}{s^{2}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now proceed to evaluate the integral by using the geometry of the problem: $cos \alpha = (R - r cos \theta) / s$ and $s^{2} = R^{2} - 2 R r cos \theta + r^{2}$.<br/><br/>
+      $
+      \begin{eqnarray}
+        \mathbf{F} &amp; = &amp; - G m M \mathbf{\hat{z}} \frac{1}{2} \int_{0}^{\frac{\tau}{2}} \frac{(R - r cos \theta ) sin \theta d\theta}{(R^{2} - 2 R r cos \theta + r^{2})^{3/2}} \\
+                   &amp; = &amp; - \frac{G m M}{R^{2}} \mathbf{\hat{z}} \frac{1}{2} \int_{0}^{\frac{\tau}{2}} \frac{(1 - \mu cos \theta ) sin \theta d\theta}{(1 - 2 \mu cos \theta + \mu^{2})^{3/2}} \\
+      \end{eqnarray}
+      $
+    </p>
+      <p>where $\mu = r / R$. Make the substitution $t^{2} = 1 - 2 \mu cos \theta + \mu^{2}$. Upon differentiating, $t dt = \mu sin \theta d \theta$. Some care is necessary in using the correct sign for the limits.<br/><br/>
+      $
+      \begin{eqnarray}
+        \mathbf{F} &amp; = &amp; - \frac{G m M}{R^2} \mathbf{\hat{z}} \frac{1}{4} \int_{1 - \mu}^{1 + \mu} \frac{(t^{2} + 1 - \mu^{2}) dt}{\mu t^{2}} \\
+                   &amp; = &amp; - \frac{G m M}{R^2} \mathbf{\hat{z}} \\
+      \end{eqnarray}
+      $
+    </p>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Theorem: The gravitational force inside and due to a uniform spherical shell is zero</h3>
+  </div>
+  <div class="panel-body">
+    <p>
+      The proof of this theorem is similar to the case of the mass being outside the sphere. However, it is necessary to split the integral for the force to account for the opposing directions.<br/><br/>
+      $
+      \begin{eqnarray}
+        \mathbf{F} &amp; = &amp; + G m M \mathbf{\hat{z}} \frac{1}{2} \int_{0}^{cos^{-1}\frac{R}{r}} \frac{cos \alpha sin \theta d\theta}{s^{2}} - G m M \mathbf{\hat{z}} \frac{1}{2} \int_{cos^{-1}\frac{R}{r}}^{\frac{\tau}{2}} \frac{cos \alpha sin \theta d\theta}{s^{2}} \\
+      \end{eqnarray}
+      $
     </p>
   </div>
 </div>
