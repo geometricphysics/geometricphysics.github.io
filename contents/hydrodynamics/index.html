@@ -55,7 +55,12 @@ title: Geometric Physics • Fluid Mechanics
     <p>
       Consider a horizontal massless plate of width $w$ and length $l$ at depth $h$ in fluid. Assume that the density of the fluid, $\rho$, is uniform.
     </p>
-    <canvas id="hydro" width="300" height="225"></canvas>
+    <canvas id="hydro-canvas" width="600" height="480"></canvas>
+    <script type="text/javascript">
+      var canvas = document.getElementById("hydro-canvas");
+      var context = canvas.getContext("2d");
+      context.fillRect(50, 25, 150, 100);
+    </script>
     <p>
       Let P(h) be the pressure at depth $h$. For the plate to be in equilibrium, we must have<br/><br/>
       $
