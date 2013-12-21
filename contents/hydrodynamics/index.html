@@ -77,4 +77,151 @@ title: Geometric Physics • Fluid Mechanics
       $
     </p>
   </section>
+  <section id="pascal-principle">
+    <h3>Pascal's Principle</h3>
+    <p>
+      A change in pressure is transmitted undeminished to all parts of the fluid.
+    </p>
+    <p>
+      Proove this by considering pressure differences horizontally and vertically in a gravitational field.
+    </p>
+    <p>
+      An application of this principle is a Hydraulic Lift.
+    </p>
+    <canvas id="pascal-canvas" width="600" height="480"></canvas>
+    <script type="text/javascript">
+      var canvas = document.getElementById("pascal-canvas");
+      var context = canvas.getContext("2d");
+      context.beginPath();
+      context.moveTo(150, 100);
+      context.lineTo(200, 225);
+      context.stroke();
+    </script>
+    <p>
+      Consider two pistons operating on a closed vessel filled with fluid...<br/><br/>
+      $
+      \begin{eqnarray}
+        F_{1} + P_{0} A_{1} &amp; = &amp; P A_{1} \\
+        F_{2} + P_{0} A_{2} &amp; = &amp; P A_{2} \\
+        \Rightarrow F_{1} A_{2} &amp; = &amp; F_{2} A_{1} \\
+        \Rightarrow \frac{F_{1}}{F_{2}} &amp; = &amp; \frac{A_{2}}{A_{1}} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="archimedes-principle">
+    <h3>Archimedes Principle</h3>
+    <p>
+      The magnitude of the buoyant force is equal to the weight of the fluid displaced by the object.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        F_{buoy} &amp; = &amp; P(h) A \\
+                 &amp; = &amp; \rho g h A \\
+                 &amp; = &amp; \rho V_{displaced} g \\
+                 &amp; = &amp; mass_{displaced} g \\
+                 &amp; = &amp; weight_{displaced} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="flow-rate">
+    <h3>Flow Rate and the Continuity Equation</h3>
+    <p>
+      The flow rate, $f$ is the volume of fluid that passes a particular area per unit time.
+    </p>
+    <p>
+      If the velocity of the fluid is $\vec{v}$ over an an area $dA \hat{n}$ then the incremental flow is
+      $
+      \begin{eqnarray}
+        df &amp; = &amp; dA \vec{v} \cdot \hat{n} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Integrating over the surface gives
+      $
+      \begin{eqnarray}
+        f &amp; = &amp; \int_{S} \vec{v} \cdot \hat{n} dA  \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For a plane surface geometry and assuming a uniform velocity
+      $
+      \begin{eqnarray}
+        f &amp; = &amp; v A cos(\theta) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For an incompressible fluid with no sinks or sources we get the <em>Continuity Equation</em>
+      $
+      \begin{eqnarray}
+        A_{1} v_{1} &amp; = &amp; A_{2} v_{2} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="bernoullis-equation">
+    <h3>Bernoulli's Equation</h3>
+    <p>
+      This equation is a statement of energy conservation and mass conservation within a fluid. In deriving Bernoulli's equation we make a number of assumptions:
+      <ul>
+        <li>The fluid is moving in a steady state</li>
+        <li>The fluid is incompressible</li>
+        <li>The fluid is frictionless</li>
+        <li>The only external force is gravitational</li>
+      </ul>
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        P + \frac{1}{2} \rho v^{2} + \rho g h &amp; = &amp; constant \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="venturi-effect">
+    <h3>Venturi Effect</h3>
+    <p>
+      Pressure is lower where the flow speed is greater.
+    </p>
+  </section>
+  <section id="torricellis-theorem">
+    <h3>Torricelli's Theorem</h3>
+    <p>
+      This theorem concerns the exit speed of a fluid from a hole in a vessel which is a specified height below the surface. It is a consequence of Bernoulli's Theorem, that is, energy conservation.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        v &amp; = &amp; \sqrt{2 g h} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="syphon">
+    <h3>Syphon</h3>
+    <p>
+      What is the maximum height that a syphon can lift a fluid?
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        h_{max} &amp; = &amp; \frac{P_{atm}}{\rho g} - s \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where
+      <ul>
+        <li>$h$ is the height of the syphon above the fluid surface</li>
+        <li>$P_{atm}$ is atmospheric pressure</li>
+        <li>$\rho$ is the density of the fluid</li>
+        <li>$s$ is the vertical drop from the fluid surface to the exit point of the syphon</li>
+      </ul>
+    </p>
+  </section>
 </article>
