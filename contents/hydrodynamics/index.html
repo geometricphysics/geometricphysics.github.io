@@ -1,5 +1,75 @@
 ---
 layout: master
-title: Geometric Physics • Hydrodynamics
+title: Geometric Physics • Fluid Mechanics
 ---
-<h1>Hydrodynamics</h1>
+<article>
+  <header>
+    <hgroup>
+      <h1>Fluid Mechanics</h1>
+      <h2>The study of fluids and their dynamics</h2>
+    </hgroup>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#density">Density</a></li>
+      <li><a href="#pressure">Pressure</a></li>
+      <li><a href="#force-density">Force Density</a></li>
+      <li><a href="#hydrostatic-pressure">Hydrostatic Pressure</a></li>
+    </ul>
+  </nav>
+  <section id="density">
+    <h3>Density</h3>
+    <p>  
+      $
+      \begin{eqnarray}
+        density &amp; = &amp; \frac{mass}{volume} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="pressure">
+    <h3>Pressure</h3>
+    <p>  
+      $
+      \begin{eqnarray}
+        pressure &amp; = &amp; \frac{force}{area} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="force-density">
+    <h3>Force Density</h3>
+    <p>  
+      $
+      \begin{eqnarray}
+        \Delta F_{x} &amp; = &amp; P(x) A - P(x + \Delta x) A \\
+        \frac{\Delta F_{x}}{\Delta V} &amp; = &amp; - \frac{[P(x + \Delta x) - P(x)]}{\Delta x} \\
+        f_{x}                         &amp; = &amp; - \frac{\partial P}{\partial x} \\
+        \mathbf{f}                    &amp; = &amp; - \nabla P \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section id="hydrostatic-pressure">
+    <h3>Hydrostatic Pressure</h3>
+    <p>
+      Consider a horizontal massless plate of width $w$ and length $l$ at depth $h$ in fluid. Assume that the density of the fluid, $\rho$, is uniform.
+    </p>
+    <canvas id="hydro" width="300" height="225"></canvas>
+    <p>
+      Let P(h) be the pressure at depth $h$. For the plate to be in equilibrium, we must have<br/><br/>
+      $
+      \begin{eqnarray}
+        P(h) w l &amp; = &amp; P(0) w l + \rho w l h g \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        P(h) &amp; = &amp; P(0) + \rho g h \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>

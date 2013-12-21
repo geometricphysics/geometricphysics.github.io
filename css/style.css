@@ -1,3 +1,16 @@
 body {
   padding-top: 50px;
 }
+/*
+article {
+  display: block; border: 1px solid red;
+}
+*/
+/*
+section {
+  display: block; border: 1px solid purple;
+}
+*/
+canvas {
+  display: block; border: 1px solid black;
+}
