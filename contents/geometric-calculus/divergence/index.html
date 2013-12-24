@@ -1,0 +1,68 @@
+---
+layout: master
+title: Geometric Physics • Calculus • Divergence
+---
+<article>
+  <h1>Divergence</h1>
+  <section>
+    <h3>Definition and Meaning</h3>
+    <p>Let $\vec{J} : (vector) \rightarrow vector$ be a vector-valued field defined over some region. We wish to compute the total flux of $\vec{J}$ out of a volume $V$ enclosed by a boundary $\partial V$ with an outward normal. If divide this total flux by $V$ and take the limit as $V$ tends to zero we obtain the outward flux of $\vec{J}$ per unit volume called the <em>divergence</em> of $\vec{J}$.</p>
+    <p>
+    $
+    \begin{eqnarray}
+      div \vec{J} &amp; = &amp; \lim_{V \rightarrow 0} \frac{\int \vec{J} \cdot d \vec{A}}{V} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>This is a coordinate free expression that shows that $div \vec{J}$ is a scalar field.</p>
+  </section>
+  <section>
+    <h3>Expression for $div \vec{J}$</h3>
+    <p>We can obtain an expression for $div \vec{J}$ by considering first the flux of $\vec{J}$ over a differential rectangular parallelepiped.</p>
+    <!--canvas></canvas-->
+    <p>
+    $
+    \begin{eqnarray*}
+      \int_{dV} \vec{J} \cdot d \vec{A} 
+        &amp; = &amp; \vec{J}(x+dx,y,z) \cdot (\hat{i}) dy dz + \vec{J}(x,y,z) \cdot (-\hat{i}) dy dz + \cdots \\
+        &amp; = &amp; \frac{\partial J_{x}}{\partial x} dx dy dz + \cdots \\
+        &amp; = &amp; (\frac{\partial J_{x}}{\partial x} + \frac{\partial J_{y}}{\partial y} + \frac{\partial J_{z}}{\partial z}) dV \\
+        &amp; = &amp; (div \vec{J}) dV
+    \end{eqnarray*}
+    $.
+    </p>
+    <p>
+    Hence<br/><br/>
+    $
+    \begin{eqnarray*}
+      div \vec{J} &amp; = &amp; \frac{\partial J_{x}}{\partial x} + \frac{\partial J_{y}}{\partial y} + \frac{\partial J_{z}}{\partial z}
+    \end{eqnarray*}
+    $.
+    </p>
+  </section>
+  <section>
+    <h3>Notation</h3>
+    <p>It is common to see the notation $\nabla \cdot \vec{J}$ used for the divergence of $\vec{J}$, where</p>
+    <p>
+    $
+    \begin{eqnarray*}
+      \nabla &amp; = &amp; \hat{i} \frac{\partial}{\partial x} + \hat{j} \frac{\partial}{\partial y} + \hat{k} \frac{\partial}{\partial z}
+    \end{eqnarray*}
+    $.
+    </p>
+    <p>
+      Although this notation is suggesting that the operator $\nabla$ (del) is a hybrid scalar-product and partial derivative operator, the meaning of the notation $\nabla \cdot \vec{J}$ is the expression for $div \vec{J}$.
+    </p>
+  </section>
+  <section>
+    <h3>Gauss's Theorem</h3>
+    <p>We can immediately obtain a relation between the surface integral of a vector and the volume integral of the divergence of the vector</p>
+    <p>
+    $
+    \begin{eqnarray*}
+      \int_{\partial V} \vec{J} \cdot d \vec{S} &amp; = &amp; \int_{V} \nabla \cdot \vec{J} dV
+    \end{eqnarray*}
+    $.
+    </p>
+  </section>
+</article>
