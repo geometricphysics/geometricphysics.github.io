@@ -5,6 +5,73 @@ title: Geometric Physics • Calculus • Derivatives
 <article>
   <h1>Derivatives</h1>
   <section>
-    <h3></h3>
+    <h3>The Derivative</h3>
+    <p>
+      Let $\phi$ be a function of a single variable that is defined at any point $x$ in an <em>open interval</em> $(a,b)$.
+    </p>
+    <aside>
+      Reminder $(a, b) = \{x: a &lt; x &lt; b\}$
+    </aside>
+    <p>
+      The derivative of the function $\phi$ at x is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+      \phi'(x) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\phi(x+h) - \phi(x)}{h}
+      \end{eqnarray}
+      $
+      <br/><br/>
+      if the limit exists.
+    </p>
+  </section>
+  <section>
+    <h3>The Increment</h3>
+    <p>
+      The increment given to a variable is<br/><br/>
+      $
+      \begin{eqnarray}
+      \Delta x &amp; = &amp; (x + \Delta x) - x
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>The Differential</h3>
+    <p>
+      Suppose $y = f(x)$ and that $\Delta x = dx$ is an increment given to $x$. Then<br/><br/>
+      $
+      \begin{eqnarray}
+      \Delta y &amp; = &amp; f(x + \Delta x) - f(x) \\
+               &amp; = &amp; f'(x) \Delta x + \epsilon \Delta x \\
+               &amp; = &amp; f'(x) dx + \epsilon dx \\
+      \end{eqnarray}
+      $
+    <br/><br/>
+    where $\epsilon \rightarrow 0$ as $\Delta x \rightarrow 0$.
+    </p>
+    <p>
+      The <em>differential of y</em> or the <em>principal part of $\Delta y$</em> is defined to be<br/><br/>
+      $
+      \begin{eqnarray}
+      dy &amp; = &amp; f'(x) dx \\
+      \end{eqnarray}
+      $.
+    </p>
+    <aside>
+      It should be noted that the quantities $dx$ and $dy$ are not the limits of $\Delta x$ and $\Delta y$ as $\Delta x \rightarrow 0$.
+    </aside>
+    <p>
+      Applying this definition for the differential of $y$ and $x$, we can write<br/><br/>
+      $
+      \begin{eqnarray}
+      \frac{dy}{dx} &amp; = &amp; f'(x) \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Rolle's theorem</h3>
+    <p>
+      Between two values of a variable where a function is zero, there exists a point where the derivative is zero.
+    </p>
   </section>
 </article>
