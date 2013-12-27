@@ -1,0 +1,93 @@
+---
+layout: master
+title: Geometric Physics • Calculus • Partial differentiation
+---
+<article>
+  <h1>Partial differentiation</h1>
+  <section>
+    <h3>Generalizing scalar functions to several variables</h3>
+    <p>
+    Consider the function $\phi$ which depends on $n$ variables $x^{1}, \ldots , x^{n}$.
+    </p>
+    <aside>
+      I'm using superscripts as variable indices because the most common usage for functions of several variables will be to represent fields as mappings from coordinates to a value.
+    </aside>
+    <p>
+      By the shorthand notation $\phi(x^{i})$ we mean the value<br/><br/>
+    $
+    \begin{eqnarray}
+    \phi(x^{1}, \ldots , x^{n})
+    \end{eqnarray}
+    $.
+    </p>
+  </section>
+  <section>
+    <h3>The Partial Derivative</h3>
+    <p>
+      The partial derivative is a generalization of the single variable case<br/><br/>
+      $
+      \begin{eqnarray}
+      \frac{\partial \phi}{\partial x^{k}} (x^{i}) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\phi(x^{1}, \ldots , x^{k}+h, \ldots , x^{n}) - \phi(x^{1}, \ldots , x^{k}, \ldots , x^{n})}{h}
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Notice that the formal way to write the left hand side involves specifying where the partial derivative is evaluated. It's common to see the call to the function omitted.
+    </p>
+  </section>
+  <section>
+    <h3>The Total Differental</h3>
+    <p>
+      When all $n$ variables are allowed to change the <em>total differential</em> of $\phi$ is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+      d \phi &amp; = &amp; \phi(x^{i}+dx^{i}) - \phi(x^{i}) \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      By applying the definition of the partial derivative and "adding zero" $n$ times we prove the following theorem<br/><br/>
+      $
+      \begin{eqnarray}
+      d \phi &amp; = &amp; \frac{\partial \phi}{\partial x^{i}} dx^{i} \\
+      \end{eqnarray}
+      $.
+    </p>
+  </section>
+  <section>
+    <h3>The Chain Rule for partial differentiation</h3>
+    <p>
+      Suppose $x^{i} = x^{i}(q^{j})$. Then the change in $x^{i}$ resulting from a change in $q^{j}$ is given by<br/><br/>
+      $
+      \begin{eqnarray}
+      d x^{i} &amp; = &amp; \frac{\partial x^{i}}{\partial q^{j}} d q^{j}
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Suppose $x^{i} = x^{i}(q^{j})$. Then
+      $
+      \begin{eqnarray}
+      d x^{i} &amp; = &amp; \frac{\partial x^{i}}{\partial q^{j}} d q^{j}
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      and
+      $
+      \begin{eqnarray}
+      \frac{\partial \phi}{\partial q^{j}} &amp; = &amp; \frac{\partial \phi}{\partial x^{i}} \frac{\partial x^{i}}{\partial q^{j}}
+      \end{eqnarray}
+      $.
+    </p>
+  </section>
+  <section>
+    <h3>Mixed Partial Derivatives</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>
