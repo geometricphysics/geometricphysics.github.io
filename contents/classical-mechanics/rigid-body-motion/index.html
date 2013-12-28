@@ -1,0 +1,194 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Rigid Body Motion
+---
+<article>
+  <h1>Rigid Body Motion</h1>
+  <section>
+    <h3>Fixed Point of Rotation</h3>
+    <p>
+      A fixed point of rotation means that the distance from the origin for every particle is constant in time.<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d (\vec{x}_{i})^{2}}{dt} &amp; = &amp; 0 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then $\vec{x}_{i}$ must be perpendicular to the velocity so we can write<br/><br/>
+      $
+      \begin{eqnarray}
+         \frac{d \vec{x}_{i}}{dt} &amp; = &amp; \vec{\omega}_{i} \times \vec{x}_{i} \\
+      \end{eqnarray}
+      $
+      <br/><br/>
+      where the $\vec{\omega}_{i}$ is not unique (add multiple of the position vector).
+    </p>
+
+  </section>
+  <section>
+    <h3>Rigid Body Definition</h3>
+    <p>
+      A rigid body is one in which the distance between any pair of particles is constant in time.<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d (\vec{x}_{i} - \vec{x}_{j})^{2}}{dt} &amp; = &amp; 0 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then<br/><br/>
+      $
+      \begin{eqnarray}
+        (\vec{x}_{i} - \vec{x}_{j}) \cdot (\frac{d \vec{x}_{i}}{dt} - \frac{d \vec{x}_{j}}{dt}) &amp; = &amp; 0 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+  </section>
+  <section>
+    <h3>Rotation Kinematics</h3>
+    <p>
+      The <b>angular velocity</b> is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+        \omega &amp; = &amp; \frac{d \theta}{d t} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      For a rigid body rotating around a fixed point (combining the previous two definitions) we can show that a rigid body rotating about a fixed origin has a vector property, $\vec{\omega}$, such that for any particle in the body<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d \vec{x}_{i}}{dt} &amp; = &amp; \vec{\omega} \times \vec{x}_{i} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      The <b>angular acceleration</b> is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+        \alpha &amp; = &amp; \frac{d \omega}{d t} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      The magnitude of the <b>linear velocity</b> is then related to the angular velocity by<br/><br/>
+      $
+      \begin{eqnarray}
+        v &amp; = &amp; r \omega \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      By considering the motion of a particle in a circular orbit with uniform angular velocity, the acceleration is found to be directed towards the center. This <b>centripetal acceleration</b> is given by<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{a}_{c} &amp; = &amp; - \omega^{2} \vec{r} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      The <b>tangential acceleration</b> is found to be<br/><br/>
+      $
+      \begin{eqnarray}
+        a_{t} &amp; = &amp; r \alpha \\
+      \end{eqnarray}
+      $.
+    </p>
+  </section>
+  <section>
+    <h3>Uniformly accelerated rotational motion</h3>
+    <p>
+      Integrating the kinematic equations gives<br/><br/>
+      $
+      \begin{eqnarray}
+        \omega &amp; = &amp; \omega_{0} + \alpha t \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \theta - \theta_{0} &amp; = &amp; \omega_{0} t + \frac{1}{2} \alpha t^{2} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \omega^{2} &amp; = &amp; \omega_{0}^2 + 2 \alpha (\theta - \theta_{0}) \\
+      \end{eqnarray}
+      $.
+    </p>
+  </section>
+  <section>
+    <h3>Rotational Motion Dynamics</h3>
+    <p>
+      A <b>torque</b> produces an angular acceleration.
+    </p>
+    <p>
+      The torque, $\vec{T}$, of a force, $\vec{F}$, applied a displacement $\vec{r}$ from the origin is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{T} &amp; = &amp; \vec{r} \times \vec{F} \\
+      \end{eqnarray}
+      $.
+    </p>
+  </section>
+  <section>
+    <h3>Rotational Inertia</h3>
+    <p>
+      What is the rotational analog of inertial mass? Using the fact that a rigid body rotating about a fixed origin has the unique vector property, $\vec{\omega}$, that connects the velocity and position of any particle, we can compute the angular momentum of the rigid body as follows<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L} &amp; = &amp; \sum_{i} \vec{x}_{i} \times \vec{p}_{i} \\
+                &amp; = &amp; \sum_{i} m_{i} \vec{x}_{i} \times \vec{v}_{i} \\
+                &amp; = &amp; \sum_{i} m_{i} \vec{x}_{i} \times (\omega \times \vec{x}_{i}) \\
+                &amp; = &amp; \sum_{i} (m_{i} (\vec{x}_{i})^2 \vec{\omega} - m_{i} (\vec{\omega} \cdot \vec{x}_{i})\vec{x}_{i}) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In general, the angular momentum and the angular velocity are not parallel and we are forced to define an <b>Inertia tensor</b>. Alternatively, we can say that the angular momentum is computed from a linear transformation of the angular velocity. In the special cases where the mass of the rigid body lies in a plane or where there is symmetry above and below a plane, the second term is zero.
+    </p>
+    <p>
+      In such special cases,<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L} &amp; = &amp; I \vec{\omega} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Parallel-Axis Theorem</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Kinetic Energy of Rotation</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Work and Power</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Angular Momentum</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Conservation of Angular Momentum</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Equilibrium</h3>
+    <p>
+    </p>
+  </section>
+</article>

@@ -2,108 +2,168 @@
 layout: master
 title: Geometric Physics • Classical Mechanics • Multi Particle Systems
 ---
-<h1>Multi Particle Systems</h1>
+<article>
+  <h1>Multi Particle Systems</h1>
 
-<h3>Angular Momentum</h3>
+  <section>
+    <h3>Center of Mass</h3>
+    <p>
+      The <b>center of mass</b> of a system of particles is the mass-weighted sum of the positions of all the particles.<br/><br/>
+      $
+      \vec{X}_{CM} = \Large\frac{\sum_{i} m_{i} \vec{r_{i}}}{\sum_{i} m_{i}}
+      $.
+    </p>
+    <p>
+      It follows that<br/><br/>
+      $
+      \vec{V}_{CM} = 0 \Leftrightarrow \vec{P} = 0
+      $.
+    </p>
+  </section>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><b>Theorem.</b> <em>If the total linear momentum of a system of particles is zero, the total angular momentum is independent of the point about which the moments are taken.</em></h3>
-  </div>
-  <div class="panel-body">
-    <p><i>Proof</i>. Let $\vec{p}_{i}$ be the linear momentum of the $i$th particle.<br/>
-      We are given that the total linear momentum of the system of particles is zero:
-      <br/><br/>
+  <section>
+    <h3>Moment of a Vector about a Point</h3>
+    <p>
+      Suppose $\vec{s}$ is a vector passing through the point with position vector $\vec{r}$, then the vector <b>$\vec{r} \times \vec{s}$</b> is called the <b>moment of the vector $\vec{s}$ about the origin</b>.
+    </p>
+  </section>
+
+  <section>
+    <h3>Angular Velocity</h3>
+    <p>
+      The <b>angular velocity</b> of a particle is the moment of the linear velocity of the particle about the origin.<br/><br/>
       $
-      \sum_{i} \vec{p}_{i} = 0
-      $
-      <br/><br/>
-      Let $\vec{r}_{i}$ be the displacement from the origin of the $i$th particle. Then the angular momentum of the $i$th particle about the origin is
-      <br/><br/>
-      $
-      l_{i} = \vec{r}_{i} \wedge \vec{p}_{i}.
-      $
-      <br/><br/>
-      The total angular momentum of the system of particles about the origin is therefore
-      <br/><br/>
-      $
-      \begin{eqnarray*}
-        L &amp; = &amp; \sum_{i} l_{i} \\
-          &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i}
-      \end{eqnarray*}
-      $
-      <br/>
-      The total angular momentum of the system of particles about a point $A$ with displacement $\vec{a}$ from the origin is
-      <br/><br/>
-      $
-      \begin{eqnarray*}
-        L_{A} &amp; = &amp; \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
-              &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i} - \sum_{i} \vec{a} \wedge \vec{p}_{i} \\
-              &amp; = &amp; L - \vec{a} \wedge \sum_{i} \vec{p}_{i} \\
-              &amp; = &amp; L.\blacksquare
-      \end{eqnarray*}
+      \vec{\omega} = \vec{r} \times \vec{v}.
       $
     </p>
-  </div>
-</div>
+  </section>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><b>Theorem.</b> <em>The rate of change of the total angular momentum of a system of particles about a fixed point is equal to the sum of the torques about that point.</em></h3>
-  </div>
-  <div class="panel-body">
-    <p><i>Proof</i>. Let the fixed point be labelled $A$ and have a displacement $\vec{a}$ from the origin.<br/>
-      We are given that the point $A$ is fixed:
-      <br/><br/>
+  <section>
+    <h3>Angular Momentum</h3>
+    <p>
+      The <b>angular momentum</b> of a particle is the moment of the linear momentum of the particle about the origin.<br/><br/>
       $
-      \Large\frac{d}{dt}$$\vec{a} = 0
-      $
-      <br/><br/>
-      Let $\vec{r}_{i}$ and $\vec{p}_{i}$ be the displacement from the origin and linear momentum of the $i$th particle respectively.<br/>
-      The total angular momentum of the system of partices about the point $A$ is
-      <br/><br/>
-      $
-      L_{A} = \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i}
-      $
-      <br/><br/>
-      Differentiating with respect to time gives the rate of change of the total angular momentum:
-      <br/><br/>
-      $
-      \begin{eqnarray*}
-        \frac{d}{dt} L_{A} &amp; = &amp; \frac{d}{dt} \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
-              &amp; = &amp; \sum_{i} (\vec{v}_{i} - \frac{d}{dt} \vec{a}) \wedge \vec{p}_{i} + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \frac{d}{dt} \vec{p}_{i} \\
-              &amp; = &amp; 0 + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{F}_{i} \\
-              &amp; = &amp; \sum_{i} N_{i, A} \\
-              &amp; = &amp; N_{A}.\blacksquare
-      \end{eqnarray*}
+      \vec{L} = \vec{r} \times \vec{p}.
       $
     </p>
-  </div>
-</div>
+  </section>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Bullet Block Experiment</h3>
-  </div>
-  <div class="panel-body">
-    <iframe width="560" height="315" src="//www.youtube.com/embed/vWVZ6APXM4w?rel=0" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
+  <section>
+    <h3>Torque (Angular Force)</h3>
+    <p>
+      The <b>torque</b> is the moment of the force about the origin.<br/><br/>
+      $
+      \vec{N} = \vec{r} \times \vec{F}.
+      $
+    </p>
+  </section>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Bullet Block Experiment Result</h3>
-  </div>
-  <div class="panel-body">
-    <iframe width="560" height="315" src="//www.youtube.com/embed/N8HrMZB6_dU?rel=0" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
+  <section>
+    <h3>Angular Theorems</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><b>Theorem.</b> <em>If the total linear momentum of a system of particles is zero (i.e. the velocity of the center of mass is zero), then the total angular momentum is independent of the point about which the moments are taken.</em></h3>
+      </div>
+      <div class="panel-body">
+        <p><i>Proof</i>. Let $\vec{p}_{i}$ be the linear momentum of the $i$th particle.<br/>
+          We are given that the total linear momentum of the system of particles is zero:
+          <br/><br/>
+          $
+          \sum_{i} \vec{p}_{i} = 0
+          $
+          <br/><br/>
+          Let $\vec{r}_{i}$ be the displacement from the origin of the $i$th particle. Then the angular momentum of the $i$th particle about the origin is
+          <br/><br/>
+          $
+          l_{i} = \vec{r}_{i} \wedge \vec{p}_{i}.
+          $
+          <br/><br/>
+          The total angular momentum of the system of particles about the origin is therefore
+          <br/><br/>
+          $
+          \begin{eqnarray*}
+            L &amp; = &amp; \sum_{i} l_{i} \\
+              &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i}
+          \end{eqnarray*}
+          $
+          <br/>
+          The total angular momentum of the system of particles about a point $A$ with displacement $\vec{a}$ from the origin is
+          <br/><br/>
+          $
+          \begin{eqnarray*}
+            L_{A} &amp; = &amp; \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
+                  &amp; = &amp; \sum_{i} \vec{r}_{i} \wedge \vec{p}_{i} - \sum_{i} \vec{a} \wedge \vec{p}_{i} \\
+                  &amp; = &amp; L - \vec{a} \wedge \sum_{i} \vec{p}_{i} \\
+                  &amp; = &amp; L.\blacksquare
+          \end{eqnarray*}
+          $
+        </p>
+      </div>
+    </div>
+  </section>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Bullet Block Explained!</h3>
-  </div>
-  <div class="panel-body">
-    <iframe width="560" height="315" src="//www.youtube.com/embed/BLYoyLcdGPc?rel=0" frameborder="0" allowfullscreen></iframe>
-  </div>
-</div>
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><b>Theorem.</b> <em>The rate of change of the total angular momentum of a system of particles about a fixed point is equal to the sum of the torques about that point.</em></h3>
+      </div>
+      <div class="panel-body">
+        <p><i>Proof</i>. Let the fixed point be labelled $A$ and have a displacement $\vec{a}$ from the origin.<br/>
+          We are given that the point $A$ is fixed:
+          <br/><br/>
+          $
+          \Large\frac{d}{dt}$$\vec{a} = 0
+          $
+          <br/><br/>
+          Let $\vec{r}_{i}$ and $\vec{p}_{i}$ be the displacement from the origin and linear momentum of the $i$th particle respectively.<br/>
+          The total angular momentum of the system of partices about the point $A$ is
+          <br/><br/>
+          $
+          L_{A} = \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i}
+          $
+          <br/><br/>
+          Differentiating with respect to time gives the rate of change of the total angular momentum:
+          <br/><br/>
+          $
+          \begin{eqnarray*}
+            \frac{d}{dt} L_{A} &amp; = &amp; \frac{d}{dt} \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{p}_{i} \\ 
+                  &amp; = &amp; \sum_{i} (\vec{v}_{i} - \frac{d}{dt} \vec{a}) \wedge \vec{p}_{i} + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \frac{d}{dt} \vec{p}_{i} \\
+                  &amp; = &amp; 0 + \sum_{i} (\vec{r}_{i} - \vec{a}) \wedge \vec{F}_{i} \\
+                  &amp; = &amp; \sum_{i} N_{i, A} \\
+                  &amp; = &amp; N_{A}.\blacksquare
+          \end{eqnarray*}
+          $
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Bullet Block Experiment</h3>
+      </div>
+      <div class="panel-body">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/vWVZ6APXM4w?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Bullet Block Experiment Result</h3>
+      </div>
+      <div class="panel-body">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/N8HrMZB6_dU?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Bullet Block Explained!</h3>
+      </div>
+      <div class="panel-body">
+        <iframe width="560" height="315" src="//www.youtube.com/embed/BLYoyLcdGPc?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+</article>
