@@ -150,13 +150,24 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       $
     </p>
     <p>
-      In general, the angular momentum and the angular velocity are not parallel and we are forced to define an <b>Inertia tensor</b>. Alternatively, we can say that the angular momentum is computed from a linear transformation of the angular velocity. In the special cases where the mass of the rigid body lies in a plane or where there is symmetry above and below a plane, the second term is zero.
+      In general, the angular momentum and the angular velocity are not parallel and we are forced to define an <b>Inertia tensor</b>. Alternatively, we can say that the angular momentum is computed from a linear transformation of the angular velocity<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L} &amp; = &amp; \vec{L}(\vec{\omega}) \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Symmetry</h3>
+    <p>
+      In the special cases where the mass of the rigid body lies in a plane or where there is symmetry above and below a plane or where there is axial symmetry, the second term is zero.
     </p>
     <p>
       In such special cases,<br/><br/>
       $
       \begin{eqnarray}
-        \vec{L} &amp; = &amp; I \vec{\omega} \\
+        \vec{L} &amp; = &amp; I \, \vec{\omega} \\
       \end{eqnarray}
       $
     </p>
@@ -164,6 +175,87 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Parallel-Axis Theorem</h3>
     <p>
+      We now investigate the angular momentum when a different origin is used. Then by adding the conditions for a rigid body and rotation about the point we obtain a relation among the inertia tensors (angular momentum.transformations).
+    </p>
+    <p>
+      Let $\vec{X}_{CM}$ be the center of mass relative to some origin and let $Y$ be the point with position vector $\vec{Y}$ relative to the same origin. We also define the displacement from $Y$ to the center of mass<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{R} &amp; = &amp; \vec{X}_{CM} - \vec{Y} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Let $\vec{x}_{i}$ be the position vector from the origin to the $i$th particle with mass $m_{i}$. We define the displacement of each particle from the center of mass<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{r}_{i} &amp; = &amp; \vec{x}_{i} - \vec{X}_{CM} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The angular momentum relative to the point $Y$ of a system of particles is<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L}_{Y} &amp; = &amp; \sum_{i} m_{i} (\vec{x}_{i} - \vec{Y}) \times (\dot{\vec{x}}_{i} - \dot{\vec{Y}}) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The angular momentum relative to the center of mass of the same system of particles is<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L}_{CM} &amp; = &amp; \sum_{i} m_{i} \vec{r}_{i} \times \dot{\vec{x}}_{i} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Using the fact that $\vec{r}_i$ is a displacement from the center of mass we conclude that<br/><br/>
+      $
+      \begin{eqnarray}
+        \sum_{i} m_{i} \vec{r}_{i} &amp; = &amp; 0 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Expanding the expression for $\vec{L}_{Y}$ with $\vec{x}_{i} - \vec{Y} = \vec{r}_{i} + \vec{R}$ and using the previous observation we obtain<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L}_{Y} &amp; = &amp; \vec{L}_{CM} + M \vec{R} \times \dot{\vec{R}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Now make $Y$ the fixed rotation point and assume that the system of particles comprise a rigid body so that given $\vec{s}_{i} = \vec{x}_{i} - \vec{Y}$,<br/><br/>
+      $
+      \begin{eqnarray}
+        \dot{\vec{s}}_{i} &amp; = &amp; \omega \times \vec{s}_{i} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      From this equation we can show<br/><br/>
+      $
+      \begin{eqnarray}
+        \dot{\vec{R}} &amp; = &amp; \omega \times \vec{R} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Finally, we obtain<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{L}_{Y} &amp; = &amp; \vec{L}_{CM} + M [ R^{2} \vec{\omega} - (\vec{R} \cdot \vec{\omega}) \vec{R} ] \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is the <b>parallel-axis theorem</b> in its more general form. It is normally derived under the simplification that the angular momentum is parallel to the angular velocity, in which case the inertia tensor becomes a scalar multiplier - the <b>moment of inertia</b>, and the theorem is presented as a relation among scalar values:<br/><br/>
+      $
+      \begin{eqnarray}
+        I_{Y} &amp; = &amp; I_{CM} + M R^{2} \\
+      \end{eqnarray}
+      $
     </p>
   </section>
   <section>
