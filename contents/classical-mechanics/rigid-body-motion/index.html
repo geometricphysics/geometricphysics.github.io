@@ -49,12 +49,34 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Rotation Kinematics</h3>
     <p>
+      Consider a particle rotating in a circle with<br/><br/>
+      $
+      \begin{eqnarray}
+        \vec{x} &amp; = &amp; R cos \theta \hat{i} + R sin \theta \hat{j} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
       The <b>angular velocity</b> is defined as<br/><br/>
       $
       \begin{eqnarray}
         \omega &amp; = &amp; \frac{d \theta}{d t} \\
       \end{eqnarray}
       $.
+    </p>
+    <p>
+      Since the particle moves in a circle, $R$ is constant in time. However, the angular velocity may depend on time.
+    </p>
+    <p>
+      Differentiating twice w.r.t time to obtain the acceleration<br/><br/>
+      $
+      \begin{eqnarray}
+        \ddot{\vec{x}} &amp; = &amp; - \omega^{2} R \hat{x} + \frac{d \omega}{d t} R (\hat{\omega} \times \hat{x}) \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      This allows us to identify both a <b>centripetal acceleration</b> as well as a <b>tangential acceleration</b>.
     </p>
     <p>
       For a rigid body rotating around a fixed point (combining the previous two definitions) we can show that a rigid body rotating about a fixed origin has a vector property, $\vec{\omega}$, such that for any particle in the body<br/><br/>
@@ -156,6 +178,56 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
         \vec{L} &amp; = &amp; \vec{L}(\vec{\omega}) \\
       \end{eqnarray}
       $
+    </p>
+  </section>
+  <section>
+    <h3>General Properties of $\vec{L}(\vec{\omega})$</h3>
+    <p>
+      The following properties of the angular momentum transformation follow from the the formula for $\vec{L}(\vec{\omega})$ and the conditions for a rigid body and a fixed rotation point.
+    </p>
+    <p>
+      <table>
+        <tr>
+          <td>Linear</td>
+          <td>
+            $
+            \begin{eqnarray}
+              \vec{L}(\alpha^{i} \vec{\omega}_{i}) &amp; = &amp; \alpha^{i} \vec{L}(\vec{\omega}_{i}) \\
+            \end{eqnarray}
+            $
+          </td>
+        </tr>
+        <tr>
+          <td>Symmetric</td>
+          <td>
+            $
+            \begin{eqnarray}
+              \vec{\omega_{1}} \cdot \vec{L}(\vec{\omega_{2}}) &amp; = &amp; \vec{L}(\vec{\omega}_{1}) \cdot \vec{\omega_{2}} \\
+            \end{eqnarray}
+            $
+          </td>
+        </tr>
+        <tr>
+          <td>Positive definite (when $\vec{\omega} \neq 0$)</td>
+          <td>
+            $
+            \begin{eqnarray}
+              \vec{\omega} \cdot \vec{L}(\vec{\omega}) &amp; &gt; &amp; 0 \\
+            \end{eqnarray}
+            $
+          </td>
+        </tr>
+        <tr>
+          <td>Kinematic</td>
+          <td>
+            $
+            \begin{eqnarray}
+              \dot{\vec{L}}(\vec{b}) &amp; = &amp; \vec{\omega} \times \vec{L}(\vec{b}) + \vec{L}(\vec{b} \times \vec{\omega}) \\
+            \end{eqnarray}
+            $
+          </td>
+        </tr>
+      </table>
     </p>
   </section>
   <section>
@@ -261,26 +333,24 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Kinetic Energy of Rotation</h3>
     <p>
+      Applying the general properties of the angular momentum linear transformation we find<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d}{d t}(\frac{1}{2} \vec{\omega} \cdot \vec{L}(\vec{\omega}))
+          &amp; = &amp; \vec{\omega} \cdot \frac{d}{d t} \vec{L}(\vec{\omega}) \\
+          &amp; = &amp; \vec{\omega} \cdot \vec{N} \\
+      \end{eqnarray}
+      $
     </p>
-  </section>
-  <section>
-    <h3>Work and Power</h3>
     <p>
-    </p>
-  </section>
-  <section>
-    <h3>Angular Momentum</h3>
-    <p>
-    </p>
-  </section>
-  <section>
-    <h3>Conservation of Angular Momentum</h3>
-    <p>
-    </p>
-  </section>
-  <section>
-    <h3>Equilibrium</h3>
-    <p>
+      The quantity<br/><br/>
+      $
+      \begin{eqnarray}
+        K_{rot} &amp; = &amp; \frac{1}{2} \vec{\omega} \cdot \vec{L}(\vec{\omega})
+      \end{eqnarray}
+      $
+      <br/><br/>
+      is the <b>rotational kinetic energy</b>.
     </p>
   </section>
 </article>
