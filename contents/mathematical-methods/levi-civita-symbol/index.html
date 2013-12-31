@@ -1,0 +1,92 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
+---
+<article>
+  <h1>Levi-Civita Symbol in 2 dimensions</h1>
+  <section>
+    <h3>Definition</h3>
+    <p>
+      $
+      \varepsilon_{ij} = 
+      \left
+      \{
+      \begin{array}{11}
+         +1 &amp; \mbox{if $(i,j)$ is $(1, 2)$,}  \\
+         -1 &amp; \mbox{if $(i,j)$ is $(2, 1)$,}  \\
+          0 &amp; \mbox{otherwise: $i = j$.}
+      \end{array}
+      \right.
+      $
+    </p>
+  <section>
+  <section>
+    <h3>Properties</h3>
+    <p>
+      Consider $\varepsilon_{ij} \varepsilon_{mn}$<br/><br/>
+      It has
+      <ul>
+        <li>$2^{4} = 16$ components,</li>
+        <li>$2$ components are $+1$,</li>
+        <li>$2$ components are $-1$,</li>
+        <li>and the remaining $(16 - 4) = 12$ components are zero.</li>
+      </ul>
+      <table>
+        <tr>
+          <th>$i$</th><th>$j$</th><th>$m$</th><th>$n$</th><th>$\varepsilon_{ij} \varepsilon_{mn}$</th>
+        </tr>
+        <tr>
+          <td>$1$</td><td>$2$</td><td>$1$</td><td>$2$</td><td>$+1$</td>
+        </tr>
+        <tr>
+          <td>$2$</td><td>$1$</td><td>$2$</td><td>$1$</td><td>$+1$</td>
+        </tr>
+        <tr>
+          <td>$1$</td><td>$2$</td><td>$2$</td><td>$1$</td><td>$-1$</td>
+        </tr>
+        <tr>
+          <td>$2$</td><td>$1$</td><td>$1$</td><td>$2$</td><td>$-1$</td>
+        </tr>
+      </table>
+      <br/>
+      We get $+1$ when $i=m$ and $j=n$, which is $\delta_{im} \delta_{jn}$.<br/>
+      We get $-1$ when $i=n$ and $j=m$, which is $\delta_{in} \delta_{jm}$.<br/>
+    </p>
+    <p>
+      This suggests the following identity, which may be verified<br/><br/>
+      $
+      \begin{eqnarray}
+         \varepsilon_{ij} \varepsilon_{mn} &amp; = &amp; \delta_{im} \delta_{jn} - \delta_{in} \delta_{jm} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This result could also be written as a $2 \times 2$ matrix determinant.
+    </p>
+  <section>
+  <section>
+    <h3>Contraction</h3>
+    <p>
+      Contraction is the operation of setting two indices equal and summing over all possible values of the index.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+         \sum_{j} \varepsilon_{ij} \varepsilon_{mj} 
+         &amp; = &amp; \sum_{j} ( \delta_{im} \delta_{jj} - \delta_{ij} \delta_{jm} ) \\
+         &amp; = &amp; 2 \delta_{im} - \delta_{i1} \delta_{1m} - \delta_{i2} \delta_{2m} \\
+         &amp; = &amp; \delta_{im} \\
+      \end{eqnarray}
+      $
+    <p>
+      $
+      \begin{eqnarray}
+         \sum_{i} \sum_{j} \varepsilon_{ij} \varepsilon_{ij} 
+         &amp; = &amp; \sum_{i} \delta_{ii} \\
+         &amp; = &amp; \sum_{i} 1 \\
+         &amp; = &amp; 2 \\
+      \end{eqnarray}
+      $
+    </p>
+  <section>
+</article>
