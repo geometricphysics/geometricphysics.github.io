@@ -1,0 +1,42 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
+---
+<article>
+  <h1>Lens Design and Matrix Algebra</h1>
+  <section>
+    <h3>Fermat's principle</h3>
+    <p>
+    </p>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:true, showNavigation: false, showCopyright: false});
+      var P = board.create('point', [-5,+5], {name: 'P', size: 3, face: 'o'});
+      P.setProperty({fixed:false});
+      var T = board.create('point', [+3,-5], {name: 'T', size: 3, face: 'o'});
+      T.setProperty({fixed:false});
+
+      var slider = board.create('slider', [[-8,0], [+8,0], [-8, 0, +8]]);
+      var n1 = board.create('slider', [[3,+2], [8,+2], [1, 1, 2]]);
+      var n2 = board.create('slider', [[3,-2], [8,-2], [1, 1, 2]]);
+
+      var X = board.create('point', [function(){return slider.Value();},+0], {name: 'X', size: 3, face: 'o'});
+      X.setProperty({fixed:true});
+
+      var PX = board.create('line', [P,X], {straightFirst: true,  straightLast: false});
+      var XT = board.create('line', [X,T], {straightFirst: false, straightLast: true});
+
+      function opticalPathLength() {
+        var px = Math.abs(P.X() - X.X());
+        var h1 = Math.abs(P.Y() - X.Y());
+        var xt = Math.abs(X.X() - T.X());
+        var h2 = Math.abs(X.Y() - T.Y());
+        var s1 = Math.sqrt(px * px + h1 * h1);
+        var s2 = Math.sqrt(xt * xt + h2 * h2);
+        return s1 * n1.Value() + s2 * n2.Value();
+      }
+
+      var txtTime = board.create('text',[-9,-9,function(){return "optical path length: " + opticalPathLength().toFixed(3);}],{fontSize:30});
+    </script>
+  </section>
+</article>
