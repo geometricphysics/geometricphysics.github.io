@@ -26,6 +26,13 @@ title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
       var PX = board.create('line', [P,X], {straightFirst: true,  straightLast: false});
       var XT = board.create('line', [X,T], {straightFirst: false, straightLast: true});
 
+      var N1 = board.create('point', [function(){return X.X()},+20], {name: 'N1', size: 3, face: 'o'});
+      N1.setProperty({fixed:true});
+      var N2 = board.create('point', [function(){return X.X()},-20], {name: 'N2', size: 3, face: 'o'});
+      N2.setProperty({fixed:true});
+      var thetaOne = board.create('angle',[N1,X,P], {radius:3});
+      var thetaTwo = board.create('angle',[N2,X,T], {radius:3});
+
       function opticalPathLength() {
         var px = Math.abs(P.X() - X.X());
         var h1 = Math.abs(P.Y() - X.Y());
@@ -36,7 +43,17 @@ title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
         return s1 * n1.Value() + s2 * n2.Value();
       }
 
-      var txtTime = board.create('text',[-9,-9,function(){return "optical path length: " + opticalPathLength().toFixed(3);}],{fontSize:30});
+      function snellOne() {
+        return n1.Value() * Math.sin(thetaOne.Value())
+      }
+
+      function snellTwo() {
+        return n2.Value() * Math.sin(thetaTwo.Value())
+      }
+
+      var txtSnellOne = board.create('text',[-9,-7,function(){return "" + snellOne().toFixed(3);}],{fontSize:20});
+      var txtSnellTwo = board.create('text',[-9,-8,function(){return "" + snellTwo().toFixed(3);}],{fontSize:20});
+      var txtTime = board.create('text',[-9,-9,function(){return "optical path length: " + opticalPathLength().toFixed(3);}],{fontSize:20});
     </script>
   </section>
 </article>
