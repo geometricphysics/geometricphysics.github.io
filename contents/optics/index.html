@@ -1,24 +1,25 @@
 ---
 layout: master
-title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
+title: Geometric Physics • Mathematical Methods • Geometric Optics
 ---
 <article>
-  <h1>Lens Design and Matrix Algebra</h1>
+  <h1>Geometric Optics</h1>
   <section>
     <h3>Fermat's principle</h3>
     <p>
+      Fermat's principle states that the path taken by a light ray between two points is such that the  optical path length is an extremum.
     </p>
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
       var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:true, showNavigation: false, showCopyright: false});
       var P = board.create('point', [-5,+5], {name: 'P', size: 3, face: 'o'});
       P.setProperty({fixed:false});
-      var T = board.create('point', [+3,-5], {name: 'T', size: 3, face: 'o'});
+      var T = board.create('point', [+5,-5], {name: 'Q', size: 3, face: 'o'});
       T.setProperty({fixed:false});
 
       var slider = board.create('slider', [[-8,0], [+8,0], [-8, 0, +8]]);
-      var n1 = board.create('slider', [[3,+2], [8,+2], [1, 1, 2]]);
-      var n2 = board.create('slider', [[3,-2], [8,-2], [1, 1, 2]]);
+      var n1 = board.create('slider', [[3,+2], [8,+2], [1, 1.0003, 2]]);
+      var n2 = board.create('slider', [[3,-2], [8,-2], [1, 1.3330, 2]]);
 
       var X = board.create('point', [function(){return slider.Value();},+0], {name: 'X', size: 3, face: 'o'});
       X.setProperty({fixed:true});
@@ -30,30 +31,105 @@ title: Geometric Physics • Mathematical Methods • Levi-Civita Symbol
       N1.setProperty({fixed:true});
       var N2 = board.create('point', [function(){return X.X()},-20], {name: 'N2', size: 3, face: 'o'});
       N2.setProperty({fixed:true});
-      var thetaOne = board.create('angle',[N1,X,P], {radius:3});
-      var thetaTwo = board.create('angle',[N2,X,T], {radius:3});
+
+      function geometricLength(P1, P2) {
+        var x = Math.abs(P1.X() - P2.X());
+        var y = Math.abs(P1.Y() - P2.Y());
+        return Math.sqrt(x * x + y * y);
+      }
 
       function opticalPathLength() {
-        var px = Math.abs(P.X() - X.X());
-        var h1 = Math.abs(P.Y() - X.Y());
-        var xt = Math.abs(X.X() - T.X());
-        var h2 = Math.abs(X.Y() - T.Y());
-        var s1 = Math.sqrt(px * px + h1 * h1);
-        var s2 = Math.sqrt(xt * xt + h2 * h2);
-        return s1 * n1.Value() + s2 * n2.Value();
+        var s1 = geometricLength(P, X);
+        var s2 = geometricLength(X, T);
+        if (P.Y() > 0) {
+          if (T.Y() > 0) {
+            return s1 * n1.Value() + s2 * n1.Value();
+          }
+          else {
+            return s1 * n1.Value() + s2 * n2.Value();
+          }
+        }
+        else {
+          if (T.Y() > 0) {
+            return s1 * n2.Value() + s2 * n1.Value();
+          }
+          else {
+            return s1 * n2.Value() + s2 * n2.Value();
+          }
+        }
       }
 
       function snellOne() {
-        return n1.Value() * Math.sin(thetaOne.Value())
+        var hypot = geometricLength(P, X);
+        var oppos = Math.abs(P.X() - X.X());
+        return oppos / hypot;
       }
 
       function snellTwo() {
-        return n2.Value() * Math.sin(thetaTwo.Value())
+        var hypot = geometricLength(X, T);
+        var oppos = Math.abs(X.X() - T.X());
+        return oppos / hypot;
       }
 
-      var txtSnellOne = board.create('text',[-9,-7,function(){return "" + snellOne().toFixed(3);}],{fontSize:20});
-      var txtSnellTwo = board.create('text',[-9,-8,function(){return "" + snellTwo().toFixed(3);}],{fontSize:20});
-      var txtTime = board.create('text',[-9,-9,function(){return "optical path length: " + opticalPathLength().toFixed(3);}],{fontSize:20});
+      var lblSnellOne = board.create('text',[-9,-7,function(){return "$sin \\theta_{1}$ : ";}],{fontSize:20});
+      var txtSnellOne = board.create('text',[-6,-7,function(){return "" + snellOne().toFixed(3);}],{fontSize:20});
+      var lblSnellOne = board.create('text',[-9,-8,function(){return "$sin \\theta_{2}$ : ";}],{fontSize:20});
+      var txtSnellTwo = board.create('text',[-6,-8,function(){return "" + snellTwo().toFixed(3);}],{fontSize:20});
+      var txtTime = board.create('text',[-9,-9,function(){return "optical path length, L: " + opticalPathLength().toFixed(3);}],{fontSize:20});
     </script>
   </section>
+  <section>
+    <h3>Law of Reflection</h3>
+    <p>
+      Let $t$ be the time taken for light to travel from $P$ to $X$ to $Q$, with $Q$ on the same side as $P$.<br/><br/>
+      Let $v$ be the speed of light in the medium.<br/><br/>
+      Let $h$ be the height of $P$ and $Q$ above the mirror (assumed the same for simplicity).
+      Let $2 s$ be the distance between $P$ and $Q$.<br/><br/>
+      Let $s + x$ be the horizontal distance of $X$ from $P$. Then<br/><br/>
+      $
+      \begin{eqnarray}
+         t &amp; = &amp; \frac{|PX|}{v} + \frac{|XQ|}{v} \\
+           &amp; = &amp; \frac{1}{v} [(h^2 + (s+x)^2)^{\frac{1}{2}} + (h^2 + (s-x)^2)^{\frac{1}{2}}]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Fermat's principle says that the time is an extremum.
+      $
+      \begin{eqnarray}
+         \frac{d t}{d x} &amp; = &amp; \frac{1}{v} [(h^2 + (s+x)^2)^{-\frac{1}{2}}(s+x) - (h^2 + (s-x)^2)^{-\frac{1}{2}}(s-x)]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+         \frac{(s+x)}{\sqrt{(h^2 + (s+x)^2)}} &amp; = &amp; \frac{(s-x)}{\sqrt{(h^2 + (s-x)^2)}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+         sin \theta_{1} &amp; = &amp; sin \theta_{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+         \theta_{1} &amp; = &amp; \theta_{2}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Law of Refraction</h3>
+    <p>
+      $
+      \begin{eqnarray}
+         n_{1} \, sin \theta_{1} &amp; = &amp; n_{2} \, sin \theta_{2}
+      \end{eqnarray}
+      $
+    </p>
 </article>
