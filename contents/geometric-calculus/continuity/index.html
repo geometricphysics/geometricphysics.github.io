@@ -5,21 +5,176 @@ title: Geometric Physics • Calculus • Functions, Limits and Continuity
 <article>
   <h1>Functions, Limits and Continuity</h1>
   <section>
-    <h3>Limit of a Function</h3>
     <p>
-      Let the value $\phi(x)$ be defined and single valued for all values of $x$ near $x = a$ with the possible exception of $x = a$.
+      The mathematical notation for a limit of a function, what it means logically, and what it means informally, are built systematically making it easier to remember what the notation means.
     </p>
+    <h3>Deconstructing the Limit of a Function Notation</h3>
+    <table border='1'>
+      <tr>
+        <th>Notation</th>
+        <th>Logical Meaning</th>
+        <th>Informal Menaing</th>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow argval} f(x) &amp; = &amp; value
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          The logical statement is built from right to left by defining
+          <ol>
+            <li>What the function does $f(x) = value$.</li>
+            <li>The assumption about the argument $x \rightarrow argval$.</li>
+            <li>The existance of value relating to the assumption.</li>
+            <li>An statement about arbitrary choice of precision for the function value.</li>
+          </ol>
+        </td>
+        <td>
+          Meaning in words
+        </td>
+      </tr>
+    </table>
     <p>
-      When we say $L$ is the <em>limit of $\phi$ as $x$ approaches $a$</em>, we mean that for any positive number $\epsilon$ we can find a positive number $\delta$ such that $| \phi(x) - L | &lt; \epsilon$ whenever $0 &lt; |x-a| &lt; \delta$.
+      In the definitions below, $stmt_{1} \Rightarrow stmt_{2}$ is used. This is normally written as $stmt_{2}$ whenever $stmt_{1}$.
     </p>
+  <section>
+  <section>
+    <h3>Definitions</h3>
+    <p>
+      Let the value $f(x)$ be defined and single valued for all values of $x$ near $x = a$ with the possible exception of $x = a$.
+    </p>
+    <table border='1'>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow a} f(x) &amp; = &amp; L
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall \epsilon &gt; 0, \exists \delta &gt; 0 \colon 0 &lt; |x - a| &lt; \delta \Rightarrow |f(x) - \epsilon| &lt; L
+          $
+        </td>
+        <td>
+          $L$ is the limit of $f(x)$, as $x$ approaches $a$.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow a^{+}} f(x) &amp; = &amp; L
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall \epsilon &gt; 0, \exists \delta &gt; 0 \colon 0 &lt; x - a &lt; \delta \Rightarrow |f(x) - \epsilon| &lt; L
+          $
+        </td>
+        <td>
+          $L$ is the limit of $f(x)$, as $x$ approaches $a$ from the right hand (positive) side.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow a^{-}} f(x) &amp; = &amp; L
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall \epsilon &gt; 0, \exists \delta &gt; 0 \colon - \delta &lt; x - a &lt; 0 \Rightarrow |f(x) - \epsilon| &lt; L
+          $
+        </td>
+        <td>
+          $L$ is the limit of $f(x)$, as $x$ approaches $a$ from the left hand (negative) side.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow a} f(x) &amp; = &amp; \infty
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall M &gt; 0, \exists \delta &gt; 0 \colon 0 &lt; |x - a| &lt; \delta \Rightarrow f(x) &gt; M
+          $
+        </td>
+        <td>
+          $f(x)$ tends to infinity as $x$ approaches $a$.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow a} f(x) &amp; = &amp; - \infty
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall N &lt; 0, \exists \delta &gt; 0 \colon 0 &lt; |x - a| &lt; \delta \Rightarrow f(x) &lt; N
+          $
+        </td>
+        <td>
+          $f(x)$ tends to negative infinity as $x$ approaches $a$.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow \infty} f(x) &amp; = &amp; L
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall \epsilon &gt; 0, \exists M &gt; 0 \colon x &gt; M \Rightarrow |f(x) - \epsilon| &lt; L
+          $
+        </td>
+        <td>
+          $L$ is the limit of $f(x)$, as $x$ tends to infinity.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          $
+          \begin{eqnarray}
+          \lim_{x \rightarrow - \infty} f(x) &amp; = &amp; L
+          \end{eqnarray}
+          $
+        </td>
+        <td>
+          $
+          \forall \epsilon &gt; 0, \exists N &lt; 0 \colon x &lt; N \Rightarrow |f(x) - \epsilon| &lt; L
+          $
+        </td>
+        <td>
+          $L$ is the limit of $f(x)$, as $x$ tends to negative infinity.
+        </td>
+      </tr>
+    </table>
   </section>
   <section>
     <h3>Continuity</h3>
     <p>
-      When we say that a function $\phi$ with argument $x$ is <em>continuous</em> at $x=a$ we mean<br/><br>
+      When we say that a function $f$ with argument $x$ is <em>continuous</em> at $x=a$ we mean<br/><br>
       $
       \begin{eqnarray}
-      \lim_{x \rightarrow a} \phi(x) &amp; = &amp; \phi(a)
+      \lim_{x \rightarrow a} f(x) &amp; = &amp; f(a)
       \end{eqnarray}
       $
     </p>
