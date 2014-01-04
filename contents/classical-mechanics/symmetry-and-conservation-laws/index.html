@@ -1,0 +1,78 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Symmetry and Conservation Laws
+---
+<article>
+  <h1>Symmetry and Conservation Laws</h1>
+  <section>
+    <h3>Symmetry</h3>
+    <p>
+      A symmetry is an active transformation that does not change the value of the Lagrangian.
+    </p>
+    <p>
+      We say that the Lagrangian is invariant under the transformation.
+    </p>
+    <p>
+      We say that the Lagrangian is symmetric with respect to the transformation.
+    </p>
+  </section>
+  <section>
+    <h3>Continuous Transformations</h3>
+    <p>
+      Transformations that can be composed from infinitesimal transformations.
+    </p>
+    <p>
+      These transformations depend on a continuous parameter.
+    </p>
+    <p>
+      Symmetry of the Lagrangian can be checked for an infinitesimal transformation; the change in the Lagragian for the (first order) infinitesimal transformation must be zero.
+    </p>
+  </section>
+  <section>
+    <h3>General Symmetries</h3>
+    <p>
+      Consider the infinitesimal transformation<br/><br/>
+      $
+      \begin{eqnarray}
+        \delta q_{i} &amp; = &amp; f_{i}(q) \delta
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The change in the Lagrangian is<br/><br/>
+      $
+      \begin{eqnarray}
+        \delta L &amp; = &amp; \sum_{i} (\frac{\partial L}{\partial \dot{q_{i}}} \delta \dot{q_{i}} + \frac{\partial L}{\partial q_{i}} \delta q_{i}) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Along a trajectory, the Euler-Lagrange equations are satisfied<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d}{d t} \frac{\partial L}{\partial \dot{q_{i}}} &amp; = &amp; \frac{\partial L}{\partial q_{i}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence<br/><br/>
+      $
+      \begin{eqnarray}
+        \delta L &amp; = &amp; \sum_{i} (\frac{\partial L}{\partial \dot{q_{i}}} \delta \dot{q_{i}} + \frac{d}{d t} (\frac{\partial L}{\partial \dot{q_{i}}}) \delta q_{i}) \\
+                 &amp; = &amp; \frac{d}{d t} \sum_{i} (\frac{\partial L}{\partial \dot{q_{i}}} \delta q_{i}) \\
+                 &amp; = &amp; \frac{d}{d t} \sum_{i} (p_{i} f_i{q}) \delta \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If $L$ is symmetric with respect to the transformation then $\delta L = 0$, and since $\delta > 0$ then there is a conserved quantity<br/><br/>
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Q &amp; = &amp; \sum_{i} p_{i} f_{i}(q)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>
