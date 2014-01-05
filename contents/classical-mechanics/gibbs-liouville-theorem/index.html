@@ -1,0 +1,78 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Gibbs-Liouville Theorem
+---
+<article>
+  <h1>Gibbs-Liouville Theorem</h1>
+  <section>
+    <h3>Divergence in Phase Space</h3>
+    <p>
+      $
+      \begin{eqnarray}
+        \nabla \cdot \vec{v} &amp; = &amp; \sum_{i} \left( \frac{\partial v_{q_{i}}}{\partial q_{i}} + \frac{\partial v_{p_{i}}}{\partial p_{i}} \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        v_{q_{i}} &amp; = &amp; \dot{q_{i}}
+                  &amp; = &amp; \frac{\partial H}{\partial p_{i}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        v_{p_{i}} &amp; = &amp; \dot{p_{i}}
+                  &amp; = &amp; \frac{\partial L}{\partial q_{i}}
+                  &amp; = &amp; - \frac{\partial H}{\partial q_{i}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \nabla \cdot \vec{v} &amp; = &amp; \sum_{i} \left( \frac{\partial}{\partial q_{i}} \frac{\partial H}{\partial p_{i}} - \frac{\partial}{\partial p_{i}} \frac{\partial H}{\partial q_{i}} \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Becuase the order of partial differentiation does not matter,<br/><br/>
+      $
+      \begin{eqnarray}
+        \nabla \cdot \vec{v} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      <em>The volume occupied by a blob of phase space fluid is conserved with time.</em>
+    </p>
+    <p>
+      Liouville's theorem is a close analogy to reversibility; the flux of $\vec{v}$ over any closed surface is zero. In quantum mechanics, Liouville's theorem is replaced by <b>unitarity</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Poisson Brackets</h3>
+    <p>
+      Consider a field in phase space, $F(p, q)$. Along a trajectory, $F$ turns into a function of time.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \dot{F} &amp; = &amp; \sum_{i} \left( \frac{\partial F}{\partial p_{i}} \dot{p_{i}} + \frac{\partial F}{\partial q_{i}} \dot{q_{i}} \right) \\
+                &amp; = &amp; \sum_{i} \left( \frac{\partial F}{\partial p_{i}} \frac{\partial L}{\partial q_{i}} + \frac{\partial F}{\partial q_{i}} \frac{\partial H}{\partial p_{i}} \right) \\
+                &amp; = &amp; \sum_{i} \left( \frac{\partial F}{\partial q_{i}} \frac{\partial H}{\partial p_{i}} - \frac{\partial F}{\partial p_{i}} \frac{\partial H}{\partial q_{i}} \right) \\
+                &amp; = &amp; \{ F, H \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The time derivative of any field along a trajectory is given by the Poisson bracket of that thing with the Hamiltonian.
+    </p>
+    <p>
+      The Poisson bracket even captures Hamilton's equations (substitute $p_{k}$ or $q_{k}$ for $F$).
+    </p>
+  </section>
+
+</article>

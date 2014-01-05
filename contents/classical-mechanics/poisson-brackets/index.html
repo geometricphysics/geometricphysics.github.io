@@ -1,0 +1,149 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Poisson Brackets
+---
+<article>
+  <h1>Poisson Brackets</h1>
+  <section>
+    <h3>Definition of the Poisson Bracket</h3>
+    <p>
+      $
+      \begin{eqnarray}
+        \{ A, B \} &amp; = &amp; \sum_{i} \left( \frac{\partial A}{\partial q_{i}} \frac{\partial B}{\partial p_{i}} - \frac{\partial A}{\partial p_{i}} \frac{\partial B}{\partial q_{i}} \right) \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Fundamental Properties of Poisson Brackets</h3>
+    <ol>
+      <li>
+        <h5>Antisymmetry</h5>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ A, C \} &amp; = &amp; - \{ C, A \} \\
+        \end{eqnarray}
+        $
+        </p>
+      </li>
+      <li>
+        <h5>Linearity</h5>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ k A, B \} &amp; = &amp; k \{ A, B \} \\
+        \end{eqnarray}
+        $
+        </p>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ (A+B), C \} &amp; = &amp; \{ A, C \} + \{ B, C \} \\
+        \end{eqnarray}
+        $
+        </p>
+      </li>
+      <li>
+        <h5>Triple Product</h5>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ (AB), C \} &amp; = &amp; B \{ A, C \} + A \{ B, C \} \\
+        \end{eqnarray}
+        $
+        </p>
+      </li>
+      <li>
+        <h5>Special PB's</h5>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ q_{i}, q_{j} \} &amp; = &amp; 0 \\
+        \end{eqnarray}
+        $
+        </p>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ p_{i}, p_{j} \} &amp; = &amp; 0 \\
+        \end{eqnarray}
+        $
+        </p>
+        <p>
+        $
+        \begin{eqnarray}
+          \{ q_{i}, p_{j} \} &amp; = &amp; \delta_{ij} \\
+        \end{eqnarray}
+        $
+        </p>
+      </li>
+    </ol>
+  </section>
+  <section>
+    <h3>Derived properties of Poisson Brackets</h3>
+    <p>
+      We can now use the fundamental properties to derive further properties.
+    </p>
+    <p>
+      The following formula can be proved by induction.<br/><br/>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \{ q^{n}, p \} &amp; = &amp; n q^{n - 1} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Using the fact that $n q^{n - 1}$ is simply a derivative,<br/><br/>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \{ q^{n}, p \} &amp; = &amp; \frac{d (q^{n})}{d q} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Now take any polynomial of $q$, Using linearity we can show<br/><br/>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \{ F(q), p \} &amp; = &amp; \frac{d F(q)}{d q} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Further,<br/><br/>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \{ F(q, p), p_{i} \} &amp; = &amp; \frac{\partial F(q)}{\partial q_{i}} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      And<br/><br/>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \{ F(q, p), q_{i} \} &amp; = &amp; - \frac{\partial F(q)}{\partial p_{i}} \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>An Axiomatic Formulation of Mechanics</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+
+</article>
