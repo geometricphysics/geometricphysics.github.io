@@ -1,0 +1,98 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Hamiltonian Mechanics
+---
+<article>
+  <h1>Hamiltonian Mechanics</h1>
+  <section>
+    <h3>Energy Conservation</h3>
+    <p>
+      Suppose the Lagrangian contains an explicit time dependence<br/><br/>
+      $
+      \begin{eqnarray}
+        L &amp; = &amp; L(q_{i}, \dot{q_{i}}, t)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Consider how $L$ changes as the system evolves<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d L}{d t} &amp; = &amp; \sum_{i} \left( \frac{\partial L}{\partial q_{i}} \dot{q_{i}} + \frac{\partial L}{\partial \dot{q}_{i}} \ddot{q_{i}} \right) + \frac{\partial L}{\partial t}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Using the usual substitutions for the generalized momentum and the Euler-Lagrange equations<br/><br/>
+      $
+      \begin{eqnarray}
+        - \frac{\partial L}{\partial t} &amp; = &amp; \frac{d}{d t} \left[ \sum_{i} p_{i} \dot{q_{i}} - L \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The quantity $H$ is the <b>Hamiltonian</b> of the system<br/><br/>
+      $
+      \begin{eqnarray}
+        H &amp; = &amp; \sum_{i} p_{i} \dot{q_{i}} - L
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $H$ is the energy of the system.
+    </p>
+    <p>
+      <em>If a system is time-translation invariant, then the quantity $H$ is conserved.</em>
+    </p>
+  </section>
+  <section>
+    <h3>Phase Space and Hamilton's Equations</h3>
+    <p>
+      In the Lagrangian/Action formulation we focus on configuration space and the equations are second-order differential (Euler-Lagrange) equations.
+    </p>
+    <p>
+      In the Hamiltonian formulation we focus on phase space; the corrdinates $q_{i}$ and conjugate momenta $p_{i}$. While the number of dimensions is doubled, the equations of motion become first-order<br/><br/>
+      $
+      \begin{eqnarray}
+        H           &amp; = &amp; H(q_{i}, p_{i}) \\
+        \dot{p_{i}} &amp; = &amp; - \frac{\partial H}{\partial q_{i}} \\
+        \dot{q_{i}} &amp; = &amp; \frac{\partial H}{\partial p_{i}} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Harmonic Oscillator Hamiltonian</h3>
+    <p>
+      $
+      \begin{eqnarray}
+        L &amp; = &amp; \frac{1}{2} m v^{2} - \frac{1}{2} k x^{2} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        q &amp; = &amp; (k m)^{\frac{1}{4}} x \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        H &amp; = &amp; \frac{\omega}{2} \left( p^{2} + q^{2} \right) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \omega &amp; = &amp; (\frac{k}{m})^{\frac{1}{2}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The motion of the system in phase space is a circle.
+    </p>
+  </section>
+</article>
