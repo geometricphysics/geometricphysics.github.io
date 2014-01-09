@@ -1,42 +1,147 @@
 ---
 layout: master
-title: Geometric Physics • Classical Mechanics • Principle of Least Action
+title: Geometric Physics • Classical Mechanics • Lagrangian Formalism
 ---
 <article>
-  <h1>Principle of Least Action</h1>
+  <h1>Lagrangian Formalism</h1>
   <section>
-    <h3>Action</h3>
+    <h3>Systems of Particles</h3>
     <p>
+      The positions of $N$ particles each with position vector $\vec{r}_{i}$ where $i = 1 \ldots N$, along with their velocities, $\vec{v}_{i}$, are used to specify the configuration of the system.
+    </p>
+    <p>
+      The equations of motion that determine the evolution of the system are<br/><br/>
       $
       \begin{eqnarray}
-        A &amp; = &amp; \int_{t_{i}}^{t_{f}} L(q, \dot{q}, t) dt
+        m_{i} \frac{d \vec{v}_{i}}{d t} &amp; = &amp; \vec{F}_{i}
+      \end{eqnarray}
+      $<br/><br/>
+      and<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d \vec{r}_{i}}{d t} &amp; = &amp; \vec{v}_{i}
       \end{eqnarray}
       $
     </p>
-  </section>
-  <section>
-    <h3>Lagrangian</h3>
     <p>
-      $
-      \begin{eqnarray}
-        L &amp; = &amp; T - V
-      \end{eqnarray}
-      $
+      Notice that in this context, $i$ is an index that picks out a particular particle.
     </p>
   </section>
   <section>
-    <h3>Principle of Stationary Action</h3>
+    <h3>Configuration Space</h3>
+    <p>
+      Instead of labelling the system coordinates by particle index, we describe the configuration of the system as if it were a single particle with 3N position coordinates.
+      The set $\{x_{i}\}$ defines a point in configuration space. Each point is a configuration of the system and the trajectory of the system is a curve. If there are N particles, each with 3 degrees of freedom then there are 3N coordinates to describe each point. Note that keeping track of the full configuration of the system also requres the set $\{ \dot{x}_{i} \}$. We will revisit this issue later when we describe phase space.
+    </p>
+  </section>
+  <section>
+    <h3>The Classical Action</h3>
+    <p>
+      Let $\bar{x}(t)$ be the trajectory of a macroscopic particle. We call this the <b>classical trajectory</b>.
+    </p>
+    <p>
+      There exists a quantity $S[x]$, called the <b>action</b>, which can be computed for an arbitrary path, $x(t)$.
+    </p>
     <p>
       $
       \begin{eqnarray}
-        \delta A &amp; = &amp; 0
+        S[x] &amp; = &amp; \int_{t_{i}}^{t_{f}} L(x(t), \dot{x}(t), t) dt
       \end{eqnarray}
       $
+    </p>
+    <p>
+      The function $L$, called the <b>lagrangian</b>, computes a value at each point along the path.
+    </p>
+    <p>
+      With just this defintion, $L$ could be any function and the value of $S$ for a given path is therefore arbitrary. We need a principle to constrain $L$.
+    </p>
+    <p>
+      We avoid defining $L$ as anything in particular, leaving the actual form of $L$ to be determined. Some authors define $L$ to be something and make the following principle a theorem.
+    </p>
+  </section>
+  <section>
+    <h3>Principle of Least (Stationary) Action</h3>
+    <p>
+      Along the classical path, $S$ an extremum with respect to a change in the path.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \delta S &amp; = &amp; S[\bar{x} + \delta x] - S[\bar{x}] = 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now crank the handle to see what this means for $L$. The technique we use comes from the <b>Calculus of Variations</b>.
+    </p>
+    <p>
+      Suppose we try a path that differs a bit from the classical trajectory<br/><br/>
+      $
+      \begin{eqnarray}
+        x(t) &amp; = &amp; \bar{x}(t) + \alpha \eta(t)
+      \end{eqnarray}
+      $<br/><br/>
+      where $\alpha$ is a scalar that controls how much we deviate from the classical trajectory $\bar{x}$. Along with the conditions that $\eta(t_{i}) = \eta(t_{f}) = 0$, we deduce that the lagrangian must satisfy a second order differential equations.
     </p>
   </section>
   <section>
     <h3>Euler Lagrange Equations</h3>
     <p>
+      $
+      \begin{eqnarray}
+        \frac{d}{d t} \frac{\partial L}{\partial \dot{x_{i}}} &amp; = &amp; \frac{\partial L}{\partial x_{i}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We will later show that these equations also hold for a general coordinate transformation. This will be powerful because it extends the Lagrangian formalism to non-inertial frames and allows constraints to be handled more easily.
+    </p>
+  </section>
+  <section>
+    <h3>Computing the Lagrangian</h3>
+    <p>
+      The form of the lagrangian is usually <i>reverse engineered</i>. Knowing the actual equations of motion, we guess a lagrangian and see if it produces the correct force law.
+    </p>
+    <p>
+      For a particle of mass $m$ subjected to a potential $V(x,t)$, the lagrangian is<br/><br/>
+      $
+      \begin{eqnarray}
+        L &amp; = &amp; \frac{1}{2} m \dot{x}^{2} - V(x,t)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Universality of the Lagrangian formalism</h3>
+    <p>
+      All the fundamental laws of physics can be written using the action principle<br/><br/>
+      $
+      \begin{eqnarray}
+        L &amp; = &amp; \sqrt g (R - \frac{1}{2} F_{\mu \nu} F^{\mu \nu} + \bar{\phi} \mathbb{D} \phi)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Coordinate System Invariance</h3>
+    <p>
+      Consider the coordinate transformation<br/>
+      $
+      \begin{eqnarray}
+        q_{i} &amp; = &amp; q_{i}(x_{j}, t)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since this is a coordinate transformation we must have<br/>
+      $
+      \begin{eqnarray}
+        x_{j} &amp; = &amp; x_{j}(q_{i}, t)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Using the properties of partial derivatives under coordinate transformations we can show<br/><br/>
       $
       \begin{eqnarray}
         \frac{d}{d t} \frac{\partial L}{\partial \dot{q_{i}}} &amp; = &amp; \frac{\partial L}{\partial q_{i}}
@@ -49,7 +154,7 @@ title: Geometric Physics • Classical Mechanics • Principle of Least Action
     <p>
       $
       \begin{eqnarray}
-        \dot{p_{i}} &amp; = &amp; \frac{\partial L}{\partial \dot{q_{i}}}
+        p_{i} &amp; = &amp; \frac{\partial L}{\partial \dot{q_{i}}}
       \end{eqnarray}
       $
     </p>
