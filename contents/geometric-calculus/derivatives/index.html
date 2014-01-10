@@ -5,25 +5,6 @@ title: Geometric Physics • Calculus • Derivatives
 <article>
   <h1>Derivatives</h1>
   <section>
-    <h3>The Derivative</h3>
-    <p>
-      Let $\phi$ be a function of a single variable that is defined at any point $x$ in an <em>open interval</em> $(a,b)$.
-    </p>
-    <aside>
-      Reminder $(a, b) = \{x: a &lt; x &lt; b\}$
-    </aside>
-    <p>
-      The derivative of the function $\phi$ at x is defined as<br/><br/>
-      $
-      \begin{eqnarray}
-      \phi'(x) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\phi(x+h) - \phi(x)}{h}
-      \end{eqnarray}
-      $
-      <br/><br/>
-      if the limit exists.
-    </p>
-  </section>
-  <section>
     <h3>The Increment</h3>
     <p>
       The increment given to a variable is<br/><br/>
@@ -35,7 +16,87 @@ title: Geometric Physics • Calculus • Derivatives
     </p>
   </section>
   <section>
-    <h3>The Differential</h3>
+    <h3>The Derivative</h3>
+    <p>
+      Let $f$ be a function of $x$ only. The <b>derivative of $f$ at $x$</b> is defined as<br/><br/>
+      $
+      \begin{eqnarray}
+      f'(x) &amp; = &amp; \lim_{\Delta x \rightarrow 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+      \end{eqnarray}
+      $
+      <br/><br/>
+      if the limit exists. i.e.<br/><br/>
+      $\forall \epsilon &gt; 0, \exists \delta &gt; 0$ such that $|\frac{f(x + \Delta x) - f(x)}{\Delta x}| &lt; \epsilon$ whenever $0 &lt; |x + \Delta x| &lt; \delta$
+    </p>
+    <p>
+      A function is called <b>differentiable</b> at the point $x$ if it has a derivative at this point. i.e. $f'(x)$ exists.
+    </p>
+    <p>
+      We are implicitly assuming that $f(x)$ is defined.
+    </p>
+    <p>
+      <b>If $f$ has a derivative at $x$, $f$ must be continuous at $x$</b>. Proof:<br/><br/>
+      $
+      \begin{eqnarray}
+      f(x + \Delta x) - f(x) &amp; = &amp; \frac{f(x + \Delta x) - f(x)}{\Delta x} \cdot \Delta x \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then<br/>
+      $
+      \begin{eqnarray}
+      \lim_{\Delta x \rightarrow 0} [f(x + \Delta x) - f(x)]
+      &amp; = &amp; \lim_{\Delta x \rightarrow 0} \frac{f(x + \Delta x) - f(x)}{\Delta x} \cdot \lim_{\Delta x \rightarrow 0} \Delta x \\
+      &amp; = &amp; f'(x) \cdot 0 \\
+      &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence<br/><br/>
+      $
+      \begin{eqnarray}
+      \lim_{\Delta x \rightarrow 0} f(x + \Delta x) &amp; = &amp; f(x)
+      \end{eqnarray}
+      $
+      showing that $f$ is continuous at $x$.
+    </p>
+  </section>
+  <section>
+    <h3>Differentiability in an Interval</h3>
+    <p>
+      If a function has a <b>derivative at all points in an interval</b>, we say that the function is <b>differentiable in the interval</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Product Rule</h3>
+    <p>
+      Let $u = u(x)$, and $v=v(x)$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d}{d x} u v &amp; = &amp; u \frac{d v}{d x} + \frac{d u}{d x} v \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Chain Rule</h3>
+    <p>
+      Let $y = y(u)$, and $u = u(x)$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d y}{d x} &amp; = &amp; \frac{d y}{d u} \cdot \frac{d u}{d x} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Differentials</h3>
     <p>
       Suppose $y = f(x)$ and that $\Delta x = dx$ is an increment given to $x$. Then<br/><br/>
       $
