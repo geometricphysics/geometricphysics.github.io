@@ -1,0 +1,110 @@
+---
+layout: master
+title: Geometric Physics • Calculus • Mean Value Theorem
+---
+<article>
+  <h1>Mean Value Theorem</h1>
+  <section>
+    <h3>Mathematical Prolog</h3>
+    <p>
+      When considering functions over the field $\mathbb{R}$, this statement is the <b>Mean Value Theorem</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Physical Prolog</h3>
+    <p>
+      The statement of this theorem is called the <b>Law of the Mean</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Theorem</h3>
+    <p>
+      If $f(x)$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$, then there exists a point $c$ in $(a,b)$ such that
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \frac{f(b) - f(a)}{b - a} &amp; = &amp; f'(c)
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Geometric Interpretation</h3>
+    <p>
+      There exists a point $[c, f(c)]$ where the tangent line at this point is parallel to the line that passes through the points $[a, f(a)]$ and $[b, f(b)]$.
+    </p>
+  </section>
+  <section>
+    <h3>Geometric Interpretation</h3>
+    <p>
+      There exists a point $[c, f(c)]$ where the tangent line at this point is parallel to the line that passes through the points $[a, f(a)]$ and $[b, f(b)]$.
+    </p>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var x1 = -1.5;
+      var y1 = +1.5;
+      var x2 = +1.5;
+      var y2 = -1.5;
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [x1, y1, x2, y2], keepaspectratio: true, axis:true, grid:true, showNavigation: true, showCopyright: false});
+
+      var A = board.create('point',[-1,-1.0], {name: "A", fixed:true});
+      var B = board.create('point',[+1,+0.5], {name: "B", fixed:true});
+      var chordAB = board.create('line',[A,B]);
+
+//    var P = board.create('point',[ 0,+1], {name: "C", fixed:true});
+//    var Q = board.create('point',[+1,+1], {visible:false});
+//    var tangent = board.create('line',[P,Q]);
+
+      function F(x) {
+        return Math.sqrt(1 - x * x);
+      }
+
+      function f(x) {
+        var m = (B.Y() - A.Y()) / (B.X() - A.X());
+        return m * (x - A.X()) + A.Y() + F(x);
+      }
+
+      board.create('functiongraph',[function(x){return f(x);}, -1.0, 1.0]);
+    </script>
+  </section>
+  <section>
+    <h3>Proof</h3>
+    <p>
+      This proof uses <b>Rolle's theorem</b>.
+    </p>
+    <p>
+      Define a function $F(x)$ that satisfies the conditions for Rolle's theorem:
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      F(x) &amp; = &amp; f(x) - f(a) - (x - a) \frac{f(b) - f(a)}{b - a}
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      $F(a) = F(b) = 0$, and $F(x)$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$.
+    </p>
+    <p>
+      Differentiating:
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      F'(x) &amp; = &amp; f'(x) - \frac{f(b) - f(a)}{b - a}
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      Applying Rolle's theorem:
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      0 &amp; = &amp; f'(c) - \frac{f(b) - f(a)}{b - a}
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+</article>

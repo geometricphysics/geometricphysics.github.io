@@ -87,10 +87,123 @@ title: Geometric Physics • Calculus • Partial differentiation
       The order of differentiation does not matter when the second partial derivatives exist and are continuous for all $(x,y)$ in the appropriate region.
     </p>
     <p>
+      By definition, the partial derivative of $f$ with respect to $x$ evaluated at the point $[x_{0},y_{0}]$ is
+    </p>
+    <p>
       $
       \begin{eqnarray}
+      \frac{\partial f}{\partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{h \rightarrow 0} \left[ \frac{f(x_{0} + h, y_{0}) - f(x_{0}, y_{0})}{h} \right]
       \end{eqnarray}
       $
+    </p>
+    <p>
+      Applying this definition again, but differentiating with respect to $y$ gives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \frac{\frac{\partial f}{\partial x}(x_{0}, y_{0} + k) - \frac{\partial f}{\partial x}(x_{0}, y_{0})}{k} \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Expanding this out by substituting $\partial f / \partial x$ evaluated at the point required gives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \frac{ \lim_{h \rightarrow 0} \left[ \frac{f(x_{0} + h, y_{0} + k) - f(x_{0}, y_{0} + k)}{h} \right] - \lim_{h \rightarrow 0} \left[ \frac{f(x_{0} + h, y_{0}) - f(x_{0}, y_{0})}{h} \right]}{k} \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      By the theorems of limits we can combine the limit for $h$ as follows
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \frac{ \lim_{h \rightarrow 0} \left[ \frac{f(x_{0} + h, y_{0} + k) - f(x_{0}, y_{0} + k) - f(x_{0} + h, y_{0}) + f(x_{0}, y_{0})}{h} \right]}{k} \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Define
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \phi(x, y) &amp; = &amp; f(x + h, y) - f(x, y)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \phi(x_{0}, y_{0} + k) &amp; = &amp; f(x_{0} + h, y_{0} + k) - f(x_{0}, y_{0} + k)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      And
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \phi(x_{0}, y_{0}) &amp; = &amp; f(x_{0} + h, y_{0}) - f(x_{0}, y_{0})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Subtracting
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \phi(x_{0}, y_{0} + k) - \phi(x_{0}, y_{0}) &amp; = &amp; f(x_{0} + h, y_{0} + k) - f(x_{0}, y_{0} + k) - f(x_{0} + h, y_{0}) + f(x_{0}, y_{0})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Apply the Mean Value Theorem to convert the differences into partial derivatives:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \lim_{h \rightarrow 0} \left[ \frac{ \frac{\partial \phi}{\partial y} (x_{0}, y_{0} + \theta_{k} k)}{h} \right] \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $0 &le; \theta_{k} &le; 1$.
+    </p>
+    <p>
+      We now convert the $\phi$ partial derivative back to a partial derivative of $f$, noting the $x$ displacement by $h$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \lim_{h \rightarrow 0} \left[ \frac{ \frac{\partial f}{\partial y} (x_{0} + h, y_{0} + \theta_{k} k) - \frac{\partial f}{\partial y} (x_{0}, y_{0} + \theta_{k} k)}{h} \right] \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Apply the Mean Value Theorem a second time gives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial^{2} f}{\partial y \partial x} (x_{0},y_{0}) &amp; = &amp; \lim_{k \rightarrow 0} \left[ \lim_{h \rightarrow 0} \left[\frac{\partial^{2} f}{\partial x \partial y} (x_{0} + \theta_{h} h, y_{0} + \theta_{k} k) \right] \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $0 &le; \theta_{h} &le; 1$.
+    </p>
+    <p>
+      Finally, since the mixed partial derivatives have been assumed to be continuous at $[x_{0},y_{0}]$, the limit on the right hand side can be replaced by the value of the mixed partial derivative evaluated at $[x_{0},y_{0}]$.
     </p>
   </section>
 </article>

@@ -1,0 +1,42 @@
+---
+layout: master
+title: Geometric Physics • Calculus • Rolle's Theorem
+---
+<article>
+  <h1>Rolle's Theorem</h1>
+  <section>
+    <h3>Theorem</h3>
+    <p>
+      If $f(x)$ is continuous on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$, and if $f(a) = f(b) = 0$, then there exists a point $c$ in $(a,b)$ such that $f'(c) = 0$.
+    </p>
+  </section>
+  <section>
+    <h3>Geometric Interpretation</h3>
+    <p>
+      There exists a point $[c, f(c)]$ where the tangent line at this point is horizontal.
+    </p>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var x1 = -1.5;
+      var y1 = +1.5;
+      var x2 = +1.5;
+      var y2 = -1.5;
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [x1, y1, x2, y2], keepaspectratio: true, axis:true, grid:true, showNavigation: true, showCopyright: false});
+
+      board.create('functiongraph',[function(x){return Math.sqrt(1 - x * x);}, -1.0, 1.0]);
+
+      var A = board.create('point',[-1,0], {name: "A", fixed:true});
+      var B = board.create('point',[+1,0], {name: "B", fixed:true});
+
+      var P = board.create('point',[ 0,+1], {name: "C", fixed:true});
+      var Q = board.create('point',[+1,+1], {visible:false});
+      var tangent = board.create('line',[P,Q]);
+    </script>
+  </section>
+  <section>
+    <h3>Proof</h3>
+    <p>
+      This proof uses a <b>Theorem on Continuity</b>, which takes us into <em>Analysis</em>.
+    </p>
+  </section>
+</article>
