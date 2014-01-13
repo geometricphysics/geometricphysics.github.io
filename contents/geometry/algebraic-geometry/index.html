@@ -1,0 +1,135 @@
+---
+layout: master
+title: Geometric Physics • Geometry • Algebraic Geometry
+---
+<article>
+  <h1>Algebraic Geometry</h1>
+  <p>
+    An alternative approach to Euclidean geometry that empasizes coordinate proofs.
+  </p>
+  <section>
+    <h3>Point (definition)</h3>
+    <p>
+      A <b>point</b> $P= [x,y]$ is an ordered pair of numbers. The numbers $x$ and $y$ are the <b>coordinates</b> of $P$.
+    </p>
+  </section>
+  <section>
+    <h3>Proportion (definition)</h3>
+    <p>
+      For a natural number $n$, an $n$-proportion is an expression of the form<br/><br/>
+      $
+      \begin{eqnarray}
+      a_{1} : a_{2} : \cdots : a_{n}
+      \end{eqnarray}
+      $<br/><br/>
+      where $a_{1}, a_{2}, \ldots, a_{n}$ are not all zero, such that<br/><br/>
+      $
+      \begin{eqnarray}
+      a_{1} : a_{2} : \cdots : a_{n} &amp; = &amp; \lambda a_{1} : \lambda a_{2} : \cdots : \lambda a_{n}
+      \end{eqnarray}
+      $<br/><br/>
+      for any non-zero number $\lambda$.
+    </p>
+  </section>
+  <section>
+    <h3>Line (definition)</h3>
+    <p>
+      A <b>line</b> $L= \langle a : b : c \rangle$ is a <b>3-proportion</b>, with the property that <b>$a$ and $b$ are not both zero</b>.
+    </p>
+    <p>
+      Notice that $a$ or $b$ can be zero, but not both at the same time.
+    </p>
+  </section>
+  <section>
+    <h3>Line through one Point (definition)</h3>
+    <p>
+      Let $P=[x,y]$, and $L = \langle a : b : c \rangle$, then
+    </p>
+    <p>
+      The phrase $P$ <b>lies on</b> $L$ or $L$ <b>passes through</b> $P$ means<br/><br/>
+      $
+      \begin{eqnarray}
+      a x + b y + c = 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Line through two Points (theorem)</h3>
+    <p>
+      For any two distinct points $P_{1}=[x_{1},y_{1}]$ and $P_{2} = [x_{2},y_{2}]$, there is a unique line $L = P_{1}P_{2}$, passing through them both given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      L = \langle y_{1} - y_{2} : x_{2} - x_{1} : x_{1} y_{2} - x_{2} y_{1} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The proof of this theorem is simply to solve the system of equations for two distinct points to lie on the same line.
+    </p>
+  </section>
+  <section>
+    <h3>Collinear Points (definition)</h3>
+    <p>
+      Three or more points which lie on a common line are <b>collinear</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Collinear Points (theorem)</h3>
+    <p>
+      The points $[x_{1},y_{1}]$, $[x_{2},y_{2}]$, and $[x_{3},y_{3}]$ are collinear precisely when<br/></br>
+      $
+      \begin{eqnarray}
+      x_{1} y_{2} - x_{1} y_{3} + x_{2} y_{3} - x_{2} y_{1} + x_{3} y_{1} - x_{3} y_{2} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The proof of this theorem involves first distinguishing whether the points are unique and then applying the theorem for a point lying on the line formed by the other two points.
+    </p>
+  </section>
+  <section>
+    <h3>Concurrent Lines (definition)</h3>
+    <p>
+      Three or more lines which pass through a common point are <b>concurrent</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Concurrent Lines (theorem)</h3>
+    <p>
+      If the lines $\langle a_{1} : b_{1} : c_{1} \rangle$, $\langle a_{2} : b_{2} : c_{2} \rangle$, and $\langle a_{3} : b_{3} : c_{3} \rangle$  are concurrent then<br/><br/>
+      $
+      \begin{eqnarray}
+      \epsilon_{ijk} a_{i} b_{j} c_{k} &amp; = &amp; 0
+      \end{eqnarray}
+      $<br/><br/>
+      where $i,j,k = 1,2,3$ and $\epsilon_{ijk}$ is the Levi-Civita symbol.
+    </p>
+    <p>
+      This is the determinant of a matrix with columns $a$'s, $b$'s and $c$'s.
+    </p>
+  </section>
+  <section>
+    <h3>Isometry</h3>
+    <p>
+      A <b>transformation $\sigma$ is an isometry</b> means
+      <ol>
+        <li>
+          The transformation $\sigma$ is invertible.
+        </li>
+        <li>
+          The transformation preserves the quadrance between any two points:<br/><br/>
+          $
+          \begin{eqnarray}
+            Q(A_{1}, A_{2}) &amp; = &amp; Q(\sigma(A_{1}),\sigma(A_{2})) \\
+          \end{eqnarray}
+          $
+        </li>
+      </ol>
+    </p>
+  </section>
+</article>
