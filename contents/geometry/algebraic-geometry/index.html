@@ -3,13 +3,7 @@ layout: master
 title: Geometric Physics • Geometry • Algebraic Geometry
 ---
 <article>
-  <h1>Algebraic Geometry</h1>
-  <section>
-    <h3>Point (definition)</h3>
-    <p>
-      A <b>point</b> $P= [x,y]$ is an ordered pair of numbers. The numbers $x$ and $y$ are the <b>coordinates</b> of $P$.
-    </p>
-  </section>
+  <h1>Preliminaries</h1>
   <section>
     <h3>Proportion (definition)</h3>
     <p>
@@ -26,6 +20,58 @@ title: Geometric Physics • Geometry • Algebraic Geometry
       \end{eqnarray}
       $<br/><br/>
       for any non-zero number $\lambda$.
+    </p>
+  </section>
+  <section>
+    <h3>Transformation (definition)</h3>
+    <p>
+      A <b>transformation</b> is a function which takes points as input and produces points as output.
+    </p>
+  </section>
+  <h1>Algebraic Geometry</h1>
+  <section>
+    <h3>Point (definition)</h3>
+    <p>
+      A <b>point</b> $P= [x,y]$ is an ordered pair of numbers. The numbers $x$ and $y$ are the <b>coordinates</b> of $P$.
+    </p>
+  </section>
+  <section>
+    <h3>Affine Combination (definition)</h3>
+    <p>
+      For any two points $P_{1} = [x_{1}, y_{1}]$ and $P_{2}=[x_{2}, y_{2}]$ and any two numbers $\lambda_{1}$ and $\lambda_{2}$ satisfying $\lambda_{1} + \lambda_{2} = 1$, the <b>affine combination</b> $\lambda_{1} P_{1} + \lambda_{2} P_{2}$ is the point<br/><br/>
+      $
+      \begin{eqnarray}
+      [\lambda_{1} x_{1} + \lambda_{2} x_{2}, \lambda_{1} y_{1} + \lambda_{2} y_{2}]
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Affine Transformation (definition)</h3>
+    <p>
+      When we say <b>A transformation $\tau$ is affine</b> we mean
+    </p>
+    <p>
+      For any two points $P_{1}$ and $P_{2}$, and any two numbers $\lambda_{1}$ and $\lambda_2$ satisfying $\lambda_{1} + \lambda_{2} = 1$,<br/><br/>
+      $
+      \begin{eqnarray}
+      \tau(\lambda_{2} P_{1} + \lambda_{2} P_{2}) &amp; = &amp; \lambda_{1} \tau(P_{1}) + \lambda_{2} \tau(P_{2})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      i.e. A transformation is <b>affine</b> if it preserves affine combinations.
+    </p>
+  </section>
+  <section>
+    <h3>Midpoint (definition)</h3>
+    <p>
+      For distinct points $P_{1} = [x_{1}, y_{1}]$ and $P_{2}=[x_{2}, y_{2}]$, the <b>midpoint</b> $M$ is the affine combination<br/><br/>
+      $
+      \begin{eqnarray}
+      M = \frac{1}{2} P_{1} + \frac{1}{2} P_{2}
+      \end{eqnarray}
+      $
     </p>
   </section>
   <section>
@@ -54,6 +100,46 @@ title: Geometric Physics • Geometry • Algebraic Geometry
     </p>
   </section>
   <section>
+    <h3>Collinear Points (definition)</h3>
+    <p>
+      Three or more points which lie on a common line are <b>collinear</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Concurrent Lines (definition)</h3>
+    <p>
+      Three or more lines which pass through a common point are <b>concurrent</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Parallel Lines (definition)</h3>
+    <p>
+      The lines $L_{1} = \langle a_{1} : b_{1} : c_{1} \rangle$ and $L_{2} = \langle a_{2} : b_{2} : c_{2} \rangle$ are <b>parallel</b> means<br/><br/>
+      $
+      \begin{eqnarray}
+      a_{1} b_{2} - a_{2} b_{1} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Perpendicular Lines (definition)</h3>
+    <p>
+      The lines $L_{1} = \langle a_{1} : b_{1} : c_{1} \rangle$ and $L_{2} = \langle a_{2} : b_{2} : c_{2} \rangle$ are <b>perpendicular</b> means<br/><br/>
+      $
+      \begin{eqnarray}
+      a_{1} a_{2} + b_{1} b_{2} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Triangle (definition)</h3>
+    <p>
+      A triangle is a set $\{P_{1},P_{2}, P_{3}\}$ with three non-collinear points.
+    </p>
+  </section>
+  <section>
     <h3>Line through two Points (theorem)</h3>
     <p>
       For any two distinct points $P_{1}=[x_{1},y_{1}]$ and $P_{2} = [x_{2},y_{2}]$, there is a unique line $L = P_{1}P_{2}$, passing through them both given by
@@ -70,12 +156,6 @@ title: Geometric Physics • Geometry • Algebraic Geometry
     </p>
   </section>
   <section>
-    <h3>Collinear Points (definition)</h3>
-    <p>
-      Three or more points which lie on a common line are <b>collinear</b>.
-    </p>
-  </section>
-  <section>
     <h3>Collinear Points (theorem)</h3>
     <p>
       The points $[x_{1},y_{1}]$, $[x_{2},y_{2}]$, and $[x_{3},y_{3}]$ are collinear precisely when<br/></br>
@@ -87,12 +167,6 @@ title: Geometric Physics • Geometry • Algebraic Geometry
     </p>
     <p>
       The proof of this theorem involves first distinguishing whether the points are unique and then applying the theorem for a point lying on the line formed by the other two points.
-    </p>
-  </section>
-  <section>
-    <h3>Concurrent Lines (definition)</h3>
-    <p>
-      Three or more lines which pass through a common point are <b>concurrent</b>.
     </p>
   </section>
   <section>
