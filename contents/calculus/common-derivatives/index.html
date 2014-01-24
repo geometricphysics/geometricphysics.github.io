@@ -1,0 +1,120 @@
+---
+layout: master
+title: Geometric Physics • Calculus • Common Derivatives
+---
+<article>
+  <h1>Common Derivatives</h1>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d f}{d x} &amp; = &amp; \frac{d f}{d u} \frac{d u}{d x}
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} f &amp; = &amp; \lim_{h \rightarrow 0} \frac{f(u(x+h))-f(u(x))}{h}               \\
+                    &amp; = &amp; \lim_{h \rightarrow 0} \frac{f(u(x+h)-u(x)+u(x))-f(u(x))}{h}               \\
+                    &amp; = &amp; \lim_{h \rightarrow 0} \frac{f(h u'(x)+u(x))-f(u(x))}{h}               \\
+                    &amp; = &amp; \lim_{h \rightarrow 0} \frac{f(u(x) + h u'(x))-f(u(x))}{h u'(x)} u'(x)               \\
+                    &amp; = &amp; \lim_{k \rightarrow 0} \frac{f(u + k)-f(u)}{k} u'(x)               \\
+                    &amp; = &amp; \frac{d f}{d u} \frac{d u}{d x}               \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (x^{n})  &amp; = &amp; n x^{n-1}
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (x^{n}) &amp; = &amp; \lim_{h \rightarrow 0} \frac{(x+h)^n - x^n}{h}               \\
+                          &amp; = &amp; \lim_{h \rightarrow 0} \frac{x^n + n x^{n-1} h + O(h^2) - x^n}{h}               \\
+                          &amp; = &amp; n x^{n-1} + \lim_{h \rightarrow 0} \frac{O(h^2)}{h}               \\
+                          &amp; = &amp; n x^{n-1}               \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (e^{x})  &amp; = &amp; e^x
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+      This is the definition of $e^x$.
+    </p>
+  </section>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\ln \, x) &amp; = &amp; \frac{1}{x}
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\ln \, x) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\ln(x+h)-\ln(x)}{h}               \\
+                             &amp; = &amp; \lim_{h \rightarrow 0} \frac{\ln(1+\frac{h}{x})}{h}            \\
+                             &amp; = &amp; \lim_{h \rightarrow 0} \frac{x}{h}\frac{\ln(1+\frac{h}{x})}{x} \\
+                             &amp; = &amp; \lim_{h \rightarrow 0} \frac{\ln(1+\frac{h}{x})^{\frac{x}{h}}}{x} \\
+                             &amp; = &amp; \frac{1}{x} \lim_{n \rightarrow \infty} \ln(1+\frac{1}{n})^{n} \\
+                             &amp; = &amp; \frac{1}{x} \ln \lim_{n \rightarrow \infty} (1+\frac{1}{n})^{n} \\
+                             &amp; = &amp; \frac{1}{x} \ln e \\
+                             &amp; = &amp; \frac{1}{x} \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\sin x)  &amp; = &amp; \cos x
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\sin x) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\sin(x+h)-\sin(x)}{h}               \\
+                           &amp; = &amp; \lim_{h \rightarrow 0} \frac{\sin(x) \cos(h) + \cos(x) \sin(h) -\sin(x)}{h} \\
+                           &amp; = &amp; \lim_{h \rightarrow 0} \frac{\sin(x) + \cos(x) h -\sin(x)}{h} \\
+                           &amp; = &amp; \cos x \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\cos x)  &amp; = &amp; - \sin x
+    \end{eqnarray}
+    $
+    </h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{d}{d x} (\cos x) &amp; = &amp; \lim_{h \rightarrow 0} \frac{\cos(x+h)-\cos(x)}{h}               \\
+                           &amp; = &amp; \lim_{h \rightarrow 0} \frac{\cos(x) \cos(h) - \sin(x) \sin(h) -\cos(x)}{h} \\
+                           &amp; = &amp; \lim_{h \rightarrow 0} \frac{\cos(x) - \sin(x) h -\cos(x)}{h} \\
+                           &amp; = &amp; - \sin x \\
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+</article>
