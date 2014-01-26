@@ -9,6 +9,28 @@ title: Geometric Physics • Spacetime • Moving Clock
     <p>
       A moving clock, when compared to clocks along the path of the moving clock which are at rest in an inertial frame, will show a slower instantaneous rate.
     </p>
+    <p>
+      Let $\tau$ be the time recorded by the moving clock and $(ct,x^i)$ an event along the world line of the moving clock.
+    </p>
+    <p>
+      If $v$ is the instantaneous speed and $\gamma(v) = (1 - (v/c)^2)^{\frac{1}{2}}$, then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \tau}{d t} &amp; = &amp; \frac{1}{\gamma(v)}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice that, consistent with the <b>clock hypothesis</b>, the rate of the moving clock depends only upon the instantaneous speed relative to the inertial frame, and not upon its acceleration.
+    </p>
+  </section>
+  <section>
+    <h3>Derivation of Moving Clock Rate</h3>
+    <p>
+      In the diagram below, the green points represent two events on the worldline of the clock moving through the inertial frame. This clock may be moving nonuniformly, but we only show a small segment of the path. The red points represent events on the worldline of a clock at rest with respect to the inertial system. The blue lines represent light signals emitted at $t_1$ and $t_2$, reflected from the moving clock, and received at $t_3$ and $t_4$ respectively. The purpose of these light signals is to measure the time and position of the events $E_i$ and $E_f$ in the coordinates of the inertial frame. The slider may be used to vary the instantaneous velocity of the moving clock in the interval $(-1,1)$.
+    </p>
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
       var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:false, showNavigation: false, showCopyright: false});
@@ -18,15 +40,15 @@ title: Geometric Physics • Spacetime • Moving Clock
       var matterDash = 2;
       var lightDash = 2;
 
-      var beta = board.create('slider', [[3,-5], [8,-5], [0.0, 0.5, 1.0]]);
+      var beta = board.create('slider', [[3,-5], [8,-5], [-1.0, 0.5, +1.0]]);
 
       var P = board.create('point', [0,0], {name: '$E_i$', size: 3, face: 'o', color:'green'});
-      P.setProperty({fixed:false});
+      P.setProperty({fixed:true});
 
       var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_1$', size: 3, face: 'o'});
       T1.setProperty({fixed:true});
 
-      var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+      var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
 
       var T3 = board.create('point', [origin.X,function(){return P.Y()+(P.X()-origin.X);}], {name: '$t_3$', size: 3, face: 'o'});
       T3.setProperty({fixed:true});
@@ -42,7 +64,7 @@ title: Geometric Physics • Spacetime • Moving Clock
       var T2 = board.create('point', [origin.X,function(){return Q.Y()-(Q.X()-origin.X)}], {name: '$t_2$', size: 3, face: 'o'});
       T2.setProperty({fixed:true});
 
-      var T2Q= board.create('line', [T2,Q], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+      var T2Q= board.create('line', [T2,Q], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
 
       var T4 = board.create('point', [origin.X,function(){return Q.Y()+(Q.X()-origin.X)}], {name: '$t_4$', size: 3, face: 'o'});
       T4.setProperty({fixed:true});
@@ -72,22 +94,5 @@ title: Geometric Physics • Spacetime • Moving Clock
 //      var N2 = board.create('point', [function(){return X.X()},-20], {name: 'N2', size: 3, face: 'o'});
 //      N2.setProperty({fixed:true});
     </script>
-
-    <p>
-      Let $\tau$ be the time recorded by the moving clock and $(ct,x^i)$ an event along the world line of the moving clock.
-    </p>
-    <p>
-      If $v$ is the instantaneous speed and $\gamma(v) = (1 - (v/c)^2)^{\frac{1}{2}}$, then
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      \frac{d \tau}{d t} &amp; = &amp; \frac{1}{\gamma(v)}
-      \end{eqnarray}
-      $
-    </p>
-    <p>
-      Notice that, consistent with the <b>clock hypothesis</b>, the rate of the moving clock depends only upon the instantaneous speed relative to the inertial frame, and not upon its acceleration.
-    </p>
   </section>
 </article>
