@@ -1,0 +1,93 @@
+---
+layout: master
+title: Geometric Physics • Spacetime • Moving Clock
+---
+<article>
+  <h1>Moving Clock</h1>
+  <section>
+    <h3>Path Dependence of Time</h3>
+    <p>
+      A moving clock, when compared to clocks along the path of the moving clock which are at rest in an inertial frame, will show a slower instantaneous rate.
+    </p>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:false, showNavigation: false, showCopyright: false});
+
+      var origin = {X:-5, Y: -8};
+
+      var matterDash = 2;
+      var lightDash = 2;
+
+      var beta = board.create('slider', [[3,-5], [8,-5], [0.0, 0.5, 1.0]]);
+
+      var P = board.create('point', [0,0], {name: '$E_i$', size: 3, face: 'o', color:'green'});
+      P.setProperty({fixed:false});
+
+      var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_1$', size: 3, face: 'o'});
+      T1.setProperty({fixed:true});
+
+      var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var T3 = board.create('point', [origin.X,function(){return P.Y()+(P.X()-origin.X);}], {name: '$t_3$', size: 3, face: 'o'});
+      T3.setProperty({fixed:true});
+
+      var PT3 = board.create('line', [P,T3], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var TI = board.create('point', [origin.X,function() {return (T3.Y()+T1.Y())/2;}], {name: '$t_i$', size: 3, face: 'o'});
+      TI.setProperty({fixed:true});
+
+      var Q = board.create('point', [function(){return beta.Value()*2;},+2], {name: '$E_f$', size: 3, face: 'o', color: 'green'});
+      Q.setProperty({fixed:true});
+
+      var T2 = board.create('point', [origin.X,function(){return Q.Y()-(Q.X()-origin.X)}], {name: '$t_2$', size: 3, face: 'o'});
+      T2.setProperty({fixed:true});
+
+      var T2Q= board.create('line', [T2,Q], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var T4 = board.create('point', [origin.X,function(){return Q.Y()+(Q.X()-origin.X)}], {name: '$t_4$', size: 3, face: 'o'});
+      T4.setProperty({fixed:true});
+
+      var QT4 = board.create('line', [Q,T4], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var TF = board.create('point', [origin.X,function() {return (T4.Y()+T2.Y())/2;}], {name: '$t_f$', size: 3, face: 'o'});
+      TF.setProperty({fixed:true});
+
+      var T1T4= board.create('line', [T1,T4], {straightFirst: true, straightLast: true, color: 'red', dash: matterDash});
+
+      var TIP= board.create('line', [TI,P], {straightFirst: false, straightLast: false, color: 'gray', strokeWidth:1, dash:2});
+      var TFQ= board.create('line', [TF,Q], {straightFirst: false, straightLast: false, color: 'gray', strokeWidth:1, dash:2});
+
+      var PQ = board.create('line', [P,Q], {straightFirst: false,  straightLast: false, color: 'green', dash:matterDash});
+
+//      var slider = board.create('slider', [[-8,0], [+8,0], [-8, 0, +8]]);
+//      var n2 = board.create('slider', [[3,-2], [8,-2], [1, 1.3330, 2]]);
+
+//      var X = board.create('point', [function(){return slider.Value();},+0], {name: 'X', size: 3, face: 'o'});
+//      X.setProperty({fixed:true});
+
+//      var XT = board.create('line', [X,T], {straightFirst: false, straightLast: true});
+
+//      var N1 = board.create('point', [function(){return X.X()},+20], {name: 'N1', size: 3, face: 'o'});
+//      N1.setProperty({fixed:true});
+//      var N2 = board.create('point', [function(){return X.X()},-20], {name: 'N2', size: 3, face: 'o'});
+//      N2.setProperty({fixed:true});
+    </script>
+
+    <p>
+      Let $\tau$ be the time recorded by the moving clock and $(ct,x^i)$ an event along the world line of the moving clock.
+    </p>
+    <p>
+      If $v$ is the instantaneous speed and $\gamma(v) = (1 - (v/c)^2)^{\frac{1}{2}}$, then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \tau}{d t} &amp; = &amp; \frac{1}{\gamma(v)}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice that, consistent with the <b>clock hypothesis</b>, the rate of the moving clock depends only upon the instantaneous speed relative to the inertial frame, and not upon its acceleration.
+    </p>
+  </section>
+</article>
