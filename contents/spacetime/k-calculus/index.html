@@ -1,0 +1,85 @@
+---
+layout: master
+title: Geometric Physics • Spacetime • k-Calculus
+---
+<article>
+  <h1>k-Calculus</h1>
+  <section>
+    <h3>The Big Picture</h3>
+    <p>
+      Firstly, k-Calculus is not actually calculus in the sense of infinitesimals and sums. We're using the more general meaning of the word as a procedure by which we calculate things. In particular we are talking about a procedure for determining the coordinates of an event. What's special about k-Calculus is that it avoids the intermediate step of creating a coordinate lattice with associated synchronized clocks. By using the more fundamental technique of measuring the elapsed time of an out-and-back signal, we hope to make the underlying physical principles more obvious.
+    </p>
+    <p>
+      In addition, we will seek ways to make the invariants manifest and take a geometric approach that avoids special coordinate systems, again to make the underlying physics more obvious.
+    </p>
+    <p>
+      The name k-Calculus comes from a function called $k$ that we invent that captures the assumption that we can't determine absolute velocity and that only relative velocity matters.
+    </p>
+  </section>
+  <section>
+    <h3>The Calculation</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:false, showNavigation: false, showCopyright: false});
+
+      var origin = {X:-5, Y: -8};
+
+      var matterDash = 2;
+      var lightDash = 2;
+
+//    var beta = board.create('slider', [[3,-5], [8,-5], [-1.0, 0.5, +1.0]]);
+
+      var P = board.create('point', [0,0], {name: '$[t,x] = [\\frac{1}{2}(t_f + t_i), \\frac{c}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
+      P.setProperty({fixed:false});
+
+      var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_i$', size: 3, face: 'o'});
+      T1.setProperty({fixed:true});
+
+      var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var T3 = board.create('point', [origin.X,function(){return P.Y()+(P.X()-origin.X);}], {name: '$t_f$', size: 3, face: 'o'});
+      T3.setProperty({fixed:true});
+
+      var PT3 = board.create('line', [P,T3], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var TI = board.create('point',
+        [
+          origin.X,
+          function() {return (T3.Y()+T1.Y())/2;}
+        ],
+        {
+          name: '$t$', size: 3, face: 'o', color: 'gray'
+        }
+      );
+      TI.setProperty({fixed:true});
+
+      var TIP= board.create('line', [TI,P], {straightFirst: false, straightLast: false, color: 'gray', strokeWidth:1, dash:2});
+
+//    var Q = board.create('point', [function(){return beta.Value()*2;},+2], {name: '$E_f$', size: 3, face: 'o', color: 'green'});
+//    Q.setProperty({fixed:true});
+
+//    var T2 = board.create('point', [origin.X,function(){return Q.Y()-(Q.X()-origin.X)}], {name: '$t_2$', size: 3, face: 'o'});
+//    T2.setProperty({fixed:true});
+
+//    var T2Q= board.create('line', [T2,Q], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
+
+//    var T4 = board.create('point', [origin.X,function(){return Q.Y()+(Q.X()-origin.X)}], {name: '$t_4$', size: 3, face: 'o'});
+//    T4.setProperty({fixed:true});
+
+//    var QT4 = board.create('line', [Q,T4], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+//    var TF = board.create('point', [origin.X,function() {return (T4.Y()+T2.Y())/2;}], {name: '$t_f$', size: 3, face: 'o'});
+//    TF.setProperty({fixed:true});
+
+      var lineA = board.create('line', [T1,T3], {straightFirst: true, straightLast: true, color: 'red', dash: matterDash});
+
+//    var TFQ= board.create('line', [TF,Q], {straightFirst: false, straightLast: false, color: 'gray', strokeWidth:1, dash:2});
+
+//    var PQ = board.create('line', [P,Q], {straightFirst: false,  straightLast: false, color: 'green', dash:matterDash});
+    </script>
+  </section>
+</article>

@@ -1,0 +1,125 @@
+---
+layout: master
+title: Geometric Physics • Spacetime • Coordinate Measurement
+---
+<article>
+  <h1>Coordinate Measurement</h1>
+  <section>
+    <h3>Coordinates</h3>
+    <p>
+      If we want to describe physical systems then we need at least a way to specify both where things happen and when. Describing where something happens requires spatial coordinates, one for each dimension of the space. Describing when something happens requires a temporal coordinate or time.
+    </p>
+  </section>
+  <section>
+    <h3>Time Standard Unit</h3>
+    <p>
+      Measuring time can be done by constructing a clock from a few conceptually simple components: an oscillator, a driver to make the oscillator resonate, a device to detect the maximum amplitude of resonance, and a counter connected to the driver. A unit of time is then defined to be a certain number of periods of the known oscillator material.
+    </p>
+    <p>
+      A good clock is one that oscillates at a uniform rate relative to other clocks nearby. What we mean by this is that the ratio of the number of oscillations of each type of good clock does not change over time. It is observed from experiment that oscillators exist in nature that can be used to make good clocks.
+    </p>
+  </section>
+  <section>
+    <h3>Information Speed</h3>
+    <p>
+      In addition to the existence of good clocks, another experimental observation is that, far from massive objects, signals travel in empty space at a uniform speed and in a straight line. One example of such a signal is the energy propagated by light.
+    </p>
+  </section>
+  <section>
+    <h3>Length Standard Unit</h3>
+    <p>
+      Given a standard time unit and a naturally occuring standard speed, we can define a standard unit of length. A unit of length is simply how far an information signal travels in a certain number of arbitrarily chosen time units.
+    </p>
+  </section>
+  <section>
+    <h3>Coordinate Frame</h3>
+    <p>
+      A coordinate frame is often thought of as a lattice of clocks sitting at all points in space with the points labelled by three numbers called the spatial coordinates of the point. The coordinates of an event $(t, x, y, z)$ are then determined by finding the nearest lattice point and reading off the label numbers and the time on the clock.
+    </p>
+    <p>
+      More abstractly, a coordinate frame can be thought of as a process by which coordinates can be assigned to an event. It is not essential for a physical lattice to be constructed since the coordinates of an event can be established by using light signals to determine distances and times. It should also be noted that the use of light signals is more fundamental because physical lattices still require a definition of how to assign spatial coordinates to points and synchronize clocks.
+    </p>
+  </section>
+  <section>
+    <h3>Light Ranging and Timing</h3>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:false, showNavigation: false, showCopyright: false});
+
+      var origin = {X:-5, Y: -8};
+
+      var matterDash = 2;
+      var lightDash = 2;
+
+//    var beta = board.create('slider', [[3,-5], [8,-5], [-1.0, 0.5, +1.0]]);
+
+      var P = board.create('point', [0,0], {name: '$[t,x] = [\\frac{1}{2}(t_f + t_i), \\frac{c}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
+      P.setProperty({fixed:false});
+
+      var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_i$', size: 3, face: 'o'});
+      T1.setProperty({fixed:true});
+
+      var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var T3 = board.create('point', [origin.X,function(){return P.Y()+(P.X()-origin.X);}], {name: '$t_f$', size: 3, face: 'o'});
+      T3.setProperty({fixed:true});
+
+      var PT3 = board.create('line', [P,T3], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});
+
+      var TI = board.create('point',
+        [
+          origin.X,
+          function() {return (T3.Y()+T1.Y())/2;}
+        ],
+        {
+          name: '$t$', size: 3, face: 'o', color: 'gray'
+        }
+      );
+      TI.setProperty({fixed:true});
+
+      var TIP= board.create('line', [TI,P], {straightFirst: false, straightLast: false, color: 'gray', strokeWidth:1, dash:2});
+
+      var lineA = board.create('line', [T1,T3], {straightFirst: true, straightLast: true, color: 'red', dash: matterDash});
+    </script>
+    <p>
+      If we send a light signal at time $t_i$ and the signal is reflected and then received at time $t_f$ then assuming that the light travels with uniform speed $c$ we can calculate the distance $x$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x &amp; = &amp; \frac{c}{2} (t_f - t_i)
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      How can we assign a time $t$ to the event? If we assume that the speed of the signal propagation is isotropic then the outbound time interval should be equal to the inbound time interval:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t - t_i &amp; = &amp; t_f - t
+      \end{eqnarray}
+      $, which is equivalent to saying
+      $
+      \begin{eqnarray}
+      t &amp; = &amp; \frac{1}{2}(t_f + t_i)
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Notice that we cannot measure the one-way speed of light because we would first need to place a clock at the final point and synchronize it with the clock at the initial point. The synchronization procedure requires the assumption that the speed of light is isotropic.
+    </p>
+  </section>
+  <section>
+    <h3>Synchronized Clocks</h3>
+    <p>
+      An alternative approach for assigning coordinates to an event is to set up a lattice of clocks and then to use radar to synchronize the clocks. This is completely equivalent to the use of light signals and a centralized clock.
+    </p>
+    <p>
+      Notice that we can't simply construct two similar clocks, synchronize them at one location and then move one to a remote location. Such a procedure will affect the system in such a way that the one-way time taken for a light signal to travel between the two clocks will depend upon the direction.
+    </p>
+    <p>
+      The synchronization procedure involves setting the clocks so that the one-way travel time between any pair of clocks is one half of the round trip time.
+    </p>
+  </section>
+</article>
