@@ -29,7 +29,13 @@ title: Geometric Physics • Spacetime • Moving Clock
   <section>
     <h3>Derivation of Moving Clock Rate</h3>
     <p>
-      In the diagram below, the green points represent two events on the worldline of the clock moving through the inertial frame. This clock may be moving nonuniformly, but we only show a small segment of the path. The red points represent events on the worldline of a clock at rest with respect to the inertial system. The blue lines represent light signals emitted at $t_1$ and $t_2$, reflected from the moving clock, and received at $t_3$ and $t_4$ respectively. The purpose of these light signals is to measure the time and position of the events $E_i$ and $E_f$ in the coordinates of the inertial frame, which is necessary in order to determine the average velocity of the moving clock. As the increment $\Delta t = t_f - t_i$ is made smaller and smaller, the average velocity becomes a better approximation to the instantaneous velocity. The slider may be used to vary the instantaneous velocity of the moving clock in the interval $(-1,1)$.
+      In the diagram below, the green points represent two events on the worldline of the clock moving through the inertial frame. This clock may be moving nonuniformly, but we only show a small segment of the path. At the <em>initial</em> event, $E_i$, the moving clock records the time $\tau_i$. At the <em>final</em> event, $E_f$, the moving clock records the time $\tau_f$. The increment of time recorded by the moving clock is then $\Delta \tau = \tau_f - \tau_i$.
+    </p>
+    <p>
+      The red points represent events on the worldline of a clock at rest with respect to the inertial system.
+    </p>
+    <p>
+      The blue lines represent light signals emitted at $t_1$ and $t_2$, reflected from the moving clock, and received at $t_3$ and $t_4$ respectively. The purpose of these light signals is to measure the time and position of the events $E_i$ and $E_f$ in the coordinates of the inertial frame, which is necessary in order to determine the average velocity of the moving clock. As the increment $\Delta t = t_f - t_i$ is made smaller and smaller, the average velocity becomes a better approximation to the instantaneous velocity. The slider may be used to vary the instantaneous velocity of the moving clock in the interval $(-1,1)$.
     </p>
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
@@ -94,5 +100,147 @@ title: Geometric Physics • Spacetime • Moving Clock
 //      var N2 = board.create('point', [function(){return X.X()},-20], {name: 'N2', size: 3, face: 'o'});
 //      N2.setProperty({fixed:true});
     </script>
+    <p>
+    </p>
+    <p>
+      We want to calculate
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \tau}{d t} &amp; = &amp; \lim_{\Delta t \rightarrow 0} \frac{\Delta \tau}{\Delta t} \\
+                         &amp; = &amp; \lim_{\Delta t \rightarrow 0} \frac{\Delta \tau}{t_f - t_i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We assume that the light takes equal time for the outbound trip as for the return trip:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t_i &amp; = &amp; \frac{1}{2}(t_3 - t_1),
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t_f &amp; = &amp; \frac{1}{2}(t_4 - t_2).
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substituting $t_i$ and $t_f$ we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 \Delta \tau}{(t_4 - t_3) - (t_2 - t_1)}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Define
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k(v) &amp; = &amp; \frac{\Delta T_{receive}}{\Delta T_{transmit}},
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $\Delta T_{transmit}$ is the interval between transmitted pulses as measured by the transmitting clock, and $\Delta T_{receive}$ is the interval between received pulses as measured by the receiving clock. $v$ is the relative velocity and is positive when the transmitter and receiver are receeding from each other, negative when they are approaching each other, and zero when at relative rest.
+    </p>
+    <p>
+      For the signals transmitted at $t_1$ and $t_2$ and received by the moving clock:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k(v) &amp; = &amp; \frac{\Delta \tau}{t_2 - t_1}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For the signals reflected by the moving clock and received at $t_3$ and $t_4$ by the clock at rest:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k(v) &amp; = &amp; \frac{t_4 - t_3}{\Delta \tau}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substituting $t_1$, $t_2$, $t_3$ and $t_4$ we now have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 k(v)}{k(v)^2 + 1}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now need to find the form for $k(v)$, which we do by first computing the moving clock velocity
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \beta &amp; = &amp; \frac{v}{c} \\
+            &amp; = &amp; \frac{\Delta x}{c \Delta t} \\
+            &amp; = &amp; \frac{x_f - x_i}{c \Delta t} \\
+            &amp; = &amp; \frac{c(t_f - t_2) - c(t_i - t_1)}{c \Delta t} \\
+            &amp; = &amp; \frac{(t_f - t_i) - (t_2 - t_1)}{\Delta t} \\
+            &amp; = &amp; \frac{\Delta t - (\Delta \tau / k(v))}{\Delta t} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Rearranging this last expression we get
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; (1 - \beta) k(v).
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Equating the two expressions for $\Delta \tau / \Delta t$ and solving for $\beta$ we find the following identities:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      1 - \beta &amp; = &amp; \frac{2}{k^2 + 1}
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \beta &amp; = &amp; \frac{k^2 - 1}{k^2 + 1}
+      \end{eqnarray}
+      $, and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      1 + \beta &amp; = &amp; \frac{2 k^2}{k^2 + 1}
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Multiplying the two expressions for $\Delta \tau / \Delta t$ and writing the result in terms of $\beta$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\frac{\Delta \tau}{\Delta t})^2 &amp; = &amp; (1 + \beta)(1 - \beta)
+      \end{eqnarray}
+      $.
+    </p>
   </section>
 </article>
