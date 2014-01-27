@@ -1,0 +1,138 @@
+---
+layout: master
+title: Geometric Physics • Spacetime • Lorentz Transformation
+---
+<article>
+  <h1>Lorentz Transformation</h1>
+  <section>
+    <h3>Lorentz Boost</h3>
+    <p>
+      Consider an event with coordinates $(t,x)$ according to Alice and $(t',x')$ according to Bob.
+    </p>
+    <p>
+      Alice emits a radar pulse at time $t-x$ and receives the reflected pulse at time $t+x$ so that she assigns coordinates $(t,x)$ to the event.
+    </p>
+    <p>
+      Bob emits a radar pulse at time $t'-x'$ and receives the reflected pulse at time $t'+x'$ so that he assigns coordinates $(t',x')$ to the event.
+    </p>
+    <p>
+      Since light travels rectilinearly, Bob's radar pulse must coincide with Alice's radar pulse.
+    </p>
+    <p>
+      Applying the k-Calculus,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k(v) &amp; = &amp; \frac{t'- x'}{t - x}
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k(v) &amp; = &amp; \frac{t + x}{t' + x'}
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Immediately, we obtain the invariant quantity:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t^2 - x^2 &amp; = &amp; (t')^2 - (x')^2
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Solving for $x'$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x' &amp; = &amp; \frac{1}{k} (t + x) - t' \\
+         &amp; = &amp; \frac{1}{k} (t + x) - (t' - x') - x' \\
+         &amp; = &amp; \frac{1}{k} (t + x) - k(t - x) - x' \\
+         &amp; = &amp; \frac{1}{2k} (t + x) - \frac{k}{2}(t - x) \\
+         &amp; = &amp; (\frac{1}{2k} + \frac{k}{2})x + (\frac{1}{2k} - \frac{k}{2}) t \\
+         &amp; = &amp; (\frac{k^2 + 1}{2k})x - (\frac{k^2 - 1}{2k}) t \\
+         &amp; = &amp; (\frac{k^2 + 1}{2k})(x - (\frac{k^2 - 1}{k^2 + 1}) t) \\
+         &amp; = &amp; \gamma (x - \beta t) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Solving for $t'$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t' &amp; = &amp; \frac{1}{k} (t + x) - x' \\
+         &amp; = &amp; \frac{1}{k} (t + x) + (t' - x') - t' \\
+         &amp; = &amp; \frac{1}{k} (t + x) + k(t - x) - t' \\
+         &amp; = &amp; \frac{1}{2k} (t + x) + \frac{k}{2}(t - x) \\
+         &amp; = &amp; (\frac{1}{2k} + \frac{k}{2}) t + (\frac{1}{2k} - \frac{k}{2})x \\
+         &amp; = &amp; (\frac{k^2 + 1}{2k})t - (\frac{k^2 - 1}{2k}) x \\
+         &amp; = &amp; (\frac{k^2 + 1}{2k})(t - (\frac{k^2 - 1}{k^2 + 1}) x) \\
+         &amp; = &amp; \gamma (t - \beta x) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Because $t$ is mixed up with $x$ in the transformation, and because there is an invariant connecting them, we regard this space as two-dimensional with time being one of the dimensions.
+    </p>
+    <p>
+      To determine the transformation of the remaining space coordinates $y$, $z$ and $y'$, $z'$ consider a light-cone with vertex at the event described by Alice as $t_0$, $x_0$ and Bob as $t_0'$, $x_0'$.
+    </p>
+    <p>
+      Alice describes the locus of the flash as:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (t - t_0)^2 &amp; = &amp; (x - x_0)^2 + (y)^2 + z^2
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Bob describes the locus of the same flash as:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (t' - t_0')^2 &amp; = &amp; (x' - x_0')^2 + (y')^2 + (z')^2
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      But
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (t - t_0)^2 - (x - x_0)^2 &amp; = &amp; t^2 - 2 t t_0 + (t_0)^2 - x^2 + 2 x x_0 - (x_0)^2 \\
+                                &amp; = &amp; t^2 - x^2 + 2 x x_0 - 2 t t_0 + (t_0)^2 - (x_0)^2 \\
+                                &amp; = &amp; (t-x)(t+x) + 2 x x_0 - 2 t t_0 + (t_0 - x_0)(t_0 + x_0) \\
+                                &amp; = &amp; [(t-x)-(t_0 - x_0)][(t+x)-(t_0 + x_0)]  \\
+                                &amp; = &amp; \frac{1}{k}[(t'-x')-(t_0' - x_0')]k[(t'+x')-(t_0' + x_0')]  \\
+                                &amp; = &amp; [(t'-x')-(t_0' - x_0')][(t'+x')-(t_0' + x_0')]  \\
+                                &amp; = &amp; (t' - t_0')^2 - (x' - x_0')^2  \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y^2 + z^2 &amp; = &amp; (y')^2 + (z')^2
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Since the $y$ and $z$ directions are symmetrically placed about the direction of motion we must have $y = y'$ and $z = z'$.
+    </p>
+  </section>
+</article>
