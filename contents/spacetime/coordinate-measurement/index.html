@@ -32,6 +32,15 @@ title: Geometric Physics • Spacetime • Coordinate Measurement
     </p>
   </section>
   <section>
+    <h3>Natural Units</h3>
+    <p>
+      In the analysis that follows we will work in so-called natural units. Expressions written in natural units are obtained from standard expressions by making the replacement $t \rightarrow t/c$. We can recover standard expressions by making the replacement $t \rightarrow ct$. Natural units simplify the handling of expressions by effectively setting $c \rightarrow 1$. More importantly, expressions in natural units make the underlying physics clearer by removing arbitrary scale factors.
+    </p>
+    <p>
+      Note that when using natural units velocities are dimensionless quantities being ratios of standard velocities to the speed of light.
+    </p>
+  </section>
+  <section>
     <h3>Coordinate Frame</h3>
     <p>
       A coordinate frame is often thought of as a lattice of clocks sitting at all points in space with the points labelled by three numbers called the spatial coordinates of the point. The coordinates of an event $(t, x, y, z)$ are then determined by finding the nearest lattice point and reading off the label numbers and the time on the clock.
@@ -53,7 +62,7 @@ title: Geometric Physics • Spacetime • Coordinate Measurement
 
 //    var beta = board.create('slider', [[3,-5], [8,-5], [-1.0, 0.5, +1.0]]);
 
-      var P = board.create('point', [0,0], {name: '$[t,x] = [\\frac{1}{2}(t_f + t_i), \\frac{c}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
+      var P = board.create('point', [0,0], {name: '$[t,x] = [\\frac{1}{2}(t_f + t_i), \\frac{1}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
       P.setProperty({fixed:false});
 
       var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_i$', size: 3, face: 'o'});
@@ -82,12 +91,12 @@ title: Geometric Physics • Spacetime • Coordinate Measurement
       var lineA = board.create('line', [T1,T3], {straightFirst: true, straightLast: true, color: 'red', dash: matterDash});
     </script>
     <p>
-      If we send a light signal at time $t_i$ and the signal is reflected and then received at time $t_f$ then assuming that the light travels with uniform speed $c$ we can calculate the distance $x$:
+      If we send a light signal at time $t_i$ and the signal is reflected and then received at time $t_f$ then assuming that the light travels with uniform speed we can calculate the distance $x$:
     </p>
     <p>
       $
       \begin{eqnarray}
-      x &amp; = &amp; \frac{c}{2} (t_f - t_i)
+      x &amp; = &amp; \frac{1}{2} (t_f - t_i)
       \end{eqnarray}
       $.
     </p>

@@ -1,9 +1,9 @@
 ---
 layout: master
-title: Geometric Physics • Spacetime • Moving Clock
+title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
 ---
 <article>
-  <h1>Moving Clock</h1>
+  <h1>Moving Clock and Time Dilation</h1>
   <section>
     <h3>Path Dependence of Time</h3>
     <p>
@@ -13,10 +13,10 @@ title: Geometric Physics • Spacetime • Moving Clock
       A moving clock, when compared to clocks along the path of the moving clock which are at rest in an inertial frame, will show a slower instantaneous rate.
     </p>
     <p>
-      Let $\tau$ be the time recorded by the moving clock and $(ct,x^i)$ an event along the world line of the moving clock.
+      Let $\tau$ be the time recorded by the moving clock and $(t,x^i)$ an event along the world line of the moving clock.
     </p>
     <p>
-      If $v$ is the instantaneous speed and $\gamma(v) = (1 - (v/c)^2)^{\frac{1}{2}}$, then
+      If $v$ is the instantaneous speed and $\gamma(v) = (1 - v^2)^{\frac{1}{2}}$, then
     </p>
     <p>
       $
@@ -192,12 +192,11 @@ title: Geometric Physics • Spacetime • Moving Clock
     <p>
       $
       \begin{eqnarray}
-      \beta &amp; = &amp; \frac{v}{c} \\
-            &amp; = &amp; \frac{\Delta x}{c \Delta t} \\
-            &amp; = &amp; \frac{x_f - x_i}{c \Delta t} \\
-            &amp; = &amp; \frac{c(t_f - t_2) - c(t_i - t_1)}{c \Delta t} \\
-            &amp; = &amp; \frac{(t_f - t_i) - (t_2 - t_1)}{\Delta t} \\
-            &amp; = &amp; \frac{\Delta t - (\Delta \tau / k(v))}{\Delta t} \\
+      v &amp; = &amp; \frac{\Delta x}{\Delta t} \\
+        &amp; = &amp; \frac{x_f - x_i}{\Delta t} \\
+        &amp; = &amp; \frac{(t_f - t_2) - (t_i - t_1)}{\Delta t} \\
+        &amp; = &amp; \frac{(t_f - t_i) - (t_2 - t_1)}{\Delta t} \\
+        &amp; = &amp; \frac{\Delta t - (\Delta \tau / k(v))}{\Delta t} \\
       \end{eqnarray}
       $
     </p>
@@ -207,31 +206,31 @@ title: Geometric Physics • Spacetime • Moving Clock
     <p>
       $
       \begin{eqnarray}
-      \frac{\Delta \tau}{\Delta t} &amp; = &amp; (1 - \beta) k(v).
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; (1 - v) k(v).
       \end{eqnarray}
       $
     </p>
     <p>
-      Equating the two expressions for $\Delta \tau / \Delta t$ and solving for $\beta$ we find the following identities:
+      Equating the two expressions for $\Delta \tau / \Delta t$ and solving for $v$ we find the following identities:
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 - \beta &amp; = &amp; \frac{2}{k^2 + 1}
+      1 - v &amp; = &amp; \frac{2}{k^2 + 1}
       \end{eqnarray}
       $,
     </p>
     <p>
       $
       \begin{eqnarray}
-      \beta &amp; = &amp; \frac{k^2 - 1}{k^2 + 1}
+      v &amp; = &amp; \frac{k^2 - 1}{k^2 + 1}
       \end{eqnarray}
       $, and
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 + \beta &amp; = &amp; \frac{2 k^2}{k^2 + 1}
+      1 + v &amp; = &amp; \frac{2 k^2}{k^2 + 1}
       \end{eqnarray}
       $.
     </p>
@@ -241,17 +240,17 @@ title: Geometric Physics • Spacetime • Moving Clock
     <p>
       $
       \begin{eqnarray}
-      k(\beta) &amp; = &amp; \left( \frac{1 + \beta}{1 - \beta} \right)^{\frac{1}{2}}
+      k(v) &amp; = &amp; \left( \frac{1 + v}{1 - v} \right)^{\frac{1}{2}}
       \end{eqnarray}
       $.
     </p>
     <p>
-      Multiplying the two expressions for $\Delta \tau / \Delta t$ and writing the result in terms of $\beta$ we obtain
+      Multiplying the two expressions for $\Delta \tau / \Delta t$ and writing the result in terms of $v$ we obtain
     </p>
     <p>
       $
       \begin{eqnarray}
-      (\frac{\Delta \tau}{\Delta t})^2 &amp; = &amp; (1 + \beta)(1 - \beta)
+      (\frac{\Delta \tau}{\Delta t})^2 &amp; = &amp; (1 + v)(1 - v)
       \end{eqnarray}
       $.
     </p>

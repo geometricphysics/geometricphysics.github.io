@@ -13,7 +13,7 @@ title: Geometric Physics • Spacetime • k-Calculus
       In addition, we will seek ways to make the invariants manifest and take a geometric approach that avoids special coordinate systems, again to make the underlying physics more obvious.
     </p>
     <p>
-      The name k-Calculus comes from a function $k(\beta)$, where $\beta = v / c$, that emerges in the analysis when we make the assumption that only relative velocity matters when transforming coordinates between inertial frames. This is equivalent to the Relativity Principle.
+      The name k-Calculus comes from a function $k(v)$ that emerges in the analysis when we make the assumption that only relative velocity matters when transforming coordinates between inertial frames. This is equivalent to the Relativity Principle.
     </p>
   </section>
   <section>
@@ -103,7 +103,7 @@ title: Geometric Physics • Spacetime • k-Calculus
       Define the relative velocity $v$ of the clocks to be positive when the clocks are receeding from each other.
     </p>
     <p>
-      The ratio of the received pulse interval (measured by the receiving clock) to transmitted pulse interval (measured by the sending clock) defines the function $k(\beta)$:
+      The ratio of the received pulse interval (measured by the receiving clock) to transmitted pulse interval (measured by the sending clock) defines the function $k(v)$:
     </p>
     <p>
       For example, considering the signals emitted at $t_1$ and $t_2$ and received by the moving clock:
@@ -111,7 +111,7 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \Delta \tau = \tau_f - \tau_i &amp; = &amp; k(\beta) (t_2 - t_1)
+      \Delta \tau = \tau_f - \tau_i &amp; = &amp; k(v) (t_2 - t_1)
       \end{eqnarray}
       $.
     </p>
@@ -121,8 +121,8 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      t_4 - t_3 &amp; = &amp; k(\beta) (\tau_f - \tau_i)
-                &amp; = &amp; k(\beta) \Delta \tau
+      t_4 - t_3 &amp; = &amp; k(v) (\tau_f - \tau_i)
+                &amp; = &amp; k(v) \Delta \tau
       \end{eqnarray}
       $.
     </p>
@@ -132,9 +132,8 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \beta &amp; = &amp; \frac{v}{c} \\
-            &amp; = &amp; \frac{1}{c} \frac{\Delta x}{\Delta t} \\
-            &amp; = &amp; \frac{1}{c} \frac{x_f - x_i}{t_f - t_i} \\
+      v &amp; = &amp; \frac{\Delta x}{\Delta t} \\
+        &amp; = &amp; \frac{x_f - x_i}{t_f - t_i} \\
       \end{eqnarray}
       $.
     </p>
@@ -144,8 +143,8 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \beta &amp; = &amp; \frac{(t_4 - t_2) - (t_3 - t_1)}{(t_4 + t_2) - (t_3 + t_1)} \\
-            &amp; = &amp; \frac{(t_4 - t_3) - (t_2 - t_1)}{(t_4 - t_3) + (t_2 - t_1)} \\
+      v &amp; = &amp; \frac{(t_4 - t_2) - (t_3 - t_1)}{(t_4 + t_2) - (t_3 + t_1)} \\
+        &amp; = &amp; \frac{(t_4 - t_3) - (t_2 - t_1)}{(t_4 - t_3) + (t_2 - t_1)} \\
       \end{eqnarray}
       $.
     </p>
@@ -155,8 +154,8 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \beta &amp; = &amp; \frac{k - 1/k}{k + 1/k} \\
-            &amp; = &amp; \frac{k^2 - 1}{k^2 + 1} \\
+      v &amp; = &amp; \frac{k - 1/k}{k + 1/k} \\
+        &amp; = &amp; \frac{k^2 - 1}{k^2 + 1} \\
       \end{eqnarray}
       $
     </p>
@@ -166,26 +165,26 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \beta (k^2 + 1) &amp; = &amp; k^2 - 1 \\
+      v (k^2 + 1) &amp; = &amp; k^2 - 1 \\
       \end{eqnarray}
       $,
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 + \beta &amp; = &amp; k^2 (1 - \beta) \\
+      1 + v &amp; = &amp; k^2 (1 - v) \\
       \end{eqnarray}
       $,
     </p>
     <p>
       $
       \begin{eqnarray}
-      k(\beta) &amp; = &amp; \left( \frac{1 + \beta}{1 - \beta} \right)^{\frac{1}{2}} \\
+      k(v) &amp; = &amp; \left( \frac{1 + v}{1 - v} \right)^{\frac{1}{2}} \\
       \end{eqnarray}
       $.
     </p>
     <p>
-      Finally, we remark the following two identities satisfied by $k$:
+      We remark the following two identities satisfied by $k$:
     </p>
     <p>
       $
@@ -198,6 +197,64 @@ title: Geometric Physics • Spacetime • k-Calculus
       $
       \begin{eqnarray}
       k(\beta) k(- \beta) &amp; = &amp; 1
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Finally, we will encounter the quantity $\gamma(v) = (1 - v^2)^{\frac{1}{2}}$. It will be useful to have an expression in terms of $k$. Since
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      v &amp; = &amp; \frac{k^2 - 1}{k^2 + 1} \\
+      \end{eqnarray}
+      $, then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      1 + v &amp; = &amp; \frac{2k^2}{k^2 + 1} \\
+      \end{eqnarray}
+      $, and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      1 - v &amp; = &amp; \frac{2}{k^2 + 1} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      It follows that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (1 + v)(1 - v) &amp; = &amp; (\frac{2k}{k^2 + 1})^2 \\
+      \end{eqnarray}
+      $, so
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \gamma(v) &amp; = &amp; \frac{k^2 + 1}{2k} \\
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      Other curious identities include
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (1 + v) \gamma(v) &amp; = &amp; k
+      \end{eqnarray}
+      $, and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (1 - v) \gamma(v) &amp; = &amp; \frac{1}{k}
       \end{eqnarray}
       $.
     </p>
