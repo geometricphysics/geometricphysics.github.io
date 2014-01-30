@@ -2,26 +2,211 @@
 layout: master
 title: Geometric Physics • Classical Mechanics • Kinematics
 ---
-<h1>Kinematics</h1>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Velocity</h3>
-  </div>
-  <div class="panel-body">
+<article>
+  <h1>Kinematics</h1>
+  <section>
+    <h3>Overview</h3>
     <p>
-      $\vec{v} = \dot{\vec{x}} \stackrel{\mathrm{def}}{=} \Large\frac{d\vec{x}}{dt} \normalsize = \lim_{\Delta t \rightarrow 0} \Large \frac{\vec{x}(t + \Delta t) - \vec{x}(t)}{\Delta t}$
+      We'll start with some informal definitions and making connections with physical quantities before applying more rigor.
     </p>
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Acceleration</h3>
-  </div>
-  <div class="panel-body">
     <p>
-      $\vec{a} = \dot{\vec{v}} \stackrel{\mathrm{def}}{=} \Large\frac{d\vec{v}}{dt} \normalsize = \lim_{\Delta t \rightarrow 0} \Large \frac{\vec{v}(t + \Delta t) - \vec{v}(t)}{\Delta t}$
+      The emphasis will be on identifying geometric objects that we can use in a geometric language to describe physical quantities that we encounter in science and engineering. This is in contrast to a more coordinate-based approach which ultimately leads to tensor analysis. A more complete geometric approach than is possible with only vector analysis will avoid some of the limitations and ambiguities of the Gibbs vector algebra and will generalize easily to more complex geometries.
     </p>
-  </div>
-</div>
+  </section>
+  <section>
+    <h3>Vectors as Geometrical Objects</h3>
+    <p>
+      There are interesting physical quantities that we encounter such as displacement, velocity, acceleration, force and momentum that require us to specify both their <b>magnitude and direction</b> in order to define them completely, and we call these <b>vector</b> quantities. This is a very informal, non-mathematical, definition that we will make more precise.
+    </p>
+    <p>
+      Suppose we want to describe a <b>point</b> in space using a vector. We can do the following:
+      <p>Choose an arbitrary point in space and call it the <b>origin</b>, $O$.</p>
+      <p>The point $A$ is then represented by the <b>position vector</b> $a$ (an arrow) from the origin $O$ to the point $A$.</p>
+      <p>The vector $a$ has <b>magnitude</b>, <b>aspect</b> and <b>orientation</b>.
+      <p>The <b>magnitude</b> of the vector is denoted by $|a|$ and can be though of geometrically as the length.
+      <p>The <b>aspect</b> of the vector is the one-dimensional line that it lies on.
+      <p>The <b>orientation</b> of the vector is $\pm 1$ according to whether the vector points in some standard orientation.
+    </p>
+    <p>
+      A word about notation: Some texts will use bold face font <b>$\textbf{a}$</b> to represent vectors instead of just $a$. Of course, this is difficult to do in hand-written notes so students are often advised to use an arrow over the top of the symbol like this: $\vec{a}$. But we will be encountering other geometrical objects and so we will soon run out of notational tricks. My advice is to get used to working without the special accent notation and try to pick variable names that don't cause confusion.
+    </p>
+  </section>
+  <section>
+    <h3>Scalars as Geometrical Objects</h3>
+    <p>
+      There are also physical quantities that we think of as having only magnitude, and no direction, such as mass, speed, time and temperature. We call these <b>scalar</b> quantities. These often act as multipliers of vectors, scaling the vector by making it larger or smaller. Multiplying a vector by a non-zero positive scalar may change the magnitude of the vector but will not change its direction. However, multiplying a vector by a negative scalar will make the vector point in the opposite direction.
+      <p>A scalar is still a geometric object because it has <b>magnitude</b>, <b>aspect</b> and <b>orientation</b>.
+      <p>The <b>magnitude</b> of the scalar is denoted by $|a|$ and is the usual modulus (positive value) function.
+      <p>The <b>aspect</b> of the scalar is the zero-dimensional point.
+      <p>The <b>orientation</b> of the scalar is $\pm 1$ according to whether the scalar is positive or negative.
+    </p>
+  </section>
+  <section>
+    <h3>Other Geometrical Objects</h3>
+    <p>
+      We will encounter other geometrical objects besides scalars and vectors and will build up a powerful mathematical language based upon the simple operations of addition and multiplication.
+    </p>
+  </section>
+  <section>
+    <h3>3-dimensional Cartesian Coordinate Frame</h3>
+    <p>
+      <p>Choose a set of three <b>orthonormal</b> vectors $\{i,j,k\}$ called the <b>basis</b>.</p>
+      <p>Decompose a vector $r$ into its <b>projections</b> onto each of the , $x$, $y$ and $z$.</p>
+      <p>
+      $
+      \begin{eqnarray}
+        a &amp; = &amp; x i + y j + z k \\
+      \end{eqnarray}
+      $.
+      </p>
+      <p>
+        The quantities $x$, $y$, and $z$ are known as the <b>cartesian components</b> of the vector $a$ or the <b>coordinates</b> of $a$ in the cartesian or standard basis.
+      </p>
+      <p>
+        An important point is that $a$ is the geometrical object (the arrow), whereas the coordinates depend upon the basis vectors.
+      </p>
+    </p>
+  </section>
+  <section>
+    <h3>Notation: Coordinates and Standard Basis Vectors</h3>
+    <p>
+      We will use the notation $\{i,j,k\}$ as the basis for 3-dimensional Cartesian space for the time being and $x$, $y$, and $z$ as the corresponding coordinates.
+    </p>
+    <p>
+      However, at times it will be more convenient to use a <b>tensor</b> notation for the coordinates and an index notation for the basis:
+    </p>
+      <p>
+      $
+      \begin{eqnarray}
+        a &amp; = &amp; x^1 e_1 + x^2 e_2 + x^3 e_3 \\
+      \end{eqnarray}
+      $.
+      </p>
+  </section>
+  <section>
+    <h3>Vector Algebra</h3>
+    <p>
+      Before looking at Geometric Algebra. We should do a review of Vector (Linear) Spaces.
+    </p>
+    <p>
+      <ul>
+        <li>Vectors in Cartesian Coordinates</li>
+        <li>Vector / Linear Spaces, Scalars</li>
+        <li>Basis Vectors</li>
+        <li>Components and Linear Combinations</li>
+        <li>Magnitude and Pythagorean Theorem</li>
+        <li>Component Addition, Subtraction, Multiplication</li>
+        <li>Dot Product</li>
+        <li>Cross Product</li>
+      </ul>
+    </p>
+    <a href="VectorAlgebraMIT.pdf">Vector Algebra Review MIT</a>
+  </section>
+  <section>
+    <h3>Particle Motion</h3>
+    <p>
+      Suppose the <b>trajectory</b> (path) of a particle is described by a vector-valued function $r(t)$:
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      r(t) &amp; = &amp; x(t) i + y(t) j + z(t) k \\
+    \end{eqnarray}
+    $.
+    </p>
+    <p>
+      We see that the position is given by 3 functions of time and a basis. The goal of Classical Mechanics is to determine $r(t)$ given an <b>initial configuration</b> and a <b>dynamical law</b>.
+    </p>
+    <p>
+      We'll need some more terminology to describe the kinematics before we get to the dynamics.
+    </p>
+  </section>
+  <section>
+    <h3>Displacement</h3>
+    <p>
+      The <b>displacement</b> (vector) of a particle is the vector from the particle's initial position to the final position.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      \Delta r &amp; = &amp; r_f - r_i = r(t_f) - r(t_i)
+    \end{eqnarray}
+    $.
+    </p>
+    <p>
+      It's not necessary that the particle travelled in a straight line!
+    </p>
+  </section>
+  <section>
+    <h3>Velocity</h3>
+    <p>
+      The (instantaneous) <b>velocity</b> (vector) of a particle is defined using calculus.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      v(t) =  \frac{d r}{dt} = \dot{r} = \lim_{\Delta t \rightarrow 0} \frac{r(t + \Delta t) - r(t)}{\Delta t}
+    \end{eqnarray}
+    $.
+    </p>
+    <p>
+      $v$ is a vector-valued function (of a scalar argument), so this is really multiple equations, one for each dimension of space! However, the calculus isn't any more complex than the 1-dimensional case. When we write $v$ in cartesian components we have $v(t) = v_x(t) i + v_y(t) j + v_z(t) k$, where
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      v_x(t) =  \frac{d x}{dt} = \dot{x} = \lim_{\Delta t \rightarrow 0} \frac{x(t + \Delta t) - x(t)}{\Delta t}
+    \end{eqnarray}
+    $,
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      v_y(t) =  \frac{d y}{dt} = \dot{y} = \lim_{\Delta t \rightarrow 0} \frac{y(t + \Delta t) - y(t)}{\Delta t}
+    \end{eqnarray}
+    $,
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      v_z(t) =  \frac{d z}{dt} = \dot{z} = \lim_{\Delta t \rightarrow 0} \frac{z(t + \Delta t) - z(t)}{\Delta t}
+    \end{eqnarray}
+    $.
+    </p>
+  </section>
+  <section>
+    <h3>Speed</h3>
+    <p>
+      The speed of a particle is the magnitude of the velocity.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      |v(t)| =  \sqrt{(v_x^2 + v_y^2 + v_z^2)}
+    \end{eqnarray}
+    $.
+    </p>
+  </section>
+  <section>
+    <h3>Acceleration</h3>
+    <p>
+      The (instantaneous) <b>acceleration</b> (vector) of a particle is defined using calculus.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+      a(t) =  \frac{d v}{dt} = \dot{v} = \ddot{r} = \lim_{\Delta t \rightarrow 0} \frac{v(t + \Delta t) - v(t)}{\Delta t}
+    \end{eqnarray}
+    $.
+    </p>
+  </section>
+  <section>
+    <h3>Applications</h3>
+    <p>
+      Projectile Motion
+    </p>
+    <p>
+      Simple Harmonic Motion
+    </p>
+  </section>
+</article>
