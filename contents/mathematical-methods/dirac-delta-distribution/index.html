@@ -97,4 +97,67 @@ title: Geometric Physics • Mathematical Methods • Dirac delta distribution
       Proving the normalization condition requires evaluating the sine integral. This can be done through contour integration or by an involved <a href="http://caicedoteaching.wordpress.com/2008/11/05/175-the-sine-integral/" target="">elementary method</a>.
     </p>
   <section>
+  <section>
+    <h3>A Useful Identity</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{-\infty}^{\infty} dx \delta(f(x)) s(x) &amp; = &amp; \sum_{i} \frac{s(x_i)}{|f'(x_i)|}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We prove this by first showing
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{-\infty}^{\infty} dx \delta(b(x - \lambda)) s(x) &amp; = &amp; \frac{s(\lambda)}{|b|}
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      by noticing that the $\delta$ distribution is an even distribution of its argument, so the result can only depend on $|b|$. Making the substitution $z = bx$, gives the desired result.
+    </p>
+    <p>
+      Now write $f(x)$ as follows
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f(x) &amp; = &amp; R(x) \prod_{i} (x - x_i)
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      where $x_i$ is a root of $f(x)$, i.e. $f(x_i) = 0$.
+    </p>
+    <p>
+      Using this expansion for f(x), considering all the roots of $f(x)$ and using the interim result we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{-\infty}^{\infty} dx \delta(f(x)) s(x) &amp; = &amp; \sum_{i} \frac{s(x_i)}{|R(x_i) \prod_{k \neq i} (x_i - x_k)|}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      But using the product rule to differentiate $f(x)$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f'(x) &amp; = &amp; R'(x) \prod_{k} (x - x_k) + R(x) \sum_{j} \prod_{k \neq j} (x - x_k)
+      \end{eqnarray}
+      $, and so evaluating $f'(x)$ at $x_i$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f'(x_i) &amp; = &amp; R(x_i) \prod_{k \neq i} (x_i - x_k)
+      \end{eqnarray}
+      $, completing the proof.
+    </p>
+  </section>
 </article>
