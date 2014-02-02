@@ -59,18 +59,42 @@ title: Geometric Physics • Mathematical Methods • Dirac delta distribution
       $
       \delta_n(x) =
       \begin{eqnarray}
-      exp(-n^2 x^2)
+      \frac{n}{\sqrt{\pi}} exp(-n^2 x^2)
       \end{eqnarray}
       $
     </p>
     <p>
-      The integral properties follow easily from the definition.
+      Verifying this approximation involves the standard approach of converting the line integral into a two-dimensional integral over the plane and converting to polar coordinates.
     </p>
     <p>
+      This form of the distribution is useful because it is easy to differentiate.
+    </p>
+    <h4>Tangent</h4>
+    <p>
       $
+      \delta_n(x) =
       \begin{eqnarray}
+      \frac{n}{\pi} \frac{1}{1 + n^2 x^2}
       \end{eqnarray}
       $
+    </p>
+    <p>
+      Verify this approximation using the substitution $n x = \tan(\theta$)
+    </p>
+    <p>
+      This form is also easy to differentiate.
+    </p>
+    <h4>Fourier</h4>
+    <p>
+      $
+      \delta_n(x) =
+      \begin{eqnarray}
+      \frac{\sin(n x)}{\pi x} = \frac{1}{2 \pi} \int_{-n}^{n} dk \exp(-i k x)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Proving the normalization condition requires evaluating the sine integral. This can be done through contour integration or by an involved <a href="http://caicedoteaching.wordpress.com/2008/11/05/175-the-sine-integral/" target="">elementary method</a>.
     </p>
   <section>
 </article>
