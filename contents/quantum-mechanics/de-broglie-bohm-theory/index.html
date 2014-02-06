@@ -227,5 +227,88 @@ title: Geometric Physics • Quantum Mechanics • de Broglie-Bohm Pilot Wave Th
   </section>
   <section>
     <h3>The quantum Hamilton-Jacobi for $N$ particles</h3>
+    <p>
+      We now seek the Schr&#246;dinger equation in terms of the complex polar variables $|\psi|$ and $S$.
+    </p>
+    <p>
+      We first evaluate $\nabla_k^2 \psi$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      
+      \nabla_k^2 \psi
+
+      &amp; = &amp; \nabla_k \cdot \left[ \nabla_k ( |\psi| \exp(\frac{i}{\hbar}S)  ) \right] \\
+
+      &amp; = &amp; \nabla_k \cdot \left[ \exp(\frac{i}{\hbar}S) \left( \nabla_k |\psi| + |\psi| \frac{i}{\hbar} \nabla_k S \right) \right] \\
+
+      &amp; = &amp; \exp(\frac{i}{\hbar}S) \left( \frac{i}{\hbar} \nabla_k S \cdot \left[\nabla_k |\psi| + |\psi| \frac{i}{\hbar} \nabla_k S \right] + \nabla_k \cdot \left[\nabla_k |\psi| + |\psi| \frac{i}{\hbar} \nabla_k S \right] \right) \\
+
+      &amp; = &amp; \exp(\frac{i}{\hbar}S) \left( \frac{i}{\hbar} \nabla_k S \cdot \nabla_k |\psi| - |\psi| \frac{1}{\hbar^2} |\nabla_k S|^2 + \nabla_k^2 |\psi| + \frac{i}{\hbar} \nabla_k |\psi| \cdot \nabla_k S + |\psi| \frac{i}{\hbar} \nabla_k^2 S \right) \\
+
+      &amp; = &amp; \exp(\frac{i}{\hbar}S) \left( \nabla_k^2 |\psi| - |\psi| \frac{1}{\hbar^2} |\nabla_k S|^2 + \frac{2i}{\hbar} \nabla_k |\psi| \cdot \nabla_k S + |\psi| \frac{i}{\hbar} \nabla_k^2 S \right) \\
+
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Now we work on $\partial_t \psi$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_t \psi
+
+      &amp; = &amp; \partial_t \left(|\psi| \exp(\frac{i}{\hbar}S) \right) \\
+
+      &amp; = &amp; \exp(\frac{i}{\hbar}S) \left( \partial_t |\psi| + |\psi| \frac{i}{\hbar} \partial_t S \right)
+
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substituting these two expressions into the Schr&#246;dinger equation, and after cancelling the $\exp(\frac{i}{\hbar}S)$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      
+      i \hbar \partial_t |\psi| - |\psi| \partial_t S
+
+      &amp; = &amp; \sum_{k=1}^N - \frac{\hbar^2}{2 m_k} \left( \nabla_k^2 |\psi| - |\psi| \frac{1}{\hbar^2} |\nabla_k S|^2 + \frac{2i}{\hbar} \nabla_k |\psi| \cdot \nabla_k S + |\psi| \frac{i}{\hbar} \nabla_k^2 S \right) + V |\psi|
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now expand the continuity equation to obtain an expression for $\partial_t |\psi|$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      2 |\psi| \partial_t |\psi| &amp; = &amp; - \sum_{k=1}^N \left(2 |\psi| \nabla_k |\psi| \cdot \frac{\nabla_k S}{m_k} + |\psi|^2 \frac{\nabla_k^2 S}{m_k} \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now expand the continuity equation to obtain an expression for $i \hbar \partial_t |\psi|$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      i \hbar \partial_t |\psi| &amp; = &amp; \sum_{k=1}^N - \frac{\hbar^2}{2 m_k} \left(\frac{2i}{\hbar} \nabla_k |\psi| \cdot \nabla_k S + |\psi| \frac{i}{\hbar} \nabla_k^2 S \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      And by an amazing stroke of good fortune our Schr&#246;dinger equation simplifies to the <b>quantum Hamilton-Jacobi</b>:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_t S + \sum_{k=1}^N \frac{|\nabla_k S|^2}{2 m_k} + V + \sum_{k=1}^N - \frac{\hbar^2}{2 m_k} \left(\frac{\nabla_k^2 |\psi|}{|\psi|} \right) = 0
+      \end{eqnarray}
+      $
+    </p>
   </section>
 </article>
