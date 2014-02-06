@@ -1,0 +1,231 @@
+---
+layout: master
+title: Geometric Physics • Quantum Mechanics • de Broglie-Bohm Pilot Wave Theory (Bohmian Mechanics)
+---
+<article>
+  <h1>Bohmian Mechanics</h1>
+  <section>
+    <h3>Overview</h3>
+    <p>
+      Bohmian mechanics is a non-relativistic (Galilei-invariant) quantum theory about the motion of <b>point particles</b>.
+    </p>
+    <p>
+      <div>
+        Bohmian mechanics aims to be observer-independent by replacing the measurement postulate of orthodox quantum theory with a postulate connecting the velocity of each particle to the wavefunction. The phase function, $S$, in the complex polar form of the wavefunction,
+      </div>
+      <br/>
+      <div>
+        $
+        \begin{eqnarray}
+        \psi &amp; = &amp; | \psi | \exp(\frac{i}{\hbar} S)
+        \end{eqnarray}
+        $,
+      </div>
+      <br/>
+      <div>
+        acts to 'guide' the $k$-th particle according to the relationship
+      </div>
+      <br/>
+      <div>
+        $
+        \begin{eqnarray}
+        v_{k} &amp; \propto &amp; \nabla_{k} S
+        \end{eqnarray}
+        $.
+      </div>
+    </p>
+  </section>
+  <section>
+    <h3>Notation</h3>
+    <p>
+      In quantum mechanics, the symbol $i$ is widely used for the complex imaginary number. We will use $k$ as the particle index. $J$ will be used for probablity current densities.
+    </p>
+  </section>
+  <section>
+    <h3>Kinematics</h3>
+    <p>
+      The law of motion is a first order differential equation and thus Bohmian mechanics is naturally formulated on <b>configuration space</b>.
+    </p>
+    <p>
+      The <b>configuration</b> of a system of $N$ particles is the vector
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      q &amp; = &amp; (q_1, \ldots , q_N) \in \mathbb{R}^{3N}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      , where $q_k \in \mathbb{R}^3$ is the position of the $k$-th particle.
+    </p>
+    <p>
+      For given initial data the theory yields a trajectory
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      t \mapsto q(t) \in \mathbb{R}^{3N}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      in configuration space, i.e. the positions of all particles at all times.
+    </p>
+    <p>
+      The positions are the only output of the theory. Everything else (velocities, momenta, energies, spin etc.) must be deduced from the positions.
+    </p>
+  </section>
+  <section>
+    <h3>Dynamics</h3>
+    <h4>Postulate 1: The Schr&#246;dinger equation</h4>
+    <p>
+      The wavefunction, $\psi(q,t) : \mathbb{R}^{3N} \times \mathbb{R} \rightarrow \mathbb{C}$, satisfies the Schr&#246;dinger equation continuously at all times.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      i \hbar \partial_t \psi &amp; = &amp; \sum_{k = 1}^{N} - \frac{\hbar^2}{2 m_k} \nabla_k^2 \psi + V \psi
+      \end{eqnarray}
+      $
+    </p>
+    <h4>Postulate 2: The de Broglie guiding equation</h4>
+    <p>
+      The position of the $k$-th particle is related to the probability current density $J_{k}$ by the relation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      v_k(q,t) &amp; = &amp; \frac{J_{k}(q,t)}{\rho(q,t)} = \frac{J_{k}(q,t)}{| \psi |^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice that this is the standard formula connecting current, density and velocity except that the density is determined by the global wavefunction, and not a partial density.
+    </p>
+    <p>
+      The velocity of the $k$-th particle is determined by the equation of motion
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      v_k &amp; = &amp; \frac{d q_k}{d t} = \frac{\hbar}{m_k} ? \left(\frac{\nabla_k \psi}{\psi} \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In other words, the theory really enables us to compute velocities which we can then integrate to determine the positions.
+    </p>
+  </section>
+  <section>
+    <h3>Pilot Wave Concept</h3>
+    <p>
+      The pilot wave idea is that the velocity, $v_k$, of the $k$-th particle is guided by the global wavefunction, $\psi$, which we can write in complex polar form as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \psi(q,t) &amp; = &amp; | \psi | \exp(\frac{i}{\hbar} S(q,t))
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      , where the phase function $S(q,t) : \mathbb{R^{3N} \times \mathbb{R} \rightarrow \mathbb{R}}$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      v_k \propto \nabla_k S
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We proceed to derive and study the continuity equation to 
+    </p>
+  </section>
+  <section>
+    <h3>Continuity Equation</h3>
+    <p>
+      We first derive the continuity equation in the standard way for the Schr&#246;dinger equation:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_t \rho
+      &amp; = &amp; \partial_t |\psi|^2 \\
+      &amp; = &amp; \partial_t (\psi \psi^{*}) \\
+      &amp; = &amp; (\partial_{t} \psi) \psi^{*} + \psi (\partial_t \psi^{*}) \\
+      &amp; = &amp; \left(\sum_{k = 1}^{N} \frac{i \hbar}{2 m_k} \nabla_k^2 \psi - \frac{i V}{\hbar} \psi \right) \psi^{*} + \psi \left(\sum_{k = 1}^{N} - \frac{i \hbar}{2 m_k} \nabla_k^2 \psi^* + \frac{i V^*}{\hbar} \psi^* \right) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Assuming that the potential is real ($V : \mathbb{R}$), then $V = V^*$, and the terms involving the potential cancel.
+    </p>
+    <p>
+      Additionally, if we define the probablility current for the $k$-th particle as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      J_k &amp; = &amp; \frac{i \hbar}{2 m_k} (\psi \nabla_k \psi^* - \psi^* \nabla_k \psi)
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      and then use the identity $\nabla(f \vec{A}) = (\nabla f) \cdot \vec{A} + f (\nabla \cdot \vec{A})$, we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \nabla_k \cdot J_k
+      &amp; = &amp; \frac{i \hbar}{2 m_k} \nabla_k \cdot (\psi \nabla_k \psi^* - \psi^* \nabla_k \psi) \\
+      &amp; = &amp; \frac{i \hbar}{2 m_k} \left(\nabla_k \psi \cdot \nabla_k \psi^* + \psi \nabla_k^2 \psi^* - \nabla_k \psi^* \cdot \nabla_k \psi - \psi^* \nabla_k^2 \psi \right) \\
+      &amp; = &amp; \frac{i \hbar}{2 m_k} \left(\psi \nabla_k^2 \psi^* - \psi^* \nabla_k^2 \psi \right).
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Combining this expression with $\partial_t \rho$ we obtain the continuity equation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_t \rho + \sum_{k=1}^N \nabla_k \cdot J_k = 0.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now use the complex polar form of the wavefunction to obtain the continuity equation in terms of $\rho$ and $S$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+
+      J_k
+      &amp; = &amp; \frac{i \hbar}{2 m_k} (\psi \nabla_k \psi^* - \psi^* \nabla_k \psi) \\
+
+      &amp; = &amp; \frac{i \hbar |\psi|}{2 m_k} \left( \exp(\frac{iS}{\hbar}) \nabla_k (|\psi|\exp(-\frac{iS}{\hbar})) - \exp(-\frac{iS}{\hbar}) \nabla_k (|\psi|\exp(\frac{iS}{\hbar})) \right) \\
+
+      &amp; = &amp; \frac{i \hbar |\psi|}{2 m_k} \left(\nabla_k |\psi| - |\psi| \frac{i}{\hbar} \nabla_k S - \nabla_k |\psi| - |\psi| \frac{i}{\hbar} \nabla_k S \right) \\
+
+      &amp; = &amp; |\psi|^2 \frac{\nabla_k S}{m_k} \\
+
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The continuity equation for $|\psi|^2 : \mathbb{R}^{3N} \times \mathbb{R} \rightarrow \mathbb{R}$ becomes
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_t |\psi|^2 + \sum_{k=1}^N \nabla_k \cdot \left(|\psi|^2 \frac{\nabla_k S}{m_k} \right) = 0.
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>The quantum Hamilton-Jacobi for $N$ particles</h3>
+  </section>
+</article>
