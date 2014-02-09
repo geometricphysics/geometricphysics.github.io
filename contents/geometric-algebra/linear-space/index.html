@@ -1,10 +1,41 @@
 ---
 layout: master
-title: Geometric Physics • Geometric Algebra • Linear Space
+title: Geometric Physics • Geometric Algebra • Vectors and Linear Spaces
 ---
 <article>
-  <h1>Linear Space</h1>
+  <h1>Vectors and Linear Spaces</h1>
   <section>
-    <h3>Definition</h3>
+    <h3>Inverse</h3>
+    <p>
+      Show that for any $u \in \mathit{Cl}_2$, $u \bar{u} = \bar{u} u \in \mathbb{R}$, and that $u$ is invertible, if $u \bar{u} \neq 0$, with inverse
+    </p>
+    <p>
+      <center>
+      $
+      \begin{eqnarray}
+      u^{-1} = \frac{\bar{u}}{u \bar{u}}
+      \end{eqnarray}
+      $.
+      </center>
+    </p>
+    <p>
+      Let $u = u^0 + u^1 e_1 + u^2 e_2 + u^{12} e_{12}$. Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \bar{u} &amp; = &amp; \sum_k (-1)^{\frac{1}{2} k (k+1)} {\langle u \rangle}_k = u^0 - u^1 e_1 - u^2 e_2 - u^{12} e_{12}
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      u \bar{u}
+      &amp; = &amp; (u^0 + u^1 e_1 + u^2 e_2 + u^{12} e_{12})(u^0 - u^1 e_1 - u^2 e_2 - u^{12} e_{12}) \\
+      &amp; = &amp; (u^0)^2 - (u^1)^2 - (u^2)^2 + (u^{12})^2
+      \end{eqnarray}
+      $.
+    </p>
   </section>
 </artice>
