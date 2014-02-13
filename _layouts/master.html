@@ -70,9 +70,29 @@
 
       }
     </script>
+    <!-- Enable single-dollars for in-line math mode, and allow escaping -->
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
-        tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+        TeX: {
+          equationNumbers: {
+            autoNumber: "AMS"
+          },
+          Macros: {
+            Bra:                ["\\langle #1 |", 1],
+            BraKet:             ["\\langle #1 | #2 \\rangle", 2],
+            Complex: "{\\mathbb{C}}",
+            ComplexConjugate:   ["{#1}^{*}", 1],
+            HermitianConjugate: ["{#1}^{\\dagger}", 1],
+            Inverse:            ["{#1}^{-1}", 1],
+            Ket:                ["| #1 \\rangle", 1],
+            Norm:               ["|#1|", 1],
+            NormSquared:        ["|#1|^{2}", 1]
+          }
+        },
+        tex2jax: {
+          inlineMath: [['$','$'],['\\(','\\)']],
+          processEscapes: true
+        }
       });
     </script>
     <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
