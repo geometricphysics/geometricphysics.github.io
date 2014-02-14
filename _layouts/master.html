@@ -80,13 +80,17 @@
           Macros: {
             Bra:                ["\\langle #1 |", 1],
             BraKet:             ["\\langle #1 | #2 \\rangle", 2],
-            Complex: "{\\mathbb{C}}",
+            Complex:            "{\\mathbb{C}}",
             ComplexConjugate:   ["{#1}^{*}", 1],
             HermitianConjugate: ["{#1}^{\\dagger}", 1],
+            Integer:            ["{\\mathbb{Z}}", 0],
             Inverse:            ["{#1}^{-1}", 1],
             Ket:                ["| #1 \\rangle", 1],
             Norm:               ["|#1|", 1],
-            NormSquared:        ["|#1|^{2}", 1]
+            NormSquared:        ["|#1|^{2}", 1],
+            OrderOfGroup:       ["|#1|", 1],
+            Primed:             ["{#1}'", 1],
+            QED:                ["{\\blacksquare}", 0]
           }
         },
         tex2jax: {
