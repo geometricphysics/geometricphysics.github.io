@@ -48,6 +48,12 @@ title: Geometric Physics • Mathematical Methods • Representation
     </p>
   </section>
   <section>
+    <h3>Can every finite group be represented by a group of matrices?</h3>
+    <p>
+      <span class="theorem">Every finite group is isomorphic to a matrix group, $Gl(n)$ for some $n$ large enough</span>. This is a consequence of Cayley's theorem.
+    </p>
+  </section>
+  <section>
     <h3>Matrix Operations</h3>
     <p>
       Let $A (, B, C, \ldots)$ be a $n \times n$ matrix with entries $a_{ij} = (A)_{ij}$, where $i,j = 1,2, \dots, n$.
@@ -83,12 +89,12 @@ title: Geometric Physics • Mathematical Methods • Representation
       $
     </p>
     <p>
-      The <span class="colloquial"><b>Hermitian conjugate</b> or <b>adjoint</b> of a matrix $A$</span>, denoted by $\HermitianConjugate{A}$, is the transposed conjugate of $A$:
+      The <span class="colloquial"><b>Hermitian conjugate</b> or <b>adjoint</b> of a matrix $A$</span>, denoted by $\Adjoint{A}$, is the transposed conjugate of $A$:
     </p>
     <p>
       $
       \begin{eqnarray}
-      (\HermitianConjugate{A})_{ij} &amp; = &amp; \ComplexConjugate{(a_{ji})}
+      (\Adjoint{A})_{ij} &amp; = &amp; \ComplexConjugate{(a_{ji})}
       \end{eqnarray}
       $
     </p>
@@ -101,7 +107,7 @@ title: Geometric Physics • Mathematical Methods • Representation
     <p>
       $
       \begin{eqnarray}
-      \HermitianConjugate{A} &amp; = &amp; A
+      \Adjoint{A} &amp; = &amp; A
       \end{eqnarray}
       $
     </p>
@@ -163,7 +169,7 @@ title: Geometric Physics • Mathematical Methods • Representation
     <p>
       $
       \begin{eqnarray}
-      \HermitianConjugate{U} U &amp; = &amp; U \HermitianConjugate{U} = I
+      \Adjoint{U} U &amp; = &amp; U \Adjoint{U} = I
       \end{eqnarray}
       $
     </p>
@@ -210,6 +216,306 @@ title: Geometric Physics • Mathematical Methods • Representation
   <section>
     <h3>Diagonalization of Hermitian Matrices</h3>
     <p>
+      Standard proof for real eigenvalues and orthogonal eigenvectors.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      H \Ket{\psi} &amp; = &amp; \lambda \Ket{\psi}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Construct a unitary matrix $U$ from the normalized eigenvectors of $H$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      U &amp; = &amp; [\Ket{\psi_1} \ldots \Ket{\psi_n}]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now write (being careful with the order of $U$ and $D$)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      H U &amp; = &amp; U D
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $D$ is the real diagonal matrix whose entries are the eigenvalues of $H$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      D
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccccccc}
+            \lambda_1 &amp; 0         &amp; \cdots &amp; 0 \\
+            0         &amp; \lambda_2 &amp; \cdots &amp; 0 \\
+            \vdots    &amp; \vdots    &amp; \ddots &amp; \vdots \\
+            0         &amp; 0         &amp; \cdots &amp; \lambda_n
+        \end{array}
+      \right]
+      &amp; = &amp;
+      \Adjoint{U} H U
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      <span class="colloquial">Any Hermitian matrix can be diagonalized by an appropriate unitary transformation</span>.
+    </p>
+  </section>
+  <section>
+    <h3>Similarity Transformation</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      A &amp; \mapsto &amp; \Inverse{S} A S
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where all matrices are $n \times n$ and matrix $S$ is invertible.
+    </p>
+  </section>
+  <section>
+    <h3>Transformation to Unitary Representations</h3>
+    <p>
+      <span class="theorem">Every representation of a group can be brought into unitary form by a similarity transformation.</span>
+    </p>
+    <p>
+      By <em>unitary form</em> we mean a representation of the same dimensionality as the original where <b>every matrix is unitary</b>.
+    </p>
+    <p>
+      The basic idea is to construct a Hermitian matrix from the matrices of $G$. By diagonalizing $H$ we construct a unitary matrix $U$. Then construct a set of matrices from the original set, using $U$ and the eigenvalues of $H$ in a similarity transformation. Show that each matrix is unitary. Finally show that the transformed matrix is a representation of the original group.
+    </p>
+    <p>
+      Let $\{A_1,\ldots,A_{\OrderOfGroup{G}}\}$ be a $d$-dimensional representation of an abstract group $G$.
+    </p>
+    <p>
+      i.e., the $A_{\alpha}$ are a set of $\OrderOfGroup{G}$ $d \times d$ matrices with non-vanishing determinants (invertible).
+    </p>
+    <p>
+      From these matrices we construct a manifestly Hermitian matrix
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      H &amp; = &amp; \sum_{\alpha = 1}^{\OrderOfGroup{G}} A_{\alpha} \Adjoint{(A_{\alpha})}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since $H$ is Hermitian, it can be diagonalized by a unitary transformation $U$, with $H U = U D$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      D
+      &amp; = &amp;
+      \Adjoint{U} H U \\
+      &amp; = &amp;
+      \sum_{\alpha} \Adjoint{U} A_{\alpha} \Adjoint{(A_{\alpha})} U \\
+      &amp; = &amp;
+      \sum_{\alpha} \Adjoint{U} A_{\alpha} (U \Adjoint{U}) \Adjoint{(A_{\alpha})} U \\
+      &amp; = &amp;
+      \sum_{\alpha} \Adjoint{U} A_{\alpha} (U \Adjoint{U}) \Adjoint{(A_{\alpha})} U \\
+      &amp; = &amp;
+      \sum_{\alpha} (\Adjoint{U} A_{\alpha} U) \Adjoint{(\Adjoint{U} A_{\alpha} U)} \\
+      &amp; = &amp;
+      \sum_{\alpha} (X_{\alpha}) \Adjoint{(X_{\alpha})} \\
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      where
+    <p>
+    <p>
+      $
+      \begin{eqnarray}
+      X_{\alpha} &amp; = &amp; \Adjoint{U} A_{\alpha} U
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In terms of components,
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      D_{ij}
+      &amp; = &amp;
+      \sum_{\alpha} \sum_{k} (X_{\alpha})_{ik} (\Adjoint{(X_{\alpha})})_{kj} \\
+      &amp; = &amp;
+      \sum_{\alpha} \sum_{k} (X_{\alpha})_{ik} (\ComplexConjugate{(X_{\alpha})_{jk})} \\
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      A diagonal element is then
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      D_{ii}
+      &amp; = &amp;
+      \sum_{\alpha} \sum_{k} (X_{\alpha})_{ik} (\ComplexConjugate{(X_{\alpha})_{ik})} \\
+      &amp; = &amp;
+      \sum_{\alpha} \sum_{k} \NormSquared{(X_{\alpha})_{ik}}
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      $D_{ii}$ must be positive because the sum over $k$ includes a diagonal element of $I$.
+    </p>
+    <p>
+      We now construct
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      D^{1/2}
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccccccc}
+            D_{11}^{1/2} &amp; 0            &amp; \cdots &amp; 0 \\
+            0            &amp; D_{22}^{1/2} &amp; \cdots &amp; 0 \\
+            \vdots       &amp; \vdots       &amp; \ddots &amp; \vdots \\
+            0            &amp; 0            &amp; \cdots &amp; D_{nn}^{1/2}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      D^{-1/2}
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccccccc}
+            D_{11}^{-1/2} &amp; 0             &amp; \cdots &amp; 0 \\
+            0             &amp; D_{22}^{-1/2} &amp; \cdots &amp; 0 \\
+            \vdots        &amp; \vdots        &amp; \ddots &amp; \vdots \\
+            0             &amp; 0             &amp; \cdots &amp; D_{nn}^{-1/2}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      and form the matrices
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      B_{\alpha} &amp; = &amp; D^{-1/2} X_{\alpha} D^{1/2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      together with the Hermitian conjugates
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Adjoint{B_{\alpha}} &amp; = &amp; D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now demonstrate that the $B_{\alpha}$ are unitary.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      B_{\alpha} \Adjoint{B_{\alpha}}
+      &amp; = &amp;
+      D^{-1/2} X_{\alpha} D^{1/2} D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} X_{\alpha} D \Adjoint{X_{\alpha}} D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} (\Adjoint{U} A_{\alpha} U) D (\Adjoint{U} \Adjoint{A_{\alpha}} U) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} (\Adjoint{U} A_{\alpha}) (U D \Adjoint{U}) (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} (\Adjoint{U} A_{\alpha}) H (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
+      &amp; = &amp;
+      \sum_{\beta} D^{-1/2} (\Adjoint{U} A_{\alpha}) A_{\beta} \Adjoint{A_{\beta}} (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} \left( \sum_{\beta} (\Adjoint{U} A_{\alpha}) A_{\beta} \Adjoint{A_{\beta}} (\Adjoint{A_{\alpha}} U) \right) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} \left( \sum_{\beta} X_{\alpha} X_{\beta} \Adjoint{X_{\beta}} \Adjoint{X_{\alpha}} \right) D^{-1/2} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since the $A_{\alpha}$ are a representation of $G$, and since the $X_{\alpha}$ are related by a similarity transform to the $A_{\alpha}$, the $X_{\alpha}$ are also a representation of $G$. And since $G$ is a group, $X_{\alpha} X_{\beta} = X_{\gamma}$ is another matrix in this representation. The sum over $\beta$, by the Rearrangement Theorem, means that we are summing over a rearrangement of the $X$-representation and so we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      B_{\alpha} \Adjoint{B_{\alpha}}
+      &amp; = &amp;
+      D^{-1/2} \left( \sum_{\gamma} X_{\gamma} \Adjoint{X_{\gamma}} \right) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} \left( \sum_{\gamma} (\Adjoint{U} A_{\gamma} U) (\Adjoint{U} \Adjoint{A_{\gamma}} U) \right) D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} \Adjoint{U} \left( \sum_{\gamma} A_{\gamma} \Adjoint{A_{\gamma}} \right) U D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} \Adjoint{U} H U D^{-1/2} \\
+      &amp; = &amp;
+      D^{-1/2} D D^{-1/2} \\
+      &amp; = &amp;
+      I
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Finally,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Adjoint{B_{\alpha}} B_{\alpha}
+      &amp; = &amp;
+       D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2} D^{-1/2} X_{\alpha} D^{1/2} \\
+      &amp; = &amp;
+      D^{1/2} \Adjoint{X_{\alpha}} D^{-1} X_{\alpha} D^{1/2} \\
+      &amp; = &amp;
+      D^{1/2} (\Adjoint{U} \Adjoint{A_{\alpha}} U) D^{-1} (\Adjoint{U} A_{\alpha} U) D^{1/2} \\
+      &amp; = &amp;
+      D^{1/2} (\Adjoint{U} \Adjoint{A_{\alpha}}) (U D^{-1} \Adjoint{U}) (A_{\alpha} U) D^{1/2} \\
+      &amp; = &amp;
+      ?
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Proving the reversed situation doesn't seem to follow the same proof! The assumption that the group elements are invertible is probably the key.
+    </p>
+    <p>
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      B_{\alpha}
+      &amp; = &amp;
+      D^{-1/2} \Adjoint{U } A_{\alpha} U D^{1/2} \\
+      &amp; = &amp;
+      \Adjoint{(U D^{-1/2})} A_{\alpha} U D^{1/2} \\
+      &amp; = &amp;
+      \Inverse{(U D^{1/2})} A_{\alpha} (U D^{1/2}) \QED \\
+      \end{eqnarray}
+      $
     </p>
   </section>
   <section>
@@ -226,7 +532,7 @@ title: Geometric Physics • Mathematical Methods • Representation
     <h3>Schur's Lemma</h3>
     <h4>Statement</h4>
     <p>
-      Any matrix that commutes with all the matrices of an irreducable representation must be a <b>constant matrix</b> (a multiple of the unit matrix).
+      <span class="theorem">Any matrix that commutes with all the matrices of an irreducable representation must be a <b>constant matrix</b> (a multiple of the unit matrix).</span>
     </p>
     <p>
       The contrapositive is that if a non-constant commuting matrix exists then the representation is reducible.
