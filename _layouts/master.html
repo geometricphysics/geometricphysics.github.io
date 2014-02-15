@@ -80,8 +80,12 @@
           Macros: {
             Bra:                ["\\langle #1 |", 1],
             BraKet:             ["\\langle #1 | #2 \\rangle", 2],
-            Complex:            "{\\mathbb{C}}",
+            CliffordAlgebra:    ["{\\mathit{Cl}}", 0],
+            CliffordConjugate:  ["{\\bar{#1}}", 1],
+            Complex:            ["{\\mathbb{C}}",0],
             ComplexConjugate:   ["{#1}^{*}", 1],
+            Field:              ["{\\mathbb{#1}}", 1],
+            GradeInvolute:      ["{\\hat{#1}}", 1],
             HermitianConjugate: ["{#1}^{\\dagger}", 1],
             Integer:            ["{\\mathbb{Z}}", 0],
             Inverse:            ["{#1}^{-1}", 1],
@@ -90,7 +94,12 @@
             NormSquared:        ["|#1|^{2}", 1],
             OrderOfGroup:       ["|#1|", 1],
             Primed:             ["{#1}'", 1],
-            QED:                ["{\\blacksquare}", 0]
+            QED:                ["{\\blacksquare}", 0],
+            QuadraticForm:      ["{\\mathit{Q}}", 0],
+            RealField:          ["{\\Field{R}}", 0],
+            Reverse:            ["{\\tilde{#1}}", 1],
+            Transpose:          ["{#1}^{T}", 1],
+            Vector:             ["{\\mathbf{#1}}", 1]
           }
         },
         tex2jax: {

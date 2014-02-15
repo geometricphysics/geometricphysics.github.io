@@ -7,24 +7,25 @@ title: Geometric Physics • Notation
   <section>
     <h3>Algebra</h3>
     <table>
-      <tr><td>$U, V, W$</td>                        <td>linear space</td></tr>
-      <tr><td>$\mathbb{F}$</td>                     <td>field</td></tr>
-      <tr><td>$\mathbb{R}^{p,q}$</td>               <td>real quadratic space ($p$ for positive and $q$ for negative)</td></tr>
-      <tr><td>$\mathbb{R}^n = \mathbb{R}^{n,0}$</td><td>$n$-dimensional real linear space</td></tr>
-      <tr><td>$\mathit{Cl}_{p,q}$</td>              <td>Clifford algebra of $\mathbb{R}^{p,q}$</td></tr>
-      <tr><td>$\mathit{Q}$</td>                     <td>quadratic form</td></tr>
+      <tr><td>$V$</td>                              <td>linear space</td></tr>
+      <tr><td>$\Vector{x}$</td>                     <td>vector</td></tr>
+      <tr><td>$\Field{F}$</td>                      <td>field</td></tr>
+      <tr><td>$\RealField^{p,q}$</td>               <td>real quadratic space ($p$ for positive and $q$ for negative)</td></tr>
+      <tr><td>$\RealField^n = \RealField^{n,0}$</td><td>$n$-dimensional real linear space</td></tr>
+      <tr><td>$\CliffordAlgebra_{p,q}$</td>         <td>Clifford algebra of $\RealField^{p,q}$</td></tr>
+      <tr><td>$\QuadraticForm$</td>                 <td>quadratic form</td></tr>
       <tr>
-        <td>$\mathit{Cl(Q)}$</td>                   <td>Clifford algebra of the quadratic form $\mathit{Q}; x^2 = \mathit{Q}(x)$</td>
+        <td>$\CliffordAlgebra(\QuadraticForm)$</td> <td>Clifford algebra of the quadratic form $\QuadraticForm; x^2 = \QuadraticForm(x)$</td>
       </tr>
-      <tr><td>$\hat{x}$</td>                        <td>grade involute of $x \in \mathit{Cl(Q)}$</td></tr>
-      <tr><td>$\tilde{x}$</td>                      <td>reverse of $x \in \mathit{Cl(Q)}$</td></tr>
-      <tr><td>$\bar{x}$</td>                        <td>Clifford-conjugate of $x \in \mathit{Cl(Q)}$</td></tr>
+      <tr><td>$\GradeInvolute{x}$</td>              <td>grade involute of $x \in \mathit{Cl(\QuadraticForm)}$</td></tr>
+      <tr><td>$\Reverse{x}$</td>                    <td>reverse of $x \in \mathit{Cl(\QuadraticForm)}$</td></tr>
+      <tr><td>$\CliffordConjugate{x}$</td>          <td>Clifford-conjugate of $x \in \mathit{Cl(\QuadraticForm)}$</td></tr>
     </table>
   </section>
   <section>
     <h3>Matrices</h3>
     <table>
-      <tr><td>$\mathrm{Mat}(d, \mathbb{F})$</td>     <td>$d \times d$ matrix algebra over $\mathbb{F}$</td></tr>
+      <tr><td>$\mathrm{Mat}(d, \Field{F})$</td>     <td>$d \times d$ matrix algebra over $\Field{F}$</td></tr>
     </table>
   </section>
 </article>

@@ -48,6 +48,75 @@ title: Geometric Physics • Mathematical Methods • Representation
     </p>
   </section>
   <section>
+    <h3>Matrix Operations</h3>
+    <p>
+      Let $A (, B, C, \ldots)$ be a $n \times n$ matrix with entries $a_{ij} = (A)_{ij}$, where $i,j = 1,2, \dots, n$.
+    </p>
+    <p>
+      We define the <b>product</b> of two matrices $C = AB$ in terms of the entries
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      c_{ij} &amp; = &amp; \sum_{k} a_{ik} b_{kj}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <b>complex conjugate</b> of a matrix $A$, denoted by $\ComplexConjugate{A}$, has entries which are the complex conjugates of the corresponding entries of $A$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\ComplexConjugate{A})_{ij} &amp; = &amp; \ComplexConjugate{(a_{ij})}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <b>transpose</b> of a matrix $A$, denoted by $\Transpose{A}$, has its rows and columns interchanged with respect to $A$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\Transpose{A})_{ij} &amp; = &amp; a_{ji}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <span class="colloquial"><b>Hermitian conjugate</b> or <b>adjoint</b> of a matrix $A$</span>, denoted by $\HermitianConjugate{A}$, is the transposed conjugate of $A$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\HermitianConjugate{A})_{ij} &amp; = &amp; \ComplexConjugate{(a_{ji})}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Hermitian and Orthogonal Matrices</h3>
+    <p>
+      We say that a <span class="colloquial">matrix $A$ is <b>Hermitian</b></span> precisely when
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \HermitianConjugate{A} &amp; = &amp; A
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We say that a <span class="colloquial">matrix $A$ is <b>Orthogonal</b></span> precisely when
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Transpose{A} A &amp; = &amp; A \Transpose{A} = I
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
     <h3>Lemma (Constant Matrix)</h3>
     <h4>Statement</h4>
     <p>
