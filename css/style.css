@@ -64,10 +64,18 @@ canvas {
     */
 }
 
+.other {
+    color: #79BEDB
+}
+
+.definition {
+    color: #593E1A
+}
+
 .colloquial {
-    color: #5B59BA
+    color: #6B78B4
 }
 
 .theorem {
-    color: #33CC66
+    color: #266A2E
 }
