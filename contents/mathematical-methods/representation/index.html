@@ -53,7 +53,7 @@ title: Geometric Physics • Mathematical Methods • Representation
       Let $A (, B, C, \ldots)$ be a $n \times n$ matrix with entries $a_{ij} = (A)_{ij}$, where $i,j = 1,2, \dots, n$.
     </p>
     <p>
-      We define the <b>product</b> of two matrices $C = AB$ in terms of the entries
+      We define the <span class="colloquial"><b>product</b> of two matrices $C = AB$</span> in terms of the entries
     </p>
     <p>
       $
@@ -63,7 +63,7 @@ title: Geometric Physics • Mathematical Methods • Representation
       $
     </p>
     <p>
-      The <b>complex conjugate</b> of a matrix $A$, denoted by $\ComplexConjugate{A}$, has entries which are the complex conjugates of the corresponding entries of $A$:
+      The <span class="colloquial"><b>complex conjugate</b> of a matrix $A$</span>, denoted by $\ComplexConjugate{A}$, has entries which are the complex conjugates of the corresponding entries of $A$:
     </p>
     <p>
       $
@@ -73,7 +73,7 @@ title: Geometric Physics • Mathematical Methods • Representation
       $
     </p>
     <p>
-      The <b>transpose</b> of a matrix $A$, denoted by $\Transpose{A}$, has its rows and columns interchanged with respect to $A$:
+      The <span class="colloquial"><b>transpose</b> of a matrix $A$</span>, denoted by $\Transpose{A}$, has its rows and columns interchanged with respect to $A$:
     </p>
     <p>
       $
@@ -94,7 +94,7 @@ title: Geometric Physics • Mathematical Methods • Representation
     </p>
   </section>
   <section>
-    <h3>Hermitian and Orthogonal Matrices</h3>
+    <h3>Hermitian Matrices</h3>
     <p>
       We say that a <span class="colloquial">matrix $A$ is <b>Hermitian</b></span> precisely when
     </p>
@@ -105,15 +105,111 @@ title: Geometric Physics • Mathematical Methods • Representation
       \end{eqnarray}
       $
     </p>
+  </section>
+  <section>
+    <h3>Orthogonal Matrices</h3>
     <p>
-      We say that a <span class="colloquial">matrix $A$ is <b>Orthogonal</b></span> precisely when
+      We say that a <span class="colloquial">matrix $R$ is <b>Orthogonal</b></span> precisely when
     </p>
     <p>
       $
       \begin{eqnarray}
-      \Transpose{A} A &amp; = &amp; A \Transpose{A} = I
+      \Transpose{R} R &amp; = &amp; R \Transpose{R} = I
       \end{eqnarray}
       $
+    </p>
+    <p>
+      In terms of matrix components, this condition reads
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{k} r_{ki} r_{kj} &amp; = &amp; \sum_{k} r_{ik} r_{jk} = \delta_{ij}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      <span class="colloquial">rows (or columns) of an orthogonal matrix are mutually orthonormal</span>
+    </p>
+    <p>
+      (taking the scalar product between vectors assuming a Euclidean metric).
+    </p>
+    <p>
+      <span class="colloquial">An orthogonal transformation matrix leaves the scalar product of vectors invariant</span>:
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \ScalarProduct{\Primed{\Vector{u}}}{\Primed{\Vector{v}}}
+      &amp; = &amp;
+      \Transpose{(\Primed{\Vector{u}})} \Primed{\Vector{v}} \\
+      &amp; = &amp;
+      \Transpose{(R \Vector{u})} R \Vector{v} \\
+      &amp; = &amp;
+      \Transpose{\Vector{u}} \Transpose{R} R \Vector{v} \\
+      &amp; = &amp;
+      \Transpose{\Vector{u}} \Vector{v} \\
+      &amp; = &amp;
+      \ScalarProduct{\Vector{u}}{\Vector{v}}
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Unitary Matrices</h3>
+    <p>
+      We say that a <span class="colloquial">matrix $U$ is <b>unitary</b></span> precisely when
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \HermitianConjugate{U} U &amp; = &amp; U \HermitianConjugate{U} = I
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is a generalization of the orthonormal condition to complex matrices.
+    </p>
+    <p>
+      In terms of matrix components, this condition reads
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{k} \ComplexConjugate{(r_{ki})} r_{kj} &amp; = &amp; \sum_{k} r_{ik} \ComplexConjugate{(r_{jk})} = \delta_{ij}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      <span class="colloquial">rows (or columns) of a unitary matrix are mutually orthonormal</span>
+    </p>
+    <p>
+      (taking the appropriate scalar product between complex vectors).
+    </p>
+    <p>
+      <span class="colloquial">A unitary transformation matrix leaves the scalar product of vectors invariant</span>:
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \BraKet{\Primed{u}}{\Primed{v}}
+      &amp; = &amp;
+      \Adjoint{(\Ket{\Primed{u}})} \Ket{\Primed{v}} \\
+      &amp; = &amp;
+      \Adjoint{(U \Ket{u})} U \Ket{v} \\
+      &amp; = &amp;
+      \Adjoint{\Ket{u}} \Adjoint{U} U \Ket{v} \\
+      &amp; = &amp;
+      \Adjoint{\Ket{u}} \Ket{v} \\
+      &amp; = &amp;
+      \BraKet{u}{v}
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Diagonalization of Hermitian Matrices</h3>
+    <p>
     </p>
   </section>
   <section>
