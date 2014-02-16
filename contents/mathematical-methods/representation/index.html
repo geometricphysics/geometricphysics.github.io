@@ -511,7 +511,7 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     </p>
   </section>
   <section>
-    <h3>Schur's First Lemma</h3>
+    <h3>Schur's First Lemma (Commuting Matrix, One Representation)</h3>
     <p>
       <span class="theorem">Any non-zero matrix that commutes with all the matrices of an irreducable representation must be a constant multiple of the unit matrix.</span>
     </p>
@@ -522,18 +522,67 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     </p>
   </section>
   <section>
-    <h3>Schur's Second Lemma (Irreducable Representation Transformations)</h3>
+    <h3>Schur's Second Lemma (Matrix with Two Irreducible Representations)</h3>
+    <span class="theorem">
     <p>
+      Let $\{A_1,\ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1,\ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be two irreducible representations of a group $G$ of dimensions $d$ and $\Primed{d}$ respectively.
     </p>
     <p>
+       If there is a matrix $M$ such that
     </p>
+    <p>
+      $
+      \begin{eqnarray}
+      M A_{\alpha} &amp; = &amp; \Primed{A}_{\alpha} M
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      for $\alpha = 1, \ldots, \OrderOfGroup{G}$,
+    </p>
+    <p>
+      then
+    </p>
+    <p>
+      if $d = \Primed{d}$, either $M = 0$ or the two representations differ by a similarity transformation, and
+    </p>
+    <p>
+      if $d \neq \Primed{d}$, then $M = 0$.
+    </p>
+    </span>
   </section>
   <section>
     <h3>Great Orthogonality Theorem</h3>
+    <span class="theorem">
     <p>
-      <span class="theorem">All non-equivalent, irreducable, and unitary representations of a group satisfy the following relation:</span>
+      Let $\{A_1,\ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1,\ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be two inequivalent irreducible representations of a group $G$ with elements $\{g_1, \ldots, g_{\OrderOfGroup{G}}\}$ and which have dimensions $d$ and $\Primed{d}$, respectively.
     </p>
     <p>
+      The matrices $A_{\alpha}$ and $\Primed{A}_{\alpha}$ in the two representations correspond to the element $g_{\alpha}$ in $G$.
     </p>
+    <p>
+      Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (\Primed{A}_{\alpha})_{i'j'} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      for all matrix elements.
+    </p>
+    <p>
+      For the elements of a single unitary irreducible representation, we have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (A_{\alpha})_{i'j'} &amp; = &amp; \frac{\OrderOfGroup{G}}{d} \delta_{i,\Primed{i}} \delta_{j,\Primed{j}}
+      \end{eqnarray}
+      $
+    </p>
+    </span>
   </section>
 </article>
