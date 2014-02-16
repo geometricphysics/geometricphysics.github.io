@@ -1,0 +1,155 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Group Theory • Basics
+---
+<article>
+  <h1>Group Theory Basics</h1>
+  <section>
+    <h3>Definition</h3>
+    <p>
+      A <b>group</b> $G$ is a set of elements $\{a,b,c,\ldots\}$ together with a binary composition law, called <em>multiplication</em>, which has the following properties:
+      <ol>
+        <li>
+          <p>
+            <b>Closure.</b> The composition of any two elements $a$ and $b$ in $G$, called the <em>product</em> and written $a b$, is itself an element of $G$.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Associativity.</b> The composition law is associative, i.e., for any elements $a, b, c \in G$, $(ab)c = a(bc)$.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Identity.</b> There exists an element, called the <b>unit</b> or <b>identity</b> and denoted by $e$, such that $ae = ea = a$ for every element $a$ in $G$.
+          </p>
+        </li>
+        <li>
+          <p>
+            <b>Inverses.</b> Every element $a \in G$ has an inverse, denoted by $\Inverse{a}$, which is also in $G$, such that $\Inverse{a} a = a \Inverse{a} = e$.
+          </p>
+        </li>
+      </ol>
+    </p>
+    <p>
+
+    </p>
+  </section>
+  <section>
+    <h3>Unique Identity Theorem</h3>
+    <p>
+      The identity element in a group $G$ is unique.
+    </p>
+  </section>
+  <section>
+    <h3>Cancellation Theorem</h3>
+    <p>
+      In a group $G$, the left and right cancellation laws hold, i.e., $ab = ac$ implies $b = c$. and $ba = ca$ imples $b = c$.
+    </p>
+    <p>
+      Notice that the cancellation does not require $a$ to be arbitrary element.
+    </p>
+  </section>
+  <section>
+    <h3>Unique Inverse Theorem</h3>
+    <p>For each element $a$ in a group $G$, there is a unique element $b$ in $G$ such that $ab = ba = e$.</p>
+  </section>
+  <section>
+    <h3>Rearrangement Theorem</h3>
+    <p>
+      If $G = \{e, g_1, \ldots, g_{n}\}$ then the set $G g_k = \{e g_k, g_1 g_k, \ldots, g_{n} g_k\}$ contains each element of $G$ exactly once.
+    </p>
+    <p>
+      The proof is by contradiction and uses the Cancellation Theorem.
+    </p>
+  </section>
+  <section>
+    <h3>Multiplication Tables</h3>
+    <p>
+      The composition law for a finite group can be represented as a <b>multiplication table</b>.
+    </p>
+    <p>
+      The Rearrangement Theorem says that the rows or columns of the tables can only contain each element once.
+    </p>
+    <p>
+      Interestingly, the multiplication table for the finite groups $\{e,a\}$ and $\{e,a,b\}$ are completely determined by the group definition and theorems and so <b>the algebraic structures of groups with two or three elements are unique</b>.
+    </p>
+    <p>
+      A group with four elements $\{e,a,b,c\}$ yields <em>two</em> distinct multiplication tables. One structure has all the elements squaring to $e$. The other has only one element squaring to $e$.
+    </p>
+  </section>
+  <section>
+    <h3>Coset</h3>
+    <p>
+      A <b>left</b> (right) <b>coset</b> is the <b>set</b> formed from a <b/>subgroup</b> of $G$ where each element has been multiplied on the left (right).
+    </p>
+  </section>
+  <section>
+    <h3>Coset Common Element Theorem</h3>
+    <p>
+      Two cosets of a subgroup either contain exactly the same elements or else have no elements in common.
+    </p>
+    <p>
+      <em>Proof.</em> Let $H = \{e, h_1, \ldots, h_r\}$ be the common subgroup of $G$ used to create each coset, with $g_k$ being an element of $G$. Let $H g_1$ and $H g_2$ be the two right cosets. If the common element is $h_i g_1 = h_j g_2$ then
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      g_1 \Inverse{g_2} &amp; = &amp; \Inverse{h_i} h_j.
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      But $\Inverse{h_i} h_j$ is an element of $H$, and so the group $H \Inverse{h_i} h_j = H g_1 \Inverse{g_2}$ is a rearrangement of $H$.
+    </p>
+    <p>
+      Therefore the elements of $H g_2$ are identical to those of
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      (H g_1 \Inverse{g_2}) g_2 &amp; = &amp; H g_1 (\Inverse{g_2} g_2) = H g_1. \QED
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Lagrange's (Order Divisor) Theorem</h3>
+    <p>
+      The order of a subgroup $H$ of a finite group $G$ is a divisor of the order of $G$, i.e., $\Norm{H}$ divides $\Norm{G}$.
+    </p>
+    <p>
+      <em>Proof.</em>
+    </p>
+    <p>
+      Let $G = \{e, g_1, \ldots, g_n\}$ be a group with order $\OrderOfGroup{G}$.
+    </p>
+    <p>
+      Let $H = \{e, h_1, \ldots, h_r\}$ be a subgroup of $G$ with order $\OrderOfGroup{H}$.
+    </p>
+    <p>
+      Construct cosets from the subgroup $H$ and every element in $G$.
+    </p>
+    <p>
+      $H$ contains $e$, $e g_k = g_k e = g_k$, and so every element in $G$ must appear in at least one coset.
+    </p>
+    <p>
+      But the cosets produced may not be distinct because any cosets with elements in common have all elements the same.
+    </p>
+    <p>
+      Let $k \in \Integer$ be the number of distinct cosets, which is called the <b>index of the subgroup</b> $H$.
+    </p>
+    <p>
+      (The <b>index of a subgroup</b> is the number of distinct cosets that can be created from it).
+    </p>
+    <p>
+      All cosets formed from the same subgroup have the same number of elements, $\OrderOfGroup{H}$.
+    </p>
+    <p>
+      So we must have $k \OrderOfGroup{H} = \OrderOfGroup{G}. \QED$
+    </p>
+    <p>
+      Lagrange's Theorem restricts the allowable orders of the subgroups of a given group. The converse is <em>not</em> generally valid, i.e., the orders of subgroups of $G$ need not span the divisors of $\OrderOfGroup{G}$.
+    </p>
+  </section>
+</article>
