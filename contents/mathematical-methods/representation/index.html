@@ -525,7 +525,7 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     <h3>Schur's Second Lemma (Matrix with Two Irreducible Representations)</h3>
     <span class="theorem">
     <p>
-      Let $\{A_1,\ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1,\ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be two irreducible representations of a group $G$ of dimensions $d$ and $\Primed{d}$ respectively.
+      Let $\{A_{1}, A_{2}, \ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1,\ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be two irreducible representations of a group $G$ of dimensions $d$ and $\Primed{d}$ respectively.
     </p>
     <p>
        If there is a matrix $M$ such that
@@ -538,7 +538,7 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       $
     </p>
     <p>
-      for $\alpha = 1, \ldots, \OrderOfGroup{G}$,
+      for $\alpha = 1, 2, \ldots, \OrderOfGroup{G}$,
     </p>
     <p>
       then
@@ -553,9 +553,33 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
   </section>
   <section>
     <h3>Great Orthogonality Theorem</h3>
+    <span class="definition">
+    <p>
+      In this theorem it helps to see that vectors are constructed by having each matrix element from the group supply a single complex vector component. It follows that the number of components in the vector is $\OrderOfGroup{G}$. Is the dimensionality of this vector space $\OrderOfGroup{G}$? In this construction, for a given vector, all components are taken from the same row and column of each matrix in the group. We will use Dirac bra-ket notation to remind us that we are dealing with vectors over a complex field and to better bring out the orthogonality condition as the more geometric scalar product. If we use the superscript $k$ to denote the representation then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{V_{ij}^{k}}
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccccccc}
+            (A_{1}^{k})_{ij}               \\
+            (A_{2}^{k})_{ij}               \\
+            \vdots                         \\
+            (A_{\OrderOfGroup{G}}^{k})_{ij}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice that each representation provides $d^2$ such vectors because the group element matrices are in $Mat(d, \Field{C})$.
+    </p>
+    </span>
     <span class="theorem">
     <p>
-      Let $\{A_1,\ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1,\ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be two inequivalent irreducible representations of a group $G$ with elements $\{g_1, \ldots, g_{\OrderOfGroup{G}}\}$ and which have dimensions $d$ and $\Primed{d}$, respectively.
+      Let $\{A_{1}, A_{2}, \ldots,A_{\OrderOfGroup{G}}\}$ and $\{\Primed{A}_1, \Primed{A}_2, \ldots,\Primed{A}_{\OrderOfGroup{G}}\}$ be <b>two</b> <b>inequivalent</b> <b>irreducible</b> representations of a group $G$ with elements $\{g_{1}, g_{2}, \ldots, g_{\OrderOfGroup{G}}\}$ and which have dimensions $d$ and $\Primed{d}$, respectively.
     </p>
     <p>
       The matrices $A_{\alpha}$ and $\Primed{A}_{\alpha}$ in the two representations correspond to the element $g_{\alpha}$ in $G$.
@@ -566,7 +590,11 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     <p>
       $
       \begin{eqnarray}
-      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (\Primed{A}_{\alpha})_{i'j'} &amp; = &amp; 0
+      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (\Primed{A}_{\alpha})_{i'j'}
+      &amp; = &amp;
+      \BraKet{V_{ij}}{\Primed{V}_{\Primed{i}\Primed{j}}}
+      &amp; = &amp;
+      0
       \end{eqnarray}
       $
     </p>
@@ -574,15 +602,55 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       for all matrix elements.
     </p>
     <p>
-      For the elements of a single unitary irreducible representation, we have
+      .i.e., <b>vectors</b> from <b>two</b> <b>inequivalent</b> <b>irreducible</b> representations are <b>orthogonal</b>.
+    </p>
+    <p>
+      For the elements of a <b>single</b> <b>unitary</b> <b>irreducible</b> representation, we have
     </p>
     <p>
       $
       \begin{eqnarray}
-      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (A_{\alpha})_{i'j'} &amp; = &amp; \frac{\OrderOfGroup{G}}{d} \delta_{i,\Primed{i}} \delta_{j,\Primed{j}}
+      \sum_{\alpha} \ComplexConjugate{(A_{\alpha})}_{ij} (A_{\alpha})_{i'j'}
+      &amp; = &amp;
+      \BraKet{V_{ij}}{V_{\Primed{i}\Primed{j}}}
+      &amp; = &amp;
+      \frac{\OrderOfGroup{G}}{d} \delta_{i,\Primed{i}} \delta_{j,\Primed{j}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      .i.e., <b>vectors</b> from a <b>single</b> <b>unitary</b> <b>irreducible</b> representation satisfy an <b>orthogonality condition</b>.
+    </p>
+    <p>
+      We can combine the two statements of the Great Orthogonality Theorem as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{\alpha} \ComplexConjugate{(A^{k}_{\alpha})}_{ij} (A^{\Primed{k}}_{\alpha})_{i'j'}
+      &amp; = &amp;
+      \BraKet{V^{k}_{ij}}{V^{\Primed{k}}_{\Primed{i}\Primed{j}}}
+      &amp; = &amp;
+      \frac{\OrderOfGroup{G}}{d} \delta_{i,\Primed{i}} \delta_{j,\Primed{j}} \delta_{k,\Primed{k}}
       \end{eqnarray}
       $
     </p>
     </span>
+  </section>
+  <section>
+    <h3>Immediate Consequences of the Great Orthogonality Theorem</h3>
+    <p>
+      In a $\OrderOfGroup{G}$-dimensional space there are at most $\OrderOfGroup{G}$ independent vectors. Suppose we have irreducible representations of dimension $d_{1}, d_{2}, \ldots, d_{N}$. Each representation with dimension $d_k$ furnishes $d_k^2$ vectors and so we must have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sum_{k} d_k^2 \leq \OrderOfGroup{G}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This sets an upper bound for both the number and dimensionalities of representations. A finite group can only have a finite number of irreducible representations. This allows us to know whether we have found all the irreducible representations of a group.
+    </p>
   </section>
 </article>
