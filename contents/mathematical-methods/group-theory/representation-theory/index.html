@@ -271,6 +271,9 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     <p>
       where all matrices are $n \times n$ and matrix $S$ is invertible.
     </p>
+    <p>
+      <span class="theorem">A similarity transformation leaves the trace invariant.</span>
+    </p>
   </section>
   <section>
     <h3>Transformation to Unitary Representations</h3>
@@ -366,6 +369,60 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       $D_{ii}$ must be positive because the sum over $k$ includes a diagonal element of $I$.
     </p>
     <p>
+      Since $det(D) \neq 0$, $D$ is invertible which is important because it means that H is also invertible with 
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      H^{-1}
+      &amp; = &amp;
+      U \Inverse{D} \Adjoint{U}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now prove some intermediate results concerning $H$ and $\Inverse{H}$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      A_{\alpha} H \Adjoint{(A_{\alpha})}
+      &amp; = &amp;
+      \sum_{\beta = 1}^{\OrderOfGroup{G}} A_{\alpha} A_{\beta} \Adjoint{(A_{\beta})} \Adjoint{(A_{\alpha})} \\
+      &amp; = &amp;
+      \sum_{\beta = 1}^{\OrderOfGroup{G}} (A_{\alpha} A_{\beta}) \Adjoint{(A_{\alpha} A_{\beta})} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Applyng the Rearrangement theorem to simplify the right hand side we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      A_{\alpha} H \Adjoint{(A_{\alpha})}
+      &amp; = &amp;
+      \sum_{\gamma = 1}^{\OrderOfGroup{G}} (A_{\gamma}) \Adjoint{(A_{\gamma})}
+      &amp; = &amp;
+      H \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Correspondingly, for $\Inverse{H}$ we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Adjoint{(A_{\alpha})} \Inverse{H} A_{\alpha}
+      &amp; = &amp;
+      \Adjoint{(A_{\alpha})} \Inverse{(A_{\alpha} H \Adjoint{(A_{\alpha})})} A_{\alpha}
+      &amp; = &amp;
+      \Inverse{H} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
       We now construct
     </p>
     <p>
@@ -409,7 +466,11 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     <p>
       $
       \begin{eqnarray}
-      B_{\alpha} &amp; = &amp; D^{-1/2} X_{\alpha} D^{1/2}
+      B_{\alpha}
+      &amp; = &amp;
+      D^{-1/2} X_{\alpha} D^{1/2}
+      &amp; = &amp;
+      D^{-1/2} (\Adjoint{U} A_{\alpha} U) D^{1/2}
       \end{eqnarray}
       $
     </p>
@@ -419,7 +480,11 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
     <p>
       $
       \begin{eqnarray}
-      \Adjoint{B_{\alpha}} &amp; = &amp; D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2}
+      \Adjoint{B_{\alpha}}
+      &amp; = &amp;
+      D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2}
+      &amp; = &amp;
+      D^{1/2} (\Adjoint{U} \Adjoint{A_{\alpha}} U) D^{-1/2}
       \end{eqnarray}
       $
     </p>
@@ -431,37 +496,13 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       \begin{eqnarray}
       B_{\alpha} \Adjoint{B_{\alpha}}
       &amp; = &amp;
-      D^{-1/2} X_{\alpha} D^{1/2} D^{1/2} \Adjoint{X_{\alpha}} D^{-1/2} \\
-      &amp; = &amp;
-      D^{-1/2} X_{\alpha} D \Adjoint{X_{\alpha}} D^{-1/2} \\
-      &amp; = &amp;
       D^{-1/2} (\Adjoint{U} A_{\alpha} U) D (\Adjoint{U} \Adjoint{A_{\alpha}} U) D^{-1/2} \\
       &amp; = &amp;
       D^{-1/2} (\Adjoint{U} A_{\alpha}) (U D \Adjoint{U}) (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
       &amp; = &amp;
       D^{-1/2} (\Adjoint{U} A_{\alpha}) H (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
       &amp; = &amp;
-      \sum_{\beta} D^{-1/2} (\Adjoint{U} A_{\alpha}) A_{\beta} \Adjoint{A_{\beta}} (\Adjoint{A_{\alpha}} U) D^{-1/2} \\
-      &amp; = &amp;
-      D^{-1/2} \left( \sum_{\beta} (\Adjoint{U} A_{\alpha}) A_{\beta} \Adjoint{A_{\beta}} (\Adjoint{A_{\alpha}} U) \right) D^{-1/2} \\
-      &amp; = &amp;
-      D^{-1/2} \left( \sum_{\beta} X_{\alpha} X_{\beta} \Adjoint{X_{\beta}} \Adjoint{X_{\alpha}} \right) D^{-1/2} \\
-      \end{eqnarray}
-      $
-    </p>
-    <p>
-      Since the $A_{\alpha}$ are a representation of $G$, and since the $X_{\alpha}$ are related by a similarity transform to the $A_{\alpha}$, the $X_{\alpha}$ are also a representation of $G$. And since $G$ is a group, $X_{\alpha} X_{\beta} = X_{\gamma}$ is another matrix in this representation. The sum over $\beta$, by the Rearrangement Theorem, means that we are summing over a rearrangement of the $X$-representation and so we find
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      B_{\alpha} \Adjoint{B_{\alpha}}
-      &amp; = &amp;
-      D^{-1/2} \left( \sum_{\gamma} X_{\gamma} \Adjoint{X_{\gamma}} \right) D^{-1/2} \\
-      &amp; = &amp;
-      D^{-1/2} \left( \sum_{\gamma} (\Adjoint{U} A_{\gamma} U) (\Adjoint{U} \Adjoint{A_{\gamma}} U) \right) D^{-1/2} \\
-      &amp; = &amp;
-      D^{-1/2} \Adjoint{U} \left( \sum_{\gamma} A_{\gamma} \Adjoint{A_{\gamma}} \right) U D^{-1/2} \\
+      D^{-1/2} \Adjoint{U} (A_{\alpha} H \Adjoint{A_{\alpha}}) U D^{-1/2} \\
       &amp; = &amp;
       D^{-1/2} \Adjoint{U} H U D^{-1/2} \\
       &amp; = &amp;
@@ -472,7 +513,7 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       $
     </p>
     <p>
-      Finally,
+      Similarly,
     </p>
     <p>
       $
@@ -487,25 +528,27 @@ title: Geometric Physics • Mathematical Methods • Representation Theory
       &amp; = &amp;
       D^{1/2} (\Adjoint{U} \Adjoint{A_{\alpha}}) (U D^{-1} \Adjoint{U}) (A_{\alpha} U) D^{1/2} \\
       &amp; = &amp;
-      ?
+      D^{1/2} (\Adjoint{U} \Adjoint{A_{\alpha}}) \Inverse{H} (A_{\alpha} U) D^{1/2} \\
+      &amp; = &amp;
+      D^{1/2} (\Adjoint{U} \Inverse{H} U) D^{1/2} \\
+      &amp; = &amp;
+      D^{1/2} \Inverse{D} D^{1/2} \\
+      &amp; = &amp;
+      I
       \end{eqnarray}
       $
     </p>
     <p>
-      Proving the reversed situation doesn't seem to follow the same proof! The assumption that the group elements are invertible is probably the key.
-    </p>
-    <p>
+      The final step is to show that we have a similarity transform:
     </p>
     <p>
       $
       \begin{eqnarray}
       B_{\alpha}
       &amp; = &amp;
-      D^{-1/2} \Adjoint{U } A_{\alpha} U D^{1/2} \\
+      D^{-1/2} \Adjoint{U} A_{\alpha} U D^{1/2}
       &amp; = &amp;
-      \Adjoint{(U D^{-1/2})} A_{\alpha} U D^{1/2} \\
-      &amp; = &amp;
-      \Inverse{(U D^{1/2})} A_{\alpha} (U D^{1/2}) \QED \\
+      (D^{-1/2} \Adjoint{U}) A_{\alpha} \Inverse{(D^{-1/2} \Adjoint{U})} \QED
       \end{eqnarray}
       $
     </p>
