@@ -1,0 +1,296 @@
+---
+layout: master
+title: Geometric Physics • Common Groups
+---
+<article>
+  <h1>Common Groups</h1>
+  <section>
+    <h3>General Linear Group $GL(n, \Field{F})$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      GL(n,\Field{F}) &amp; = &amp; \{M \in \mathrm{Mat}(n, \Field{F}) | det(M) \neq 0 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $GL(n,\Field{F})$ is a $(n^2 \times \OrderOfGroup{\Field{F}})$-parameter Lie group.
+    </p>
+  </section>
+  <section>
+    <h3>Orthogonal Group $O(n)$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      O(n) &amp; = &amp; \{M \in \mathrm{Mat}(n, \RealField) | \Transpose{M} M = M \Transpose{M} =  I \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The statement $\Transpose{M} M = I$ means that the column vectors of $M$ are mutually orthonormal.
+    </p>
+    <p>
+      The statement $M \Transpose{M} = I$ means that the row vectors of $M$ are mutually orthonormal.
+    </p>
+    <p>
+      The orthonormal condition is a necessary and sufficient condition for the transformation to preserve the length of a vector in the appropriate space:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{\Primed{x}} &amp; = &amp; M \Ket{x}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \BraKet{\Primed{x}}{\Primed{x}} &amp; = &amp; \Bra{x} \Transpose{M} M \Ket{x} = \BraKet{x}{x}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The orthonormal condition also implies that $det(M) = \pm 1$. This makes the orthogonal group a subgroup of the general linear group.
+    </p>
+    <p>
+      For the field $\RealField$, the number of parameters of $GL(n,\RealField)$ is $n^2$. The orthogonality condition reduces the number of free parameters.
+      <table border='1'>
+        <tr><th>$n$</th><th>free parameters</th></tr>
+        <tr><td>1</td><td>0</td></tr>
+        <tr><td>2</td><td>1</td></tr>
+        <tr><td>3</td><td>3</td></tr>
+        <tr><td>4</td><td>6 (I'm guessing it's the number of bivectors). Confirm by calculating the orthonormal conditions.</td></tr>
+      </table>
+    </p>
+  </section>
+  <section>
+    <h3>Special Orthogonal Group $SO(n)$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      SO(n) &amp; = &amp; \{M \in \mathrm{Mat}(n, \RealField) | M \Transpose{M} = \Transpose{M} M = I, det(M) = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Rotation group $SO(2)$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      SO(2) &amp; = &amp; \{R \in \mathrm{Mat}(2, \mathbb{R}) | R^T R = 1, det(R) = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For an <b>active rotation</b> (of the points in the coordinate frame counter-clockwise)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        R(\phi)
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            \cos \phi &amp; - \sin \phi \\
+            \sin \phi &amp;   \cos \phi
+          \end{array}
+        \right]
+        &amp; \in &amp;
+        SO(2),
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \left[
+          \begin{array}{cccc}
+            x  \\
+            y
+          \end{array}
+        \right]
+        &amp; \mapsto &amp;
+        R(\phi)
+        \left[
+          \begin{array}{cccc}
+            x  \\
+            y
+          \end{array}
+        \right].
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For an infinitesimal rotation,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \left[
+          \begin{array}{cccc}
+            x + dx  \\
+            y + dy
+          \end{array}
+        \right]
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            1 &amp; - d \phi \\
+            d \phi &amp;   1
+          \end{array}
+        \right]
+        \left[
+          \begin{array}{cccc}
+            x  \\
+            y
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \left[
+          \begin{array}{cccc}
+            dx  \\
+            dy
+          \end{array}
+        \right]
+        &amp; = &amp;
+        d \phi
+        J
+        \left[
+          \begin{array}{cccc}
+            x  \\
+            y
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        J
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            0 &amp; - 1 \\
+            1 &amp;   0
+          \end{array}
+        \right]
+        &amp; = &amp;
+        \frac{d R}{d \phi} (0)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      is called the <b>infinitesimal generator of the rotation matrix</b>.
+    </p>
+    <p>
+      Using Taylor's theorem to expand $R(\phi)$ about $R(0)$ we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      R(\phi)
+      &amp; = &amp;
+      \sum_{n=0}^{\infty} \frac{\phi^n}{n!} \frac{d^n R}{d \phi^n} (0) \\
+      &amp; = &amp;
+      \sum_{n=0}^{\infty} \frac{(\phi J)^n}{n!} \\
+      &amp; = &amp;
+      \exp(\phi J) \\
+      &amp; = &amp;
+      I \cos(\phi) + J \sin(\phi)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If we now consider an arbitrary differentiable function $F(x,y)$ under an infinitesimal rotation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      F(x,y)
+      &amp; \mapsto &amp;
+      F(x+dx,y+dy) \\
+      &amp; = &amp;
+      F(x,y) + \frac{\partial F}{\partial x} dx + \frac{\partial F}{\partial y} dy \\
+      &amp; = &amp;
+      F(x,y) + \frac{\partial F}{\partial x} (- d \phi y) + \frac{\partial F}{\partial y} (d \phi x) \\
+      &amp; = &amp;
+      F(x,y) + d \phi \left(x \frac{\partial F}{\partial y} - y \frac{\partial F}{\partial x} \right) \\
+      &amp; = &amp;
+      F(x,y) + d \phi L F, \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $L$ is the differential operator
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      L
+      &amp; = &amp;
+      x \frac{\partial}{\partial y} - y \frac{\partial}{\partial x} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Changing the notation for coordinates from $(x,y)$ to $(x^1,x^2)$, this operator can be written more compactly as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      L
+      &amp; = &amp;
+      x^1 \frac{\partial}{\partial x^2} - x^2 \frac{\partial}{\partial x^1} \\
+      &amp; = &amp;
+      x^1 \partial_2 - x^2 \partial_1 \\
+      &amp; = &amp;
+      \varepsilon^{ij} x^{i} \partial_{j} \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Unitary group $U(1)$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      U(1) &amp; = &amp; \{z \in \mathbb{C} | z \bar{z} = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \cos \phi + i \sin \phi &amp; \in &amp; U(1)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>$Spin(2)$</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      Spin(2) &amp; = &amp; \{s \in \mathit{Cl}_2 | s \bar{s} = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \cos \frac{\phi}{2} + e_{12} \sin \frac{\phi}{2} &amp; \in &amp; Spin(2)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>
