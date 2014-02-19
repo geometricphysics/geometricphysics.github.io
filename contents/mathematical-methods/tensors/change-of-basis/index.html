@@ -1,0 +1,104 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Tensors • Change of Basis
+---
+<article>
+  <h1>Change of Basis</h1>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      The choice of a set of basis vectors $\{\Vector{e_1}, \Vector{e_2}, \ldots, \Vector{e_n} \}$ in a vector space $V$ is not unique.
+    </p>
+    <span class="theorem">
+    <p>
+      The basis vectors for any coordinate system can be expressed as a linear superposition of basis vectors in any other coordinate system.
+    </p>
+    </span>
+    <p>
+      Suppose we have a coordinate system $\Sigma_{A}$ with basis vectors $\{\Vector{a_1}, \Vector{a_2}, \ldots, \Vector{a_n} \}$.
+    </p>
+    <p>
+      And suppose $\Sigma_{E}$ is the coordinate system with basis vectors $\{\Vector{e_1}, \Vector{e_2}, \ldots, \Vector{e_n} \}$.
+    </p>
+    <span class="todo">
+      <p>
+        Maybe avoid matrices entirely in order to avoid conflating indices with rows and columns? There is also no requirement that the dimensions of the vector spaces be the same.
+      </p>
+    </span>
+    <p>
+      We can relate $\Sigma_{A}$ and $\Sigma_{E}$ by the matrix equation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \left[
+        \begin{array}{cccccccc}
+            \Vector{a_1} \\
+            \Vector{a_2} \\
+            \vdots \\
+            \Vector{a_n}
+        \end{array}
+      \right]
+      &amp; = &amp;
+      A
+      \left[
+        \begin{array}{cccccccc}
+            \Vector{e_1} \\
+            \Vector{e_2} \\
+            \vdots \\
+            \Vector{e_n}
+        \end{array}
+      \right]
+      \label{xyz}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      A
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccccccc}
+            A_{1}^{\, 1} &amp; A_{1}^{\, 2} &amp; \cdots &amp; A_{1}^{\, n} \\
+            A_{2}^{\, 1} &amp; A_{2}^{\, 2} &amp; \cdots &amp; A_{2}^{\, n} \\
+            \vdots       &amp; \vdots       &amp; \ddots &amp; \vdots \\
+            A_{n}^{\, 1} &amp; A_{n}^{\, 2} &amp; \cdots &amp; A_{n}^{\, n}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The matrix $A$ must be nonsingular in order to possess an inverse.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \det A &amp; \neq &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can also write equation $\ref{xyz}$ in component form:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{a_i} &amp; = &amp; A_{i}^{\, j} \Vector{e_j}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Writing our equations in component form will be necessary as we generalize our vectors to elements in a <b>direct product vector space</b>.
+    </p>
+    <span class="todo">
+      <p>
+        Discuss <b>covariant</b> and <b>contravariant</b>.
+      </p>
+    </span>
+  </section>
+</article>

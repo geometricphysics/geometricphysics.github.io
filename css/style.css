@@ -64,6 +64,10 @@ canvas {
     */
 }
 
+.todo {
+    color: #FF0000
+}
+
 .other {
     color: #79BEDB
 }
