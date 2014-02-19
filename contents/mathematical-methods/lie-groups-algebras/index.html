@@ -1,0 +1,130 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Lie Groups, Lie Algebras
+---
+<article>
+  <h1>Lie Groups, Lie Algebras</h1>
+  <section>
+    <h3>Lie Group</h3>
+    <p>
+      Our interest will be in parameterized coordinate transformations:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Primed{x}_i &amp; = &amp; f_i(x_1, x_2, \ldots, x_n ; a_1, a_2, \ldots, a_r)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $i = 1, 2, \ldots, n.$
+    </p>
+    <p>
+      e.g., The continuous parameters $(a_1, a_2, \ldots, a_r)$ may be angles (rotations) or relative velocity (Lorentz transformation).
+    </p>
+    <p>
+      Considering the effect of such an r-parameter transformation on a field $F(x_1, x_2, \ldots, x_n)$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d F
+      &amp; = &amp;
+      \sum_{j=1}^{n} dx_j \frac{\partial F}{\partial x_j} \\
+      &amp; = &amp;
+      \sum_{j=1}^{n} \left( \sum_{i=1}^{r} da_i \frac{\partial f_j}{\partial a_i} \right) \frac{\partial F}{\partial x_j} \\
+      &amp; = &amp;
+      \sum_{i=1}^{r} da_i \left( \sum_{j=1}^{n} \frac{\partial f_j}{\partial a_i} \frac{\partial}{\partial x_j} \right) F \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <b>differential operator</b> corresponding to the infinitesimal $da_i$ is defined to be
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      X_i
+      &amp; = &amp;
+      \sum_{j=1}^{n} \frac{\partial f_j}{\partial a_i} \frac{\partial}{\partial x_j}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      There will be a differential operator corresponding to each parameter in the transformation.
+    </p>
+  </section>
+  <section>
+    <h3>Lie Algebra</h3>
+    <p>
+      We can form an $r$-dimensional vector space using the differential operators over some field $\Field{F}$.
+    </p>
+    <p>
+      If we then add a vector-valued multiplication operation to the vector space we have an algebra.
+    </p>
+    <p>
+      Imposing some particular rules on the multiplication operation, we arrive at a Lie Algebra.
+    </p>
+    <span class="definition">
+    <p>
+      A <b>Lie Algebra</b> is a vector space $V$ over a field $\Field{F}$ together with a binary operation $[\cdot,\cdot] : V \times V \rightarrow V$, called the <em>Lie bracket</em>, which has the following properties:
+      <ol>
+        <li>
+          <b>Bilinearity</b>.
+          <p>
+          $
+          \begin{eqnarray}
+          [ax+by, z]
+          &amp; = &amp;
+          a[x,z] + b[y,z]
+          \end{eqnarray}
+          $
+          </p>
+          <p>
+          $
+          \begin{eqnarray}
+          [z, ax+by]
+          &amp; = &amp;
+          a[z,x] + b[z,y]
+          \end{eqnarray}
+          $
+          </p>
+          <p>
+            $\forall a, b \in \Field{F}$ and $\forall x, y, z \in V$.
+          </p>
+        </li>
+        <li>
+          <b>Jacobi Identity</b>.
+          <p>
+          $
+          \begin{eqnarray}
+          [x,[y,z]] + [y,[z,x]] + [z,[x,y]]
+          &amp; = &amp;
+          0
+          \end{eqnarray}
+          $
+          </p>
+          <p>
+            $\forall x, y, z \in V$.
+          </p>
+        </li>
+        <li>
+          <b>Asymmetry</b>.
+          <p>
+          $
+          \begin{eqnarray}
+          [x,y]
+          &amp; = &amp;
+          -[y,x]
+          \end{eqnarray}
+          $
+          </p>
+          <p>
+            $\forall x, y \in V$.
+          </p>
+        </li>
+      </ol>
+    </p>
+    </span>
+  </section>
+</article>
