@@ -1,0 +1,168 @@
+---
+layout: master
+title: Geometric Physics • Special Unitary Group
+---
+<article>
+  <h1>Special Unitary Group</h1>
+  <section>
+    <h3>$SU(2)$ and spinors</h3>
+    <p>
+      Consider the set of unitary $n \times n$ matrices with determinant $+1$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      SU(n) &amp; = &amp; \{U \in \mathrm{Mat}(n, \Complex) | U U^{\dagger} = 1, det(U) = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We will examine what this implies in the specific case of $SU(2)$. Let
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        U
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a &amp; b \\
+            c &amp; d
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since the determinant of $U$ is unity and $\Inverse{U} = \HermitianConjugate{U}$,
+    <p>
+    <p>
+      $
+      \begin{eqnarray}
+        \left[
+          \begin{array}{cccc}
+            d &amp; -b \\
+            -c &amp; a
+          \end{array}
+        \right]
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            \ComplexConjugate{a} &amp; \ComplexConjugate{c} \\
+            \ComplexConjugate{b} &amp; \ComplexConjugate{d}
+          \end{array}
+        \right].
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      and by comparing matrix elements we find $c = - \ComplexConjugate{b}$ and $d = \ComplexConjugate{a}$. This enables us to re-write $U$ and the determinant condition as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        U
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a                      &amp; b \\
+            - \ComplexConjugate{b} &amp; \ComplexConjugate{a}
+          \end{array}
+        \right],
+        \NormSquared{a} + \NormSquared{b} = 1.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The previous equation implies that $U$ is determined by 3 real parameters.
+    </p>
+    <p>
+      Consider now the transformation of a two component complex column vector, which we call a spinor.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{\psi}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            \psi_{1} \\
+            \psi_{2}
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{\psi}
+      &amp; \mapsto &amp;
+      U \Ket{\psi}
+      &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a                      &amp; b \\
+            - \ComplexConjugate{b} &amp; \ComplexConjugate{a}
+          \end{array}
+        \right]
+        \left[
+          \begin{array}{cccc}
+            \psi_{1} \\
+            \psi_{2}
+          \end{array}
+        \right]
+      &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a \psi_{1}                      + b \psi_{2} \\
+            - \ComplexConjugate{b} \psi_{1} + \ComplexConjugate{a} \psi_{2}
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Bra{\psi}
+      &amp; = &amp;
+      \HermitianConjugate{\Ket{\psi}}
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccc}
+          \ComplexConjugate{\psi_{1}} &amp; \ComplexConjugate{\psi_{2}}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The quantity
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \BraKet{\psi}{\psi}
+        &amp; = &amp;
+        \NormSquared{\psi_1} + \NormSquared{\psi_2}
+        \label{eq:scalarProduct}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      is invariant under the unitary transormation $\eqref{eq:unitaryTransformation}$.
+    </p>
+    <p>
+      We see that $\Ket{\psi}$ and $\Bra{\psi}$ (the Hermitian conjugate) transform in different ways:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Bra{\psi} = \HermitianConjugate{\Ket{\psi}} \mapsto \HermitianConjugate{(U \Ket{\psi})} = \HermitianConjugate{\Ket{\psi}} \HermitianConjugate{U} = \Bra{\psi} \HermitianConjugate{U}
+        \label{eq:unitaryTransformation}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>

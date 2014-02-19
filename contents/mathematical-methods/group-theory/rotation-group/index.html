@@ -1,0 +1,360 @@
+---
+layout: master
+title: Geometric Physics • Rotation Group
+---
+<article>
+  <h1>Rotation Group</h1>
+  <section>
+    <h3>Rotation Group $O(3)$</h3>
+    <p>
+      A general spatial rotation using real matrices transforms column vectors according to
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x' &amp; = &amp; R x.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The rotation preserves the length of the column vector and so for an arbitrary vector $x$,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x^{T} x &amp; = &amp; (x')^{T} x' \\
+              &amp; = &amp; (R x)^{T} R x \\
+              &amp; = &amp; x^T (R^T R) x.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since $x$ is arbitrary we obtain the condition $R^{T} R = I$.
+    </p>
+    <p>
+      By considering successive rotations, the identity element, and the inverse $R^T$ of an element $R$, we see that rotation matrices form a group called the rotation group:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      O(n) &amp; = &amp; \{ R \in \mathrm{Mat}(n, \mathbb{R}) | R^{T} R = I \}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For example, consider the <b>passive rotation</b> (rotate the axes, leave objects fixed) about the $z$-axis:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        R_{z}(\psi)
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+              \cos \psi &amp; \sin \psi &amp; 0 \\
+            - \sin \psi &amp; \cos \psi &amp; 0 \\
+              0           &amp; 0           &amp; 1
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      (Prove this by using elementary trigonometry.) Now use cyclic permutations to show:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        R_{x}(\varphi)
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            1 &amp; 0              &amp; 0 \\
+            0 &amp; \cos \varphi   &amp; \sin \varphi \\
+            0 &amp; - \sin \varphi &amp; \cos \varphi \\
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $,
+    </p>
+    <p>
+      and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        R_{y}(\theta)
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            \cos \theta &amp; 0 &amp; - \sin \theta \\
+            0           &amp; 1 &amp; 0 \\
+            \sin \theta &amp; 0 &amp; \cos \theta \\
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $.
+    </p>
+    <p>
+      We now proceed to compute the matrix <b>generators</b> of a rotation by examining the behavior close to the identity transformation. If $J_x$ is the generator (matrix) for the finite rotation $R_x(\varphi)$ then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      R_x(\varphi)
+      &amp; = &amp; \exp(i J_x \varphi) \\
+      &amp; = &amp; \lim_{N \rightarrow \infty} \left(I +  i J_x  \frac{\varphi}{N} \right)^{N}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Combining this definition and the matrix $R_x(\varphi)$ enables us to derive $J_x$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \lim_{\Delta \varphi \rightarrow 0} R_{x}(\Delta \varphi)
+        &amp; = &amp;
+        I + \lim_{\Delta \varphi \rightarrow 0} i J_x \Delta \varphi \\
+        &amp; = &amp;
+        \lim_{\Delta \varphi \rightarrow 0}
+        \left[
+          \begin{array}{cccccc}
+            1 &amp; 0              &amp; 0 \\
+            0 &amp; \cos \Delta \varphi   &amp; \sin \Delta \varphi \\
+            0 &amp; - \sin \Delta \varphi &amp; \cos \Delta \varphi \\
+          \end{array}
+        \right] \\
+        &amp; = &amp;
+        \lim_{\Delta \varphi \rightarrow 0}
+        \left[
+          \begin{array}{cccccc}
+            1 &amp; 0              &amp; 0 \\
+            0 &amp; 1   &amp; \Delta \varphi \\
+            0 &amp; - \Delta \varphi &amp; 1 \\
+          \end{array}
+        \right] \\
+        &amp; = &amp;
+        I + \lim_{\Delta \varphi \rightarrow 0} \Delta \varphi
+        \left[
+          \begin{array}{cccccc}
+            0 &amp;  0 &amp; 0 \\
+            0 &amp;  0 &amp; 1 \\
+            0 &amp; -1 &amp; 0 \\
+          \end{array}
+        \right] \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        J_{x}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            0 &amp; 0 &amp;  0 \\
+            0 &amp; 0 &amp; -i \\
+            0 &amp; i &amp;  0 \\
+          \end{array}
+        \right],
+        J_{y}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+             0 &amp; 0 &amp;  i \\
+             0 &amp; 0 &amp;  0 \\
+            -i &amp; 0 &amp;  0 \\
+          \end{array}
+        \right],
+        J_{z}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            0 &amp; -i &amp; 0 \\
+            i &amp; 0 &amp;  0 \\
+            0 &amp; 0 &amp;  0 \\
+          \end{array}
+        \right].
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      A (general) rotation about an axis $\hat{n}$ by an angle $\theta$ is given by
+    </p>
+    <p>
+      $
+      \begin{equation*}
+        R_{\hat{n}}(\theta) = \exp i (J \cdot \hat{n}) \theta
+      \end{equation*}
+      $.
+    </p>
+    <p>
+      Every rotation matrix in $O(3)$ is determined by 3 parameters.
+    </p>
+  </section>
+  <section>
+    <h3>$SU(2)$ and spinors</h3>
+    <p>
+      Consider the set of unitary $n \times n$ matrices with determinant $+1$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      SU(n) &amp; = &amp; \{U \in \mathrm{Mat}(n, \Complex) | U U^{\dagger} = 1, det(U) = 1 \}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We will examine what this implies in the specific case of $SU(2)$. Let
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        U
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a &amp; b \\
+            c &amp; d
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since the determinant of $U$ is unity and $\Inverse{U} = \HermitianConjugate{U}$,
+    <p>
+    <p>
+      $
+      \begin{eqnarray}
+        \left[
+          \begin{array}{cccc}
+            d &amp; -b \\
+            -c &amp; a
+          \end{array}
+        \right]
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            \ComplexConjugate{a} &amp; \ComplexConjugate{c} \\
+            \ComplexConjugate{b} &amp; \ComplexConjugate{d}
+          \end{array}
+        \right].
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      and by comparing matrix elements we find $c = - \ComplexConjugate{b}$ and $d = \ComplexConjugate{a}$. This enables us to re-write $U$ and the determinant condition as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        U
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a                      &amp; b \\
+            - \ComplexConjugate{b} &amp; \ComplexConjugate{a}
+          \end{array}
+        \right],
+        \NormSquared{a} + \NormSquared{b} = 1.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The previous equation implies that $U$ is determined by 3 real parameters.
+    </p>
+    <p>
+      Consider now the transformation of a two component complex column vector, which we call a spinor.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{\psi}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            \psi_{1} \\
+            \psi_{2}
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Ket{\psi}
+      &amp; \mapsto &amp;
+      U \Ket{\psi}
+      &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a                      &amp; b \\
+            - \ComplexConjugate{b} &amp; \ComplexConjugate{a}
+          \end{array}
+        \right]
+        \left[
+          \begin{array}{cccc}
+            \psi_{1} \\
+            \psi_{2}
+          \end{array}
+        \right]
+      &amp; = &amp;
+        \left[
+          \begin{array}{cccc}
+            a \psi_{1}                      + b \psi_{2} \\
+            - \ComplexConjugate{b} \psi_{1} + \ComplexConjugate{a} \psi_{2}
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Bra{\psi}
+      &amp; = &amp;
+      \HermitianConjugate{\Ket{\psi}}
+      &amp; = &amp;
+      \left[
+        \begin{array}{cccc}
+          \ComplexConjugate{\psi_{1}} &amp; \ComplexConjugate{\psi_{2}}
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The quantity
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \BraKet{\psi}{\psi}
+        &amp; = &amp;
+        \NormSquared{\psi_1} + \NormSquared{\psi_2}
+        \label{eq:scalarProduct}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      is invariant under the unitary transormation $\eqref{eq:unitaryTransformation}$.
+    </p>
+    <p>
+      We see that $\Ket{\psi}$ and $\Bra{\psi}$ (the Hermitian conjugate) transform in different ways:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Bra{\psi} = \HermitianConjugate{\Ket{\psi}} \mapsto \HermitianConjugate{(U \Ket{\psi})} = \HermitianConjugate{\Ket{\psi}} \HermitianConjugate{U} = \Bra{\psi} \HermitianConjugate{U}
+        \label{eq:unitaryTransformation}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>
