@@ -7,44 +7,223 @@ title: Geometric Physics • Quantum Mechanics • Dirac Equation
   <section>
     <h3>Introduction</h3>
     <p>
-      A review of the Pauli and Dirac matrices and algebras is given for convenience.
+      The Dirac Equation is
     </p>
-    <p>
-      The following identity will be useful:
-    </p>
+    <span class="definition">
     <p>
       $
       \begin{eqnarray}
-      (A \otimes B)(C \otimes D) &amp; = &amp; AC \otimes BD
+      (i \gamma^{\mu} \partial_{\mu} - m) \psi(\Vector{x}) &amp; = &amp; 0.
       \end{eqnarray}
       $
+    </p>
+    </span>
+    <p>
+      What do the symbols mean, what does the equation imply, and how should we study it?
     </p>
   </section>
   <section>
-    <h3>Notation</h3>
+    <h3>Approach</h3>
     <p>
-      We will work always in natural units.
+      We will study the Dirac Equation from several perspectives:
+      <ol>
+        <li>
+          <b>Traditional Dirac Matrices</b>
+          <p>
+            We take the Dirac Equation as given and use a $Mat(4, \Field{C})$ representation to examine the transformations, symmetries and invariants.
+          </p>
+        </li>
+        <li>
+          <b>Group Theoretical</b>
+          <p>
+            We derive the Dirac Equation from the transformation properties of the Poincare group.
+          </p>
+        </li>
+        <li>
+          <b>Spacetime Geometric Algebra</b>
+          <p>
+            We regard the $\gamma^{\mu}$ as elements in a Spacetime Geometric Algebra.
+          </p>
+        </li>
+        <li>
+          <b>Conformal Geometric Algebra</b>
+          <p>
+            Does the Poincare group mesh with a conformal algebra where translations and rotations have a uniform realization?
+          </p>
+        </li>
+      </ol>
+    </p>
+  </section>
+</article>
+<article>
+  <h1>Traditional Dirac Matrices</h1>
+  <section>
+    <h3>Why Matrices?</h1>
+    <p>
+      Dirac was inspired to write down a first-order relativistic wave <b>Dirac equation</b>:
     </p>
     <p>
       $
       \begin{eqnarray}
-      x^{\mu} &amp; = &amp; (x^0, x^1, x^2, x^3) = (t, x, y, z)
+      (i \gamma^{\mu} \partial_{\mu} - m) \psi(\Vector{x}) &amp; = &amp; 0.
       \end{eqnarray}
       $
     </p>
     <p>
-      $
-      \begin{eqnarray}
-      x_{\mu} &amp; = &amp; (x_0, x_1, x_2, x_3) = (t, -x, -y, -z)
-      \end{eqnarray}
-      $
+      To understand the notation, we start with the coordinates (contravariant components) of the $4$-vector, $\Vector{x}$, given by
     </p>
     <p>
       $
       \begin{eqnarray}
-      \partial_{\mu} &amp; = &amp; \frac{\partial}{\partial x^{\mu}}
+      x^{\mu}        &amp; = &amp; (x^0, x^1, x^2, x^3) = (t, x, y, z). \\
       \end{eqnarray}
       $
+    </p>
+    <p>
+      Notice that we are working in natural units with $c = \hbar = 1$.
+    </p>
+    <p>
+      The orthonormal spacetime frame is $\{\gamma_{\mu} \}$ and so
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{x} &amp; = &amp; x^{\mu} \gamma_{\mu} &amp; = &amp; t \gamma_0 + x^i \gamma_{i}. \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The covariant components of the $4$-vector $\Vector{x}$ are related through the <em>metric tensor</em>:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x_{\mu}        &amp; = &amp; g_{\mu \nu} x^{\nu} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We will be working in flat spacetime and so the metric is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        g_{\mu \nu}
+        &amp; = &amp;
+        \eta_{\mu \nu}
+        &amp; = &amp;
+        \gamma_{\mu} \cdot \gamma_{\nu}
+        &amp; = &amp;
+        \left(
+          \begin{array}{cccc}
+            +1 &amp;  0 &amp;  0 &amp; 0  \\
+             0 &amp; -1 &amp;  0 &amp; 0  \\
+             0 &amp;  0 &amp; -1 &amp; 0  \\
+             0 &amp;  0 &amp;  0 &amp; -1
+          \end{array}
+        \right).
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since we are working in (flat) Minkowski space,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \eta^{\mu \nu}
+        &amp; = &amp;
+        \eta_{\mu \nu}
+        &amp; = &amp;
+        \left(
+          \begin{array}{cccc}
+            +1 &amp;  0 &amp;  0 &amp; 0  \\
+             0 &amp; -1 &amp;  0 &amp; 0  \\
+             0 &amp;  0 &amp; -1 &amp; 0  \\
+             0 &amp;  0 &amp;  0 &amp; -1
+          \end{array}
+        \right).
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      However, because the we are in a space of mixed signature, we must distinguish between the frame vectors $\{\gamma_{\mu} \}$ and the reciprocal frame vectors $\{\gamma^{\mu} \}$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \gamma^{\mu} &amp; = &amp; \eta^{\mu \nu} \gamma_{\nu}. \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence, the covariant components of the $4$-vector $\Vector{x}$, transforming like the basis vectors $\{\gamma_{\mu} \}$, are
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x_{\mu}
+      &amp; = &amp;
+      \Vector{x} \cdot \gamma_{\mu}
+      &amp; = &amp;
+      g_{\mu \nu} x^{\nu}
+      &amp; = &amp;
+      (x_0, -x^1, -x^2, -x^3)
+      &amp; = &amp;
+      (x_0, x_1, x_2, x_3)
+      &amp; = &amp;
+      (t, -x, -y, -z). \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Finally, from a notation perspective, we employ the shorthand for partial derivatives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_{\mu} &amp; = &amp; \frac{\partial}{\partial x^{\mu}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $\psi(\Vector{x})$ looks like a scalar field, $m$ is a scalar, and so the equation is Lorentz invariant if $\gamma^{\mu} \partial_{\mu}$ is a scalar operator. So the $\gamma^{\mu}$ looks like a $4$-vector, but it can't be; that would pick out a unique direction in spacetime, and spacetime is supposed to be isotropic.
+    </p>
+    <p>
+      Pre-multiply by $(i \gamma^{\mu} \partial_{\mu} + m)$ and we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\gamma^{\mu} \gamma^{\nu} \partial_{\mu} \partial_{\nu} + m^2) \psi(\Vector{x}) &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Using the <em>anticommutator</em> $\{A,B\}= AB + BA$, we can rewrite the result as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\frac{1}{2} \{ \gamma^{\mu}, \gamma^{\nu} \} \partial_{\mu} \partial_{\nu} + m^2) \psi(\Vector{x}) &amp; = &amp; 0,
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      which is the <b>Klein-Gordon</b> equation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\Box + m^2) \psi(\Vector{x})
+      &amp; = &amp;
+      (\partial_0 \partial_0 - \sum_{i=1}^{3} \partial_i \partial_i + m^2) \psi(\Vector{x})
+      &amp; = &amp; 0,
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      describing a particle with no spin - a scalar particle.
     </p>
   </section>
   <span class="definition">
@@ -112,6 +291,19 @@ title: Geometric Physics • Quantum Mechanics • Dirac Equation
   <span class="definition">
   <section>
     <h3>Spacetime Basis</h3>
+    <p>
+      The following identity will be useful:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (A \otimes B)(C \otimes D) &amp; = &amp; AC \otimes BD
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      It is easy to verify that the following reciprocal frame vectors satisfy the Spacetime algebra:
+    </p>
     <p>
       $
       \begin{eqnarray}
