@@ -1,0 +1,86 @@
+---
+layout: master
+title: Geometric Physics • Geometric Analysis
+---
+<article>
+  <h1>Geometric Analysis</h1>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      You've probably not heard of the term <b>geometric analysis</b>. That's because I made it up myself. But don't worry, I'm just extending a traditional subject called <b>vector analysis</b>. To give these ramblings some context, lets go back to the Greeks - a fellow called Euclid, to be precise. Well, he invented this neat and tidy way of proving <b>geometrical</b> statements using nothing much more than a straight edge for drawing lines and a compass for drawing circles, publishing it in a wicked doorstop called "The Elements". And it worked, or at least terrorized school children for thousands of years, as well as some very brilliant mathematicians. One of the problems was that the foundations were, shall we say, fuzzy. For example, you are expected to just know what a point is without a concrete definition. Modern mathematicians don't like that because it makes it hard or impossible to apply iron-clad logical reasoning. And then around 1637 a French fellow by the name of Rene - "I think therefore I am" - Descartes came along and said "Let's imagine that the world is drawn on a big sheet of graph paper", or a 3-dimensional lattice if you want to talk about the space we live in. Then we don't need to have this fuzzy notion of points. Points are now lists of numbers e.g., $[x, y, z]$, and we'll call them the <b>coordinates</b> of the point. And he wrote his own book called "The Geometry" and it was the start for a subject we now call <b>algebraic geometry</b>. Like so many other things it became the foundation for other mathematical objects like <b>vectors</b> and <b>tensors</b> and <b>matrices</b>, which we'll come to in due course.
+    <p/>
+    <p>
+      Of course, nature doesn't actually construct grids everywhere in space, and so the physicists (some of them at least) started wondering why the laws of universe were described in terms of things that we don't need until we take measurements. Even then, grids a.k.a. <b>coordinate frames</b> are an intermediate construction that we can avoid if we are prepared to use radar signals and clocks to measure where and when something happens. These same physicists said "wouldn't it be more natural to write down the laws in some sort of coordinate-free notation"? And that's what I mean by <b>geometric</b> - coordinate-free.
+    </p>
+    <p>
+      The irony of course is that by 1915, Albert Einstein had already written the greatest "geometric" theory of all time called General Relativity in the language of tensors. So it's not so much that you can't do mathematical physics using coordinate notation, it's just that by using a coordinate-free approach you might hope to see what's going on more clearly.
+    </p>
+    <p>
+      An even bigger irony would be that one of Einstein's countrymen, Hermann Grassman, had laid the foundation for a more geometric mathematical notation. It was an Englishman, William Kingdom Clifford, continuing the work of Grassman, who really put the "geometric" in <b>geometric algebra</b>. Sadly, Clifford died young at age 33, the vestiges of his work were still present in Hamilton's quaternions, but the American physicist Josiah Willard Gibbs was more persuasive and his simplified vector analysis won the day. And so it is that we use vectors, scalars, and tensors.
+    </p>
+    <p>
+      We'll develop the subject by first starting with a 
+    </p>
+  </section>
+  <section>
+    <h3>Vector and Linear Spaces</h3>
+    <p>
+      Giuseppe Peano, in 1888, formally defined a <b>vector space</b>, or <em>linear system</em>, as he called it. Today we use the terms <em>vector space</em> and <b>linear space</b> interchangeably. A vector space definition talks about objects called <b>vectors</b> and <b>scalars</b> and how they are related. You may have heard of these mathematical objects as having the properties (or not) of <b>magnitude</b> and <b>direction</b>. You might also have heard about vectors being described as lists of numbers. It can be quite confusing knowing where to start. We will start with Giuseppe's formal definition and then see how we can interpret the mathematical objects as geometric quantities. Along the way we'll clarify how the various definitions and concepts are related making these vague notions more clear as we go.
+    <p/>
+  </section>
+  <span class="definition">
+  <section>
+    <h3>Definition: Vector and Linear Spaces</h3>
+    <p>
+      A vector space $V$ over a field $\Field{F}$ is a set of objects called <b>vectors</b> belonging to $V$ along with objects not in $V$ called <b>scalars</b> and an operation called scalar multiplication : $\Field{F} \times V \rightarrow V$, with the following properties:
+      <ol>
+        <li>
+          <p>
+            <b>Closure under Addition.</b> If $\Vector{a} \in V$ and $\Vector{b} \in V$ then $\Vector{a} + \Vector{b} \in V$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b>Addition is Associative.</b> If $\Vector{a}, \Vector{b}$ and $\Vector{c} \in V$ then $(\Vector{a} + \Vector{b}) + \Vector{c} = \Vector{a} + (\Vector{b} + \Vector{c})$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b>Existence of an Additive Identity.</b> $\exists \Vector{0} \in V$ such that $\Vector{a} + \Vector{0} = \Vector{a}$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b>Existence of an Additive Inverse.</b> If $\Vector{a} \in V$ then $\exists \Inverse{\Vector{a}} \in V$ such that $\Vector{a} + \Inverse{\Vector{a}} = \Vector{0}$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b>Addition is Commutative.</b> If $\Vector{a} \in V$ and $\Vector{b} \in V$ then $\Vector{a} + \Vector{b} = \Vector{b} + \Vector{a}$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b></b> $\lambda (\Vector{x} + \Vector{y}) = \lambda \Vector{x} + \lambda \Vector{y}$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b></b> $(\lambda + \mu) \Vector{x} = \lambda \Vector{x} + \mu \Vector{x}$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b></b> $(\lambda \mu) \Vector{x} = \lambda ( \mu \Vector{x})$.
+          <p>
+        </li>
+        <li>
+          <p>
+            <b></b> $1 \Vector{x} = \Vector{x}$.
+          <p>
+        </li>
+      </ol>
+    <p/>
+  </section>
+  </span>
+</article 
