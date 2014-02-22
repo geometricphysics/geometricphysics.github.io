@@ -18,9 +18,11 @@ title: Geometric Physics • Geometric Analysis
     <p>
       An even bigger irony would be that one of Einstein's countrymen, Hermann Grassman, had laid the foundation for a more geometric mathematical notation. It was an Englishman, William Kingdom Clifford, continuing the work of Grassman, who really put the "geometric" in <b>geometric algebra</b>. Sadly, Clifford died young at age 33, the vestiges of his work were still present in Hamilton's quaternions, but the American physicist Josiah Willard Gibbs was more persuasive and his simplified vector analysis won the day. And so it is that we use vectors, scalars, and tensors.
     </p>
+    <span class="todo">
     <p>
-      We'll develop the subject by first starting with a 
+      TODO: Informal introduction to vectors and scalars. Concepts of magnitude and direction. Point out that the concept of sliding vectors around only works in flat spaces. And so we should think of vectors as infinitesimal field quantities. Try to avoid getting defining things using coordinates so that the concept of a metric stays geometric. We want t make coordinate (algebraic) geometry secondry to geometric algebra.
     </p>
+    </span>
   </section>
   <section>
     <h3>Vector and Linear Spaces</h3>
@@ -83,4 +85,74 @@ title: Geometric Physics • Geometric Analysis
     <p/>
   </section>
   </span>
+  <span class="todo">
+  <p>
+    TODO: Axioms of geometric algebra generating a Geometric Space.
+  </p>
+  </span>
+  <section>
+    <h3>Let the fun begin</h3>
+    <p>
+      Now that we have our axioms, what facts can we deduce and how might they be useful in physics?
+    </p>
+  </section>
+  <span class="theorem">
+  <section>
+    <h3>Theorem: Symmetric Product of Two Vectors</h3>
+    <p>
+      Suppose we form the expression $(\Vector{a} \Vector{b} + \Vector{b}\Vector{a})$ of two vectors $\Vector{a}$ and $\Vector{b}$. What can we deduce, from our axioms alone, about the nature of this quantity? Exactly what kind of mathematical quantity is it? The axioms don't provide an explicit answer.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{a} \Vector{b} + \Vector{b} \Vector{a}
+      &amp; = &amp; \Vector{a}(\Vector{b} - \Vector{a}) + \Vector{a}^2 + \Vector{b} \Vector{a} \\
+      &amp; = &amp; \Vector{a}(\Vector{b} - \Vector{a}) + \Vector{a}^2 + \Vector{b}(\Vector{a} - \Vector{b}) + \Vector{b}^2 \\
+      &amp; = &amp; \Vector{a}^2 + \Vector{b}^2 + \Vector{a}(\Vector{b} - \Vector{a}) - \Vector{b}(\Vector{b} - \Vector{a}) \\
+      &amp; = &amp; \Vector{a}^2 + \Vector{b}^2 + (\Vector{a} - \Vector{b})(\Vector{b} - \Vector{a}) \\
+      &amp; = &amp; \Vector{a}^2 + \Vector{b}^2 - (\Vector{a} - \Vector{b})^2 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Each term on the right is, by the axioms, a scalar. And so our expression must be a scalar:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{a} \Vector{b} + \Vector{b} \Vector{a}
+      &amp; \in &amp; \Field{F}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We've just constructed a quantity from the symmetrized product of two vectors and have proven that it is a scalar. This quantity will prove to be extremely useful going forward so let's create a shorthand notation for it and we can call it, appropriately, the scalar product (of two vectors).
+    </p>
+  </section>
+  </span>
+  <span class="definition">
+  <section>
+    <h3>Definition: Scalar Product of Two Vectors</h3>
+    <p>
+      The scalar product of two vectors, written $\Vector{a} \cdot \Vector{b}$, is defined by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{a} \cdot \Vector{b}
+      &amp; = &amp; \frac{1}{2} (\Vector{a} \Vector{b} + \Vector{b} \Vector{a}) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We've thrown in a factor of one half to make the expressions down the cleaner.
+    </p>
+  </section>
+  </span>
+  <section>
+    <h3>What is the Antisymmetric Product of Two Vectors?</h3>
+    <p>
+      We've formed a symmetric product of two vectors, what is the type of the antisymmetric product $(\Vector{a} \Vector{b} - \Vector{b} \Vector{a})$? Is it a vector, a scalar, or something else?
+    </p>
+  </section>
 </article 
