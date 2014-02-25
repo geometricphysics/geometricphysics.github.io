@@ -19,14 +19,17 @@ title: Geometric Physics • Spacetime • Momentum and Mass
       By symmetry, the spheres will have equal and opposite transverse velocities in their respective frames of magnitude $u_{\perp}$.
     </p>
     <p>
-      Suppose that the mass of the moving sphere, $m$ is a function of it's rest value $m_0$ as a result of the relative speed of the two frames. By conservation of the transverse momentum we have
+      It seems fashionable these days to assume that mass means rest mass and so we indicate the rest mass by $m$.
+    </p>
+    <p>
+      Suppose that the mass of the moving sphere, $m(v)$ is a function of it's rest value $m$ as a result of the relative speed of the two frames. By conservation of the transverse momentum we have
     </p>
     <p>
       $
       \begin{eqnarray}
-      m_0 u_{\perp} &amp; = &amp; \frac{m(v) u_{\perp}}{\gamma(v)(1 \pm v \, u_{\perp})}
+      m u_{\perp} &amp; = &amp; \frac{m(v) u_{\perp}}{\gamma(v)(1 \pm v \, u_{\perp})},
       \end{eqnarray}
-      $, where the choice of sign depends whether the collision is being examined from Alice or Bob's frame.
+      $ where the choice of sign depends whether the collision is being examined from Alice or Bob's frame.
     </p>
     <p>
       Considering the limit of an increasingly glancing blow so that $v \, u_{\perp} \ll 1$, we obtain
@@ -34,9 +37,9 @@ title: Geometric Physics • Spacetime • Momentum and Mass
     <p>
       $
       \begin{eqnarray}
-      m(v) &amp; = &amp; \gamma(v) m_0
+      m(v) &amp; = &amp; \gamma(v) m
       \end{eqnarray}
-      $.
+      $
     </p>
   </section>
   <section>
@@ -47,9 +50,25 @@ title: Geometric Physics • Spacetime • Momentum and Mass
     <p>
       $
       \begin{eqnarray}
-      P &amp; = &amp; m \, U = \gamma(u) (m \Vector{u}, m) = \gamma(u) (\Vector{p}, m)
+      P &amp; = &amp; m \, U = \gamma(u) (m \Vector{u}, m) = (\Vector{p}, \gamma(u) \, m)
       \end{eqnarray}
-      $.
+      $
+    </p>
+    <p>
+      This construction of another four-vector requires only that $m$ is a scalar.
+    </p>
+    <p>
+      This can be used to recover the Energy-momentum transformation using the standard LT as follows.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Primed{p}_x &amp; = &amp; \gamma(v) (p_x - v \, \gamma(u) \, m) \\
+      \Primed{p}_y &amp; = &amp; p_y \\
+      \Primed{p}_z &amp; = &amp; p_z \\
+      \gamma(\Primed{u}) \Primed{m} &amp; = &amp; \gamma(v) (\gamma(u) m - v \, p_x) \\
+      \end{eqnarray}
+      $
     </p>
   </section>
 </article>
