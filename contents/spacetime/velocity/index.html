@@ -13,7 +13,7 @@ title: Geometric Physics • Spacetime • Velocity
       $
       \begin{eqnarray}
       u_x' &amp; = &amp; \frac{dx'}{dt'}
-           &amp; = &amp; \frac{\gamma(dx - v \, dt)}{\gamma(dt - v \, dx)}
+           &amp; = &amp; \frac{\gamma(v) \, (dx - v \, dt)}{\gamma(v) \, (dt - v \, dx)}
            &amp; = &amp; \frac{u_x - v}{1 - v \, u_x} \\
       \end{eqnarray}
       $
@@ -22,8 +22,8 @@ title: Geometric Physics • Spacetime • Velocity
       $
       \begin{eqnarray}
       u_y' &amp; = &amp; \frac{dy'}{dt'}
-           &amp; = &amp; \frac{dy}{\gamma(dt - v \, dx)}
-           &amp; = &amp; \frac{u_y}{\gamma(1 - v \, u_x)} \\
+           &amp; = &amp; \frac{dy}{\gamma(v) \, (dt - v \, dx)}
+           &amp; = &amp; \frac{u_y}{\gamma(v) \, (1 - v \, u_x)} \\
       \end{eqnarray}
       $
     </p>
@@ -31,8 +31,8 @@ title: Geometric Physics • Spacetime • Velocity
       $
       \begin{eqnarray}
       u_z' &amp; = &amp; \frac{dz'}{dt'}
-           &amp; = &amp; \frac{dz}{\gamma(dt - v \, dx)}
-           &amp; = &amp; \frac{u_z}{\gamma(1 - v \, u_x)} \\
+           &amp; = &amp; \frac{dz}{\gamma(v) \, (dt - v \, dx)}
+           &amp; = &amp; \frac{u_z}{\gamma(v) \, (1 - v \, u_x)} \\
       \end{eqnarray}
       $
     </p>
@@ -52,16 +52,55 @@ title: Geometric Physics • Spacetime • Velocity
     <p>
       $
       \begin{eqnarray}
-      u_y &amp; = &amp; \frac{u_y'}{\gamma(1 + v \, u_x')} \\
+      u_y &amp; = &amp; \frac{u_y'}{\gamma(v) \, (1 + v \, u_x')} \\
       \end{eqnarray}
       $
     </p>
    <p>
       $
       \begin{eqnarray}
-      u_z &amp; = &amp; \frac{u_z'}{\gamma(1 + v \, u_x')} \\
+      u_z &amp; = &amp; \frac{u_z'}{\gamma(v) \, (1 + v \, u_x')} \\
       \end{eqnarray}
       $
+    </p>
+    <p>
+      Although we have derived a velocity transformation law, we haven't uncovered a four-velocity. An interesting way to derive a four-velocity, and provide an alternate route to the velocity transformation is by constructing a four velocity $U$ as follows:
+    </p>
+   <p>
+      $
+      \begin{eqnarray}
+      U &amp; = &amp; \frac{d X}{d \tau}, \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $d X$ is the four-displacement and $d \tau = \sqrt{dt^2 - d\Vector{x}^2}$ is the proper time invariant interval.
+    </p>
+   <p>
+      $
+      \begin{eqnarray}
+      U &amp; = &amp; \frac{(d\Vector{x}, d t)}{\sqrt{dt^2 - d\Vector{x}^2}} = \gamma(u)(\Vector{u},1). \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This can be used to recover the velocity transformation using the standard LT as follows.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \gamma(\Primed{u}) \Primed{u}_x &amp; = &amp; \gamma(v) (\gamma(u) u_x - v \gamma(u)) = \gamma(v) \gamma(u) (u_x - v) \\
+      \gamma(\Primed{u}) \Primed{u}_y &amp; = &amp; \gamma(u) u_y \\
+      \gamma(\Primed{u}) \Primed{u}_z &amp; = &amp; \gamma(u) u_z \\
+      \gamma(\Primed{u}) &amp; = &amp; \gamma(v) (\gamma(u) - v \gamma(u) u_x) = \gamma(v) \gamma(u) (1 - v \, u_x) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The transformation of the time component of $U$ provides exactly the factor to make the other components work out.
+    </p>
+    <p>
+      The four-velocity provides the most robust route to the four-momemntum, simply by multiplying $U$ by the rest mass, $m$.
     </p>
   </section>
 </article>
