@@ -1,0 +1,159 @@
+---
+layout: master
+title: Geometric Physics • Electrodynamics • Rigid Body Motion
+---
+<article>
+  <h1>Rigid Body Motion</h1>
+  <section>
+    <h3>Background</h3>
+    <p>
+      This is a traslation and interpretation of <a href="http://en.wikisource.org/wiki/Author:Max_Born">Max Born</a>'s 1910 paper, <a href="http://en.wikisource.org/wiki/Translation:On_the_Kinematics_of_the_Rigid_Body_in_the_System_of_the_Principle_of_Relativity">On the kinematics of the rigid body in the system of the principle of relativity</a>.
+    </p>
+  </section>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>The rigid body of ordinary mechanics</h3>
+    <p>
+      Born starts from a definition of a rigid body in terms of the velocity of its points. In modern notation, if $\Vector{\omega}$ is the (axial) angular velocity vector, then the velocity $\Vector{v}_i$ of the $i$th point with position vector $\Vector{r}_i$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Vector{v}_i &amp; = &amp; \Vector{\omega} \times \Vector{r}_i. \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Taking two arbitrary points, and forming the Galilean relative velocity we have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Vector{v}_i - \Vector{v}_j &amp; = &amp; \Vector{\omega} \times (\Vector{r}_i - \Vector{r}_j). \label{RelativeVelocity} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      He then shows that the separation, $|\Vector{r}_i - \Vector{r}_j|$, between any two points is a constant of the motion:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        |\Vector{r}_i - \Vector{r}_j|^2 &amp; = &amp; (\Vector{r}_i - \Vector{r}_j) \cdot (\Vector{r}_i - \Vector{r}_j) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Differentiating with respect to time and then using $\ref{RelativeVelocity}$, we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        |\Vector{r}_i - \Vector{r}_j| \frac{d |\Vector{r}_i - \Vector{r}_j|}{d t}
+        &amp; = &amp;
+        (\Vector{r}_i - \Vector{r}_j) \cdot (\Vector{v}_i - \Vector{v}_j) \\
+        &amp; = &amp;
+        (\Vector{r}_i - \Vector{r}_j) \cdot (\Vector{\omega} \times (\Vector{r}_i - \Vector{r}_j)) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      From the definition of the cross product we must conclude
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \frac{d |\Vector{r}_i - \Vector{r}_j|}{d t} &amp; = &amp; 0.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Born warns us that we won't be able to transfer this conclusion to the relativistic domain, and we will gain an understanding of why.
+    </p>
+  </section>
+  <section>
+    <h3>Rest vectors of first and second kind</h3>
+    <p>
+      Born reminds us that a Lorentz transformation contains 6 independent parameters corresponding to a spatial rotation and the boost. He refers to boosts as <em>special Lorentz transformations</em>. He calls four-vectors <em>vectors of the first kind</em>, trnsforming like the coordinate differentials. He defines <em>vectors of the second kind</em> to be what we call an antisymmetric tensor of rank two. This has 6 independent components in spacetime, $f_{23}, f_{31}, f_{12}, f_{14}, f_{24}, f_{34}$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Tensor{f} &amp; = &amp; \langle f_{23}, f_{31}, f_{12}, f_{14}, f_{24}, f_{34} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      An antisymmetric second-rank tensor can be written in matrix form. Here I've used the symbol $\Box$ to indicate that the value is not independent i.e., $f_{ij} = - f_{ji}$. The diagonal values must be zero by antisymmetry.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Tensor{f}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            0      &amp; f_{12} &amp; \Box   &amp; f_{14} \\
+            \Box   &amp; 0      &amp; f_{23} &amp; f_{24} \\
+            f_{31} &amp; \Box   &amp; 0      &amp; f_{34} \\
+            \Box   &amp; \Box   &amp; \Box   &amp; 0      \\
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Comparing this to the antisymmetric tensor that can be interpreted as a polar vector $\Vector{E}$ and an axial vector $\Vector{B}$, we see that Born's choice of components was designed to coincide.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Tensor{F}
+        &amp; = &amp;
+        \left[
+          \begin{array}{cccccc}
+            0      &amp; B_{z} &amp; \Box  &amp; -iE_{x} \\
+            \Box   &amp; 0     &amp; B_{x} &amp; -iE_{y} \\
+            B_{y}  &amp; \Box  &amp; 0     &amp; -iE_{z} \\
+            \Box   &amp; \Box  &amp; \Box  &amp; 0       \\
+          \end{array}
+        \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We see that in every reference system, the six components of $\Tensor{f}$ represent two space vectors, one polar and one axial.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Vector{E} &amp; = &amp; \langle f_{14}, f_{24}, f_{34} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Vector{B} &amp; = &amp; i \langle f_{23}, f_{31}, f_{12} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Born defines the dual of the tensor $\Tensor{f}$ to be composed of the vectors in reverse order.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Dual{\Tensor{f}} &amp; = &amp; \langle f_{14}, f_{24}, f_{34}, f_{23}, f_{31}, f_{12} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Born now defines <b>rest vectors</b> as vectors whose fourth component vanishes. We consider two reference frames, $\Sigma$ and $\Primed{\Sigma}$, with parallel spatial coordinate axes, where the primed system has velocity $\Vector{v}$ relative to the unprimed system.
+    </p>
+  </section>
+</article>
