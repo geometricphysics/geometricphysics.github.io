@@ -5,7 +5,7 @@ title: Geometric Physics • Spacetime • k-Calculus
 <article>
   <h1>k-Calculus</h1>
   <section>
-    <h3>The Big Picture</h3>
+    <h3>Introduction</h3>
     <p>
       Firstly, k-Calculus is not actually calculus in the sense of infinitesimals and sums. We're using the more general meaning of the word as a procedure by which we calculate things. In particular we are talking about a procedure for determining the coordinates of an event. What's special about k-Calculus is that it avoids the intermediate step of creating a coordinate lattice with associated synchronized clocks. By using the more fundamental technique of measuring the elapsed time of an out-and-back signal, we hope to make the underlying physical principles more obvious.
     </p>
@@ -100,7 +100,7 @@ title: Geometric Physics • Spacetime • k-Calculus
       Figure 1.
     </p>
     <p>
-      Define the relative velocity $v$ of the clocks to be positive when the clocks are receeding from each other.
+      Define the <b>relative velocity</b> $v$ of the clocks to be positive when the clocks are receeding from each other.
     </p>
     <p>
       The ratio of the received pulse interval (measured by the receiving clock) to transmitted pulse interval (measured by the sending clock) defines the function $k(v)$:
@@ -111,9 +111,9 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      \Delta \tau = \tau_f - \tau_i &amp; = &amp; k(v) (t_2 - t_1)
+      \Delta \tau = \tau_f - \tau_i &amp; = &amp; k(v) (t_2 - t_1).
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       Similarly,
@@ -122,9 +122,9 @@ title: Geometric Physics • Spacetime • k-Calculus
       $
       \begin{eqnarray}
       t_4 - t_3 &amp; = &amp; k(v) (\tau_f - \tau_i)
-                &amp; = &amp; k(v) \Delta \tau
+                &amp; = &amp; k(v) \Delta \tau.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       Let us calculate an expression for the velocity of the moving clock relative to the inertial frame.
@@ -132,10 +132,10 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      v &amp; = &amp; \frac{\Delta x}{\Delta t} \\
-        &amp; = &amp; \frac{x_f - x_i}{t_f - t_i} \\
+      v &amp; = &amp; \frac{\Delta x}{\Delta t}
+        &amp; = &amp; \frac{x_f - x_i}{t_f - t_i}.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       Recalling the expressions for the coordinates in terms of the times at which measuring signals are sent and received, we find
@@ -143,10 +143,10 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      v &amp; = &amp; \frac{(t_4 - t_2) - (t_3 - t_1)}{(t_4 + t_2) - (t_3 + t_1)} \\
-        &amp; = &amp; \frac{(t_4 - t_3) - (t_2 - t_1)}{(t_4 - t_3) + (t_2 - t_1)} \\
+      v &amp; = &amp; \frac{(t_4 - t_2) - (t_3 - t_1)}{(t_4 + t_2) - (t_3 + t_1)}
+        &amp; = &amp; \frac{(t_4 - t_3) - (t_2 - t_1)}{(t_4 - t_3) + (t_2 - t_1)}.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       Substituting the expressions for the differences gives,
@@ -154,8 +154,8 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      v &amp; = &amp; \frac{k - 1/k}{k + 1/k} \\
-        &amp; = &amp; \frac{k^2 - 1}{k^2 + 1} \\
+      v &amp; = &amp; \frac{k - (1/k)}{k + (1/k)}
+        &amp; = &amp; \frac{k^2 - 1}{k^2 + 1}.
       \end{eqnarray}
       $
     </p>
@@ -165,23 +165,23 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      v (k^2 + 1) &amp; = &amp; k^2 - 1 \\
+      v (k^2 + 1) &amp; = &amp; k^2 - 1,
       \end{eqnarray}
-      $,
+      $
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 + v &amp; = &amp; k^2 (1 - v) \\
+      1 + v &amp; = &amp; k^2 (1 - v),
       \end{eqnarray}
-      $,
+      $
     </p>
     <p>
       $
       \begin{eqnarray}
-      k(v) &amp; = &amp; \left( \frac{1 + v}{1 - v} \right)^{\frac{1}{2}} \\
+      k(v) &amp; = &amp; \left( \frac{1 + v}{1 - v} \right)^{\frac{1}{2}}.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       We remark the following two identities satisfied by $k$:
@@ -189,16 +189,16 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      k(0) &amp; = &amp; 1
+      k(0) &amp; = &amp; 1,
       \end{eqnarray}
-      $,
+      $
     </p>
     <p>
       $
       \begin{eqnarray}
-      k(\beta) k(- \beta) &amp; = &amp; 1
+      k(\beta) k(- \beta) &amp; = &amp; 1.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       Finally, we will encounter the quantity $\gamma(v) = (1 - v^2)^{- \frac{1}{2}}$. It will be useful to have an expression for $\gamma$ in terms of $k$. Since
@@ -206,23 +206,25 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      v &amp; = &amp; \frac{k^2 - 1}{k^2 + 1} \\
+      v &amp; = &amp; \frac{k^2 - 1}{k^2 + 1},
       \end{eqnarray}
-      $, then
+      $
+      then
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 + v &amp; = &amp; \frac{2k^2}{k^2 + 1} \\
+      1 + v &amp; = &amp; \frac{2k^2}{k^2 + 1},
       \end{eqnarray}
-      $, and
+      $
+      and
     </p>
     <p>
       $
       \begin{eqnarray}
-      1 - v &amp; = &amp; \frac{2}{k^2 + 1} \\
+      1 - v &amp; = &amp; \frac{2}{k^2 + 1}.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       It follows that
@@ -230,33 +232,35 @@ title: Geometric Physics • Spacetime • k-Calculus
     <p>
       $
       \begin{eqnarray}
-      (1 + v)(1 - v) &amp; = &amp; (\frac{2k}{k^2 + 1})^2 \\
+      (1 + v)(1 - v) &amp; = &amp; (\frac{2k}{k^2 + 1})^2,
       \end{eqnarray}
-      $, so
+      $
+      so
     </p>
     <p>
       $
       \begin{eqnarray}
-      \gamma(v) &amp; = &amp; \frac{k^2 + 1}{2k} \\
+      \gamma(v) &amp; = &amp; \frac{k^2 + 1}{2k}.
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
-      Other curious identities include
+      We also have
     </p>
     <p>
       $
       \begin{eqnarray}
-      (1 + v) \gamma(v) &amp; = &amp; k
+      (1 + v) \gamma(v) &amp; = &amp; k,
       \end{eqnarray}
-      $, and
+      $
+      and
     </p>
     <p>
       $
       \begin{eqnarray}
-      (1 - v) \gamma(v) &amp; = &amp; \frac{1}{k}
+      (1 - v) \gamma(v) &amp; = &amp; \frac{1}{k}.
       \end{eqnarray}
-      $.
+      $
     </p>
   </section>
 </article>

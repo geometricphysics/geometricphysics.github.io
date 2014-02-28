@@ -111,25 +111,25 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
     <p>
       $
       \begin{eqnarray}
-      \frac{d \tau}{d t} &amp; = &amp; \lim_{\Delta t \rightarrow 0} \frac{\Delta \tau}{\Delta t} \\
-                         &amp; = &amp; \lim_{\Delta t \rightarrow 0} \frac{\Delta \tau}{t_f - t_i}
+      \frac{d \tau}{d t} &amp; = &amp; \lim_{\Delta t \rightarrow 0} \frac{\Delta \tau}{\Delta t}
+                         &amp; = &amp; \lim_{t_f \rightarrow t_i} \frac{\Delta \tau}{t_f - t_i}.
       \end{eqnarray}
       $
     </p>
     <p>
-      We assume that the light takes equal time for the outbound trip as for the return trip:
+      Our procedure using reflected pulses establishes the time of the events according to the inertial frame to be
     </p>
     <p>
       $
       \begin{eqnarray}
-      t_i &amp; = &amp; \frac{1}{2}(t_3 - t_1),
+      t_i &amp; = &amp; \frac{1}{2}(t_3 + t_1),
       \end{eqnarray}
       $
     </p>
     <p>
       $
       \begin{eqnarray}
-      t_f &amp; = &amp; \frac{1}{2}(t_4 - t_2).
+      t_f &amp; = &amp; \frac{1}{2}(t_4 + t_2).
       \end{eqnarray}
       $
     </p>
@@ -139,12 +139,12 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
     <p>
       $
       \begin{eqnarray}
-      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 \Delta \tau}{(t_4 - t_3) - (t_2 - t_1)}.
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 \Delta \tau}{(t_4 - t_3) + (t_2 - t_1)}.
       \end{eqnarray}
       $
     </p>
     <p>
-      Define
+      We have already defined
     </p>
     <p>
       $
@@ -157,7 +157,7 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
       where $\Delta T_{transmit}$ is the interval between transmitted pulses as measured by the transmitting clock, and $\Delta T_{receive}$ is the interval between received pulses as measured by the receiving clock. $v$ is the relative velocity and is positive when the transmitter and receiver are receeding from each other, negative when they are approaching each other, and zero when at relative rest.
     </p>
     <p>
-      For the signals transmitted at $t_1$ and $t_2$ and received by the moving clock:
+      For the signals transmitted at times $t_1$ and $t_2$ and received by the moving clock,
     </p>
     <p>
       $
@@ -167,7 +167,7 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
       $
     </p>
     <p>
-      For the signals reflected by the moving clock and received at $t_3$ and $t_4$ by the clock at rest:
+      For the signals reflected by the moving clock and received at times $t_3$ and $t_4$ by the clock at rest,
     </p>
     <p>
       $
@@ -182,77 +182,9 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
     <p>
       $
       \begin{eqnarray}
-      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 k(v)}{k(v)^2 + 1}.
+      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 k}{k^2 + 1} = \frac{1}{\gamma(v)}.
       \end{eqnarray}
       $
-    </p>
-    <p>
-      We now need to find the form for $k(v)$, which we do by first computing the moving clock velocity
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      v &amp; = &amp; \frac{\Delta x}{\Delta t} \\
-        &amp; = &amp; \frac{x_f - x_i}{\Delta t} \\
-        &amp; = &amp; \frac{(t_f - t_2) - (t_i - t_1)}{\Delta t} \\
-        &amp; = &amp; \frac{(t_f - t_i) - (t_2 - t_1)}{\Delta t} \\
-        &amp; = &amp; \frac{\Delta t - (\Delta \tau / k(v))}{\Delta t} \\
-      \end{eqnarray}
-      $
-    </p>
-    <p>
-      Rearranging this last expression we get
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      \frac{\Delta \tau}{\Delta t} &amp; = &amp; (1 - v) k(v).
-      \end{eqnarray}
-      $
-    </p>
-    <p>
-      Equating the two expressions for $\Delta \tau / \Delta t$ and solving for $v$ we find the following identities:
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      1 - v &amp; = &amp; \frac{2}{k^2 + 1}
-      \end{eqnarray}
-      $,
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      v &amp; = &amp; \frac{k^2 - 1}{k^2 + 1}
-      \end{eqnarray}
-      $, and
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      1 + v &amp; = &amp; \frac{2 k^2}{k^2 + 1}
-      \end{eqnarray}
-      $.
-    </p>
-    <p>
-      Solving for k gives
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      k(v) &amp; = &amp; \left( \frac{1 + v}{1 - v} \right)^{\frac{1}{2}}
-      \end{eqnarray}
-      $.
-    </p>
-    <p>
-      Multiplying the two expressions for $\Delta \tau / \Delta t$ and writing the result in terms of $v$ we obtain
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      (\frac{\Delta \tau}{\Delta t})^2 &amp; = &amp; (1 + v)(1 - v)
-      \end{eqnarray}
-      $.
     </p>
   </section>
 </article>
