@@ -1,0 +1,337 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Differential Forms
+---
+<article>
+  <h1>Differential Forms</h1>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Manifolds</h3>
+    <p>
+      Let $\Vector{X}: \RealField^{k} \rightarrow \RealField^{n}$. i.e, $\Vector{X}$ is a function that maps a point $\Vector{u} = (u_1, u_2, \ldots, u_k)$ in a $k$-dimensional space to a point in an $n$-dimensional space.
+    </p>
+    <p>
+      A <em>$k$-manifold</em>, $M$, is the image, $\Vector{X}(D)$, in $\RealField^{n}$ of a bounded open region $D$ in $\RealField^{k}$.
+    </p>
+    <p>
+      We say that the manifold $M$ is parameterized by the function $\Vector{X}$.
+    </p>
+    <p>
+      When we say "$M$ is a smooth manifold" we mean
+      <ul>
+        <li>The function $\Vector{X}$ is $C^1$.</li>
+        <li>The function $\Vector{X}$ is injective (it maps distinct points to distinct points).</li>
+        <li>The tangent vectors $\partial \Vector{X}/ \partial u_1, \partial \Vector{X}/ \partial u_2, \ldots, \partial \Vector{X}/ \partial u_k$ are independent.</li>
+      </ul>
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Differential Forms</h3>
+    <p>
+      A 0-form $\omega$ is a function
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; f(x_1, x_2, \ldots, x_n)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      A <em>general</em> 1-form $\omega$ is an expression like
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; \sum_{i=1}^{n} F_{i}(\Vector{x}) dx_{i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <em>basic</em> or <em>elementary</em> differential $1$-form $\omega$ is an expression like
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dx_{i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $1 \le i \le n$.
+    </p>
+    <p>
+      The <em>basic</em> or <em>elementary</em> 1-form $dx_{i}$ is a function that acts on a single vector $\Vector{v}$ and outputs $v_{i}$, the $i$th component of $\Vector{v}$. 
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dx_{i}(\Vector{v})
+      &amp; = &amp;
+      v_{i}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This makes it apparent that a <em>general</em> 1-form is a function that takes a vector and returns the type of $F_{i}$.
+      We also remark that a 0-form is a function with no arguments.
+      However, both forms depend on the coordinates of the point $\Vector{x}$.
+    </p>
+    <p>
+      The <em>basic</em> or <em>elementary</em> differential $2$-form $\omega$ is an expression like
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dx_{i} \wedge dx_{j},
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      where $1 \le i,j \le n$.
+    </p>
+    <p>
+      The <em>basic</em> or <em>elementary</em> 2-form is a function with two vector arguments
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dx_{i} \wedge dx_{j}(\Vector{v_1},\Vector{v_2})
+      &amp; = &amp;
+      \det
+      \left[
+        \begin{array}{cccccccc}
+            dx_{i}(\Vector{v_1}) &amp; dx_{i}(\Vector{v_2}) \\
+            dx_{j}(\Vector{v_1}) &amp; dx_{j}(\Vector{v_2})
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice how the implementation of the elementary 2-form uses the implementation of the elementary 1-form.
+    </p>
+    <p>
+      The notation of differential forms reflects the Grassman exterior product, while the action of the elementary forms reflects the scalar product.
+    </p>
+    <p>
+      A <em>general</em> differential 2-form $\omega$ is an expression of the form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; \sum_{1 \le i \lt j \le n}F_{ij}(\Vector{x}) dx_{i} \wedge dx_{j},
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice how we have restricted the sum because the elementary 2-forms are not independent. There are only $(n^2 - n)/2$ that are independent.
+    </p>
+    <p>
+      The action of the 2-form as a function is obtained by combining the expression with the action of the basic 2-forms.
+    </p>
+    <p>
+      The action of the elementary forms is purely one of extracting the coordinates in a prescribed manner. There is no concept of a metric in the elementary forms. It would appear that differential forms have a tensoral nature and yet they embody the antisymmetry properties of the exterior product. So they appear to avoid some of the redundancy of the tensor formalism but at the same time appear to have a component flavor.
+    </p>
+    <p>
+      From a geometric algebra perspective, the forms share the exterior algebra, and yet the action of the general $k$-forms on $k$ vectors is always to return a 0-form.
+    </p>
+    <p>
+      The generalization to <em>elementary</em> and <em>general</em> $k$-forms is as we would expect. A <em>general</em> $k$-form is a linear superposition of <em>elementary</em> $k$-forms in which the coefficients are functions of position.
+    </p>
+  </section>
+  <section>
+    <h3>Integration</h3>
+    <p>
+      When we integrate a $k$-form, we do so over a $k$-manifold.
+    </p>
+    <p>
+      Let's integrate a $1$-form over a $1$-manifold. Suppose $M = \Vector{X}(t)$ over the domain $a \le t \le b$, is a smooth $1$-manifold in $\RealField^{n}$.
+    </p>
+    <p>
+      We define the integral of the $1$-form $\omega$ over the manifold $M$ as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} \omega &amp; = &amp; \int_{a}^{b} \omega(\frac{d \Vector{X}}{d t}) dt
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      You can see that we are making use of the fact that a <em>general</em> $k$-form is a function. The interesting point to note is that we use the tangent vector as the argument to $\omega$ as the integrand.
+    </p>
+    <p>
+      The integral is straight-forward to evaluate by applying the action of the <em>elementary</em> $1$-form. The only thing to remember is that the coordinates $x_i$ that appear in the differential form are replaced by the parameters from the function $\Vector{X}(t) = \langle x_1(t), x_2(t), \ldots, x_n(t) \rangle$ that parameterizes the manifold.
+    </p>
+    <p>
+      The integral of a $1$-form over a $1$-manifold has a connection to a line integral of a vector field for an appropriate $1$-form.
+    </p>
+    <p>
+      Suppose that $\Vector{F}(\Vector{x}) = \langle F_1(\Vector{x}), F_2(\Vector{x}), \ldots, F_n(\Vector{x}) \rangle$ is a vector field in $\RealField^{n}$. Define the differential $1$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; \sum_{i = 1}^{n} F_{i} dx_{i} = F_1 dx_1 + F_2 dx_2 + \cdots + F_n dx_n.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} \omega
+      &amp; = &amp;
+      \int_{a}^{b} \omega(\frac{d \Vector{X}}{d t}) dt \\
+      &amp; = &amp;
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} dx_{i}(\frac{d \Vector{X}}{d t}) dt \\
+      &amp; = &amp;
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} \frac{d X_{i}}{d t} dt \\
+      &amp; = &amp;
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} d X_{i} \\
+      &amp; = &amp;
+      \int_{M} \Vector{F} \cdot \Vector{dX}.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now generalize to define the integral of the $2$-form $\omega$ over the a $2$-manifold $M$ as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} \omega
+      &amp; = &amp;
+      \int_{D} \omega(\frac{\partial \Vector{X}}{\partial u_1},\frac{\partial \Vector{X}}{\partial u_1}) du_1 du_2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The integral of a $2$-form over a $2$-manifold has a connection to a surface integral of the flux of a vector field for an appropriate $2$-form (so long as the manifold is in $\RealField^3$).
+    </p>
+    <p>
+      Suppose that $\Vector{F}(\Vector{x}) = \langle F_1(\Vector{x}), F_2(\Vector{x}), \ldots, F_n(\Vector{x}) \rangle$ is a vector field in $\RealField^{n}$. Define the differential $2$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; F_1 dx_2 \wedge dx_3 + F_2 dx_3 \wedge dx_1 + F_3 dx_1 \wedge dx_2.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then, using the crucial substitution (involving the cross product in 3 dimensions)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d \Vector{A}
+      &amp; = &amp;
+      \frac{\partial \Vector{X}}{\partial u_1} \times \frac{\partial \Vector{X}}{\partial u_2} du_1 du_2,
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      it is straigtforward to show
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} \omega
+      &amp; = &amp;
+      \int_{M} \Vector{F} \cdot \Vector{dA}.
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>The Wedge Product</h3>
+    <p>
+      The linearity of differential forms allows us to add differential forms of the same grade. The exterior product allows us to perform a kind of multiplication.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>The Exterior Derivative</h3>
+    <p>
+      We have already integrated differential forms over a manifold. We now take a look at differentiation, and later we connect the two with a general theorem.
+    </p>
+    <p>
+      The exterior drivative of a $0$-form $f(\Vector{x})$ is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      df &amp; = &amp; \sum_{i = 1}^{n} \frac{\partial f}{\partial x_i} dx_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Clearly, we have created a $1$-form. That's the general rule. The <em>exterior derivative</em> $d$ is an operator that turns $k$-forms into $(k+1)$-forms.
+    </p>
+    <p>
+      The exterior drivative of the $k$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega
+      &amp; = &amp;
+      \sum_{i_1, i_2, \ldots, i_k} F_{i_1, i_2, \ldots, i_k} dx_{i_1} \wedge dx_{i_2} \wedge \cdots \wedge dx_{i_k}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      is the $(k+1)$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d \omega
+      &amp; = &amp;
+      \sum_{i_1, i_2, \ldots, i_k} d F_{i_1, i_2, \ldots, i_k} \wedge dx_{i_1} \wedge dx_{i_2} \wedge \cdots \wedge dx_{i_k}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We simply compute the exterior derivative of the coefficients and wedge them with the corresponding elementary forms.
+    </p>
+  </section>
+    <h3>Generalized Stoke's Theorem</h3>
+    <p>
+      Let $M$ be a smooth oriented $k$-manifold with consistently oriented smooth boundary $\partial M$. Let $\omega$ be a $k-1$ form defined in a neighborhood of $M$. Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} d \omega &amp; = &amp; \int_{\partial M} \omega.
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      So far, this is stated without proof. With appropriate choices of differential forms we can show that it reproduces Stokes' theorem and Gauss's theorem.
+    </p>
+  </section>
+</article>
