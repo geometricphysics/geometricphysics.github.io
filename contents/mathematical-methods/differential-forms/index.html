@@ -42,7 +42,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Differential Forms</h3>
     <p>
-      A 0-form $\omega$ is a function
+      A <em>general</em> $0$-form $\omega$ is an expression like
     </p>
     <p>
       $
@@ -50,6 +50,9 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \omega &amp; = &amp; f(x_1, x_2, \ldots, x_n)
       \end{eqnarray}
       $
+    </p>
+    <p>
+      Recall that like $f$, the coordinate $x_i$ is a function on $\RealField^{n}$.
     </p>
     <p>
       A <em>general</em> 1-form $\omega$ is an expression like
@@ -267,10 +270,74 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       The linearity of differential forms allows us to add differential forms of the same grade. The exterior product allows us to perform a kind of multiplication.
     </p>
     <p>
+      The algebra for coordinate differentials is anti-commutative.
+    </p>
+    <p>
       $
       \begin{eqnarray}
+      dx \wedge dy &amp; = &amp; - dy \wedge dx
       \end{eqnarray}
       $
+    </p>
+    <p>
+      By linearity it is also a fact that the exterior product of two $1$-forms is zero.
+    </p>
+    <p>
+      However, the outer product for $r$-forms with $r \ge 2$ is not generally zero, although it happens to be true for $n \le 3$.
+    </p>
+    <p>
+      If we consider $\omega \in \Lambda^{j}(K)$ and $\eta \in \Lambda^{k}(K)$ then it is easy to show that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega \wedge \eta &amp; = &amp; (-1)^{jk} \eta \wedge \omega
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We generally don't use mixed forms. Forms of the same <em>degree</em> are called <b>homogeneous</b>.
+    </p>
+  </section>
+  <section>
+    <h3>The Differential Operator $d$ (The Exterior Derivative)</h3>
+    <p>
+      <ol>
+        <li>
+          <p>
+            $d$ is a linear operator.
+          </p>
+        </li>
+        <li>
+          <p>
+            On the functions $\Lambda^{0}(K)$
+          </p>
+          <p>
+            $
+            \begin{eqnarray}
+            df &amp; = &amp; \sum \frac{\partial f}{\partial x_i} dx_i
+            \end{eqnarray}
+            $
+          </p>
+        </li>
+        <li>
+          <p>
+            if $\omega \in \Lambda^{j}(K)$ and $\eta \in \Lambda^{k}(K)$ then (Liebnitz's Rule)
+          </p>
+          <p>
+            $
+            \begin{eqnarray}
+            d(\omega \wedge \eta) &amp; = &amp; (d \omega) \wedge \eta + (-1)^{j} \omega \wedge (d \eta)
+            \end{eqnarray}
+            $
+          </p>
+        </li>
+        <li>
+          <p>
+            $dd = 0$
+          </p>
+        </li>
+      </ol>
     </p>
   </section>
   <section>
@@ -279,7 +346,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       We have already integrated differential forms over a manifold. We now take a look at differentiation, and later we connect the two with a general theorem.
     </p>
     <p>
-      The exterior drivative of a $0$-form $f(\Vector{x})$ is
+      The exterior derivative of a $0$-form $f(\Vector{x})$ is
     </p>
     <p>
       $
@@ -289,7 +356,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       $
     </p>
     <p>
-      Clearly, we have created a $1$-form. That's the general rule. The <em>exterior derivative</em> $d$ is an operator that turns $k$-forms into $(k+1)$-forms.
+      Clearly, we have created a $1$-form. That's the general rule. The <em>exterior derivative</em> $d$ is an operator that turns $k$-forms into $(k+1)$-forms. Notice that $df$ and $dx_{i}$ are the same kinds of objects since both $f$ and the coordinates $x_i$ are both functions on $\RealField^{n}$.
     </p>
     <p>
       The exterior drivative of the $k$-form
@@ -315,11 +382,25 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \end{eqnarray}
       $
     </p>
+  </section>
+  <section>
+    <h3>grad, div and curl</h3>
     <p>
-      We simply compute the exterior derivative of the coefficients and wedge them with the corresponding elementary forms.
+      We can demonstrate how the three vector operators occur naturally in differential forms.
+    </p>
+    <p>
+      We simply compute the exterior derivative of the coefficients and wedge them with the corresponding elementary forms. Just apply $d$ to a $0$-form, $1$-form, and $2$-form. Recall that $d$ applied to a $3$-form is zero.
     </p>
   </section>
-    <h3>Generalized Stoke's Theorem</h3>
+  <section>
+    <h3>The Poincar&#233; Lemma ($dd \omega = 0$) and its Converse</h3>
+    <p>
+    </p>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Generalized Stoke's Theorem (The Boundary Theorem?)</h3>
     <p>
       Let $M$ be a smooth oriented $k$-manifold with consistently oriented smooth boundary $\partial M$. Let $\omega$ be a $k-1$ form defined in a neighborhood of $M$. Then
     </p>
@@ -331,7 +412,179 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       $
     </p>
     <p>
+      Besides the symmetry in the above expression, it can be memorized by recalling that (1) the $d$ operator acting on a $k$-form prduces a $(k+1)$-form, and (2) we generally integrate a $k$-form over a $k$-manifold, and finally (3) that the boundary of a $k$-manifold is a $(k-1)$-manifold.
+      <ul>
+        <li>$M$ is a $k$-manifold,</li>
+        <li>$\partial M$ is a $(k-1)$-manifold,</li>
+        <li>$\omega$ is a $(k-1)$-form,</li>
+        <li>$d \omega$ is a $k$-form.</li>
+      </ul>
+    </p>
+    <p>
       So far, this is stated without proof. With appropriate choices of differential forms we can show that it reproduces Stokes' theorem and Gauss's theorem.
+    </p>
+  </section>
+  </section>
+    <h3>Stoke's Theorem in $\RealField^3$</h3>
+    <p>
+      Let $\Vector{F}(\Vector{x}) = F^{i}(\Vector{x}) \Vector{e}_{i}$ be a vector field in three dimensions.
+    </p>
+    <p>
+      Consider the $1$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; F^{i}(\Vector{x}) dx_{i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We have already seen
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{\partial M} \omega &amp; = &amp; \int \Vector{F} \cdot d \Vector{X}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now compute
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d \omega
+      &amp; = &amp;
+      d (F^{i}(\Vector{x}) dx_{i}) \\
+      &amp; = &amp;
+      d F^{i}(\Vector{x})\wedge dx_{i} \\
+      &amp; = &amp;
+      \frac{\partial F^{i}}{\partial x_{j}} dx_{j} \wedge dx_{i} \\
+      &amp; = &amp;
+      \frac{\partial F^{1}}{\partial x_{2}} dx_{2} \wedge dx_{1} + \frac{\partial F^{1}}{\partial x_{3}} dx_{3} \wedge dx_{1} + \frac{\partial F^{2}}{\partial x_{1}} dx_{1} \wedge dx_{2} + \frac{\partial F^{2}}{\partial x_{3}} dx_{3} \wedge dx_{2} + 
+      \frac{\partial F^{3}}{\partial x_{1}} dx_{1} \wedge dx_{3} + \frac{\partial F^{3}}{\partial x_{2}} dx_{2} \wedge dx_{3} \\
+      &amp; = &amp;
+      \left( \frac{\partial F^{3}}{\partial x_{2}} - \frac{\partial F^{2}}{\partial x_{3}} \right) dx_{2} \wedge dx_{3} +
+      \left( \frac{\partial F^{1}}{\partial x_{3}} - \frac{\partial F^{3}}{\partial x_{1}} \right) dx_{3} \wedge dx_{1} +
+      \left( \frac{\partial F^{2}}{\partial x_{1}} - \frac{\partial F^{1}}{\partial x_{2}} \right) dx_{1} \wedge dx_{2} \\
+      &amp; = &amp;
+      \left(\nabla \times \Vector{F} \right)_{1} dx_{2} \wedge dx_{3} +
+      \left(\nabla \times \Vector{F} \right)_{2} dx_{3} \wedge dx_{1} +
+      \left(\nabla \times \Vector{F} \right)_{3} dx_{1} \wedge dx_{2} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now apply the result that we have already found for $2$-forms to show
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{M} d \omega &amp; = &amp; \int_{M} (\nabla \times \Vector{F}) \cdot d \Vector{A}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We have now reproduced Stokes' Theorem
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{S} (\nabla \times \Vector{F}) \cdot d \Vector{A} &amp; = &amp; \oint_{C} \Vector{F} \cdot d \Vector{X}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  </section>
+    <h3>Gauss's Theorem in $\RealField^3$</h3>
+    <p>
+      Let $\Vector{F}(\Vector{x}) = F^{i}(\Vector{x}) \Vector{e}_{i}$ be a vector field in three dimensions.
+    </p>
+    <p>
+      Consider the $2$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega
+      &amp; = &amp;
+      F^{1}(\Vector{x}) dx_{2} \wedge dx_{3} +
+      F^{2}(\Vector{x}) dx_{3} \wedge dx_{1} +
+      F^{3}(\Vector{x}) dx_{1} \wedge dx_{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We have already seen
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int_{\partial M} \omega &amp; = &amp; \int \Vector{F} \cdot d \Vector{S}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now compute
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d \omega
+      &amp; = &amp;
+      dF^{1} \wedge dx_{2} \wedge dx_{3} +
+      dF^{2} \wedge dx_{3} \wedge dx_{1} +
+      dF^{3} \wedge dx_{1} \wedge dx_{2} \\
+      &amp; = &amp;
+      \frac{\partial F^{1}}{\partial x_1} dx_{1} \wedge dx_{2} \wedge dx_{3} +
+      \frac{\partial F^{2}}{\partial x_2} dx_{2} \wedge dx_{3} \wedge dx_{1} +
+      \frac{\partial F^{3}}{\partial x_3} dx_{3} \wedge dx_{1} \wedge dx_{2} \\
+      &amp; = &amp;
+      (\nabla \cdot \Vector{F}) dx_{1} \wedge dx_{2} \wedge dx_{3}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now apply the result we have already found (TODO)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \int d \omega &amp; = &amp; \int_{V} (\nabla \cdot \Vector{F}) dV
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Which reproduces the divergence theorem of Gauss.
+    </p>
+  </section>
+  <section>
+    <h3>References</h3>
+    <p>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/diff-forms-kurt-bryan.pdf">
+              Differential Forms - Kurt Bryan
+            </a>
+          </p>
+          <p>
+            This is a gentle introduction that connects with vector analysis.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/diff-forms-schulz.pdf">
+              A Practical Introduction to Differential Forms - Alexia and William Schulz
+            </a>
+          </p>
+          <p>
+            An introduction for a mathematical physics class. This paper starts with a clear summary of conventions.
+          </p>
+        </li>
+      </ul>
     </p>
   </section>
 </article>
