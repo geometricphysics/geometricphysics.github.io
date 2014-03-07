@@ -39,7 +39,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Manifolds</h3>
     <p>
-      Let $\Vector{X}: \RealField^{k} \rightarrow \RealField^{n}$. i.e, $\Vector{X}$ is a function that maps a point $\Vector{u} = (u_1, u_2, \ldots, u_k)$ in a $k$-dimensional space to a point in an $n$-dimensional space.
+      Let $\Vector{X}: \RealField^{k} \rightarrow \RealField^{n}$. i.e, $\Vector{X}$ is a function that maps a point $\Vector{u} = (u^1, u^2, \ldots, u^k)$ in a $k$-dimensional space to a point in an $n$-dimensional space.
     </p>
     <p>
       A <em>$k$-manifold</em>, $M$, is the image, $\Vector{X}(D)$, in $\RealField^{n}$ of a bounded open region $D$ in $\RealField^{k}$.
@@ -52,7 +52,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       <ul>
         <li>The function $\Vector{X}$ is $C^1$.</li>
         <li>The function $\Vector{X}$ is injective (it maps distinct points to distinct points).</li>
-        <li>The tangent vectors $\partial \Vector{X}/ \partial u_1, \partial \Vector{X}/ \partial u_2, \ldots, \partial \Vector{X}/ \partial u_k$ are independent.</li>
+        <li>The tangent vectors $\partial \Vector{X}/ \partial u^1, \partial \Vector{X}/ \partial u^2, \ldots, \partial \Vector{X}/ \partial u^k$ are independent.</li>
       </ul>
     </p>
     <p>
@@ -70,12 +70,12 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      \omega &amp; = &amp; f(x_1, x_2, \ldots, x_n)
+      \omega &amp; = &amp; f(x^1, x^2, \ldots, x^n)
       \end{eqnarray}
       $
     </p>
     <p>
-      Recall that like $f$, the coordinate $x_i$ is a function on $\RealField^{n}$.
+      Recall that like $f$, the coordinate $x^i$ is a function on $\RealField^{n}$.
     </p>
     <p>
       A <em>general</em> 1-form $\omega$ is an expression like
@@ -83,7 +83,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      \omega &amp; = &amp; \sum_{i=1}^{n} F_{i}(\Vector{x}) dx_{i}
+      \omega &amp; = &amp; \sum_{i=1}^{n} F_{i}(\Vector{x}) dx^{i}
       \end{eqnarray}
       $
     </p>
@@ -93,7 +93,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      dx_{i}
+      dx^{i}
       \end{eqnarray}
       $
     </p>
@@ -101,14 +101,14 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       where $1 \le i \le n$.
     </p>
     <p>
-      The <em>basic</em> or <em>elementary</em> 1-form $dx_{i}$ is a function that acts on a single vector $\Vector{v}$ and outputs $v_{i}$, the $i$th component of $\Vector{v}$. 
+      The <em>basic</em> or <em>elementary</em> 1-form $dx^{i}$ is a function that acts on a single vector $\Vector{v}$ and outputs $v^{i}$, the $i$th component of $\Vector{v}$. 
     </p>
     <p>
       $
       \begin{eqnarray}
-      dx_{i}(\Vector{v})
+      dx^{i}(\Vector{v})
       &amp; = &amp;
-      v_{i}.
+      v^{i}.
       \end{eqnarray}
       $
     </p>
@@ -123,7 +123,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      dx_{i} \wedge dx_{j},
+      dx^{i} \wedge dx^{j},
       \end{eqnarray}
       $
     </p>
@@ -136,13 +136,13 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      dx_{i} \wedge dx_{j}(\Vector{v_1},\Vector{v_2})
+      dx^{i} \wedge dx^{j}(\Vector{u},\Vector{v})
       &amp; = &amp;
       \det
       \left[
         \begin{array}{cccccccc}
-            dx_{i}(\Vector{v_1}) &amp; dx_{i}(\Vector{v_2}) \\
-            dx_{j}(\Vector{v_1}) &amp; dx_{j}(\Vector{v_2})
+            dx^{i}(\Vector{u}) &amp; dx^{i}(\Vector{v}) \\
+            dx^{j}(\Vector{u}) &amp; dx^{j}(\Vector{v})
         \end{array}
       \right]
       \end{eqnarray}
@@ -160,7 +160,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      \omega &amp; = &amp; \sum_{1 \le i \lt j \le n}F_{ij}(\Vector{x}) dx_{i} \wedge dx_{j},
+      \omega &amp; = &amp; \sum_{1 \le i \lt j \le n}F_{ij}(\Vector{x}) dx^{i} \wedge dx^{j},
       \end{eqnarray}
       $
     </p>
@@ -202,7 +202,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       You can see that we are making use of the fact that a <em>general</em> $k$-form is a function. The interesting point to note is that we use the tangent vector as the argument to $\omega$ as the integrand.
     </p>
     <p>
-      The integral is straight-forward to evaluate by applying the action of the <em>elementary</em> $1$-form. The only thing to remember is that the coordinates $x_i$ that appear in the differential form are replaced by the parameters from the function $\Vector{X}(t) = \langle x_1(t), x_2(t), \ldots, x_n(t) \rangle$ that parameterizes the manifold.
+      The integral is straight-forward to evaluate by applying the action of the <em>elementary</em> $1$-form. The only thing to remember is that the coordinates $x^i$ that appear in the differential form are replaced by the parameters from the function $\Vector{X}(t) = \langle x^1(t), x^2(t), \ldots, x^n(t) \rangle$ that parameterizes the manifold.
     </p>
     <p>
       The integral of a $1$-form over a $1$-manifold has a connection to a line integral of a vector field for an appropriate $1$-form.
@@ -213,7 +213,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      \omega &amp; = &amp; \sum_{i = 1}^{n} F_{i} dx_{i} = F_1 dx_1 + F_2 dx_2 + \cdots + F_n dx_n.
+      \omega &amp; = &amp; \sum_{i = 1}^{n} F_{i} dx^{i} = F_1 dx^1 + F_2 dx^2 + \cdots + F_n dx^n.
       \end{eqnarray}
       $
     </p>
@@ -227,11 +227,11 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       &amp; = &amp;
       \int_{a}^{b} \omega(\frac{d \Vector{X}}{d t}) dt \\
       &amp; = &amp;
-      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} dx_{i}(\frac{d \Vector{X}}{d t}) dt \\
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} dx^{i}(\frac{d \Vector{X}}{d t}) dt \\
       &amp; = &amp;
-      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} \frac{d X_{i}}{d t} dt \\
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} \frac{d X^{i}}{d t} dt \\
       &amp; = &amp;
-      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} d X_{i} \\
+      \int_{a}^{b} \sum_{i = 1}^{n} F_{i} d X^{i} \\
       &amp; = &amp;
       \int_{M} \Vector{F} \cdot \Vector{dX}.
       \end{eqnarray}
@@ -245,7 +245,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \begin{eqnarray}
       \int_{M} \omega
       &amp; = &amp;
-      \int_{D} \omega(\frac{\partial \Vector{X}}{\partial u_1},\frac{\partial \Vector{X}}{\partial u_1}) du_1 du_2
+      \int_{D} \omega(\frac{\partial \Vector{X}}{\partial u^1},\frac{\partial \Vector{X}}{\partial u^2}) du^1 du^2
       \end{eqnarray}
       $
     </p>
@@ -258,7 +258,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      \omega &amp; = &amp; F_1 dx_2 \wedge dx_3 + F_2 dx_3 \wedge dx_1 + F_3 dx_1 \wedge dx_2.
+      \omega &amp; = &amp; F_1 dx^2 \wedge dx^3 + F_2 dx^3 \wedge dx^1 + F_3 dx^1 \wedge dx^2.
       \end{eqnarray}
       $
     </p>
@@ -270,7 +270,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \begin{eqnarray}
       d \Vector{A}
       &amp; = &amp;
-      \frac{\partial \Vector{X}}{\partial u_1} \times \frac{\partial \Vector{X}}{\partial u_2} du_1 du_2,
+      \frac{\partial \Vector{X}}{\partial u^1} \times \frac{\partial \Vector{X}}{\partial u^2} du^1 du^2,
       \end{eqnarray}
       $
     </p>
@@ -338,7 +338,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
           <p>
             $
             \begin{eqnarray}
-            df &amp; = &amp; \sum \frac{\partial f}{\partial x_i} dx_i
+            df &amp; = &amp; \sum \frac{\partial f}{\partial x^i} dx^i
             \end{eqnarray}
             $
           </p>
@@ -374,12 +374,12 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     <p>
       $
       \begin{eqnarray}
-      df &amp; = &amp; \sum_{i = 1}^{n} \frac{\partial f}{\partial x_i} dx_i
+      df &amp; = &amp; \sum_{i = 1}^{n} \frac{\partial f}{\partial x^i} dx^i
       \end{eqnarray}
       $
     </p>
     <p>
-      Clearly, we have created a $1$-form. That's the general rule. The <em>exterior derivative</em> $d$ is an operator that turns $k$-forms into $(k+1)$-forms. Notice that $df$ and $dx_{i}$ are the same kinds of objects since both $f$ and the coordinates $x_i$ are both functions on $\RealField^{n}$.
+      Clearly, we have created a $1$-form. That's the general rule. The <em>exterior derivative</em> $d$ is an operator that turns $k$-forms into $(k+1)$-forms. Notice that $df$ and $dx^{i}$ are the same kinds of objects since both $f$ and the coordinates $x^i$ are both functions on $\RealField^{n}$.
     </p>
     <p>
       The exterior drivative of the $k$-form
@@ -389,7 +389,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \begin{eqnarray}
       \omega
       &amp; = &amp;
-      \sum_{i_1, i_2, \ldots, i_k} F_{i_1, i_2, \ldots, i_k} dx_{i_1} \wedge dx_{i_2} \wedge \cdots \wedge dx_{i_k}
+      \sum_{i_1, i_2, \ldots, i_k} F_{i_1, i_2, \ldots, i_k} dx^{i_1} \wedge dx^{i_2} \wedge \cdots \wedge dx^{i_k}
       \end{eqnarray}
       $
     </p>
@@ -401,7 +401,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \begin{eqnarray}
       d \omega
       &amp; = &amp;
-      \sum_{i_1, i_2, \ldots, i_k} d F_{i_1, i_2, \ldots, i_k} \wedge dx_{i_1} \wedge dx_{i_2} \wedge \cdots \wedge dx_{i_k}
+      \sum_{i_1, i_2, \ldots, i_k} d F_{i_1, i_2, \ldots, i_k} \wedge dx^{i_1} \wedge dx^{i_2} \wedge \cdots \wedge dx^{i_k}
       \end{eqnarray}
       $
     </p>
@@ -418,9 +418,14 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>The Poincar&#233; Lemma ($dd \omega = 0$) and its Converse</h3>
     <p>
+      If $\omega$ is a differential form then $dd \omega = 0$. This follows from the equality of mixed partial derivatives.
     </p>
     <p>
+      The converse of the Poincar&#233; Lemma says that if $\omega \in \Lambda^r(K)$ is a differential form and $K$ is <em>simply connected</em> and $d \omega = 0$ then there exists $\alpha \in \Lambda^{r-1}(K)$ for which $d \alpha = \omega$.
     </p>
+  </section>
+  <section>
+    <h3>Theorems of Vector Analysis from the converse of the Poincar&#233; Lemma</h3>
   </section>
   <section>
     <h3>Generalized Stoke's Theorem (The Boundary Theorem?)</h3>
