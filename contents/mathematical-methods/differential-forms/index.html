@@ -7,22 +7,32 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Introduction</h3>
     <p>
-      Differential geometry appears to be "isomorphic" to Geometric algebra. The correspondence is between the reciprocal vectors $e^i$ and the elementary differential $1$-forms $du^i$. The differential $1$-forms are considered to be linear functionals on the vector space $V$ and occupying the dual space $V^*$. So differential forms occupy a space that is distinct from the vectors. This makes them a bit different from the reciprocal vectors which share the same vector space. From a correspondence standpoint, we can make the association
+      Differential geometry appears to be "isomorphic" to Geometric algebra. The correspondence is between the dual basis vectors (reciprocal vectors) $\Vector{e}^i$ and the elementary differential $1$-forms $dx^i$. The differential $1$-forms are considered to be linear functionals on the vector space $V$ and occupying the dual space $V^*$. So differential forms occupy a space that is distinct from the vectors. This makes them a bit different from the reciprocal vectors which share the same vector space. From a correspondence standpoint, we can make the association
     </p>
     <p>
       $
       \begin{eqnarray}
-      du^i(v) &amp; = &amp; e^i(v) &amp; = &amp; v^i
+      dx^i &amp; \leftrightarrow &amp; \Vector{e}^i
       \end{eqnarray}
       $
     </p>
     <p>
-      However, Geometric Algebra tries to achieve the same result by using the defining property of the reciprocal frame $\{e^k \}$
+      This suggests that we should also extend the action of the elementary differentials on vectors to the dual basis vectors
     </p>
     <p>
       $
       \begin{eqnarray}
-      e^i \cdot e_j &amp; = &amp; \delta^i_j
+      dx^i(\Vector{v}) &amp; = &amp; \Vector{e}^i(\Vector{v}) = v^i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      However, Geometric Algebra tries to achieve the same result by using the defining property of the dual basis vectors (reciprocal frame) $\{\Vector{e}^k \}$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{e}^i \cdot \Vector{e}_j &amp; = &amp; \delta^i_j
       \end{eqnarray}
       $
     </p>
@@ -65,7 +75,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Differential Forms</h3>
     <p>
-      A <em>general</em> $0$-form $\omega$ is an expression like
+      A <em>general</em> differential $0$-form $\omega$ on $\RealField^n$ is an expression like
     </p>
     <p>
       $
@@ -78,12 +88,22 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       Recall that like $f$, the coordinate $x^i$ is a function on $\RealField^{n}$.
     </p>
     <p>
-      A <em>general</em> 1-form $\omega$ is an expression like
+      A <em>general</em> differential $1$-form $\omega$ is an expression like
     </p>
     <p>
       $
       \begin{eqnarray}
       \omega &amp; = &amp; \sum_{i=1}^{n} F_{i}(\Vector{x}) dx^{i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In geometric algebra terms, a <em>general</em> differential $1$-form is a linear combination of dual basis vectors, and is therefore vector-valued.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega &amp; = &amp; \sum_{i=1}^{n} F_{i}(\Vector{x}) \Vector{e}^{i}
       \end{eqnarray}
       $
     </p>
@@ -186,7 +206,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       When we integrate a $k$-form, we do so over a $k$-manifold.
     </p>
     <p>
-      Let's integrate a $1$-form over a $1$-manifold. Suppose $M = \Vector{X}(t)$ over the domain $a \le t \le b$, is a smooth $1$-manifold in $\RealField^{n}$.
+      Let's integrate a $1$-form over a $1$-manifold. Suppose $M = \Vector{X}(t)$ over the domain $a \le t \le b$, is a smooth $1$-manifold in $\RealField^{n}$. $1$-forms are naturally integrated along a curve. This requires a vector. The vector defined for a <b>parametric curve</b> $\Vector{X}(t) : [a,b] \rightarrow V$ is the tangent vector $\frac{d \Vector{X}}{d t}$. The domain is not just a set of points. It is a trajectory of a particle travelling along the curve. We wavt to assume that the particle travels without stopping, so the tangent vector is never zero. The tangent vector then gives a direction to the curve called the <b>orientation</b>. The pairing of the $1$-form $\omega \in \Lambda^1(V^*)$ with the tangent vector $\frac{d \Vector{X}}{d t} \in \Lambda^1(V)$ produces a scalar.
     </p>
     <p>
       We define the integral of the $1$-form $\omega$ over the manifold $M$ as
@@ -199,7 +219,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       $
     </p>
     <p>
-      You can see that we are making use of the fact that a <em>general</em> $k$-form is a function. The interesting point to note is that we use the tangent vector as the argument to $\omega$ as the integrand.
+      You can see that we are making use of the fact that a <em>general</em> $k$-form is a function. The interesting point to note is that we use the tangent vector as the argument to $\omega$ as the integrand. The left hand side is the integration of the $1$-form $\omega$ over a curve in $M$. The right hand side is an integral of a scalar function over the real line. This is an example of <b>pullback</b>.
     </p>
     <p>
       The integral is straight-forward to evaluate by applying the action of the <em>elementary</em> $1$-form. The only thing to remember is that the coordinates $x^i$ that appear in the differential form are replaced by the parameters from the function $\Vector{X}(t) = \langle x^1(t), x^2(t), \ldots, x^n(t) \rangle$ that parameterizes the manifold.
@@ -216,6 +236,9 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \omega &amp; = &amp; \sum_{i = 1}^{n} F_{i} dx^{i} = F_1 dx^1 + F_2 dx^2 + \cdots + F_n dx^n.
       \end{eqnarray}
       $
+    </p>
+    <p>
+      We should regard a Newtonian force $F$ as a $1$-form. The integral of $F$ over a curve is the work done. This means that the force $1$-form plays the role of a density being energy per unit length.
     </p>
     <p>
       Then
@@ -285,6 +308,9 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \int_{M} \Vector{F} \cdot \Vector{dA}.
       \end{eqnarray}
       $
+    </p>
+    <p>
+      The integral of the $2$-form over a surface can be interpreted as a flux.
     </p>
   </section>
   <section>
@@ -407,21 +433,45 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
   </section>
   <section>
-    <h3>grad, div and curl</h3>
+    <h3>grad, curl and div</h3>
     <p>
       We can demonstrate how the three vector operators occur naturally in differential forms.
     </p>
     <p>
       We simply compute the exterior derivative of the coefficients and wedge them with the corresponding elementary forms. Just apply $d$ to a $0$-form, $1$-form, and $2$-form. Recall that $d$ applied to a $3$-form is zero.
     </p>
+    <p>
+      <b>grad</b> shows up in the operator $d$ acting on a $0$-form.
+    </p>
+    <p>
+      <b>curl</b> shows up in the operator $d$ acting on a $1$-form.
+    </p>
+    <p>
+      <b>div</b> shows up in the operator $d$ acting on a $2$-form.
+    </p>
+    <p>
+      In three dimensions, the operator $d$ acting on a $3$-form is zero.
+    </p>
   </section>
   <section>
-    <h3>The Poincar&#233; Lemma ($dd \omega = 0$) and its Converse</h3>
+    <h3>The Poincar&#233; Lemma ($dd = 0$) and its Converse</h3>
     <p>
-      If $\omega$ is a differential form then $dd \omega = 0$. This follows from the equality of mixed partial derivatives.
+      If $\omega$ is a differential form then $dd \omega = 0$. This follows from the equality of mixed partial derivatives. In terms of standard vector analysis notation
+    </p>
+    <p>
+      $d(df) = 0 \leftrightarrow \curl{(\gradient{f})}$
+    </p>
+    <p>
+      $d(d \omega) = 0 \leftrightarrow \divergence{(\curl{\Vector{v}})}$
     </p>
     <p>
       The converse of the Poincar&#233; Lemma says that if $\omega \in \Lambda^r(K)$ is a differential form and $K$ is <em>simply connected</em> and $d \omega = 0$ then there exists $\alpha \in \Lambda^{r-1}(K)$ for which $d \alpha = \omega$.
+    </p>
+  </section>
+  <section>
+    <h3>Exactness</h3>
+    <p>
+      A differential $\omega$ is said to be <em>exact</em> if one can find a $C^2$ function $f(\Vector{x})$ with $df = \omega$.
     </p>
   </section>
   <section>
@@ -589,6 +639,134 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
   </section>
   <section>
+    <h3>Hodge star operator</h3>
+    <p>
+      We currently only discuss duality for $\RealField^3$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      *(dx) &amp; = &amp; dy \wedge dz
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      *(dy) &amp; = &amp; dz \wedge dx
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      *(dz) &amp; = &amp; dx \wedge dy
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      * (dy \wedge dz) &amp; = &amp; dx
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      * (dz \wedge dx) &amp; = &amp; dy
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      * (dx \wedge dy) &amp; = &amp; dy
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Maxwell's equations in Spacetime</h3>
+    <p>
+      We treat the electric $\Vector{E} = E_1 \Vector{i} + E_2 \Vector{j} + E_3 \Vector{k}$ and magnetic $\Vector{B} = B_1 \Vector{i} + B_2 \Vector{j} + B_3 \Vector{k}$ fields as parts of a single field on space-time. The electromagmetic field is represented by a $2$-form
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      F &amp; = &amp;
+      B_3 dx \wedge dy + B_1 dy \wedge dz + B_2 dz \wedge dx +
+      E_1 dx \wedge dt + E_2 dy \wedge dt + E_3 dz \wedge dt
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The dual of F is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      *F &amp; = &amp;
+      E_3 dx \wedge dy + E_1 dy \wedge dz + E_2 dz \wedge dx -
+      B_1 dx \wedge dt - B_2 dy \wedge dt + B_3 dz \wedge dt
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Notice how the electric and magnetic fields changed signs in different ways under duality.
+    </p>
+    <p>
+      If we now examine $dF = 0$, and assume that the four (4) trivectors are non-zero we get
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \divergence{\Vector{B}} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \curl{\Vector{E}} &amp;= &amp; - \frac{\partial \Vector{B}}{\partial t}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      It's interesting that both of these equations don't involve sources. Since $dF = 0$, there exists a $1$-form  from which $F$ is derived by the exterior derivative
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      F &amp;= &amp; d(A_1 dx + A_2 dy + A_3 dz + A_4 dt)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Expanding the right hand side and comparing to the initial expression for $F$ reproduces the expected equations for $\Vector{B}$ and $\Vector{E}$ in terms of $\Vector{A}$ and $\varphi$.
+    </p>
+    <p>
+      This provides an interesting starting point using $dd = 0$, which is a purely geometric statement. The $1$-form, derived from the magnetic vector potential and the spacetime dual basis vectors generates two of Maxwell's source free equations.
+    </p>
+    <p>
+      If we compute $d*F$ then we are going to get linear combinations of trivectors again. So, in order to reproduce Maxwell's other two equations, Gauss's Law and Amp&#232;re's Law, we are going to need a four-current that is a linear combination of trivectors (module constants)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      J &amp;= &amp;
+       \rho dx \wedge dy \wedge dz
+      - J_3 dx \wedge dy \wedge dt
+      - J_1 dy \wedge dz \wedge dt
+      - J_2 dz \wedge dx \wedge dt
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Since $dd = 0$ we must have $dd*F = dJ = 0$. This reproduces the continuity equation assuming that the pseudoscalar is non-zero.
+    </p>
+  </section>
+  <section>
     <h3>References</h3>
     <p>
       <ul class="nav nav-pills nav-stacked">
@@ -599,7 +777,27 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
             </a>
           </p>
           <p>
-            This is a gentle introduction that connects with vector analysis.
+            A good place to start. A gentle introduction that connects with vector analysis.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/diff-forms-donu-arapura.pdf">
+              Donu Arapura. Introduction to Differential Forms. May 27, 2012
+            </a>
+          </p>
+          <p>
+            Not reviewed yet.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/diff-forms-lessig.pdf">
+              A Primer on Differential Forms - Christian Lessig
+            </a>
+          </p>
+          <p>
+            Lightweight, but introduction to pullback and charts.
           </p>
         </li>
         <li>
@@ -609,7 +807,27 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
             </a>
           </p>
           <p>
-            An introduction for a mathematical physics class. This paper starts with a clear summary of conventions.
+            An introduction for a mathematical physics class. This paper starts with a clear summary of conventions. The coverage is quite comprehensive. Still seems to be missing proof of generalized Stokes' theorem.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/manifolds-sjamaar.pdf">
+              Manifolds and Differential Forms - Reyer Sjamaar
+            </a>
+          </p>
+          <p>
+            Mathematical. Manifolds explained. Proofs of Differential Geometry.
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/mathematical-methods/differential-forms/diff-forms-emberton.pdf">
+              Emberton Jonathon. An elucidation of Vector Calculus through Differential Forms. August 22, 2008
+            </a>
+          </p>
+          <p>
+            Not reviewed yet. Introduction. Mathematical.
           </p>
         </li>
       </ul>

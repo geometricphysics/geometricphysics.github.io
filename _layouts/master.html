@@ -85,8 +85,11 @@
             CliffordConjugate:  ["{\\bar{#1}}", 1],
             Complex:            ["{\\mathbb{C}}",0],
             ComplexConjugate:   ["{#1}^{*}", 1],
+            curl:               ["{\\nabla \\times {#1}}", 1],
+            divergence:         ["{\\nabla \\cdot {#1}}", 1],
             Dual:               ["{#1}^{*}", 1],
             Field:              ["{\\mathbb{#1}}", 1],
+            gradient:           ["{\\nabla{#1}}", 1],
             GradeInvolute:      ["{\\hat{#1}}", 1],
             HermitianConjugate: ["{#1}^{\\dagger}", 1],
             Integer:            ["{\\mathbb{Z}}", 0],
@@ -103,7 +106,7 @@
             ScalarProduct:      ["\\langle #1 , #2 \\rangle", 2],
             Tensor:             ["{\\mathbf{\\mathsf{#1}}}", 1],
             Transpose:          ["{#1}^{T}", 1],
-            Vector:             ["{#1}", 1]
+            Vector:             ["{\\mathbf{#1}}", 1]
           }
         },
         tex2jax: {
