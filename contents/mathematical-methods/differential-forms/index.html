@@ -7,6 +7,12 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Introduction</h3>
     <p>
+      Warning: This treatment of differntial forms is a work in progress!
+    </p>
+    <p>
+      This initial approach was based on coordinates. The goals are (1) to make contact with geometric algebra, (2) to use geometric objects (coordinate-free) as much as possible and to provide coordinate representations (3) to provide pictorial interpretations. Note that geometric algebra texts consider the algebra to be the <em>maths</em> and the geometry to be the interpretation.
+    </p>
+    <p>
       Differential geometry appears to be "isomorphic" to Geometric algebra. The correspondence is between the dual basis vectors (reciprocal vectors) $\Vector{e}^i$ and the elementary differential $1$-forms $dx^i$. The differential $1$-forms are considered to be linear functionals on the vector space $V$ and occupying the dual space $V^*$. So differential forms occupy a space that is distinct from the vectors. This makes them a bit different from the reciprocal vectors which share the same vector space. From a correspondence standpoint, we can make the association
     </p>
     <p>
@@ -47,6 +53,30 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
   </section>
   <section>
+    <h3>Vectors</h3>
+    <p>
+      Vectors can be defined in a number of ways. The introductory appraoch is an oriented directed line segment joining two points. The more sophisticated approach is as the tangent vector to a curve (a parameterized set of points).
+    </p>
+  </section>
+    <h3>The Metric Tensor</h3>
+    <p>
+      The metric tensor is a machine for computing a real number from two vectors. It is linear and symmetric in the vectors inserted. Because it is linear, if we know what it computes for a given basis, then we can compute the output for any input.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Tensor{g}(\Vector{u},\Vector{v})
+      &amp; = &amp;
+      g(u^{\mu}\Vector{e}_{\mu},v^{\nu}\Vector{e}_{\nu}) \\
+      &amp; = &amp;
+      u^{\mu} v^{\nu} \Tensor{g}(\Vector{e}_{\mu},\Vector{e}_{\nu}) \\
+      &amp; = &amp;
+      g_{\mu \nu} u^{\mu} v^{\nu}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
     <h3>Manifolds</h3>
     <p>
       Let $\Vector{X}: \RealField^{k} \rightarrow \RealField^{n}$. i.e, $\Vector{X}$ is a function that maps a point $\Vector{u} = (u^1, u^2, \ldots, u^k)$ in a $k$-dimensional space to a point in an $n$-dimensional space.
@@ -73,7 +103,40 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
   </section>
   <section>
-    <h3>Differential Forms</h3>
+    <h3>Differential Forms (Geometric Approach)</h3>
+    <p>
+      We start by introducing a $1$-form as a machine that acts on a vector.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \omega(\Vector{v}) &amp; = &amp; \langle \omega, \Vector{v} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We imagine a $1$-form $\omega$ pictorially as a sequence of (hyper)planes of constant value. When $\omega$ acts on a vector it pierces the hyperplanes. The result is the change in value from the tail of the vector to the head.
+    </p>
+    <p>
+      Every $1$-form has a corresponding unique vector and every vector has a corresponding unique $1$-form.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\Inverse{\Phi}(\omega)) \cdot \Vector{v} &amp; = &amp; \langle \omega, \Vector{v} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{u} \cdot \Vector{v} &amp; = &amp; \langle \Phi(\Vector{u}), \Vector{v} \rangle
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Differential Forms (Coordinate Approach)</h3>
     <p>
       A <em>general</em> differential $0$-form $\omega$ on $\RealField^n$ is an expression like
     </p>
@@ -648,6 +711,16 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
     <p>
       Which reproduces the divergence theorem of Gauss.
+    </p>
+  </section>
+  </section>
+    <h3>Curvilinear Coordinates</h3>
+    <p>
+    </p>
+  </section>
+  </section>
+    <h3>The operator $\Phi : V \rightarrow \Dual{V}$</h3>
+    <p>
     </p>
   </section>
   <section>

@@ -47,7 +47,7 @@ title: Geometric Physics • Spacetime • Momentum and Mass
     <p>
       $
       \begin{eqnarray}
-      P &amp; = &amp; m \, U = \gamma(u) (m \Vector{u}, m) = (\Vector{p}, \gamma(u) \, m)
+      P &amp; = &amp; m \, U = \gamma(u) (m, m \Vector{u}) = (E, \Vector{p})
       \end{eqnarray}
       $
     </p>
@@ -98,6 +98,65 @@ title: Geometric Physics • Spacetime • Momentum and Mass
     </p>
     <p>
       We also have the scalar invariant $E^2 - (\Vector{p} c)^2 = m^2 c^4$.
+    </p>
+  </section>
+  <section>
+    <h3>Energy and Velocity from 4-Momentum</h3>
+    <p>
+      Consider a particle of rest mass $m$ and 4-momentum $P = (E(\Vector{v}), \Vector{p}) = \gamma(\Vector{v})m(1,\Vector{v})$. The observer has a 4-velocity $U = \gamma(\Vector{u})(1, \Vector{u})$. Using the metric $(+1,-1,-1,-1)$, we find the following invariants
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      U \cdot U &amp; = &amp; 1
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      P \cdot P &amp; = &amp; E^2 - (\Vector{p})^2 = m^2
+      \end{eqnarray}
+      $
+      (by going to rest frame of particle)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      U \cdot P &amp; = &amp; m \gamma(\Vector{u}) \gamma(\Vector{v}) (1 - \Vector{u} \cdot \Vector{v}) = E(\Vector{v})
+      \end{eqnarray}
+      $
+      (by going to the observer frame) where $E(\Vector{v})$ is the energy of the particle as measured by the observer.
+    </p>
+    <p>
+      The magnitude of the particle momentum measured by the observer is 
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Norm{\Vector{p}} &amp; = &amp; [E^2 - P \cdot P]^\frac{1}{2} = [(U \cdot P)^2 - P \cdot P]^\frac{1}{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The ordinary velocity is related to the ordinary momentum
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{p} &amp; = &amp; \gamma(\Vector{v}) m \Vector{v} = E(\Vector{v}) \Vector{v}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      There exists a 4-velocity $V$ in which the components measured by the observer are $(0, \Vector{v})$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{P}{P \cdot U} - U &amp; = &amp; (1, \Vector{v}) - (1, \Vector{0}) = (0, \Vector{v})
+      \end{eqnarray}
+      $
     </p>
   </section>
 </article>
