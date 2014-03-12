@@ -926,14 +926,15 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Lorentz Force Law (Geometric)</h3>
     <p>
-      We want to find a manifestly geometric version of the Lorentz Force Law
+      We want to find a manifestly geometric version of the <b>Lorentz Force Law</b> for a particle of charge $q$
     </p>
     <p>
       $
       \begin{eqnarray}
       \frac{d \Vector{p}}{d t}
       &amp;= &amp;
-      e (\Vector{E} + \Vector{v} \times \Vector{B})
+      q (\Vector{E} + \Vector{v} \times \Vector{B})
+      \label{LorentzForceLaw}
       \end{eqnarray}
       $
     </p>
@@ -941,19 +942,20 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       Note that this equation is exact in the sense that it is not a low-velocity approximation to a more general formula.
     </p>
     <p>
-      For the left hand side we want to use the 4-momentum $\geometric{p} = (E, \Vector{p})$. This alerts us that we also need the vector equation that determines $p^{0}$
+      For the left hand side of $\ref{LorentzForceLaw}$ we want to use the 4-momentum $\geometric{p} = (E, \Vector{p})$. This alerts us that we also need the <b>Power Law</b> vector equation that determines $p^{0} = E$
     </p>
     <p>
       $
       \begin{eqnarray}
       \frac{d E}{d t}
       &amp;= &amp;
-      e (\Vector{E} \cdot \Vector{v})
+      q (\Vector{E} \cdot \Vector{v})
+      \label{PowerLaw}
       \end{eqnarray}
       $
     </p>
     <p>
-      We can now combine these two equations using our notation for 4-vectors
+      We can now combine $\ref{LorentzForceLaw}$ and $\ref{PowerLaw}$ using our notation for 4-vectors
     </p>
     <p>
       $
@@ -962,7 +964,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       &amp;= &amp;
       \frac{d (E, \Vector{p})}{d t}
       &amp;= &amp;
-      e (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
+      q (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
       \end{eqnarray}
       $
     </p>
@@ -986,24 +988,25 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
       \begin{eqnarray}
       \frac{d \geometric{p}}{d \tau}
       &amp;= &amp;
-      e \, \gamma(\Vector{v}) (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
+      q \, \gamma(\Vector{v}) (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
       \end{eqnarray}
       $
     </p>
     <p>
-      On the right hand side we want to introduce the 4-velocity $\geometric{v} = \gamma(\Vector{v}) (1, \Vector{v})$. We now notice that the right is linear in $\geometric{V}$, so we introduce a new geometric quantity $\geometric{F} = \geometric{Faraday}$ that takes the 4-velocity and returns a 4-vector
+      On the right hand side we want to introduce the 4-velocity $\geometric{v} = \gamma(\Vector{v}) (1, \Vector{v})$. We now notice that the right is linear in $\geometric{v}$, so we introduce a new geometric quantity $\geometric{F} = \geometric{Faraday}$ that takes the 4-velocity $\geometric{v}$ and returns a 4-vector
     </p>
     <p>
       $
       \begin{eqnarray}
       \frac{d \geometric{p}}{d \tau}
       &amp;= &amp;
-      e \geometric{F}(\geometric{v})
+      q \geometric{F}(\geometric{v})
+      \label{GeometricLorentzForceLaw}
       \end{eqnarray}
       $
     </p>
     <p>
-      We can now deduce the components of $\geometric{F}$ by comparing
+      We can now deduce the components of $\geometric{F}$ by comparing the spacetime geometric Lorentz Force Law $\ref{GeometricLorentzForceLaw}$ to the $3+1$ Lorentz Force Law $\ref{LorentzForceLaw}$
     </p>
     <p>
       $
@@ -1018,7 +1021,8 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
         \end{array}
       \right]
       &amp;= &amp;
-      e [\geometric{F}]
+      q
+      [\geometric{F}]
       \left[
         \begin{array}{cc}
             1 \\
@@ -1028,7 +1032,7 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
         \end{array}
       \right]
       &amp;= &amp;
-      e
+      q
       \left[
         \begin{array}{cccccccc}
             0   &amp;  E_x &amp; E_y  &amp;  E_z \\

@@ -9,9 +9,6 @@ title: Geometric Physics • Electrodynamics • Schwartz
     <p>
       We start by considering rotations and translations in 3D euclidean space.
     </p>
-    <p>
-      We start by considering rotations and translations in 3D euclidean space.
-    </p>
   </section>
   <section>
     <h3>Spacetime Tensors and Transformations</h3>
@@ -22,7 +19,7 @@ title: Geometric Physics • Electrodynamics • Schwartz
   <section>
     <h3>Four-Current</h3>
     <p>
-      We want charge to be conserved. Let $\Vector{j(\Vector{x},t)}$ be the flux of charge per unit area and $\rho(\Vector{x},t)$ the charge density. The total charge $Q$ inside a volume $V$ is
+      We want charge to be conserved. Let $\Vector{j}(\Vector{x},t)$ be the flux of charge per unit area and $\rho(\Vector{x},t)$ the charge density. The total charge $Q$ inside a volume $V$ is
     </p>
     <p>
       $
@@ -52,12 +49,12 @@ title: Geometric Physics • Electrodynamics • Schwartz
       $
     </p>
     <p>
-      We know that the divergence of a four-vector is a scalar, and so the four-current $J$ must be
+      We know that the divergence of a four-vector is a scalar, and so the four-current $\geometric{J}$ must be
     </p>
     <p>
       $
       \begin{eqnarray}
-      J &amp; = &amp; (\Vector{j}, \rho).
+      \geometric{J} &amp; = &amp; (\rho, \Vector{j}).
       \end{eqnarray}
       $
     </p>
@@ -72,10 +69,10 @@ title: Geometric Physics • Electrodynamics • Schwartz
       We also must be careful to ensure that any analysis we do that uses what we know about electrostatics happens in an environment where the charge density and current are not changing with time.
     </p>
     <p>
-      The derivation of Maxwell's equations proceeds by generalizing electrostatics into a Lorentz-covariant form. We start with Poisson's equation and infer the existence of a four-vector potential. We can solve the d'Alembertian equations to find retarded potentials for $\psi$ and $\Vector{A}$. In order to connect $\Vector{E}$ to $\Vector{A}$ we construct an antisymmetric second-rank tensor $F$ enabling us to generalize the expression for $\Vector{E}$. We define $\Vector{B} = \nabla \times \Vector{A}$. Extracting Maxwell's equations is then a matter of expansion.
+      The derivation of Maxwell's equations proceeds by generalizing electrostatics into a Lorentz-covariant form. We start with Poisson's equation and infer the existence of a four-vector potential. We can solve the d'Alembertian equations to find retarded potentials for $\psi$ and $\Vector{A}$. In order to connect $\Vector{E}$ to $\Vector{A}$ we construct an antisymmetric second-rank tensor $\geometric{F} = \geometric{Faraday}$ enabling us to generalize the expression for $\Vector{E}$. We define $\Vector{B} = \nabla \times \Vector{A}$. Extracting Maxwell's equations is then a matter of expansion.
     </p>
     <p>
-      We find that to write Maxwell's equations in compact tensor form requires two equations and two antisymmetric tensors $F$ and $G$.
+      We find that to write Maxwell's equations in compact tensor form requires two equations and two antisymmetric tensors $\geometric{F}$ and $\geometric{G}$.
     </p>
     <p>
       The Lorenz Force Law is also derivable by transforming the electrostatic force law from the rest frame of the charged particle to one where the particle is moving.
