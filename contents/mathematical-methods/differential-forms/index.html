@@ -105,32 +105,104 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
   <section>
     <h3>Differential Forms (Geometric Approach)</h3>
     <p>
-      We start by introducing a $1$-form as a machine that acts on a vector.
+      We start by introducing a $1$-form as a machine that acts on a vector to produce a real number. The action of a $1$-form $\omega$ on a vector $\Vector{v}$ is given by
     </p>
     <p>
       $
       \begin{eqnarray}
-      \omega(\Vector{v}) &amp; = &amp; \langle \omega, \Vector{v} \rangle
+      \omega(\Vector{v})
+      &amp; = &amp;
+      \langle \omega, \Vector{v} \rangle
       \end{eqnarray}
       $
     </p>
     <p>
-      We imagine a $1$-form $\omega$ pictorially as a sequence of (hyper)planes of constant value. When $\omega$ acts on a vector it pierces the hyperplanes. The result is the change in value from the tail of the vector to the head.
-    </p>
-    <p>
-      Every $1$-form has a corresponding unique vector and every vector has a corresponding unique $1$-form.
+      This machine is linear in the input vector
     </p>
     <p>
       $
       \begin{eqnarray}
-      (\Inverse{\Phi}(\omega)) \cdot \Vector{v} &amp; = &amp; \langle \omega, \Vector{v} \rangle
+      \langle \omega, a\Vector{u} + b\Vector{v} \rangle
+      &amp; = &amp;
+      a \langle \omega, \Vector{u} \rangle + b \langle \omega, \Vector{v} \rangle
       \end{eqnarray}
       $
     </p>
     <p>
+      $1$-forms can also be added
+    </p>
+    <p>
       $
       \begin{eqnarray}
-      \Vector{u} \cdot \Vector{v} &amp; = &amp; \langle \Phi(\Vector{u}), \Vector{v} \rangle
+      \langle a \alpha + b \beta, \Vector{v} \rangle
+      &amp; = &amp;
+      a \langle \alpha, \Vector{v} \rangle + b \langle \beta, \Vector{v} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We imagine a $1$-form $\omega$ pictorially as a sequence of hyperplanes of constant value. When $\omega$ acts on a vector, the vector pierces the hyperplanes. The result is the change in value from the tail of the vector to the head.
+    </p>
+    <p>
+    </p>
+  </section>
+  <section>
+    <h3>Gradient and Directional Derivative</h3>
+    <p>
+      Consider a scalar field $f(\Vector{x})$. Define the <b>gradient of $f$</b>, $\form{d} f$, to provide the first order approximation to $f$ in the neighborhood of $\Vector{x}_0$ via the Taylor expansion
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f(\Vector{x})
+      &amp; = &amp;
+      f(\Vector{x}_0) + \langle \form{d} f, \Vector{x} - \Vector{x}_0 \rangle + \cdots
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now define the <b>directional derivative of $f$</b> as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_{\Vector{a}} f (\Vector{x}_0)
+      &amp; = &amp;
+      (\Vector{a} * \partial_{\Vector{x}}) f (\Vector{x}_0)
+      &amp; = &amp;
+      \lim_{\lambda \rightarrow 0} \frac{f(\Vector{x}_0 + \lambda \Vector{a}) - f(\Vector{x}_0)}{\lambda}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now relate the directional derivative to the gradient as follows
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \partial_{\Vector{a}} f (\Vector{x}_0)
+      &amp; = &amp;
+      (\Vector{a} * \partial_{\Vector{x}}) f (\Vector{x}_0)
+      &amp; = &amp;
+      \lim_{\lambda \rightarrow 0} \frac{\langle \form{d} f, \lambda \Vector{a} \rangle}{\lambda}
+      &amp; = &amp;
+      \langle \form{d} f, \Vector{a} \rangle
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We conclude that the gradient of $f$, $\form{d} f$, is a linear machine for computing the rate of change of $f$ along any desired vector.
+    </p>
+  </section>
+  <section>
+    <h3>Coordinate Representation of Geometric Objects</h3>
+    <p>
+      Recall that coordinates $x^{\mu}(\Vector{x})$ are functions of position $\Vector{x}$. This means that we can calculate their gradient and the result is a $1$-form.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \form{d} x^{\mu} = \form{e}^{\mu}
       \end{eqnarray}
       $
     </p>
@@ -849,6 +921,132 @@ title: Geometric Physics • Mathematical Methods • Differential Forms
     </p>
     <p>
       Since $dd = 0$ we must have $dd*F = dJ = 0$. This reproduces the continuity equation assuming that the pseudoscalar is non-zero.
+    </p>
+  </section>
+  <section>
+    <h3>Lorentz Force Law (Geometric)</h3>
+    <p>
+      We want to find a manifestly geometric version of the Lorentz Force Law
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \Vector{p}}{d t}
+      &amp;= &amp;
+      e (\Vector{E} + \Vector{v} \times \Vector{B})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Note that this equation is exact in the sense that it is not a low-velocity approximation to a more general formula.
+    </p>
+    <p>
+      For the left hand side we want to use the 4-momentum $\geometric{p} = (E, \Vector{p})$. This alerts us that we also need the vector equation that determines $p^{0}$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d E}{d t}
+      &amp;= &amp;
+      e (\Vector{E} \cdot \Vector{v})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now combine these two equations using our notation for 4-vectors
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \geometric{p}}{d t}
+      &amp;= &amp;
+      \frac{d (E, \Vector{p})}{d t}
+      &amp;= &amp;
+      e (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Instead of the observer coordinate time $t$, we should use the <b>proper time</b> $\geometric{\tau}$ of the particle, where
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d t
+      &amp;= &amp;
+      \gamma (\Vector{v}) d \tau
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Making the proper time substitution, we now have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \geometric{p}}{d \tau}
+      &amp;= &amp;
+      e \, \gamma(\Vector{v}) (\Vector{E} \cdot \Vector{v} , \Vector{E} + \Vector{v} \times \Vector{B})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      On the right hand side we want to introduce the 4-velocity $\geometric{v} = \gamma(\Vector{v}) (1, \Vector{v})$. We now notice that the right is linear in $\geometric{V}$, so we introduce a new geometric quantity $\geometric{F} = \geometric{Faraday}$ that takes the 4-velocity and returns a 4-vector
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \geometric{p}}{d \tau}
+      &amp;= &amp;
+      e \geometric{F}(\geometric{v})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now deduce the components of $\geometric{F}$ by comparing
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d}{d t}
+      \left[
+        \begin{array}{cc}
+            E \\
+            p_x \\
+            p_y \\
+            p_z
+        \end{array}
+      \right]
+      &amp;= &amp;
+      e [\geometric{F}]
+      \left[
+        \begin{array}{cc}
+            1 \\
+            v_x \\
+            v_y \\
+            v_z
+        \end{array}
+      \right]
+      &amp;= &amp;
+      e
+      \left[
+        \begin{array}{cccccccc}
+            0   &amp;  E_x &amp; E_y  &amp;  E_z \\
+            E_x &amp;  0   &amp; B_z  &amp; -B_y \\
+            E_y &amp; -B_z &amp; 0    &amp;  B_x \\
+            E_z &amp;  B_y &amp; -B_x &amp;  0
+        \end{array}
+      \right]
+      \left[
+        \begin{array}{cc}
+            1 \\
+            v_x \\
+            v_y \\
+            v_z
+        \end{array}
+      \right]
+      \end{eqnarray}
+      $
     </p>
   </section>
   <section>
