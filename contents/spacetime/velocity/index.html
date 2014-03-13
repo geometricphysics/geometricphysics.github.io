@@ -64,12 +64,12 @@ title: Geometric Physics • Spacetime • Velocity
       $
     </p>
     <p>
-      Although we have derived a velocity transformation law, we haven't uncovered a four-velocity. An interesting way to derive a four-velocity, and provide an alternate route to the velocity transformation is by constructing a four velocity $U$ as follows:
+      Although we have derived a velocity transformation law, we haven't uncovered a four-velocity. An interesting way to derive a four-velocity, and provide an alternate route to the velocity transformation is by constructing a four velocity $\geometric{U}$ as follows:
     </p>
    <p>
       $
       \begin{eqnarray}
-      U &amp; = &amp; \frac{d X}{d \tau}, \\
+      \geometric{U} &amp; = &amp; \frac{d \geometric{X}}{d \tau}, \\
       \end{eqnarray}
       $
     </p>
@@ -87,12 +87,36 @@ title: Geometric Physics • Spacetime • Velocity
       This can be used to recover the velocity transformation using the standard LT as follows.
     </p>
     <p>
+      The zeroth (time) component transforms as follows:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \gamma(\Primed{u}) &amp; = &amp; \gamma(v) (\gamma(u) - v \gamma(u) u_x) = \gamma(v) \gamma(u) (1 - v \, u_x) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      (providing a relationship that we will use for the spatial components)
+    </p>
+    <p>
+      The spatial component parallel to the direction of relative motion transforms as follows:
+    </p>
+    <p>
       $
       \begin{eqnarray}
       \gamma(\Primed{u}) \Primed{u}_x &amp; = &amp; \gamma(v) (\gamma(u) u_x - v \gamma(u)) = \gamma(v) \gamma(u) (u_x - v) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The spatial components perpendicular to the direction of relative motion transforms as:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
       \gamma(\Primed{u}) \Primed{u}_y &amp; = &amp; \gamma(u) u_y \\
       \gamma(\Primed{u}) \Primed{u}_z &amp; = &amp; \gamma(u) u_z \\
-      \gamma(\Primed{u}) &amp; = &amp; \gamma(v) (\gamma(u) - v \gamma(u) u_x) = \gamma(v) \gamma(u) (1 - v \, u_x) \\
       \end{eqnarray}
       $
     </p>
@@ -100,7 +124,7 @@ title: Geometric Physics • Spacetime • Velocity
       The transformation of the time component of $U$ provides exactly the factor to make the other components work out.
     </p>
     <p>
-      The four-velocity provides the most robust route to the four-momemntum, simply by multiplying $U$ by the rest mass, $m$.
+      The four-velocity provides the most robust route to the four-momentum, simply by multiplying $U$ by the rest mass, $m$.
     </p>
   </section>
 </article>
