@@ -51,26 +51,36 @@ title: Geometric Physics • Spacetime • Coordinate Measurement
   </section>
   <section>
     <h3>Light Ranging and Timing</h3>
+    <p>
+      Suppose an observer wants to assign a time coordinate $t$ and position coordinates $x, y, z$ to an event $[t, x, y, z]$. The observer has (1) a clock at the origin and (2) a means for sending and receiving light signals at the origin with corresponding times recorded on the clock. With only send and receive times available, the observer will have to invoke some postulate to infer the event time $t$ and spatial position $[x, y, z]$.
+    </p>
     <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
-      var board = JXG.JSXGraph.initBoard('box', {boundingbox: [-10, 10, 10, -10], keepaspectratio: true, axis:false, showNavigation: false, showCopyright: false});
+      var board = JXG.JSXGraph.initBoard(
+        'box',
+        {
+          boundingbox: [-10, 10, 10, -10],
+          keepaspectratio: true,
+          axis:false,
+          showNavigation: false,
+          showCopyright: false
+        }
+      );
 
       var origin = {X:-5, Y: -8};
 
       var matterDash = 2;
       var lightDash = 2;
 
-//    var beta = board.create('slider', [[3,-5], [8,-5], [-1.0, 0.5, +1.0]]);
-
-      var P = board.create('point', [0,0], {name: '$[t,x] = [\\frac{1}{2}(t_f + t_i), \\frac{1}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
+      var P = board.create('point', [0,0], {name: '$[t,\\Norm{x}] = [\\frac{1}{2}(t_f + t_i), \\frac{1}{2}(t_f - t_i)]$', size: 3, face: 'o', color:'green'});
       P.setProperty({fixed:false});
 
-      var T1 = board.create('point', [origin.X,function(){return P.Y()-(P.X()-origin.X);}], {name: '$t_i$', size: 3, face: 'o'});
+      var T1 = board.create('point', [origin.X,function(){return P.Y()-Math.abs(P.X()-origin.X);}], {name: '$t_i$', size: 3, face: 'o'});
       T1.setProperty({fixed:true});
 
       var T1P = board.create('line', [T1,P], {straightFirst: false, straightLast: false, color: 'blue', strokeWidth:2, dash:lightDash});
 
-      var T3 = board.create('point', [origin.X,function(){return P.Y()+(P.X()-origin.X);}], {name: '$t_f$', size: 3, face: 'o'});
+      var T3 = board.create('point', [origin.X,function(){return P.Y()+Math.abs(P.X()-origin.X);}], {name: '$t_f$', size: 3, face: 'o'});
       T3.setProperty({fixed:true});
 
       var PT3 = board.create('line', [P,T3], {straightFirst: false, straightLast: true, color: 'blue', strokeWidth:2, dash:lightDash});

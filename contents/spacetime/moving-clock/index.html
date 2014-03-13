@@ -7,21 +7,31 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
   <section>
     <h3>Path Dependence of Time</h3>
     <p>
-      We have already suggested the potential problems that can arise with clock synchronization if we pick up a clock and move it to another location. We will now show how the speed of a clock affects the rate at which it ticks.
+      We have already suggested the potential problems that can arise with clock synchronization if we pick up a clock and move it to another location. We will now show how the relative velocity of a clock affects the rate at which it ticks.
     </p>
     <p>
       A moving clock, when compared to clocks along the path of the moving clock which are at rest in an inertial frame, will show a slower instantaneous rate.
     </p>
     <p>
-      Let $\tau$ be the time recorded by the moving clock and $(t,x^i)$ an event along the world line of the moving clock.
+      Let $d \tau$ be the infinitesimal time interval recorded by the moving clock between the events $[t, x]$ and $[t+dt, x+dx]$ along the world line of the moving clock.
     </p>
     <p>
-      If $v$ is the instantaneous speed and $\gamma(v) = (1 - v^2)^{- \frac{1}{2}}$, then
+      If $v$ is the instantaneous speed and $\gamma(v) = (1 - v^2)^{- \frac{1}{2}}$, then we will show
     </p>
     <p>
       $
       \begin{eqnarray}
       \frac{d \tau}{d t} &amp; = &amp; \frac{1}{\gamma(v)}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      or the more memorable
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d t &amp; = &amp; \gamma(v) d \tau
       \end{eqnarray}
       $
     </p>
@@ -32,7 +42,7 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
   <section>
     <h3>Derivation of Moving Clock Rate</h3>
     <p>
-      In the diagram below, the green points represent two events on the worldline of the clock moving through the inertial frame. This clock may be moving nonuniformly, but we only show a small segment of the path. At the <em>initial</em> event, $E_i$, the moving clock records the time $\tau_i$. At the <em>final</em> event, $E_f$, the moving clock records the time $\tau_f$. The increment of time recorded by the moving clock is then $\Delta \tau = \tau_f - \tau_i$.
+      In the diagram below, the green points represent two events on the worldline of the clock moving through the inertial frame. This clock may be moving nonuniformly, but we only show an infinitesimally small segment of the path. At the <em>initial</em> event, $E_i$, the moving clock records the time $\tau_i$. At the <em>final</em> event, $E_f$, the moving clock records the time $\tau_f = \tau_i + d \tau$. The increment of time recorded by the moving clock is then $\Delta \tau = \tau_f - \tau_i$.
     </p>
     <p>
       The red points represent events on the worldline of a clock at rest with respect to the inertial system.
@@ -182,9 +192,12 @@ title: Geometric Physics • Spacetime • Moving Clock and Time Dilation
     <p>
       $
       \begin{eqnarray}
-      \frac{\Delta \tau}{\Delta t} &amp; = &amp; \frac{2 k}{k^2 + 1} = \frac{1}{\gamma(v)}.
+      \frac{d \tau}{d t} &amp; = &amp; \frac{2 k}{k^2 + 1} = \frac{1}{\gamma(v)}.
       \end{eqnarray}
       $
+    </p>
+    <p>
+      By the clock hypothesis, this is true even if the clock is accelerating. So we can use the expression e.g., for a clock executing circular motion. It's also true for any path and so we can conclude that the time recorded by a moving clock is path dependent.
     </p>
   </section>
 </article>

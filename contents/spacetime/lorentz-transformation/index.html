@@ -7,19 +7,300 @@ title: Geometric Physics • Spacetime • Lorentz Transformation
   <section>
     <h3>Lorentz Boost</h3>
     <p>
-      Consider an event with coordinates $(t,x)$ according to Alice and $(t',x')$ according to Bob.
+      Consider an event $\geometric{P}$ with coordinates $(t,x)$ according to Alice and $(t',x')$ according to Bob.
+    </p>
+    <div id="box" class="jxgbox" style="width:600px; height:600px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard(
+        'box',
+        {
+          boundingbox: [-1, 3, 2, -1],
+          keepaspectratio: true,
+          axis: false,
+          showNavigation: false,
+          showCopyright: false
+        }
+      );
+
+      // Physics
+      var v = 0.5;
+      var gamma = 1 / Math.sqrt(1 - v * v)
+
+      var origin = board.create(
+        'point',
+        [0,0],
+        {
+          name: '$\\geometric{O}$',
+          size: 3,
+          face: 'o',
+          color: 'black'
+        }
+      );
+      origin.setProperty({fixed:true});
+
+      var matterDash = 2;
+      var lightDash = 2;
+      var lightColor = 'gray'
+
+      var Alice = {
+        color: 'red'
+      };
+      var Bob = {
+        color: 'blue'
+      };
+
+      var P = board.create(
+        'point',
+        [1,8/5],
+        {
+          name: '$\\geometric{P}, [\\geometric{P}]_{Alice} = [t,x], [\\geometric{P}]_{Bob} = [\\Primed{t},\\Primed{x}]$',
+          size: 3,
+          face: 'o',
+          color:'black'
+        }
+      );
+      P.setProperty({fixed:false});
+
+      var A1 = board.create(
+        'point',
+        [
+          origin.X(),
+          function(){
+            return P.Y()-Math.abs(P.X()-origin.X());
+          }
+        ],
+        {
+          name: '$\\geometric{A}_1, [\\geometric{A}_1]_{Alice} = [t-x,0]$',
+          size: 3,
+          face: 'o',
+          color: Alice.color
+        }
+      );
+      A1.setProperty({fixed:true});
+
+      var A1P = board.create(
+        'line',
+        [A1,P],
+        {
+          straightFirst: false,
+          straightLast: false,
+          color: 'gray',
+          strokeWidth:2,
+          dash:lightDash
+        }
+      );
+
+      var A2 = board.create(
+        'point',
+        [
+          origin.X(),
+          function(){
+            return P.Y()+Math.abs(P.X()-origin.X());
+          }
+        ],
+        {
+          name: '$\\geometric{A}_2, [\\geometric{A}_2]_{Alice} = [t+x,0]$',
+          size: 3,
+          face: 'o',
+          color: Alice.color
+        }
+      );
+      A2.setProperty({fixed:true});
+
+      var PA2 = board.create(
+        'line',
+        [P,A2],
+        {
+          straightFirst: false,
+          straightLast: true,
+          color: 'gray',
+          strokeWidth:2,
+          dash:lightDash
+        }
+      );
+
+      var B1 = board.create(
+        'point',
+        [
+          function(){
+            return v * A1.Y() * (P.X() - A1.X()) / ((P.X() - A1.X()) - v * (P.Y() - A1.Y()));
+          },
+          function(){
+            return A1.Y() * (P.X() - A1.X()) / ((P.X() - A1.X()) - v * (P.Y() - A1.Y()));
+          }
+        ],
+        {
+          name: '$\\geometric{B}_1, [\\geometric{B}_1]_{Bob} = [\\Primed{t}-\\Primed{x},0]$',
+          size: 3,
+          face: 'o',
+          color: Bob.color
+        }
+      );
+      B1.setProperty({fixed:true});
+
+      var B2 = board.create(
+        'point',
+        [
+          function(){
+            return v * A2.Y() * (P.X() - A2.X()) / ((P.X() - A2.X()) - v * (P.Y() - A2.Y()));
+          },
+          function(){
+            return A2.Y() * (P.X() - A2.X()) / ((P.X() - A2.X()) - v * (P.Y() - A2.Y()));
+          }
+        ],
+        {
+          name: '$\\geometric{B}_2, [\\geometric{B}_2]_{Bob} = [\\Primed{t}+\\Primed{x},0]$',
+          size: 3,
+          face: 'o',
+          color: Bob.color
+        }
+      );
+      B2.setProperty({fixed:true});
+
+      var TI = board.create('point',
+        [
+          origin.X(),
+          function() {return (A2.Y()+A1.Y())/2;}
+        ],
+        {
+          name: '$t$', size: 3, face: 'o', color: 'lightgray'
+        }
+      );
+      TI.setProperty({fixed:true, visible:false});
+
+      var TIP= board.create(
+        'line',
+        [TI,P],
+        {
+          straightFirst: false,
+          straightLast: false,
+          color: 'lightgray',
+          strokeWidth:1,
+          dash:2
+        }
+      );
+      TIP.setProperty({visible:false});
+
+      var lineA = board.create(
+        'line',
+        [A1,A2],
+        {
+          straightFirst: true,
+          straightLast: true,
+          color: Alice.color,
+          dash: matterDash
+        }
+      );
+
+      var Lpos = board.create(
+        'point',
+        [5,5],
+        {
+          name: '$\\geometric{L}$',
+          size: 3,
+          face: 'o',
+          color:lightColor
+        }
+      );
+      Lpos.setProperty({fixed:true, visible:false});
+
+      var OLpos = board.create(
+        'line',
+        [origin,Lpos],
+        {
+          straightFirst: false,
+          straightLast: true,
+          color: lightColor,
+          dash: lightDash
+        }
+      );
+
+      var Lneg = board.create(
+        'point',
+        [-5,+5],
+        {
+          name: '$\\geometric{Lneg}$',
+          size: 3,
+          face: 'o',
+          color: lightColor
+        }
+      );
+      Lneg.setProperty({fixed: true, visible: false});
+
+      var OLneg = board.create(
+        'line',
+        [origin,Lneg],
+        {
+          straightFirst: false,
+          straightLast: true,
+          color: lightColor,
+          dash: lightDash
+        }
+      );
+
+      var B = board.create(
+        'point',
+        [v * 10,10],
+        {
+          name: '$\\geometric{B}$',
+          size: 3,
+          face: 'o',
+          color: Bob.color
+        }
+      );
+      B.setProperty({fixed:true, visible:false});
+
+      var OB = board.create(
+        'line',
+        [origin,B],
+        {
+          straightFirst: false,
+          straightLast: true,
+          color: Bob.color,
+          dash: matterDash
+        }
+      );
+
+      var gamma0 = board.create(
+        'line',
+        [[0,0],[0,1]],
+        {
+          straightFirst: false,
+          straightLast: false,
+          lastArrow: true,
+          color: Alice.color,
+        }
+      );
+
+      var gamma1 = board.create(
+        'line',
+        [[0,0],[1,0]],
+        {
+          straightFirst: false,
+          straightLast: false,
+          lastArrow: true,
+          color: Alice.color,
+        }
+      );
+
+    </script>
+    <p>
+      Alice emits a radar pulse from $\geometric{A}_1$ at time $t-x$ and receives the reflected pulse at $\geometric{A}_2$ at time $t+x$ so that she assigns coordinates $(t,x)$ to the event $\geometric{P}$.
     </p>
     <p>
-      Alice emits a radar pulse at time $t-x$ and receives the reflected pulse at time $t+x$ so that she assigns coordinates $(t,x)$ to the event.
-    </p>
-    <p>
-      Bob emits a radar pulse at time $t'-x'$ and receives the reflected pulse at time $t'+x'$ so that he assigns coordinates $(t',x')$ to the event.
+      Bob emits a radar pulse from $\geometric{B}_1$ at time $t'-x'$ and receives the reflected pulse at $\geometric{B}_2$ at time $t'+x'$ so that he assigns coordinates $(t',x')$ to the event  $\geometric{P}$.
     </p>
     <p>
       Since light travels rectilinearly, Bob's radar pulse must coincide with Alice's radar pulse.
     </p>
     <p>
-      Assuming that at the moment that their spatial origins coincide they both set their clocks to zero, applying the k-Calculus,
+      Assume that at the moment that their spatial origins coincide they both set their clocks to zero.
+    </p>
+    <p>
+      We now apply the k-Calculus twice:
+    </p>
+    <p>
+      (1) Alice transmitting from $\geometric{O}$ to  $\geometric{A}_1$ and Bob receiving from $\geometric{O}$ to  $\geometric{B}_1$:
     </p>
     <p>
       $
@@ -29,6 +310,9 @@ title: Geometric Physics • Spacetime • Lorentz Transformation
       $,
     </p>
     <p>
+      (2) Bob transmitting from $\geometric{O}$ to  $\geometric{B}_2$ and Alice receiving from $\geometric{O}$ to  $\geometric{A}_2$:
+    </p>
+    <p>
       $
       \begin{eqnarray*}
       k(v) &amp; = &amp; \frac{t + x}{t' + x'}
@@ -36,7 +320,7 @@ title: Geometric Physics • Spacetime • Lorentz Transformation
       $.
     </p>
     <p>
-      Immediately, we obtain the invariant quantity:
+      Immediately, by equating these two expressions, we obtain the invariant quantity:
     </p>
     <p>
       $
