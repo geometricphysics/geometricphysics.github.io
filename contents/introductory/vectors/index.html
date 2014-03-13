@@ -9,29 +9,152 @@ title: Geometric Physics • Introductory • Vectors
     <p>
       The simple answer is that <b>a vector can be used to model certain kinds of physical quantities</b>. A more complete answer is that <b>vectors and similar geometric objects can be used to model all physical quantities</b>. It will make more sense to postpone defining what we mean by a <b>geometric object</b> for now, but we can say a vector is one example. As a final teaser, we will discover that <b>nature's laws tend to be simplest when expressed correctly in terms of geometric quantities</b>.
     </p>
+  </section>
+  <section>
+    <h3>Can you give me an example of a vector quantity in physics?</h3>
     <p>
       For a familiar example of a vector, the <b>displacement</b> (change in position), $\Delta \geometric{x}$, of an object from one point to a nearby point can be modeled as a vector. In the diagram below, the displacement of a square is indicated pictorially by an arrow which represents the displacement vector. The initial position of the object is at the tail of the arrow and the final position is at the head of the arrow.
     </p>
+    <button onClick="box010.run();">Move the square along $\Delta \geometric{x}$</button>
+    <button onClick="box010.reset();">Reset</button>
     <div id="box010" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var box010 = (function(){
+        var BOX_SIZE = 30;
+        var POINT_SIZE = 3;
+        var board = JXG.JSXGraph.initBoard(
+          'box010',
+          {
+            boundingbox: [-0.5, 1.5, 1.5, -0.5],
+            keepaspectratio: true,
+            axis: true,
+            showNavigation: false,
+            showCopyright: false
+          }
+        );
+
+        var message = "To modify the displacement vector, use the circles to drag the head or tail."
+        var text = board.create('text', [-0.25,1.25, message]);
+
+        var P = board.create(
+          'point',
+          [0.5,0.5],
+          {
+            size: POINT_SIZE,
+            face: 'o',
+            strokeColor: 'gray',
+            strokeOpacity: 1,
+            fillOpacity: 0,
+            highlightFillOpacity: 0,
+            withLabel: false
+          }
+        );
+        P.setProperty({visible: true});
+
+        var Q = board.create(
+          'point',
+          [0.5,1.0],
+          {
+            size: POINT_SIZE,
+            face: 'o',
+            strokeColor: 'gray',
+            strokeOpacity: 1,
+            fillOpacity: 0,
+            highlightFillOpacity: 0,
+            withLabel: false
+          }
+        );
+        Q.setProperty({visible: true});
+
+        var PQ = board.create(
+          'line',
+          [P, Q],
+          {
+            straightFirst: false,
+            straightLast: false,
+            lastArrow: true,
+            color: 'red'
+          }
+        );
+        PQ.setProperty({fixed: false});
+
+        var M = board.create(
+          'midpoint',
+          [P,Q],
+          {
+            name: '$\\Delta \\geometric{x}$',
+            size: POINT_SIZE,
+            color: 'red',
+            strokeOpacity: 0,
+            fillOpacity: 0
+          }
+        );
+
+        X = board.create(
+          'point',
+          [P.X(), P.Y()],
+          {
+            name: 'Final position',
+            size: BOX_SIZE,
+            face: '[]',
+            strokeColor: 'black',
+            fillOpacity: 0,
+            highlightFillOpacity: 0,
+            withLabel: false,
+            dash: 0
+          }
+        );
+        X.setProperty({visible: true, fixed:true});
+
+        var sample = {
+          reset: function() {
+            P.moveTo([0.0, 0.0], 0);
+            Q.moveTo([0.0, 0.5], 0);
+            // Move the object back to the origin.
+            X.moveTo([0.0, 0.0], 0);
+          },
+          run: function() {
+            var dx = (Q.X() - P.X());
+            var dy = (Q.Y() - P.Y());
+            var distance = Math.sqrt(dx * dx + dy * dy);
+            var duration = distance * 1000;
+            X.moveTo([X.X() + dx, X.Y() + dy], duration);
+          }
+        };
+
+        sample.reset();
+
+        return sample;
+
+      })();
+    </script>
+  </section>
+  <section>
+    <h3>What makes a quantity a vector?</h3>
+    <p>
+      Let's use our <b>displacement vector</b> as an example. If we first move our square object by an displacement vector $\geometric{a}$ and then follow that by a displacement vector $\geometric{b}$ then we expect the resulting movement to also be described by a displacement vector. We'll use the addition notation $\geometric{a} + \geometric{b}$ to indicate the operation of displacing by an amount $\geometric{a}$ followed by an amount $\geometric{b}$.
+    </p>
+    <div id="box020" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
       var BOX_SIZE = 30;
       var POINT_SIZE = 2;
       var board = JXG.JSXGraph.initBoard(
-        'box010',
+        'box020',
         {
           boundingbox: [-0.5, 1.5, 1.5, -0.5],
           keepaspectratio: true,
           axis: false,
+          grid: false,
           showNavigation: false,
           showCopyright: false
         }
       );
 
-      var text = board.create('text', [-0.25,1.25,'Change the initial and final positions of the square objects to see the displacement vector change.']);
+      var text = board.create('text', [-0.25,1.25,'Rule (1) The sum of two vectors is also a vector.']);
 
       var P = board.create(
         'point',
-        [0,0],
+        [0.0, 0.5],
         {
           name: 'Initial position',
           size: BOX_SIZE,
@@ -47,7 +170,23 @@ title: Geometric Physics • Introductory • Vectors
 
       var Q = board.create(
         'point',
-        [1,1],
+        [1.0, 0.0],
+        {
+          name: 'Intermediate position',
+          size: BOX_SIZE,
+          face: '[]',
+          strokeColor: 'black',
+          fillOpacity: 0,
+          highlightFillOpacity: 0,
+          withLabel: true,
+          dash: 0
+        }
+      );
+      Q.setProperty({visible: true});
+
+      var R = board.create(
+        'point',
+        [0.75, 1.0],
         {
           name: 'Final position',
           size: BOX_SIZE,
@@ -59,7 +198,7 @@ title: Geometric Physics • Introductory • Vectors
           dash: 0
         }
       );
-      Q.setProperty({visible: true});
+      R.setProperty({visible: true});
 
       var PQ = board.create(
         'line',
@@ -73,11 +212,35 @@ title: Geometric Physics • Introductory • Vectors
       );
       PQ.setProperty({fixed: false});
 
-      var M = board.create(
+      var QR = board.create(
+        'line',
+        [Q, R],
+        {
+          straightFirst: false,
+          straightLast: false,
+          lastArrow: true,
+          color: 'red'
+        }
+      );
+      QR.setProperty({fixed: false});
+
+      var PR = board.create(
+        'line',
+        [P, R],
+        {
+          straightFirst: false,
+          straightLast: false,
+          lastArrow: true,
+          color: 'red'
+        }
+      );
+      PR.setProperty({fixed: false});
+
+      var midpointA = board.create(
         'midpoint',
         [P,Q],
         {
-          name: '$\\Delta \\geometric{x}$',
+          name: '$\\geometric{a}$',
           size: POINT_SIZE,
           color: 'red',
           strokeOpacity: 0,
@@ -85,6 +248,29 @@ title: Geometric Physics • Introductory • Vectors
         }
       );
 
+      var midpointB = board.create(
+        'midpoint',
+        [Q,R],
+        {
+          name: '$\\geometric{b}$',
+          size: POINT_SIZE,
+          color: 'red',
+          strokeOpacity: 0,
+          fillOpacity: 0
+        }
+      );
+
+      var midpointC = board.create(
+        'midpoint',
+        [P,R],
+        {
+          name: '$\\geometric{a} + \\geometric{b}$',
+          size: POINT_SIZE,
+          color: 'red',
+          strokeOpacity: 0,
+          fillOpacity: 0
+        }
+      );
     </script>
   </section>
   <section>
@@ -92,11 +278,11 @@ title: Geometric Physics • Introductory • Vectors
     <p>
       A vector can be used to model certain kinds of physical quantities at a point in space.
     </p>
-    <div id="box020" class="jxgbox" style="width:500px; height:500px;"></div>
+    <div id="box030" class="jxgbox" style="width:500px; height:500px;"></div>
     <script type="text/javascript">
       var POINT_SIZE = 2;
       var board = JXG.JSXGraph.initBoard(
-        'box020',
+        'box030',
         {
           boundingbox: [-0.5, 1.5, 1.5, -0.5],
           keepaspectratio: true,
@@ -120,7 +306,7 @@ title: Geometric Physics • Introductory • Vectors
 
       var Q = board.create(
         'point',
-        [1,0],
+        [1,2],
         {
           name: '$\\geometric{Q}$',
           size: POINT_SIZE,
