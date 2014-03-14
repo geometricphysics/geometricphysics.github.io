@@ -1,0 +1,164 @@
+---
+layout: master
+title: Geometric Physics • Introductory • Work, Heat, and Entropy
+---
+<article>
+  <h1>Work, Heat, and Entropy</h1>
+  <section>
+    <h3>Traditional Pedagogy</h3>
+    <p>
+      The following statements are typical of textbooks:
+    </p>
+    <p>
+      Heat and work are both descriptions of the <b>transfer of energy</b>.
+    </p>
+    <p>
+      <b>Work</b> is the <b>mechanical transfer of energy</b> (Knight) or a <b>change in external parameters</b> (Kittel).
+    </p>
+    <p>
+      <b>Heat</b> is the <b>transfer of energy by thermal contact</b>.
+    </p>
+    <p>
+      <b>The fundamental difference is in the entropy transfer.</b>
+    </p>
+  </section>
+  <section>
+    <h3>Conceptual Remarks</h3>
+    <p>
+      The use of <b>the word mechanical is ambiguous</b> when we consider that the transfer of energy at the inter-molecular level is also informally described as mechanical. We would like to have a terminology that helps us <b>clarify the different ways in which we account for the energy transfer</b> and how that causes us to consider the <b>concept of entropy</b>.
+    </p>
+    <p>
+      Randall suggests omitting entropy unless there is time to develop the probabilistic approach. He then keeps the second law in the form of Kelvin-Planck (impossibility of 100% efficiency) or Carnot (reversible engine has maximum efficiency).
+    </p>
+  </section>
+  <section>
+    <h3>First Law (Energy Conservation)</h3>
+    <p>
+    $
+    \begin{eqnarray}
+    \Delta K + \Delta U + \Delta E_{int} &amp; = &amp; W + Q
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>Ideal Gas Equation</h3>
+    <p>
+      This must be introduced as an empirical law if it cannot be derived using statistical mechanics.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    p V &amp; = &amp; n R T = N k_{B} T = N \tau
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      It might be interesting to observe that this is a statement about <b>energy conservation</b> for non-interacting particles constrained to a finite volume. The pressure $p$ is an energy per unit volume - an energy density. The scaling factor $k_{B}$ for the Kelvin temperature could be dropped if we move to natural units.
+    </p>
+  </section>
+  <section>
+    <h3>$C_{P} - C_{V} = R$ or $k_{B}$ or $1$ (depending on units).</h3>
+    <p>
+      Consider bringing a cylinder-piston-gas system at temperature $T_{i}$ into thermal contact with a resevoir at temperature $T_{f}$.
+    </p>
+    <p>
+      (1) Fix the piston position so that the process happens at constant volume.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    Q &amp; = &amp; N C_{V} \Delta T \\
+    W &amp; = &amp; 0 \\
+    \Rightarrow \Delta E_{int} &amp; = &amp; W + Q = N C_{V} T
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      (2) Allow the piston to move freely so that the process happens at constant pressure.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    Q &amp; = &amp; N C_{P} \Delta T \\
+    W &amp; = &amp; - \int_{V_i}^{V_f} p dV = - p \int_{V_i}^{V_f} dV = - p (V_f - V_i) = - N K_{B} (T_f - T_i) = - N K_{B} \Delta T
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      The key insight is that the internal energy at the end is the same in both cases because it depends only on temperature. This can be represented on a $pV$ diagram.
+    </p>
+  </section>
+  <section>
+    <h3>Adiabatic Compression</h3>
+    <p>
+      Consider the case when $Q = 0$ because of insulation or sufficiently fast change. We also make use of the fact that the internal energy only depends on the temperature.
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    W &amp; = &amp; - \int_{V_i}^{V_f} p dV = \Delta E_{int} = N C_{V} \Delta T
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Assuming also that the change takes place slowly enough for internal equilibrium,
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    - p dV &amp; = &amp; N C_{V} dT
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      We now substitute for $p$, rearrange and integrate. The result is
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    T^{(\frac{C_V}{k_B})} V &amp; = &amp; const
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      or, using the ideal gas equation to eliminate $T$,
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    p V^{\gamma} &amp; = &amp; const
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \gamma &amp; = &amp; \frac{C_P}{C_V} = 5/3
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>Heat Engines</h3>
+    <p>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+  <section>
+    <h3>Carnot Cycle</h3>
+    <p>
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \end{eqnarray}
+    $
+    </p>
+  </section>
+</article>
