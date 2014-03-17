@@ -1,0 +1,18 @@
+{
+  "name": "geometricphysics",
+  "version": "0.0.1",
+  "main": "index.html",
+  "description": "",
+  "author": {
+    "name": "David Holmes",
+    "email": "david.geo.holmes@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/geometricphysics/geometricphysics.git"
+  },
+  "dependencies": {
+    "davinci": "latest",
+    "threejs": "latest"
+  }
+}

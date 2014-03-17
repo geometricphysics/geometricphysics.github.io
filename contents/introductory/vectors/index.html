@@ -5,6 +5,90 @@ title: Geometric Physics • Introductory • Vectors
 <article>
   <h1>Vectors</h1>
   <section>
+    <h3>Geometry Zen DaVinci library (standalone)</h3> 
+    <script>
+      var box000 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var program = document.getElementById("program").value;
+            var mypre = document.getElementById("output");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            eval(Sk.importMainWithBody("<stdin>", false, program));
+          }
+        };
+        return sample;
+      })();
+    </script>
+    <!-- Change the style from 'inline' to 'none' if you want to hide the code. -->
+    <textarea id="program" cols="80" rows="40" style="display:none;">
+from browser import *
+from geometry import *
+from math import *
+from workbench import *
+ 
+T = 5 # Periodic Time
+omega = 2 * pi / T # Angular Velocity
+R = 4 # radius
+timeOut = 1.5 * T
+ 
+scene = Scene()
+ 
+renderer = WebGLRenderer({"canvas":document.getElementById("mycanvas"), "antialias":True})
+ 
+space = CartesianSpace(scene, renderer)
+ 
+sphere = SphereBuilder().color(0x0000FF).build()
+space.add(sphere)
+ 
+def tick(t):
+    sphere.position.set(R * cos(omega*t), R * sin(omega*t), 0)
+    renderer.render(scene, space.camera)
+ 
+def terminate(time):
+    return time &gt; timeOut
+ 
+def setUp():
+    document.addEventListener("keydown", onDocumentKeyDown, False)
+ 
+def tearDown():
+    document.removeEventListener("keydown", onDocumentKeyDown, False)
+ 
+def escKey(event, downFlag):
+    event.preventDefault()
+    global timeOut
+    timeOut = 0
+ 
+keyHandlers = {27: escKey}
+    
+def onDocumentKeyDown(event):
+    try:
+        keyHandlers[event.keyCode](event, True)
+    except:
+        pass
+ 
+war = WindowAnimationRunner(tick, terminate, setUp, tearDown)
+war.start()
+    </textarea>
+    <br/>
+    <button type="button" onclick="box000.run()">Run</button>
+    <pre id="output"></pre>
+    <canvas id="mycanvas" width="640" height="360"></mycanvas>
+  </section>
+  <section>
     <h3>Why do we care about vectors?</h3>
     <p>
       The simple answer is that <b>a vector can be used to model certain kinds of physical quantities</b>. A more complete answer is that <b>vectors and similar geometric objects can be used to model all physical quantities</b>. It will make more sense to postpone defining what we mean by a <b>geometric object</b> for now, but we can say a vector is one example. As a final teaser, we will discover that <b>nature's laws tend to be simplest when expressed correctly in terms of geometric quantities</b>.

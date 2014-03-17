@@ -1,0 +1,1 @@
+@BLADE = @BLADE or {}
