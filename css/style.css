@@ -13,11 +13,12 @@ section {
   display: block; border: 1px solid purple;
 }
 */
-/*
 canvas {
-  display: block; border: 1px solid black;
+  display: block;
+  border: 1px solid black;
+  background-color: gray;
 }
-*/
+
 .jxgbox {
     position:relative; /* for IE 7 */
     overflow:hidden;

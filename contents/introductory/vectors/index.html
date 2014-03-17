@@ -6,36 +6,7 @@ title: Geometric Physics • Introductory • Vectors
   <h1>Vectors</h1>
   <section>
     <h3>Geometry Zen DaVinci library (standalone)</h3> 
-    <script>
-      var box000 = (function(){
-        function outf(text)
-        {
-          var mypre = document.getElementById("output");
-          mypre.innerHTML = mypre.innerHTML + text;
-        }
-        function builtinRead(x)
-        {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          {
-            throw "File not found: '" + x + "'";
-          }
-          return Sk.builtinFiles["files"][x];
-        }
-        var sample = {
-          run: function() {
-            var program = document.getElementById("program").value;
-            var mypre = document.getElementById("output");
-            mypre.innerHTML = '';
-            Sk.configure({"output": outf, "read": builtinRead});
-            eval(Sk.importMainWithBody("<stdin>", false, program));
-          }
-        };
-        return sample;
-      })();
-    </script>
-    <!-- Change the style from 'inline' to 'none' if you want to hide the code. -->
-    <textarea id="program" cols="80" rows="40" style="display:none;">
-from browser import *
+    <div id="editor" style="height: 675px;">from browser import *
 from geometry import *
 from math import *
 from workbench import *
@@ -61,7 +32,7 @@ scene.add(directionalLight)
 renderer = WebGLRenderer({"canvas":document.getElementById("mycanvas"), "antialias":True})
 
 space = CartesianSpace(scene, renderer)
-#renderer.setClearColor(Color(0xFFFFFF), 1.0)
+renderer.setClearColor(Color(0x080808), 1.0)
 
 sphere = SphereBuilder().color(0x0000FF).build()
 space.add(sphere)
@@ -74,32 +45,51 @@ def terminate(time):
     return time &gt; timeOut
  
 def setUp():
-    document.addEventListener("keydown", onDocumentKeyDown, False)
+    pass
  
 def tearDown():
-    document.removeEventListener("keydown", onDocumentKeyDown, False)
+    print "Done!"
  
-def escKey(event, downFlag):
-    event.preventDefault()
-    global timeOut
-    timeOut = 0
- 
-keyHandlers = {27: escKey}
-    
-def onDocumentKeyDown(event):
-    try:
-        keyHandlers[event.keyCode](event, True)
-    except:
-        pass
- 
-war = WindowAnimationRunner(tick, terminate, setUp, tearDown)
-war.start()
-    </textarea>
+WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
+    </div>
     <br/>
-    <pre id="output" style="display:none;"></pre>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
     <button type="button" onclick="box000.run()">Run</button>
-    <canvas id="mycanvas" width="600" height="400">
-    </canvas>
+    <pre id="output" style=""></pre>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+    </script>
+    <script>
+      var box000 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor");
+            var program = editor.getValue();//document.getElementById("editor").value;
+            var mypre = document.getElementById("output");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            eval(Sk.importMainWithBody("<stdin>", false, program));
+          }
+        };
+        return sample;
+      })();
+    </script>
+
   </section>
   <section>
     <h3>Why do we care about vectors?</h3>
