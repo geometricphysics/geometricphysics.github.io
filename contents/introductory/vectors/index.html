@@ -46,11 +46,23 @@ R = 4 # radius
 timeOut = 1.5 * T
  
 scene = Scene()
- 
+
+ambientLight = AmbientLight(0x111111)
+scene.add(ambientLight)
+
+pointLight = PointLight(0xFFFFFF)
+pointLight.position.set(20.0, 20.0, 20.0)
+scene.add(pointLight)
+
+directionalLight = DirectionalLight(0xFFFFFF)
+directionalLight.position.set(0.0, 1.0, 0.0)
+scene.add(directionalLight)
+
 renderer = WebGLRenderer({"canvas":document.getElementById("mycanvas"), "antialias":True})
- 
+
 space = CartesianSpace(scene, renderer)
- 
+#renderer.setClearColor(Color(0xFFFFFF), 1.0)
+
 sphere = SphereBuilder().color(0x0000FF).build()
 space.add(sphere)
  
