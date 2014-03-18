@@ -1,0 +1,143 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Tolman &amp; Stewart 1916
+---
+<article>
+  <h1>Tolman &amp; Stewart (1916)</h1>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      A direct measurement of the charge to mass ratio of an electron.
+    </p>
+  </section>
+  <section>
+    <h3>Theory</h3>
+    <p>
+      <ul>
+        <li>Inertia of the free electrons is responsible for a current.</li>
+        <li>Joule heating causes the current to decay over time.</li>
+        <li>Conservation of energy provides the dynamical equations.</li>
+      </ul>
+    </p>
+    <p>
+      The kinetic energy $K$ of the electrons due to their angular velocity $\omega$ and moment of inertial $I$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \frac{1}{2} I \omega^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Let $m$ be the mass of the electron and $n_e$ the free electron density. For a circular coil of wire of $N$ turns of major radius $a$ and cross-sectional area $A \ll a$, the moment of inertia is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      I &amp; = &amp; m n_e A (2 \pi a) N a^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The current decays because of Joule heating. Let the current in the loop be $J$ and the resistance of the circuit be $R$ then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d K}{d t}
+      &amp; = &amp;
+      I \omega \frac{d \omega}{d t}
+      &amp; = &amp;
+      J^2 R
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      From the geometry of the system
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      J &amp; = &amp; e n_e v A = e n_e a \omega A
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{e}{m} J dt
+      &amp; = &amp;
+      \frac{2 \pi N a^2}{R} d \omega
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Integrating
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{e}{m}
+      &amp; = &amp;
+      \frac{2 \pi N a^2}{Q R} \omega
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Orders of Magnitude</h3>
+    <p>
+      If we assume that most of the resistance $R$ of the circuit is die to the coil of wire then if the conductivity of the wire is $\sigma$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{1}{R}
+      &amp; = &amp;
+      2 \pi a N \sigma
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Giving
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Q
+      &amp; = &amp;
+      (2 \pi N)^2 a^3 \sigma \omega  \frac{m}{e}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>References</h3>
+    <p>
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <p>
+            <a href="/contents/experiments/tolman-stewart/tolman-stewart-original.pdf">
+              R.C. Tolman and T.D. Stewart, Phys Rev. 8 (1916) 97-116.
+            </a>
+          </p>
+          <p>
+          </p>
+        </li>
+        <li>
+          <p>
+            <a href="/contents/experiments/tolman-stewart/tolman-stewart-munro-thesis-2013.pdf">
+              Creating a version of the Tolman-Stewart Experiment for use in an Intermediate Physics Laboratory Course.
+            </a>
+          </p>
+          <p>
+          </p>
+        </li>
+      </ul>
+    </p>
+  </section>
+</article>
