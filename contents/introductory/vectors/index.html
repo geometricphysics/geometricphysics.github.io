@@ -6,16 +6,15 @@ title: Geometric Physics • Introductory • Vectors
   <h1>Vectors</h1>
   <section>
     <h3>Geometry Zen DaVinci library (standalone)</h3> 
-    <div id="editor" style="height: 675px;">from browser import *
+    <div id="editor" style="height: 700px;">from browser import *
 from geometry import *
 from math import *
-from workbench import *
- 
+
 T = 5 # Periodic Time
 omega = 2 * pi / T # Angular Velocity
 R = 4 # radius
 timeOut = 1.5 * T
- 
+
 scene = Scene()
 
 ambientLight = AmbientLight(0x111111)
@@ -34,24 +33,24 @@ renderer = WebGLRenderer({"canvas":document.getElementById("mycanvas"), "antiali
 space = CartesianSpace(scene, renderer)
 renderer.setClearColor(Color(0x080808), 1.0)
 
-sphere = SphereBuilder().color(0x0000FF).build()
+sphere = SphereBuilder().radius(0.25).color(0x0000FF).build()
 space.add(sphere)
- 
+
 def tick(t):
     sphere.position.set(R * cos(omega*t), R * sin(omega*t), 0)
     renderer.render(scene, space.camera)
- 
+
 def terminate(time):
     return time &gt; timeOut
- 
+
 def setUp():
     pass
- 
+
 def tearDown():
-    print "Done!"
- 
+    pass
+
 WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
-    </div>
+</div>
     <br/>
     <canvas id="mycanvas" width="600" height="400"></canvas>
     <button type="button" onclick="box000.run()">Run</button>
@@ -60,6 +59,7 @@ WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/twilight");
       editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
     </script>
     <script>
       var box000 = (function(){
@@ -358,65 +358,6 @@ WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
           fillOpacity: 0
         }
       );
-    </script>
-  </section>
-  <section>
-    <h3>Pictorial representation of a vector</h3>
-    <p>
-      A vector can be used to model certain kinds of physical quantities at a point in space.
-    </p>
-    <div id="box030" class="jxgbox" style="width:500px; height:500px;"></div>
-    <script type="text/javascript">
-      var POINT_SIZE = 2;
-      var board = JXG.JSXGraph.initBoard(
-        'box030',
-        {
-          boundingbox: [-0.5, 1.5, 1.5, -0.5],
-          keepaspectratio: true,
-          axis: false,
-          showNavigation: false,
-          showCopyright: false
-        }
-      );
-
-      var P = board.create(
-        'point',
-        [0,0],
-        {
-          name: '$\\geometric{P}$',
-          size: POINT_SIZE,
-          face: 'o',
-          color: 'gray'
-        }
-      );
-      P.setProperty({visible: false, draft: true});
-
-      var Q = board.create(
-        'point',
-        [1,2],
-        {
-          name: '$\\geometric{Q}$',
-          size: POINT_SIZE,
-          face: 'o',
-          color: 'gray'
-        }
-      );
-      Q.setProperty({visible: false, draft: true});
-
-      var PQ = board.create(
-        'line',
-        [P, Q],
-        {
-          straightFirst: false,
-          straightLast: false,
-          lastArrow: true,
-          color: 'red'
-        }
-      );
-      PQ.setProperty({fixed: true});
-
-      var M = board.create('midpoint', [P,Q], {name: '$\\geometric{a}$', size: POINT_SIZE, color: 'red'});
-
     </script>
   </section>
 </article>
