@@ -1,0 +1,303 @@
+---
+layout: master
+title: Geometric Physics • Python • Tutorial
+---
+<article>
+  <div class="page-header">
+    <h1>DaVinci Python Tutorial</h1>
+  </div>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      DaVinci Python is a version of Python 2.x that runs directly in your web browser. The DaVinci Python implementation is bundled with modules for Physics modeling.
+    </p>
+  </section>
+  <section>
+    <h3>Hello World</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor000" style="height: 400px;"># This is a single-line comment.
+
+# This is a print statement.
+print "Hello, World!"
+</div>
+        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output000" style=""></pre>
+        <!-- canvas id="mycanvas000" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var setUp = function(id) {
+        var editor = ace.edit(id);
+        editor.setTheme("ace/theme/twilight");
+        editor.getSession().setMode("ace/mode/python");
+        editor.setShowInvisibles(true);
+        editor.setFontSize(15);
+      }
+      var box000 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output000");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function(id) {
+            var editor = ace.edit("editor000");
+            var program = editor.getValue();
+            var mypre = document.getElementById("output000");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        setUp("editor000");
+        return sample;
+      })();
+    </script>
+  </section>
+  <section>
+    <h3>Arithmetic</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor010" style="height: 400px;"># This is a single-line comment.
+
+# This is a print statement.
+print 3 + (4 / 2) * 5
+</div>
+        <button type="button" class="btn btn-default" onclick="box010.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output010" style=""></pre>
+        <!-- canvas id="mycanvas010" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor010");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+      var mypre = document.getElementById("output010");
+      var box010 = (function(){
+        function outf(text)
+        {
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor010");
+            var program = editor.getValue();
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+  </section>
+  <section>
+    <h3>Variables</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor020" style="height: 400px;">x = 7
+
+print "x=" + str(x)
+print "The value of 3 times x is " + str(3 * x)
+</div>
+        <button type="button" class="btn btn-default" onclick="box020.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output020" style=""></pre>
+        <!-- canvas id="mycanvas020" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor020");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+      var box020 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output020");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor020");
+            var program = editor.getValue();
+            var mypre = document.getElementById("output020");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+  </section>
+  <section>
+    <h3>Functions</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor030" style="height: 400px;"># How to declare and call a function.
+
+def f(x, y):
+    return 2 * x + y
+
+print f(1,3)
+</div>
+        <button type="button" class="btn btn-default" onclick="box030.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output030" style=""></pre>
+        <!-- canvas id="mycanvas030" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor030");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+      var box030 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output030");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor030");
+            var program = editor.getValue();
+            var mypre = document.getElementById("output030");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+  </section>
+  <section>
+    <h3>Conditional Statements</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor040" style="height: 400px;"># How to branch program execution.
+
+x = 1
+
+if (x &gt; 3):
+    print "x is greater than three"
+else:
+    print "x is less than or equal to 3"
+</div>
+        <button type="button" class="btn btn-default" onclick="box040.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output040" style=""></pre>
+        <!-- canvas id="mycanvas040" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor040");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+      var box040 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output040");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor040");
+            var program = editor.getValue();
+            var mypre = document.getElementById("output040");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+  </section>
+</article>
