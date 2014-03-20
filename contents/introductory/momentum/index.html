@@ -1,0 +1,172 @@
+---
+layout: master
+title: Geometric Physics • Introductory • Momentum
+---
+<article>
+  <div class="page-header">
+    <h1>Momentum <small></small></h1>
+  </div>
+  <section>
+  </section>
+  <section>
+    <h3>Single Particle Systems</h3>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Linear Momentum of a Particle</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          The <b>linear momentum</b>, $\Vector{p}$, of a particle with mass $m$ and velocity $\Vector{v}$ is defined to be<br/><br/>
+          $\Vector{p} = m\Vector{v}$
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h3>Linear Momentum in DaVinci Python</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor000" style="height: 400px;">from e3ga import *
+from units import *
+
+m = ScalarE3(5) * kilogram
+v = VectorE3(1,2,0) * meter / second
+
+p = m * v
+
+print p
+</div>
+        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output000" style=""></pre>
+        <!-- canvas id="mycanvas000" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor000");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+    </script>
+    <script>
+      var box000 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output000");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor000");
+            var program = editor.getValue();//document.getElementById("editor").value;
+            var mypre = document.getElementById("output000");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+
+  </section>
+
+  <section>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Angular Momentum of a Particle about a Point</h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          The <b>moment of momentum of a particle about a given point</b> is called the <b>angular momentum about that point</b>.
+        </p>
+        <p>
+          If $\Vector{r}$ is the displacement from the point to the particle, and $\Vector{p}$ is the linear momentum of the particle, then the angular momentum, $L$, of the particle about the point is<br/><br/>
+          $L = \Vector{r} \wedge \Vector{p}$
+        </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <h3>Angular Momentum in DaVinci Python</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor010" style="height: 400px;">from e3ga import *
+from units import *
+
+r = VectorE3(0,0,1) * meter
+m = ScalarE3(5) * kilogram
+v = VectorE3(1,2,0) * meter / second
+
+p = m * v
+L = r ^ p
+
+print L
+</div>
+        <button type="button" class="btn btn-default" onclick="box010.run()">Run</button>
+      </div>
+      <div class="col-md-6">
+        <pre id="output010" style=""></pre>
+        <!-- canvas id="mycanvas010" width="600" height="400"></canvas -->
+      </div>
+    </div>
+    <br/>
+    <script>
+      var editor = ace.edit("editor010");
+      editor.setTheme("ace/theme/twilight");
+      editor.getSession().setMode("ace/mode/python");
+      editor.setShowInvisibles(true);
+      editor.setFontSize(15);
+    </script>
+    <script>
+      var box010 = (function(){
+        function outf(text)
+        {
+          var mypre = document.getElementById("output010");
+          mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x)
+        {
+          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+          {
+            throw "File not found: '" + x + "'";
+          }
+          return Sk.builtinFiles["files"][x];
+        }
+        var sample = {
+          run: function() {
+            var editor = ace.edit("editor010");
+            var program = editor.getValue();//document.getElementById("editor").value;
+            var mypre = document.getElementById("output010");
+            mypre.innerHTML = '';
+            Sk.configure({"output": outf, "read": builtinRead});
+            try {
+              eval(Sk.importMainWithBody("<stdin>", false, program));
+            }
+            catch(e) {
+              window.alert(e);
+            }
+          }
+        };
+        return sample;
+      })();
+    </script>
+
+  </section>
+</article>

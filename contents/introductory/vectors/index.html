@@ -3,10 +3,14 @@ layout: master
 title: Geometric Physics • Introductory • Vectors
 ---
 <article>
-  <h1>Vectors</h1>
+  <div class="page-header">
+    <h1>Vectors <small>Geometric Numbers</small></h1>
+  </div>
   <section>
-    <h3>Geometry Zen DaVinci library (standalone)</h3> 
-    <div id="editor" style="height: 700px;">from browser import *
+    <h3>Geometry Zen DaVinci library (standalone)</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="editor" style="height: 700px;">from browser import *
 from geometry import *
 from math import *
 
@@ -28,7 +32,10 @@ directionalLight = DirectionalLight(0xFFFFFF)
 directionalLight.position.set(0.0, 1.0, 0.0)
 scene.add(directionalLight)
 
-renderer = WebGLRenderer({"canvas":document.getElementById("mycanvas"), "antialias":True})
+canvas = document.getElementById("mycanvas")
+canvas.height = 400
+
+renderer = WebGLRenderer({"canvas": canvas, "antialias":True})
 
 space = CartesianSpace(scene, renderer)
 renderer.setClearColor(Color(0x080808), 1.0)
@@ -51,15 +58,20 @@ def tearDown():
 
 WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
 </div>
+        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
+        <pre id="output" style=""></pre>
+      </div>
+      <div class="col-md-6">
+        <canvas id="mycanvas" width="600" height="700"></canvas>
+      </div>
+    </div>
     <br/>
-    <canvas id="mycanvas" width="600" height="400"></canvas>
-    <button type="button" onclick="box000.run()">Run</button>
-    <pre id="output" style=""></pre>
     <script>
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/twilight");
       editor.getSession().setMode("ace/mode/python");
       editor.setShowInvisibles(true);
+      editor.setFontSize(15);
     </script>
     <script>
       var box000 = (function(){
