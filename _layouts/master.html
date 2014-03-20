@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xml:lang="en">
+<html lang="en" xml:lang="en" ng-app="pagesApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -16,9 +16,22 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <!-- ACE code editor -->
+    <script src="{{ site.url }}/{{ site.folder }}vendor/ace-builds/src-noconflict/ace.js"></script>
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular.min.js"></script>
+    <script>
+      var pagesApp = angular.module('pagesApp', []);
+
+      pagesApp.config([
+        '$interpolateProvider',
+        function($interpolateProvider) {
+          return $interpolateProvider.startSymbol('{(').endSymbol(')}');
+        }
+      ]);
+    </script>
     <!-- JSXGraph must be loaded in the head in order to be available in pages -->
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
-    <script src="{{ site.url }}/{{ site.folder }}vendor/ace-builds/src-noconflict/ace.js"></script>
   </head>
   <body style>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -59,7 +72,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script src="{{ site.url }}/{{ site.folder }}js/scale.fix.js"></script>
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -121,8 +134,7 @@
         }
       });
     </script>
-    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'>
-    </script>
+    <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
     <script src="{{ site.url }}/{{ site.folder }}vendor/threejs/build/three.min.js"></script>
     <script src="{{ site.url }}/{{ site.folder }}vendor/bladejs/dist/bladejs.js"></script>
     <script src="{{ site.url }}/{{ site.folder }}vendor/davinci/davinci.min.js"></script>
