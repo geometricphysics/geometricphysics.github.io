@@ -23,9 +23,9 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
       Suppose we want to describe a <b>point</b> in space using a vector. We can do the following:
       <p>Choose an arbitrary point in space and call it the <b>origin</b>, $O$.</p>
-      <p>The point $A$ is then represented by the <b>position vector</b> $a$ (an arrow) from the origin $O$ to the point $A$.</p>
-      <p>The vector $a$ has <b>magnitude</b>, <b>aspect</b> and <b>orientation</b>.
-      <p>The <b>magnitude</b> of the vector is denoted by $|a|$ and can be though of geometrically as the length.
+      <p>The point $A$ is then represented by the <b>position vector</b> $\Vector{a}$ (an arrow) from the origin $O$ to the point $A$.</p>
+      <p>The vector $\Vector{a}$ has <b>magnitude</b>, <b>aspect</b> and <b>orientation</b>.
+      <p>The <b>magnitude</b> of the vector is denoted by $\Norm{\Vector{a}}$ and can be though of geometrically as the length.
       <p>The <b>aspect</b> of the vector is the one-dimensional line that it lies on.
       <p>The <b>orientation</b> of the vector is $\pm 1$ according to whether the vector points in some standard orientation.
     </p>
@@ -52,17 +52,17 @@ title: Geometric Physics • Classical Mechanics • Kinematics
   <section>
     <h3>3-dimensional Cartesian Coordinate Frame</h3>
     <p>
-      <p>Choose a set of three <b>orthonormal</b> vectors $\{i,j,k\}$ called the <b>basis</b>.</p>
-      <p>Decompose a vector $r$ into its <b>projections</b> onto each of the , $x$, $y$ and $z$.</p>
+      <p>Choose a set of three <b>orthonormal</b> vectors $\{\Vector{i},\Vector{j},\Vector{k}\}$ called the <b>basis</b>.</p>
+      <p>Decompose a vector $\Vector{r}$ into its <b>projections</b> onto each of the basis vectors.</p>
       <p>
       $
       \begin{eqnarray}
-        a &amp; = &amp; x i + y j + z k \\
+        \Vector{a} &amp; = &amp; x \Vector{i} + y \Vector{j} + z \Vector{k} \\
       \end{eqnarray}
       $.
       </p>
       <p>
-        The quantities $x$, $y$, and $z$ are known as the <b>cartesian components</b> of the vector $a$ or the <b>coordinates</b> of $a$ in the cartesian or standard basis.
+        The quantities $x$, $y$, and $z$ are known as the <b>cartesian components</b> of the vector $\Vector{a}$ or the <b>coordinates</b> of $\Vector{a}$ in the cartesian or standard basis.
       </p>
       <p>
         An important point is that $a$ is the geometrical object (the arrow), whereas the coordinates depend upon the basis vectors.
@@ -72,7 +72,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
   <section>
     <h3>Notation: Coordinates and Standard Basis Vectors</h3>
     <p>
-      We will use the notation $\{i,j,k\}$ as the basis for 3-dimensional Cartesian space for the time being and $x$, $y$, and $z$ as the corresponding coordinates.
+      We will use the notation $\{\Vector{i},\Vector{j},\Vector{k}\}$ as the basis for 3-dimensional Cartesian space for the time being and $x$, $y$, and $z$ as the corresponding coordinates.
     </p>
     <p>
       However, at times it will be more convenient to use a <b>tensor</b> notation for the coordinates and an index notation for the basis:
@@ -80,7 +80,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
       <p>
       $
       \begin{eqnarray}
-        a &amp; = &amp; x^1 e_1 + x^2 e_2 + x^3 e_3 \\
+        \Vector{a} &amp; = &amp; x^1 \Vector{e}_1 + x^2 \Vector{e}_2 + x^3 \Vector{e}_3 \\
       \end{eqnarray}
       $.
       </p>
@@ -107,17 +107,17 @@ title: Geometric Physics • Classical Mechanics • Kinematics
   <section>
     <h3>Particle Motion</h3>
     <p>
-      Suppose the <b>trajectory</b> (path) of a particle is described by a vector-valued function $r(t)$:
+      Suppose the <b>trajectory</b> (path) of a particle is described by a vector-valued function $\Vector{r}(t)$:
     </p>
     <p>
     $
     \begin{eqnarray}
-      r(t) &amp; = &amp; x(t) i + y(t) j + z(t) k \\
+      \Vector{r}(t) &amp; = &amp; x(t) \Vector{i} + y(t) \Vector{j} + z(t) \Vector{k} \\
     \end{eqnarray}
     $.
     </p>
     <p>
-      We see that the position is given by 3 functions of time and a basis. The goal of Classical Mechanics is to determine $r(t)$ given an <b>initial configuration</b> and a <b>dynamical law</b>.
+      We see that the position is given by 3 functions of time and a basis. The goal of Classical Mechanics is to determine $\Vector{r}(t)$ given an <b>initial configuration</b> and a <b>dynamical law</b>.
     </p>
     <p>
       We'll need some more terminology to describe the kinematics before we get to the dynamics.
@@ -131,7 +131,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      \Delta r &amp; = &amp; r_f - r_i = r(t_f) - r(t_i)
+      \Delta \Vector{r} &amp; = &amp; \Vector{r}_f - \Vector{r}_i = \Vector{r}(t_f) - \Vector{r}(t_i)
     \end{eqnarray}
     $.
     </p>
@@ -160,12 +160,12 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      average \, velocity = \bar{v} =   \frac{displacement}{time \, interval} = \frac{\Delta r}{\Delta t} = \frac{r_f - r_i}{t_f - t_i}
+      average \, velocity = \bar{\Vector{v}} =   \frac{displacement}{time \, interval} = \frac{\Delta \Vector{r}}{\Delta t} = \frac{\Vector{r}_f - \Vector{r}_i}{t_f - t_i}
     \end{eqnarray}
     $.
     </p>
     <p>
-      The slope of a position-time graph is $\Delta r / \Delta t$, which is the average velocity.
+      The slope of a position-time graph is $\Delta \Vector{r} / \Delta t$, which is the average velocity.
     </p>
   </section>
   <section>
@@ -176,12 +176,12 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      v(t) =  \frac{d r}{dt} = \dot{r} = \lim_{\Delta t \rightarrow 0} \frac{r(t + \Delta t) - r(t)}{\Delta t}
+      \Vector{v}(t) =  \frac{d \Vector{r}}{dt} = \dot{\Vector{r}} = \lim_{\Delta t \rightarrow 0} \frac{\Vector{r}(t + \Delta t) - \Vector{r}(t)}{\Delta t}
     \end{eqnarray}
     $.
     </p>
     <p>
-      $v$ is a vector-valued function (of a scalar argument), so this is really multiple equations, one for each dimension of space! However, the calculus isn't any more complex than the 1-dimensional case. When we write $v$ in cartesian components we have $v(t) = v_x(t) i + v_y(t) j + v_z(t) k$, where
+      $\Vector{v}$ is a vector-valued function (of a scalar argument), so this is really multiple equations, one for each dimension of space! However, the calculus isn't any more complex than the 1-dimensional case. When we write $\Vector{v}$ in cartesian components we have $\Vector{v}(t) = v_x(t) \Vector{i} + v_y(t) \Vector{j} + v_z(t) \Vector{k}$, where
     </p>
     <p>
     $
@@ -213,7 +213,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      |v(t)| =  \sqrt{(v_x^2 + v_y^2 + v_z^2)}
+      \Norm{\Vector{v}(t)} =  \sqrt{(v_x^2 + v_y^2 + v_z^2)}
     \end{eqnarray}
     $.
     </p>
@@ -226,12 +226,12 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      average \, acceleration = \bar{a} =   \frac{change \, in \, velocty}{time \, interval} = \frac{\Delta v}{\Delta t} = \frac{v_f - v_i}{t_f - t_i}
+      average \, acceleration = \bar{\Vector{a}} =   \frac{change \, in \, velocty}{time \, interval} = \frac{\Delta \Vector{v}}{\Delta t} = \frac{\Vector{v}_f - \Vector{v}_i}{t_f - t_i}
     \end{eqnarray}
     $.
     </p>
     <p>
-      The slope of a velocity-time graph is $\Delta v / \Delta t$, which is the average acceleration.
+      The slope of a velocity-time graph is $\Delta \Vector{v} / \Delta t$, which is the average acceleration.
     </p>
   </section>
   <section>
@@ -242,7 +242,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     <p>
     $
     \begin{eqnarray}
-      a(t) =  \frac{d v}{dt} = \dot{v} = \ddot{r} = \lim_{\Delta t \rightarrow 0} \frac{v(t + \Delta t) - v(t)}{\Delta t}
+      \Vector{a}(t) =  \frac{d \Vector{v}}{dt} = \dot{\Vector{v}} = \ddot{\Vector{r}} = \lim_{\Delta t \rightarrow 0} \frac{\Vector{v}(t + \Delta t) - \Vector{v}(t)}{\Delta t}
     \end{eqnarray}
     $.
     </p>
