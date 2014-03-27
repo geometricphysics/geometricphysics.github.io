@@ -71,7 +71,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
       \begin{eqnarray}
         \Vector{a} &amp; = &amp; x \Vector{i} + y \Vector{j} + z \Vector{k} \\
       \end{eqnarray}
-      $.
+      $
       </p>
       <p>
         The quantities $x$, $y$, and $z$ are known as the <b>cartesian components</b> of the vector $\Vector{a}$ or the <b>coordinates</b> of $\Vector{a}$ in the cartesian or standard basis.
@@ -94,7 +94,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
       \begin{eqnarray}
         \Vector{a} &amp; = &amp; x^1 \Vector{e}_1 + x^2 \Vector{e}_2 + x^3 \Vector{e}_3 \\
       \end{eqnarray}
-      $.
+      $
       </p>
   </section>
   <section>
@@ -126,7 +126,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       \Vector{r}(t) &amp; = &amp; x(t) \Vector{i} + y(t) \Vector{j} + z(t) \Vector{k} \\
     \end{eqnarray}
-    $.
+    $
     </p>
     <p>
       We see that the position is given by 3 functions of time and a basis. The goal of Classical Mechanics is to determine $\Vector{r}(t)$ given an <b>initial configuration</b> and a <b>dynamical law</b>.
@@ -145,7 +145,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       \Delta \Vector{r} &amp; = &amp; \Vector{r}_f - \Vector{r}_i = \Vector{r}(t_f) - \Vector{r}(t_i)
     \end{eqnarray}
-    $.
+    $
     </p>
     <p>
       It's not necessary that the particle travelled in a straight line!
@@ -161,7 +161,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       average \, speed =  \frac{total \, distance}{time \, taken}
     \end{eqnarray}
-    $.
+    $
     </p>
   </section>
   <section>
@@ -174,7 +174,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       average \, velocity = \bar{\Vector{v}} =   \frac{displacement}{time \, interval} = \frac{\Delta \Vector{r}}{\Delta t} = \frac{\Vector{r}_f - \Vector{r}_i}{t_f - t_i}
     \end{eqnarray}
-    $.
+    $
     </p>
     <p>
       The slope of a position-time graph is $\Delta \Vector{r} / \Delta t$, which is the average velocity.
@@ -190,7 +190,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       \Vector{v}(t) =  \frac{d \Vector{r}}{dt} = \dot{\Vector{r}} = \lim_{\Delta t \rightarrow 0} \frac{\Vector{r}(t + \Delta t) - \Vector{r}(t)}{\Delta t}
     \end{eqnarray}
-    $.
+    $
     </p>
     <p>
       $\Vector{v}$ is a vector-valued function (of a scalar argument), so this is really multiple equations, one for each dimension of space! However, the calculus isn't any more complex than the 1-dimensional case. When we write $\Vector{v}$ in cartesian components we have $\Vector{v}(t) = v_x(t) \Vector{i} + v_y(t) \Vector{j} + v_z(t) \Vector{k}$, where
@@ -200,21 +200,21 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       v_x(t) =  \frac{d x}{dt} = \dot{x} = \lim_{\Delta t \rightarrow 0} \frac{x(t + \Delta t) - x(t)}{\Delta t}
     \end{eqnarray}
-    $,
+    $
     </p>
     <p>
     $
     \begin{eqnarray}
       v_y(t) =  \frac{d y}{dt} = \dot{y} = \lim_{\Delta t \rightarrow 0} \frac{y(t + \Delta t) - y(t)}{\Delta t}
     \end{eqnarray}
-    $,
+    $
     </p>
     <p>
     $
     \begin{eqnarray}
       v_z(t) =  \frac{d z}{dt} = \dot{z} = \lim_{\Delta t \rightarrow 0} \frac{z(t + \Delta t) - z(t)}{\Delta t}
     \end{eqnarray}
-    $.
+    $
     </p>
   </section>
   <section>
@@ -227,7 +227,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       \Norm{\Vector{v}(t)} =  \sqrt{(v_x^2 + v_y^2 + v_z^2)}
     \end{eqnarray}
-    $.
+    $
     </p>
   </section>
   <section>
@@ -240,7 +240,7 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       average \, acceleration = \bar{\Vector{a}} =   \frac{change \, in \, velocty}{time \, interval} = \frac{\Delta \Vector{v}}{\Delta t} = \frac{\Vector{v}_f - \Vector{v}_i}{t_f - t_i}
     \end{eqnarray}
-    $.
+    $
     </p>
     <p>
       The slope of a velocity-time graph is $\Delta \Vector{v} / \Delta t$, which is the average acceleration.
@@ -256,7 +256,181 @@ title: Geometric Physics • Classical Mechanics • Kinematics
     \begin{eqnarray}
       \Vector{a}(t) =  \frac{d \Vector{v}}{dt} = \dot{\Vector{v}} = \ddot{\Vector{r}} = \lim_{\Delta t \rightarrow 0} \frac{\Vector{v}(t + \Delta t) - \Vector{v}(t)}{\Delta t}
     \end{eqnarray}
-    $.
+    $
+    </p>
+  </section>
+  <section>
+    <h3>Uniform Circular Motion</h3>
+    <p>
+      Suppose we have a particle moving in a plane. We could use Cartesian coordinates $(x,y)$ and corrsponding time $t$, to record the motion of the particle.
+    </p>
+    <p>
+      However, because we are considering circular motion, we will find it sometimes more convenient to use polar coordinates in which a point is specified by its distance $r$ from a fixed point and by the angle $\theta$ from a fixed direction. So the polar coordinates are $(r, \theta)$.
+    </p>
+    <p class="definition">
+      The <span class="definition"><b>period</b> is the time taken to complete one revolution</span>, normally given the symbol $T$.
+    </p>
+    <p class="definition">
+      The <b>frequency</b> is the number of revolutions completed per unit time, normally given the symbol $f$.
+    </p>
+    <p>
+      The period and frequency are related because for any amount of time $t$, $f t = t / T$, so by cancelling $t$,
+    </p>
+    <p class="important">
+    $
+    \begin{eqnarray}
+    f &amp; = &amp; \frac{1}{T}
+    \end{eqnarray}
+    $
+    </p>
+    <span class="definition">
+      <p>
+        By <b>circular motion</b>, we mean that the <em>distance of the particle</em>, $R$, from the origin is constant in time so
+      </p>
+      <p>
+      $
+      \begin{eqnarray}
+      r(t) &amp; = &amp; R
+      \end{eqnarray}
+      $
+      </p>
+      <p>
+        and by <b>uniform</b> circular motion, we mean that the angle that the particles position vector makes with the reference direction increases uniformly in time, so
+      </p>
+      <p>
+      $
+      \begin{eqnarray}
+      \theta(t) &amp; = &amp; \omega t + \phi
+      \end{eqnarray}
+      $
+      </p>
+    </span>
+    <p>
+      The constant $\phi$ is simply the angle that the particle makes at $t=0$
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \phi &amp; = &amp; \theta(0) = \theta_{0}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      The constant $\omega$ can be related to the period $T$ or the frequency $f$ because
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \theta(t + n T) &amp; = &amp; \theta(t) + n (2 \pi)
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \omega (t + n T) + \phi &amp; = &amp; \omega t + \phi + n (2 \pi)
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      and so
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    T &amp; = &amp; \frac{2 \pi}{\omega}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      The constant <span class="important">$\omega$ is called the <b>angular frequency</b></span> because
+    </p>
+    <p class="important">
+    $
+    \begin{eqnarray}
+    \omega &amp; = &amp; 2 \pi f = \frac{2 \pi}{T}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      The <span class="important"><b>speed</b> of the partice, $v$</span> can be realted to the radius $R$ and the angular frequency $\omega$. Consider a particle that travels an arc length $s$ in time $t$. The speed is, by definition
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    v &amp; = &amp; \frac{s}{t}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      But
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \frac{s}{R} &amp; = &amp; \theta(t_0 + t) - \theta(t_0) = \omega t
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p class="important">
+    $
+    \begin{eqnarray}
+    v &amp; = &amp; R \omega
+    \label{speed}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      The instantaneous velocity of the particle $\Vector{v}$ is always perpendicular to its position vector $\Vector{r}$ and leads by one quarter of a turn, $(\tau / 4)$ or $(\pi / 2)$. The magnitude of the velocity is $\omega$ times the magnitude of the position vector. Since the velocity is the rate of change of position, and the acceleration is the rate of change of velocity, it follows that the acceleration leads the velocity by one quarter of a turn. The acceleration must then lead the position vector by one half a turn, i.e., the acceleration is always directed towards the center and is perpendicular to the velocity. The magnitude of the acceleration will be $\omega$ times the magnitude of the velocity, $a = R \omega^2$.
+    </p>
+    <p class="important">
+    $
+    \begin{eqnarray}
+    \Vector{a} &amp; = &amp; - \omega^2 \Vector{r}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Note: By writing $\Vector{r}(t) = R \UnitVector{r}(t)$ with $\Norm{\UnitVector{r}(t)} = 1$ or $\Norm{\Vector{r}(t)} = R$, it is straightforward to show, using calculus, that the velocity is orthogonal to the position vector. But without introducing the assumption that the motion is taking place in a plane, it is not possible to go any further (consider e.g., a particle moving over the surface of a sphere). This would seem to be a good way to demonstrate the use of the vector (cross) product.
+    </p>
+    <p class="important">
+    $
+    \begin{eqnarray}
+    \Vector{v} &amp; = &amp; \Vector{\omega} \times \Vector{r}
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Differentiating,
+    </p>
+    <p>
+    $
+    \begin{eqnarray}
+    \Vector{a}
+    &amp; = &amp;
+    \frac{d \Vector{v}}{d t} \\
+    &amp; = &amp;
+    \frac{d \Vector{\omega}}{d t} \times \Vector{r} + \Vector{\omega} \times \frac{d \Vector{r}}{d t} \\
+    &amp; = &amp;
+    \Vector{0} \times \Vector{r} + \Vector{\omega} \times \Vector{v} \\
+    &amp; = &amp;
+    \Vector{\omega} \times (\Vector{\omega} \times \Vector{r}) \\
+    &amp; = &amp;
+    - \omega^2 \Vector{r} \\
+    \end{eqnarray}
+    $
+    </p>
+    <p>
+      Cartesian coordinates also offer a non-geometric route to this result, but without the geometric expression for the velocity. That seems a nice way to contrast the geometric and coordinate approaches.
+    </p>
+    <p>
+      Even more powerful would be to use Geometric Algebra.
     </p>
   </section>
   <section>
