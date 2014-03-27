@@ -306,6 +306,48 @@ title: Geometric Physics • Classical Mechanics • Multi Particle Systems
       The rate of change of the total angular momentum of a system of particles about a fixed point is equal to the sum of the torques about that point.
     </p>
   </section>
+  
+  <section>
+    <h3>Kinetic Energy of a Multiparticle System</h3>
+    <p>
+      The <b>total kinetic energy</b>, $K$, is defined to be the sum of the kinetic energy of all the particles.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \sum_i \frac{1}{2} m_i (\Vector{v}_i)^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The kinetic energy measured in the center of mass frame, $K_{CM}$, is then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K_{CM}
+      &amp; = &amp;
+      \sum_i \frac{1}{2} m_i (\Vector{v}_i - \Vector{V}_{CM})^2 \\
+      &amp; = &amp;
+      K - \Vector{V}_{CM} \cdot \sum_i m_i \Vector{v}_i + \frac{1}{2} \sum_i m_i \Vector{V}_{CM}^2 \\
+      &amp; = &amp;
+      K - \frac{1}{2} M \Vector{V}_{CM}^2 \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Similar to the total angular momentum, the total kinetic energy decomposes.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K
+      &amp; = &amp;
+      K_{CM} + \frac{1}{2} M \Vector{V}_{CM}^2 \\
+      \end{eqnarray}
+      $
+    </p>
+  </section>
 
   <section>
     <div class="panel panel-default">
