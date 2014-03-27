@@ -7,6 +7,134 @@ title: Geometric Physics • Introductory • Vectors
     <h1>Vectors <small>Geometric Numbers</small></h1>
   </div>
   <section>
+    <h3>Coordinates and Reference Frames</h3>
+    <p>
+      Let us imagine that Alice and Bob are two experimental physicists deep in space and each running their own separate laboratory. Alice and Bob are observing the goings-on in some common region of space and are each trying to deduce the laws of physics. For obvious reasons we call them <b>observers</b>, each observing some common phenomenon.
+    </p>
+    <p>
+      For simplicity, we will assime that Alice and Bob are not in relative motion, which is to say that their separation does not change in time. We'll also assume that neither observer is spinning in space.
+    </p>
+    <p>
+      Being distinct observers, we mean that generally their respective <b>reference frames</b> that they use to measure the locations of points in 3-dimensional space are not perfectly aligned. There are many ways to set up a reference frame or <b>coordinate frame</b>. Nature does not care, but some may be more convenient or suitable for the experimentalist to perform calculations.
+    </p>
+    <p>
+      We will assume that both Alice and Bob have established <b>Cartesian coordinate frames</b> so that the position of a point is specified by a list of three numbers $[x,y,z]$ along three mutually perpendicular axes. The numbers $(x,y,z)$ are called the <b>coordinates</b> of the point.
+    </p>
+    <p>
+      In this case we imagine that the $z$-axis of Alice's frame and the $\Primed{z}$-axis of Bob's frame do coincide, as do the spatial origins of each frame. However, Bob's frame is rotated through an angle $\phi$ clockwise when viewed along the $z$-axis, or equivalently, counterclockwise when looking at the $xy$-plane when viewed from the positive $z$ direction.
+    </p>
+    <p>
+      Show that if Alice determines the coordinates of a point to be $(x,y,z)$ in her frame then Bob's coordinates $(\Primed{x},\Primed{y},\Primed{z})$ are given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \Primed{x} &amp; = &amp; x \cos \phi + y \sin \phi \\
+      \Primed{y} &amp; = &amp; y \cos \phi - x \sin \phi \\
+      \Primed{z} &amp; = &amp; z
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      (You only need to know basic trigonometry to do this).
+    </p>
+  </section>
+    <h3>Geometric Numbers</h3>
+    <p>
+      Suppose that $\Vector{a}$ and $\Vector{b}$ are two vectors.
+    </p>
+    <p>
+      When Alice measures the vector $\Vector{a}$ she obtains <b>the components of $\Vector{a}$ in her representation</b>
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      [\Vector{a}]_{Alice} &amp; = &amp; [a_{x}, a_{y}, a_{z}]
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      And when Alice measures the vector $\Vector{b}$ she obtains the components of $\Vector{b}$ in her representation
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      [\Vector{b}]_{Alice} &amp; = &amp; [b_{x}, b_{y}, b_{z}]
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      But when Bob measures $\Vector{a}$ he gets a different set of numbers from Alice because he is using a different reference frame.
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      [\Vector{a}]_{Bob} &amp; = &amp; [\Primed{a}_{x}, \Primed{a}_{y}, \Primed{a}_{z}]
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      And similarly for measuring $\Vector{b}$
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      [\Vector{b}]_{Bob} &amp; = &amp; [\Primed{b}_{x}, \Primed{b}_{y}, \Primed{b}_{z}]
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      Now suppose that Alice and Bob want to compare their observations. This brings us to the fundamental insight. We need coordinates to make measurements, but we quantities that are coordinate-free in order to make comparisons.
+    </p>
+  </section>
+  <section>
+    <h3>Scalar (dot) Product of two vectors</h3>
+    <p>
+      Show that the quantity $a_{x} b_{x} + a_{y} b_{y} + a_z b_z$ does not depend upon the coordinates i.e.
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \Primed{a}_x \Primed{b}_x + \Primed{a}_y \Primed{b}_y + \Primed{a}_z \Primed{b}_z
+      &amp; = &amp;
+      a_{x} b_{x} + a_{y} b_{y} + a_z b_z
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      Any single function of position that has the same value for all observers is called a <b>scalar invariant</b>.
+    </p>
+    <p>
+      And so the quantity we have just computed from the components of $\Vector{a}$ and $\Vector{b}$, and yet which is independent of the coordinate frames used, is called the <b>scalar product of two vectors</b>. It is so useful that we give it a special coordinate-free notation
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \Vector{a} \cdot \Vector{b}
+      &amp; = &amp;
+      a_{x} b_{x} + a_{y} b_{y} + a_z b_z
+      &amp; = &amp;
+      \Primed{a}_x \Primed{b}_x + \Primed{a}_y \Primed{b}_y + \Primed{a}_z \Primed{b}_z
+      \end{eqnarray*}
+      $
+    </p>
+    <p>
+      But what quantity is $\Vector{a} \cdot \Vector{b}$? What is the geometric significance?
+    </p>
+    <p>
+      By considering $\Vector{b}$ to be a unit vector, say along the $x$-axis, show
+    </p>
+    <p>
+      $
+      \begin{eqnarray*}
+      \Vector{a} \cdot \Vector{b}
+      &amp; = &amp;
+      \Norm{\Vector{a}} \Norm{\Vector{b}} \cos \theta
+      \end{eqnarray*}
+      $
+    </p>
+  </section>
+  <section>
     <h3>Geometry Zen DaVinci library (standalone)</h3>
     <div class="row">
       <div class="col-md-6">
