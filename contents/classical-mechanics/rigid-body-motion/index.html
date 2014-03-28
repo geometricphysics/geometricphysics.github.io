@@ -3,28 +3,38 @@ layout: master
 title: Geometric Physics • Classical Mechanics • Rigid Body Motion
 ---
 <article>
-  <h1>Rigid Body Motion</h1>
+  <div class="page-header">
+    <h1>Rigid Body Motion <small>Moment of Inertia</small></h1>
+  </div>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      From studying a general multiparticle system, we now ask what happens when the relative motions of the particles are constrained. One of the major concepts that emerges is a linear function of the angular velocity called the moment of inertia.
+    </p>
+  </section>
   <section>
     <h3>Fixed Point of Rotation</h3>
     <p>
       A fixed point of rotation means that the distance from the origin for every particle is constant in time.<br/><br/>
       $
       \begin{eqnarray}
-        \frac{d (\vec{x}_{i})^{2}}{dt} &amp; = &amp; 0 \\
+        \frac{d (\Vector{x}_{i})^{2}}{dt} &amp; = &amp; 0 \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Then $\vec{x}_{i}$ must be perpendicular to the velocity so we can write<br/><br/>
+      Then $\Vector{x}_{i}$ must be perpendicular to the velocity so we can write<br/><br/>
       $
       \begin{eqnarray}
-         \frac{d \vec{x}_{i}}{dt} &amp; = &amp; \vec{\omega}_{i} \times \vec{x}_{i} \\
+         \frac{d \Vector{x}_{i}}{dt} &amp; = &amp; \Vector{\omega}_{i} \times \Vector{x}_{i} \\
       \end{eqnarray}
       $
       <br/><br/>
-      where the $\vec{\omega}_{i}$ is not unique (add multiple of the position vector).
+      where the $\Vector{\omega}_{i}$ is not unique (we can add a multiple of the position vector).
     </p>
-
+    <p>
+      With this 'feeble' constraint, every particle is moving on its own sphere, not constrained to a plane. It's rather elegant though that forcing the velocity vector to be orthogonal to the position vector constrains each particle to move on the surface of a sphere.
+    </p>
   </section>
   <section>
     <h3>Rigid Body Definition</h3>
@@ -32,7 +42,7 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       A rigid body is one in which the distance between any pair of particles is constant in time.<br/><br/>
       $
       \begin{eqnarray}
-        \frac{d (\vec{x}_{i} - \vec{x}_{j})^{2}}{dt} &amp; = &amp; 0 \\
+        \frac{d (\Vector{x}_{i} - \Vector{x}_{j})^{2}}{dt} &amp; = &amp; 0 \\
       \end{eqnarray}
       $
     </p>
@@ -40,108 +50,203 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       Then<br/><br/>
       $
       \begin{eqnarray}
-        (\vec{x}_{i} - \vec{x}_{j}) \cdot (\frac{d \vec{x}_{i}}{dt} - \frac{d \vec{x}_{j}}{dt}) &amp; = &amp; 0 \\
+        (\Vector{x}_{i} - \Vector{x}_{j}) \cdot (\frac{d \Vector{x}_{i}}{dt} - \frac{d \Vector{x}_{j}}{dt}) &amp; = &amp; 0 \\
       \end{eqnarray}
       $
     </p>
     <p>
   </section>
   <section>
+    <h3>Combining Rigid Body Definition</h3>
+    <p>
+      If we combine the fixed rotation point constraint with the rigid body constraint then we might now imagine some solid body spinning around a fixed point.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\Vector{x}_i - \Vector{x}_j) \cdot (\dot{\Vector{x}}_i - \dot{\Vector{x}}_j)
+      &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substitute expression for fixed point of rotation:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\Vector{x}_i - \Vector{x}_j) \cdot (\omega_i \times \Vector{x}_i - \omega_j \times \Vector{x}_j)
+      &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Expand and observe that some terms are zero:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{x}_i \cdot (\omega_j \times \Vector{x}_j) + \Vector{x}_j \cdot (\omega_i \times \Vector{x}_i)
+      &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Cyclically permute the triple scalar product:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (\omega_i - \omega_j) \cdot (\Vector{x}_i \times \Vector{x}_j)
+      &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Deduce that the form of the $\Vector{\omega}_i$ must be:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{\omega}_i
+      &amp; = &amp;
+      \Vector{\omega} + \lambda_i \Vector{x}_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Here $\Vector{\omega}$ is independent of $i$ and is a property of the system.
+    </p>
+    <p>
+      The motion of every particle is now described by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{\Vector{x}}_i
+      &amp; = &amp;
+      \Vector{\omega} \times \Vector{x}_i
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
     <h3>Rotation Kinematics</h3>
+    <p>
+      We digress for a moment for a more elementary treatment in Cartesian coordinates.
+    </p>
     <p>
       Consider a particle rotating in a circle with<br/><br/>
       $
       \begin{eqnarray}
-        \vec{x} &amp; = &amp; R cos \theta \hat{i} + R sin \theta \hat{j} \\
+        \Vector{x} &amp; = &amp; R \cos \theta(t) \UnitVector{i} + R \sin \theta(t) \UnitVector{j} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
-      The <b>angular velocity</b> is defined as<br/><br/>
+      The <b>angular velocity</b> vector is defined as<br/><br/>
       $
       \begin{eqnarray}
-        \omega &amp; = &amp; \frac{d \theta}{d t} \\
+        \Vector{\omega}(t) &amp; = &amp; \frac{d \theta}{d t}(t) \UnitVector{k} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
-      Since the particle moves in a circle, $R$ is constant in time. However, the angular velocity may depend on time.
+      Since the particle moves in a circle, $R$ is constant in time. However, the angular velocity magnitude may depend on time.
     </p>
     <p>
-      Differentiating twice w.r.t time to obtain the acceleration<br/><br/>
+      Differentiating twice w.r.t time to obtain the acceleration
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \ddot{\vec{x}} &amp; = &amp; - \omega^{2} R \hat{x} + \frac{d \omega}{d t} R (\hat{\omega} \times \hat{x}) \\
+        \ddot{\Vector{x}}
+        &amp; = &amp;
+        - \omega^{2} \Vector{x} + \frac{d \omega}{d t} \times \Vector{x} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       This allows us to identify both a <b>centripetal acceleration</b> as well as a <b>tangential acceleration</b>.
     </p>
     <p>
-      For a rigid body rotating around a fixed point (combining the previous two definitions) we can show that a rigid body rotating about a fixed origin has a vector property, $\vec{\omega}$, such that for any particle in the body<br/><br/>
+      Using $\Vector{x} = R \UnitVector{x}$,
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \frac{d \vec{x}_{i}}{dt} &amp; = &amp; \vec{\omega} \times \vec{x}_{i} \\
+        \ddot{\Vector{x}}
+        &amp; = &amp;
+        - \omega^{2} R \UnitVector{x} + \frac{d^2 \theta}{d t^2} R (\UnitVector{\omega} \times \UnitVector{x}) \\
       \end{eqnarray}
-      $.
+      $
+    </p>
+    <p>
+      For a rigid body rotating around a fixed point (combining the previous two definitions) we can show that a rigid body rotating about a fixed origin has a vector property, $\Vector{\omega}$, such that for any particle in the body<br/><br/>
+      $
+      \begin{eqnarray}
+        \frac{d \Vector{x}_{i}}{dt} &amp; = &amp; \Vector{\omega} \times \Vector{x}_{i} \\
+      \end{eqnarray}
+      $
     </p>
     <p>
       The <b>angular acceleration</b> is defined as<br/><br/>
       $
       \begin{eqnarray}
-        \alpha &amp; = &amp; \frac{d \omega}{d t} \\
+        \alpha &amp; = &amp; \frac{d^2 \theta}{d t^2} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       The magnitude of the <b>linear velocity</b> is then related to the angular velocity by<br/><br/>
       $
       \begin{eqnarray}
-        v &amp; = &amp; r \omega \\
+        v &amp; = &amp; R \omega \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
-      By considering the motion of a particle in a circular orbit with uniform angular velocity, the acceleration is found to be directed towards the center. This <b>centripetal acceleration</b> is given by<br/><br/>
+      By considering the motion of a particle in a circular orbit with uniform angular velocity, the acceleration is found to be directed towards the center.
+    </p>
+    <p>The <b>centripetal acceleration</b> is given by<br/><br/>
       $
       \begin{eqnarray}
-        \vec{a}_{c} &amp; = &amp; - \omega^{2} \vec{r} \\
+        \Vector{a}_{c} &amp; = &amp; - \omega^{2} \Vector{x} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       The <b>tangential acceleration</b> is found to be<br/><br/>
       $
       \begin{eqnarray}
-        a_{t} &amp; = &amp; r \alpha \\
+        \Vector{a}_{t} &amp; = &amp; R \alpha (\UnitVector{\omega} \times \UnitVector{x}) \\
       \end{eqnarray}
-      $.
+      $
     </p>
   </section>
   <section>
     <h3>Uniformly accelerated rotational motion</h3>
     <p>
-      Integrating the kinematic equations gives<br/><br/>
+      Integrating the kinematic equations for a constant angular acceleration gives<br/><br/>
       $
       \begin{eqnarray}
         \omega &amp; = &amp; \omega_{0} + \alpha t \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       $
       \begin{eqnarray}
         \theta - \theta_{0} &amp; = &amp; \omega_{0} t + \frac{1}{2} \alpha t^{2} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       $
       \begin{eqnarray}
         \omega^{2} &amp; = &amp; \omega_{0}^2 + 2 \alpha (\theta - \theta_{0}) \\
       \end{eqnarray}
-      $.
+      $
     </p>
   </section>
   <section>
@@ -150,38 +255,43 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       A <b>torque</b> produces an angular acceleration.
     </p>
     <p>
-      The torque, $\vec{T}$, of a force, $\vec{F}$, applied a displacement $\vec{r}$ from the origin is defined as<br/><br/>
+      The torque, $\Vector{T}$, of a force, $\Vector{F}$, applied a displacement $\Vector{r}$ from the origin is defined as<br/><br/>
       $
       \begin{eqnarray}
-        \vec{T} &amp; = &amp; \vec{r} \times \vec{F} \\
+        \Vector{T} &amp; = &amp; \Vector{r} \times \Vector{F} \\
       \end{eqnarray}
-      $.
+      $
     </p>
   </section>
   <section>
     <h3>Rotational Inertia</h3>
     <p>
-      What is the rotational analog of inertial mass? Using the fact that a rigid body rotating about a fixed origin has the unique vector property, $\vec{\omega}$, that connects the velocity and position of any particle, we can compute the angular momentum of the rigid body as follows<br/><br/>
+      What is the rotational analog of inertial mass? Using the fact that a rigid body rotating about a fixed origin has the unique vector property, $\Vector{\omega}$, that connects the velocity and position of any particle, we can compute the angular momentum of the rigid body as follows<br/><br/>
       $
       \begin{eqnarray}
-        \vec{L} &amp; = &amp; \sum_{i} \vec{x}_{i} \times \vec{p}_{i} \\
-                &amp; = &amp; \sum_{i} m_{i} \vec{x}_{i} \times \vec{v}_{i} \\
-                &amp; = &amp; \sum_{i} m_{i} \vec{x}_{i} \times (\omega \times \vec{x}_{i}) \\
-                &amp; = &amp; \sum_{i} (m_{i} (\vec{x}_{i})^2 \vec{\omega} - m_{i} (\vec{\omega} \cdot \vec{x}_{i})\vec{x}_{i}) \\
+        \Vector{L}
+        &amp; = &amp;
+        \sum_{i} \Vector{x}_{i} \times \Vector{p}_{i} \\
+        &amp; = &amp;
+        \sum_{i} m_{i} \Vector{x}_{i} \times \Vector{v}_{i} \\
+        &amp; = &amp;
+        \sum_{i} m_{i} \Vector{x}_{i} \times (\Vector{\omega} \times \Vector{x}_{i}) \\
+        &amp; = &amp;
+        \sum_{i} (m_{i} (\Vector{x}_{i})^2 \Vector{\omega} - m_{i} (\Vector{\omega} \cdot \Vector{x}_{i})\Vector{x}_{i}) \\
       \end{eqnarray}
       $
     </p>
     <p>
-      In general, the angular momentum and the angular velocity are not parallel and we are forced to define an <b>Inertia tensor</b>. Alternatively, we can say that the angular momentum is computed from a linear transformation of the angular velocity<br/><br/>
+      <b>In general, the angular momentum and the angular velocity are not parallel</b> and we are forced to define an <b>Inertia tensor</b>. Alternatively, we can say that the angular momentum is computed from a linear transformation of the angular velocity<br/><br/>
       $
       \begin{eqnarray}
-        \vec{L} &amp; = &amp; \vec{L}(\vec{\omega}) \\
+        \Vector{L} &amp; = &amp; \Vector{L}(\Vector{\omega}) \\
       \end{eqnarray}
       $
     </p>
   </section>
   <section>
-    <h3>General Properties of $\vec{L}(\vec{\omega})$</h3>
+    <h3>General Properties of $\Vector{L}(\Vector{\omega})$</h3>
     <p>
       The following properties of the angular momentum transformation follow from the the formula for $\vec{L}(\vec{\omega})$ and the conditions for a rigid body and a fixed rotation point.
     </p>
@@ -233,13 +343,22 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Symmetry</h3>
     <p>
-      In the special cases where the mass of the rigid body lies in a plane or where there is symmetry above and below a plane or where there is axial symmetry, the second term is zero.
+      In the special cases where the mass of the rigid body lies in a plane or where there is symmetry above and below a plane or where there is axial symmetry, the second term has components only parallel to $\Vector{\omega}$. For example $\Vector{x}_1 = \Vector{x}$
     </p>
     <p>
-      In such special cases,<br/><br/>
+      In such special cases
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{L} &amp; = &amp; I \, \vec{\omega} \\
+        \Vector{L} &amp; = &amp; I_{symmetric} \, \Vector{\omega} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        I_{symmetric} &amp; = &amp; \sum_i m_i (\Vector{x}_i)^2 \\
       \end{eqnarray}
       $
     </p>
@@ -247,77 +366,119 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Parallel-Axis Theorem</h3>
     <p>
-      We now investigate the angular momentum when a different origin is used. Then by adding the conditions for a rigid body and rotation about the point we obtain a relation among the inertia tensors (angular momentum.transformations).
+      We now investigate the angular momentum when a different origin is used. Then by adding the conditions for a rigid body and rotation about the point we obtain a relation among the inertia tensors (angular momentum transformations).
     </p>
     <p>
-      Let $\vec{X}_{CM}$ be the center of mass relative to some origin and let $Y$ be the point with position vector $\vec{Y}$ relative to the same origin. We also define the displacement from $Y$ to the center of mass<br/><br/>
+      Let $\Vector{X}_{CM}$ be the center of mass relative to some origin and let $A$ be the point with position vector $\Vector{a}$ relative to the same origin. We also define the displacement from $A$ to the center of mass
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{R} &amp; = &amp; \vec{X}_{CM} - \vec{Y} \\
+        \Vector{R} &amp; = &amp; \Vector{X}_{CM} - \Vector{a} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Let $\vec{x}_{i}$ be the position vector from the origin to the $i$th particle with mass $m_{i}$. We define the displacement of each particle from the center of mass<br/><br/>
+      Let $\Vector{x}_{i}$ be the position vector from the origin to the $i$th particle with mass $m_{i}$. We define the displacement of each particle from the center of mass
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{r}_{i} &amp; = &amp; \vec{x}_{i} - \vec{X}_{CM} \\
+        \Vector{r}_{i} &amp; = &amp; \Vector{x}_{i} - \Vector{X}_{CM} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      The angular momentum relative to the point $Y$ of a system of particles is<br/><br/>
+      Adding the previous two equations,
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{L}_{Y} &amp; = &amp; \sum_{i} m_{i} (\vec{x}_{i} - \vec{Y}) \times (\dot{\vec{x}}_{i} - \dot{\vec{Y}}) \\
+        \Vector{r}_{i} + \Vector{R} &amp; = &amp; \Vector{x}_{i} - \Vector{a} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      The angular momentum relative to the center of mass of the same system of particles is<br/><br/>
+      The angular momentum relative to the point $A$ of a system of particles is
+    </p>
+    <p class="important">
+      Note how the momenta are calculated using a Galilean transformation of velocity relative to $A$. It's not that we are being non-relativistic. The point is that if $A$ is moving relative to the origin then the momenta of the particles relative to $A$ will change.
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{L}_{CM} &amp; = &amp; \sum_{i} m_{i} \vec{r}_{i} \times \dot{\vec{x}}_{i} \\
+        \Vector{L}_{A}
+        &amp; = &amp;
+        \sum_{i} m_{i} (\Vector{x}_{i} - \Vector{a}) \times (\dot{\Vector{x}}_{i} - \dot{\Vector{a}}) \\
+        &amp; = &amp;
+        \sum_{i} m_{i} (\Vector{r}_{i} + \Vector{R}) \times (\dot{\Vector{r}}_{i} + \dot{\Vector{R}}) \\
+        &amp; = &amp;
+        \sum_{i} m_{i} (\Vector{r}_{i} \times \dot{\Vector{r}}_{i}) + \Vector{R} \times \sum_i m_i \dot{\Vector{r}}_i - \dot{\Vector{R}} \times \sum_i m_i \Vector{r}_i + \Vector{R} \times \dot{\Vector{R}} \sum_i m_i \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Using the fact that $\vec{r}_i$ is a displacement from the center of mass we conclude that<br/><br/>
+      The angular momentum relative to the center of mass of the same system of particles is
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \sum_{i} m_{i} \vec{r}_{i} &amp; = &amp; 0 \\
+        \Vector{L}_{CM} &amp; = &amp; \sum_{i} m_{i} \Vector{r}_{i} \times \dot{\Vector{r}}_{i} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Expanding the expression for $\vec{L}_{Y}$ with $\vec{x}_{i} - \vec{Y} = \vec{r}_{i} + \vec{R}$ and using the previous observation we obtain<br/><br/>
+      Using the fact that $\Vector{r}_i$ is a displacement from the center of mass we conclude that
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{L}_{Y} &amp; = &amp; \vec{L}_{CM} + M \vec{R} \times \dot{\vec{R}} \\
+        \sum_{i} m_{i} \Vector{r}_{i} &amp; = &amp; 0 \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Now make $Y$ the fixed rotation point and assume that the system of particles comprise a rigid body so that given $\vec{s}_{i} = \vec{x}_{i} - \vec{Y}$,<br/><br/>
+      And so
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \dot{\vec{s}}_{i} &amp; = &amp; \omega \times \vec{s}_{i} \\
+        \Vector{L}_{A} &amp; = &amp; \Vector{L}_{CM} + M \Vector{R} \times \dot{\Vector{R}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p class="important">
+      This is a very general result because it allows the possibility that $A$ may be moving.
+    </p>
+    <p>
+      Now make $A$ the fixed rotation point and assume that the system of particles comprise a rigid body so that given $\Vector{s}_{i} = \Vector{x}_{i} - \Vector{a} = \Vector{r}_i + \Vector{R}$,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \dot{\Vector{s}}_{i} &amp; = &amp; \Vector{\omega} \times \Vector{s}_{i} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      From this equation we can show<br/><br/>
+      From this equation we can show (substitute $\Vector{s}_i = \Vector{r}_i + \Vector{R}$, multiply by $m_i$ and sum over $i$)
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \dot{\vec{R}} &amp; = &amp; \omega \times \vec{R} \\
+        \dot{\Vector{R}} &amp; = &amp; \Vector{\omega} \times \Vector{R} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      Finally, we obtain<br/><br/>
+      Finally, we obtain
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \vec{L}_{Y} &amp; = &amp; \vec{L}_{CM} + M [ R^{2} \vec{\omega} - (\vec{R} \cdot \vec{\omega}) \vec{R} ] \\
+        \Vector{L}_{A}
+        &amp; = &amp;
+        \Vector{L}_{CM} + M [ R^{2} \Vector{\omega} - (\Vector{R} \cdot \Vector{\omega}) \Vector{R} ] \\
       \end{eqnarray}
       $
     </p>
@@ -325,7 +486,7 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       This is the <b>parallel-axis theorem</b> in its more general form. It is normally derived under the simplification that the angular momentum is parallel to the angular velocity, in which case the inertia tensor becomes a scalar multiplier - the <b>moment of inertia</b>, and the theorem is presented as a relation among scalar values:<br/><br/>
       $
       \begin{eqnarray}
-        I_{Y} &amp; = &amp; I_{CM} + M R^{2} \\
+        I_{A} &amp; = &amp; I_{CM} + M R^{2} \\
       \end{eqnarray}
       $
     </p>

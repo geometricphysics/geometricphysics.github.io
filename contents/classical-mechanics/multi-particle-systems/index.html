@@ -3,7 +3,9 @@ layout: master
 title: Geometric Physics • Classical Mechanics • Multi Particle Systems
 ---
 <article>
-  <h1>Multi Particle Systems</h1>
+  <div class="page-header">
+    <h1>Multi Particle Systems <small>Center of Mass emerges and splits motions</small></h1>
+  </div>
   <section>
     <h3>Equilibrium of Forces (Empirical)</h3>
     <p>
@@ -273,6 +275,9 @@ title: Geometric Physics • Classical Mechanics • Multi Particle Systems
     <p>
       Finally, if we set $\Vector{a}$ to $\Vector{X}_{CM}$ then rearrange we get
     </p>
+    <p class="todo">
+      I don't think this is the correct definition of the spin angular momentum. The reason is that the momenta are relative to the origin rather than the center-of-mass. See the derivation for Rigid Bodies.
+    </p>
     <p>
       $
       \begin{eqnarray}
@@ -281,7 +286,10 @@ title: Geometric Physics • Classical Mechanics • Multi Particle Systems
       $
     </p>
     <p class="theorem">
-      The total angular momentum of a system about any origin decomposes into a contribution $\Vector{L}_{CM}$ due to the motion of the particles relative to the center of mass, and to a contribution, $\Vector{X}_{CM} \times \Vector{P}$, due to the motion of the center of mass 'particle' relative to the origin.
+      The total angular momentum of a system about any origin decomposes into a <b>spin</b> contribution $\Vector{L}_{CM}$ due to the motion of the particles relative to the center of mass, and to an <b>orbital</b> contribution, $\Vector{X}_{CM} \times \Vector{P}$, due to the motion of the center of mass 'particle' relative to the origin.
+    </p>
+    <p>
+      Under special conditions, we will see that these contributions are independently conserved.
     </p>
   </section>
 
