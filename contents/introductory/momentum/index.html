@@ -9,18 +9,83 @@ title: Geometric Physics • Introductory • Momentum
   <section>
   </section>
   <section>
-    <h3>Single Particle Systems</h3>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Linear Momentum of a Particle</h3>
-      </div>
-      <div class="panel-body">
-        <p>
-          The <b>linear momentum</b>, $\Vector{p}$, of a particle with mass $m$ and velocity $\Vector{v}$ is defined to be<br/><br/>
-          $\Vector{p} = m\Vector{v}$
-        </p>
-      </div>
-    </div>
+    <h3>Linear Momentum of a Particle</h3>
+    <p>
+      The <b>linear momentum</b>, $\Vector{p}$, of a particle with mass $m$ and velocity $\Vector{v}$ is defined to be
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{p} = m\Vector{v}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Newton's Second Law</h3>
+    <p>
+      The more general form of Newton's Second Law is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d \Vector{p}}{dt} &amp; = &amp; \Vector{F}
+      \label{Newton2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If the mass of the particle is constant then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{a}
+      &amp; = &amp;
+      \frac{d \Vector{v}}{dt}
+      &amp; = &amp;
+      \frac{\Vector{F}}{m}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Momentum-Impulse Relationship</h3>
+    <p>
+      If we integrate $\ref{Newton2}$ then we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta \Vector{p}
+      &amp; = &amp;
+      \Vector{p}_f - \Vector{p}_i
+      &amp; = &amp;
+      \int_{t_i}^{t_f} dt \, \Vector{F}(t)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This quantity (on the right) is called the <b>impulse</b> of the force $\Vector{F}$ between $t_i$ and $t_f$.
+    </p>
+    <p>
+      In a graph of force versus time, the impulse of a force $\Vector{F}$ as it acts from $t_i$ to $t_f$ is the area under the graph bounded by the time limits. (You actually need three graphs in 3 dimensions).
+    </p>
+  </section>
+  <section>
+    <h3>Average Force</h3>
+    <p>
+      If a force $\Vector{F}(t)$ acts over an interval of time $\Delta t = t_f - t_i$, then the average force $\bar{\Vector{F}}$ is defined by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \bar{\Vector{F}} \Delta t
+      &amp; = &amp;
+      \int_{t_i}^{t_f} dt \, \Vector{F}(t)
+      \end{eqnarray}
+      $
+    </p>
   </section>
   <section>
     <h3>Linear Momentum in DaVinci Python</h3>
@@ -86,22 +151,71 @@ print p
     </script>
 
   </section>
+  <section>
+    <h3>Conservation of Linear Momentum</h3>
+    <p>
+      Newton's Third Law states that if one particle exerts a force on a second particle, then the first particle experiences a force that is equal and opposite to the force on the second particle.
+    </p>
+    <p>
+      I'm not too fond of the terminology 'action' and 'reaction' because it suggests a primacy or causality of one force over the other. I'd prefer to say that <b>the forces of interaction between particles are pairwise and equal in magnitude but opposite in direction</b>.
+    </p>
+    <p>
+      A consequence of Newton's Third Law is that <b>In an isolated system, Linear Momentum is conserved</b>.
+    </p>
+    <p>
+      The change in momentum of the $i$th particle due to the external force $\Vector{F}_i$ and the internal forces $\Vector{f}_{ij}$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta \Vector{p}_i
+      &amp; = &amp;
+      \int_{t_{initial}}^{t_{final}} dt \, (\Vector{F}_i(t) + \sum_{j \ne i} \Vector{f}_{ij}(t))
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The change in momentum for the system of particles is obtained by summing over all particles.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta \Vector{P}
+      &amp; = &amp;
+      \sum_i \Delta \Vector{p}_i
+      &amp; = &amp;
+      \int_{t_{initial}}^{t_{final}} dt \, \sum_i (\Vector{F}_i(t) + \sum_{j \ne i} \Vector{f}_{ij}(t))
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      As a consequence of Newton's Third Law, the contributions due to internal forces cancel in pairs.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta \Vector{P}
+      &amp; = &amp;
+      \int_{t_{initial}}^{t_{final}} dt \, \sum_i \Vector{F}_i(t)
+      &amp; = &amp;
+      \int_{t_{initial}}^{t_{final}} dt \, \Vector{F}_{net}(t)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If the system is isolated then $\Vector{F}_{net}(t) = 0$, and so $\Delta \Vector{P} = 0$.
+    </p>
+  </section>
 
   <section>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Angular Momentum of a Particle about a Point</h3>
-      </div>
-      <div class="panel-body">
-        <p>
-          The <b>moment of momentum of a particle about a given point</b> is called the <b>angular momentum about that point</b>.
-        </p>
-        <p>
-          If $\Vector{r}$ is the displacement from the point to the particle, and $\Vector{p}$ is the linear momentum of the particle, then the angular momentum, $L$, of the particle about the point is<br/><br/>
-          $L = \Vector{r} \wedge \Vector{p}$
-        </p>
-      </div>
-    </div>
+    <h3>Angular Momentum of a Particle about a Point</h3>
+    <p>
+      The <b>moment of momentum of a particle about a given point</b> is called the <b>angular momentum about that point</b>.
+    </p>
+    <p>
+      If $\Vector{r}$ is the displacement from the point to the particle, and $\Vector{p}$ is the linear momentum of the particle, then the angular momentum, $L$, of the particle about the point is<br/><br/>
+      $L = \Vector{r} \wedge \Vector{p}$
+    </p>
   </section>
   <section>
     <h3>Angular Momentum in DaVinci Python</h3>
