@@ -305,17 +305,26 @@ title: Geometric Physics • Classical Mechanics • Multi Particle Systems
         &amp; = &amp;
         \sum_{i} (\Vector{v}_{i} - \frac{d}{dt} \Vector{a}) \wedge \Vector{p}_{i} + \sum_{i} (\Vector{r}_{i} - \Vector{a}) \wedge \frac{d}{dt} \Vector{p}_{i} \\
         &amp; = &amp;
-        \Vector{0} + \sum_{i} (\Vector{r}_{i} - \Vector{a}) \wedge \Vector{F}_{i} \\
+        \Vector{0} + \sum_{i} (\Vector{r}_{i} - \Vector{a}) \wedge (\Vector{F}_{i} + \sum_{j \ne i} \Vector{f}_{ij}) \\
         &amp; = &amp;
         \sum_{i} \Vector{N}_{i, A}
       \end{eqnarray*}
       $
     </p>
+    <p class="important">
+      The internal forces can be disregarded because of both Newton's Third Law and because we assume that the pairwise forces act on a line joining two particles.
+    </p>
     <p class="theorem">
       The rate of change of the total angular momentum of a system of particles about a fixed point is equal to the sum of the torques about that point.
     </p>
   </section>
-  
+
+  <section>
+    <h3>Conservation of Angular Momentum</h3>
+    <p>
+      In computing the angular momentum of a system of particles we have seen that it might depend upon both the choice of origin and the relative velocity. In a reference frame which is co-moving with the center-of-mass, we have seen that the total angular momentum is independent of the choice of the origin.
+    </p>
+  </section>
   <section>
     <h3>Kinetic Energy of a Multiparticle System</h3>
     <p>
