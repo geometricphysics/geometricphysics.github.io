@@ -3,7 +3,103 @@ layout: master
 title: Geometric Physics • Electrodynamics • Magnetostatics
 ---
 <article>
-  <h1>Magnetostatics</h1>
+  <div class="page-header">
+    <h1>Magnetostatics</h1>
+  </div>
+  <section>
+    <h3>Historical Development</h3>
+    <p>
+      Force per unit length between two parallel conducting wires is determined empirically to depend upon the currens in the wires and their separation.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      F / length &amp; = &amp; \frac{\mu_0 I_1 I_2}{2 \pi r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \mu_0 &amp; = &amp; 4 \pi \times 10^{-7} N / A^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Experiments involving a compass and a wire suggest a picture of circles of magnetic field surrounding a current-carrying wire and yet the magnetic force is perpendicular to the lines of $\Vector{B}$. Of course, a vectoral field is not the only possibility (bivector is more appropriate).
+    </p>
+    <p>
+      Considering an infinitesimally small length of wire $d\Vector{x}$, and accounting for the directions of the wire and magnetic field, the force is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d \Vector{F}_{magnetic} &amp; = &amp; I \, d \Vector{x} \times \Vector{B}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      A microscopic analysis of a current as a stream of charged particles suggests a magnetic force law for a moving charge and the introduction of a magnetic field $\Vector{B}$.
+    </p>
+    <p>
+      Consider a wire of cross-sectional area $A$ containing a current with drift velocity $\Vector{v}$ of charge carriers of density $n$ per unit volume and individual charge $q$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      I &amp; = &amp; n A v q
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We deduce the magnetic force per charge to be
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \Vector{F}_{magnetic} &amp; = &amp; q (\Vector{v} \times \Vector{B}) \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Studies of various geometries of currents leads to a guess (Biot-Savart Law) for the connection between the magnetic field $\Vector{B}$ and the source current densities $\Vector{j}(\Vector{r})$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{B}(\Vector{r})
+      &amp; = &amp;
+      \frac{\mu_0}{4 \pi} \int_{V} d^3\Primed{x} \frac{\Vector{j}(\Primed{\Vector{r}}) \times (\Vector{r} - \Primed{\Vector{r}})}{\Norm{\Vector{r} - \Primed{\Vector{r}}}^3}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The Biot Savart guess reproduces the observed static magnetic fields.
+    </p>
+    <p>
+      A consequence is that the magnetic field is divergence-free $\nabla \cdot \Vector{B} = 0$. In other words, there are no magnetic charges.
+    </p>
+    <p>
+      We also get Amp&#232;res Law
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \oint_{C} d \Vector{x} \cdot \Vector{B} = \mu_0 I_{enclosed}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can combine this with Stokes's theorem to obtain the differential form of Amp&#232;res Law (incomplete, as Maxwell observed, because it does not respect charge conservation).
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \nabla \times \Vector{B} &amp; = &amp; \mu_0 \Vector{j}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
   <section>
     <h3>Lorentz Force Law</h3>
     <p>
