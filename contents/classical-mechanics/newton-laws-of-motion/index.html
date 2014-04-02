@@ -2,6 +2,7 @@
 layout: master
 title: Geometric Physics • Classical Mechanics • Newton's Laws of Motion
 ---
+<article>
 <div class="page-header">
   <h1>Dynamics <small>Laws of Motion</small></h1>
 </div>
@@ -70,3 +71,76 @@ title: Geometric Physics • Classical Mechanics • Newton's Laws of Motion
       The third law has been refined since Newton's time to have a <em>weak</em> and a <em>strong</em> form. In the strong form, the lines of the forces coincide along a line joining the particles rather than being merely parallel and opposite. The gravitational force between massive particles and the electrostatic forces between charges are examples of a forces obeying the strong form.</p>
   </div>
 </div>
+  <section>
+    <h3>Trains of Mass</h3>
+    <p>
+      A common problem (in tests) is that of masses connected together by a string. One mass, on the end of the train is then subjected to a force. This is sometimes disguised, or made apparently more complex, by using a pulley and gravity to generate the force on the terminal mass.
+    </p>
+    <p>
+      Solving this system to compute the tension in the string is fairly simple but takes enough lines of algebra to make the problem a pain in tests. The result, at least for two masses, exhibits a high degree of symmetry in the masses. Is there some other way to think about this problem?
+    </p>
+    <p>
+      We first consider the case of two masses. $m_1$ is subjected to a force $F$ and is connected to $m_2$ by a string. The tension in the string is $T$.
+    </p>
+    <p>
+      The effect of the string, because it is non-stretchy, is to constrain the accelerations
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a_1 &amp; = &amp; a_2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We now apply Newton's second law to each of the masses
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      m_2 a_2 &amp; = &amp; T
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      m_1 a_1 &amp; = &amp; F - T
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Eliminate the accelerations to solve for T
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      m_1 (\frac{T}{m_2}) &amp; = &amp; F - T
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      T &amp; = &amp; \frac{m_2}{m_1 + m_2} F
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The result is only symmetrical in the masses if $F = m_1 g$.
+    </p>
+    <p>
+      We would expect that the total mass of the system, $M$, would come into play because the common acceleration, $a$, is governed only by the external force and the total mass
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a &amp; = &amp; \frac{F}{M}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This provides a quick route to the tension $T$ because $T = m_2 a$, as we have found previously.
+    </p>
+  </section>
+</article>
