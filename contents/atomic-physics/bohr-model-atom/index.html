@@ -19,7 +19,9 @@ title: Geometric Physics • Atomic Physics • The Bohr Model of the Atom
       \begin{eqnarray}
         \frac{1}{\lambda} &amp; = &amp; R (\frac{1}{n^{2}_{f}} - \frac{1}{n^{2}_{i}})\\
       \end{eqnarray}
-      $,<br/><br/>
+      $
+    </p>
+    <p>
       where $R$ is the Rydberg constant ~ $1.1 \times 10^{-7} m^{-1}$.
     </p>
   </section>
@@ -31,53 +33,87 @@ title: Geometric Physics • Atomic Physics • The Bohr Model of the Atom
       \begin{eqnarray}
         T &amp; = &amp; \frac{1}{2} m v^{2} \\
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       We assume that the centripetal acceleration is provided by the electrostatic interaction between the electron and the nucleus and we consider only circlular orbits<br/><br/>
       $
       \begin{eqnarray}
-        \frac{m v^{2}}{r} &amp; = &amp; \frac{Z e^{2}}{4 \pi \epsilon_{0} r^{2}} \\
+      \frac{m v^{2}}{r} &amp; = &amp; \frac{Z e^{2}}{4 \pi \epsilon_{0} r^{2}}
+      \label{Centripetal}
       \end{eqnarray}
-      $,<br/><br/>
-      So the kinetic energy is<br/><br/>
+      $
+    </p>
+    <p>
+      The centripetal force equation (circular motion) $\ref{Centripetal}$ constrains the speed to be a function of the radius of the orbit.
+    </p>
+    <p>
+      So the kinetic energy is
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        T &amp; = &amp; \frac{Z e^{2}}{8 \pi \epsilon_{0} r} \\
+        T(r) &amp; = &amp; \frac{Z e^{2}}{8 \pi \epsilon_{0} r}
+        \label{KineticEnergy}
       \end{eqnarray}
-      $.
+      $
     </p>
     <p>
       The potential energy of a the orbiting electron is <br/><br/>
       $
       \begin{eqnarray}
-        V &amp; = &amp; - \frac{Z e^{2}}{4 \pi \epsilon_{0} r} \\
-      \end{eqnarray}
-      $,<br/><br/>
-      and thus the total energy of the system is<br/><br/>
-      $
-      \begin{eqnarray}
-        E &amp; = &amp; T + V \\
-          &amp; = &amp; - \frac{Z e^{2}}{8 \pi \epsilon_{0} r} \\
+        V(r) &amp; = &amp; - \frac{Z e^{2}}{4 \pi \epsilon_{0} r}
       \end{eqnarray}
       $
     </p>
     <p>
-      Bohr now imposed the condition<br/><br/>
+      and thus the total energy of the system is
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        L &amp; = &amp; m v r \\
-          &amp; = &amp; n \hbar
+      E(r) &amp; = &amp; T + V &amp; = &amp; - \frac{Z e^{2}}{8 \pi \epsilon_{0} r} \\
       \end{eqnarray}
       $
     </p>
     <p>
-      This established the energy of an orbit as<br/><br/>
+      Bohr now imposed the condition on the angular momentum
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        L &amp; = &amp; m v r &amp; = &amp; n \hbar
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is equivalent to saying that the de Broglie wavelength exactly fits into the circular orbit, which is slightly more intuitive from a wave perspective.
+    </p>
+    <p>
+      The angular momentum condition provides another expression for $v(r)$ and so can be combined with the centripetal force equation $\ref{Centripetal}$ to provide an expression for $r$ in terms of the quantum number $n$ (i.e. eliminate $v$)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{1}{r} &amp; = &amp; \frac{Z e^2}{4 \pi \epsilon_0} \frac{m}{(n \hbar)^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is quite useful because it shows that $r_{n} \propto n^2$.
+    </p>
+    <p>
+      This established the energy of an orbit as
+    </p>
+    <p>
       $
       \begin{eqnarray}
         E_{n} &amp; = &amp; - 2 m (\frac{Z e^{2}}{8 \pi \epsilon_{0} \hbar})^{2} \frac{1}{n^{2}} \\
       \end{eqnarray}
       $
+    </p>
+    <p>
+      We see that $E_{n} \propto (\frac{1}{n})^2$.
     </p>
   </section>
 </article>
