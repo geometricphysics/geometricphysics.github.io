@@ -1,0 +1,286 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Linear Least Squares
+---
+<article>
+  <div class="page-header">
+    <h1>Linear Least Squares</h1>
+  </div>
+  <section>
+    <h3>Abstract</h3>
+    <p>
+      Regression analysis is used to compare sets of pairs of measurements. We may have one quantity measured by different methods, or two different quantities for which we are trying to establish a relationship. Ordinary linear regression may be used if one variable is without random error. In that case we have minimized the vertical squared deviations. The Deming method of regression analysis accounts for measurement error in both variables.
+    </p>
+    <h3>Linear Regression</h3>
+    <p>
+      In ordinary linear regression the typical derivation does not try to account for how the measurement values are distributed. Rather, the starting point is to minimize a function that is the sum of the squares of the vertical displacements of each measurement pair from a line. Physically, this is like minimizing the total energy of springs which are attached to the measurement pairs and to the line. Think of each spring as having a loop over the line that makes it free to slide on the line, but the string is constrained to run in vertical grooves.
+    </p>
+    <p>
+      If we had started from a normal distribution, we would arrive at the same quadratic dependence. However, there may be other distributions that give the same energy minimization interpretation.
+    </p>
+    <p>
+      Suppose the equation of the line that we desire is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p x + q y + r &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      I've using a more symmetrical representation of a line than is customary to facilitate a smoother transition to the Deming regression. I'm also using $p,q,r$ to make the translation to $y = a x + b$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a &amp; = &amp; - \frac{p}{q}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      b &amp; = &amp; - \frac{r}{q}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The vertical deviation $\delta_i$ of the $i$th data point $[x_i,y_i]$ from the line is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \delta_i &amp; = &amp; y_i - (-\frac{px_i+r}{q}) = \frac{1}{q}(p x_i + q y_i + r)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The form of $\delta_i$ immediately shows that if $[x_i,y_i]$ lies on the line then $\delta_i = 0$. As might be expected, we have to take care as $q \rightarrow 0$, which is the case for lines with steep gradients.
+    </p>
+    <p>
+      It's worth at this point introducing the square of the perpendicular distance from the measurement point to the line, $Q_i$. The square of a distance shall be termed the quadrance.
+    </p>
+    <p>
+      The quadrance $Q_i$ of a point $[x_i,y_i]$ from the line is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Q_i &amp; = &amp; \frac{(p x_i + q y_i + r)^2}{p^2 + q^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can now express the square of the deviation as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \delta_i^2 &amp; = &amp; \frac{1}{q^2}(p x_i + q y_i + r)^2 = \frac{p^2+q^2}{q^2} Q_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The sum of the squares of all these deviations is then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta &amp; = &amp; \sum_{i=1}^n \delta_i^2 = \frac{1}{q^2} \sum_{i=1}^n (p x_i + q y_i + r)^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Using the following substitutions
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{x} &amp; = &amp; \frac{1}{n} \sum_{i=1}^{n} x_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{y} &amp; = &amp; \frac{1}{n} \sum_{i=1}^{n} y_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{x^2} &amp; = &amp; \frac{1}{n} \sum_{i=1}^{n} x_i^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{y^2} &amp; = &amp; \frac{1}{n} \sum_{i=1}^{n} y_i^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{xy} &amp; = &amp; \frac{1}{n} \sum_{i=1}^{n} x_i y_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      we find that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Delta
+      &amp; = &amp;
+      \frac{n}{q^2} (p^2\overline{x^2} + q^2\overline{y^2} + r^2 + 2pr\overline{x} + 2qr\overline{y} + 2pq\overline{xy})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Be careful with the $\overline{xy}$, it's not $\overline{x}\overline{y}$!
+    </p>
+    <p>
+      Notice that this expression lacks symmetry in $p$ and $q$ because we singled out only the deviation in $y$.
+    </p>
+    <p>
+      We want to minimize $\Delta$ so we take the partial derivatives with respect to $p$, $q$, and $r$, and set them equal to zero.
+    </p>
+    <p>
+      For the partial derivative with respect to $r$ we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p \overline{x} + q \overline{y} + r &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In other words, the point $[\overline{x},\overline{y}]$ lies on the fitted line.
+    </p>
+    <p>
+      For the partial derivatives with respect to $p$ we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p \overline{x^2} + q \overline{xy} + r \overline{x} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Interestingly, if we assume $\overline{x} \ne 0$ then we may divide this equation by $\overline{x}$ to give
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p \frac{\overline{x^2}}{\overline{x}} + q \frac{\overline{xy}}{\overline{x}} + r &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In other words, the point $[\overline{x^2}/\overline{x},\overline{xy}/\overline{x}]$ lies on the line. We could work from here with two points on the line to compute the equation for the regression line. But is the restriction required?
+    </p>
+    <p>
+      Let's eliminate $r$ from the expression for the partial derivative with respect to $p$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p \overline{x^2} + q \overline{xy}-(p \overline{x} + q \overline{y})\overline{x} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p (\overline{x^2} - \overline{x}^2) &amp; = &amp; - q (\overline{xy} - \overline{x}\overline{y})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      which gives us the expression for $a$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a &amp; = &amp; \frac{\overline{xy} - \overline{x}\overline{y}}{\overline{x^2} - \overline{x}^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Let's now divide the expression for the partial derivative wrt $p$ by $q$ to follow the normal progression.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \overline{x^2}(- \frac{p}{q}) + \overline{x}(-\frac{r}{q}) &amp; = &amp; \overline{xy}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substituting in the expression for $a$ allows us to find $b$:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      b &amp; = &amp; \frac{\overline{x^2}\overline{y} - \overline{x}\overline{xy}}{\overline{x^2} - \overline{x}^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Some texts will have used  $2 \times 2$ matrices and the inverse to do the previous steps, but that seems overkill for a two variable problem.
+    </p>
+    <p>
+      Somehow, we've managed to avoid taking the derivative with respect to $q$. Effectively, we set $q = 1$.
+    </p>
+    <p>
+      Just for grins, lets take the partial derivative of $\Delta$ with respect to $q$ and set equal to zero.
+    </p>
+    <p>
+      Things are a bit more complicated than the normal progression because of the $q^2$ in the denominator. After some algebra and eliminating $r$ we find the dimensionless identity
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      p^2 \overline{x^2} + r^2 + 2pr\overline{x}+qr\overline{y}+pq\overline{xy} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If we divide by $q^2$ we obtain, since $a$ is dimensionless, the quadrance identity:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a^2 \overline{x^2} + b^2 + 2ab\overline{x}-b\overline{y}-a\overline{xy} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      But this turns out to be a redundant expression that provides no new information. That is gratifying because there is some redundancy in the specification of $p,q,r$.
+    </p>
+    <p>
+      We can also compute the uncertainty in $y$ and each of the parameters $a$ and $b$.
+    </p>
+    <h3>Deming Regression</h3>
+    <p>
+      The Deming regression line is determined by requiring the stationary value, with respect to a number of fitting parameters, of a function of all the points. The choice of this function may be dictated by some knowledge of the probability distribution of the measurements. In this case a function is constructed that is proportional to the probability of the fit and this will involve a product of the probability for each measurement point. Rather than computing the stationary values for this function, we can compute them for its logarithm which then involves a sum. The function that we work with often involves a sum of squares if the original probability distributions were Gaussian.
+    </p>
+    <p>
+      Often we bypass such analysis and proceed directly to a more physical interpretation that is equivalent to minimizing the total energy of springs connected in various orientations and with various stiffness. However, I'm not sure that this approach could yield estimates for the variances?
+    </p>
+    <p>
+      The Deming regression line is estimated by minimizing the sums of squared deviations in both the $x$ and $y$ directions but weighted according to the analytical standard deviations for the two methods of measurement. If we consider the $y$ axis to be vertical and the $x$ axis to be horizontal, then we can define an angle $\theta$ measured counter-clockwise from the vertical that expresses the relative importance given to the fitting errors. If the angle is taken to be zero, we are assuming that the standard deviation in the $x$ direction is zero, we only care about the deviation in the $y$ direction, and we have the ordinary linear regression case.
+    </p>
+    <p>
+      I've seen the Deming regression derived by using the constraints to eliminate variables. However, it is more symmetrical and elegant to use <b>Lagrangian Multipliers</b>.
+    </p>
+    <h3>The likelihood function</h3>
+  </section>
+</article>
