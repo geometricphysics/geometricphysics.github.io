@@ -1,0 +1,331 @@
+---
+layout: master
+title: Geometric Physics • Mathematical Methods • Conic Sections
+---
+<article>
+  <div class="page-header">
+    <h1>Conic Sections</h1>
+  </div>
+  <section>
+    <h3>Overview</h3>
+    <p>
+      Our goal will be to provide a <em>uniform treatment</em> of <b>conic sections</b> in terms of the <b>Directrix</b> and <b>Focus</b>.
+    </p>
+    <p>
+      We will show that the loci are indeed sections of a cone.
+    </p>
+    <p>
+      We then show how the character of the orbit depends on the <b>eccentricity</b>.
+    </p>
+    <p>
+      We will replace the usual disjointed definitions of the <b>parabola</b>, <b>ellipse</b> and <b>hyperbola</b> with theorems.
+    </p>
+    <p>
+      We will take into consideration the <b>circle</b> as well as the <b>intersection of two lines</b>.
+    </p>
+    <p>
+      The classification into elliptic, parabolic and hyperbolic occurs in other areas of mathematics.
+    </p>
+  </section>
+  <section>
+    <h3>Geometry of Conic Sections</h3>
+    <p>
+      A conic section is the locus of a point whose distance from a given point, the <b>focus</b>, $F$, is proportional to  its perpendicular distance from a given line not containing $F$, the <b>directrix</b>, $L$. The constant of proportionality is called the <b>eccentricity</b>, $e$.
+    </p>
+  </section>
+  <section>
+    <h3>Definitions</h3>
+    <p>
+      The <b>linear eccentricity</b>, $c$ is the distance from a focus to center.
+    </p>
+    <p>
+      The <b>latus rectum</b>, $2l$ is chord parallel to the directrix and passing through the focus.
+    </p>
+    <p>
+      The <b>semi-latus rectum</b>, $l$ is half the latus rectum.
+    </p>
+    <p>
+      The <b>focal parameter</b>, $p$ is the distance from the focus to the directrix.
+    </p>
+    <p>
+      For an ellipse, the <b>semi-major axis</b>, $a$ is half the length of the major axis.
+    </p>
+    <p>
+      For an ellipse, the <b>semi-minor axis</b>, $b$ is half the length of the minor axis.
+    </p>
+  </section>
+  <section>
+    <h3>Algebra of Conic Sections</h3>
+    <p>
+      In the diagram below, the conic is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Norm{FP} &amp; = &amp; e \Norm{DP}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      r &amp; = &amp; e (p + r \cos \theta)
+      \end{eqnarray}
+      $
+    </p>
+    <div id="box" class="jxgbox" style="width:500px; height:500px;"></div>
+    <script type="text/javascript">
+      var board = JXG.JSXGraph.initBoard(
+        'box',
+        {
+          boundingbox: [-10, 10, 10, -10],
+          keepaspectratio: true,
+          axis:false,
+          showNavigation: false,
+          showCopyright: false
+        });
+
+      var F  = board.create('point',[0,0], {"name":"Focus, $F$", "fixed":true});
+      var D1 = board.create('point',[-5,+5], {"name":"D1", "visible":false});
+      var D2 = board.create('point',[-5,0], {"name":"D2", "visible":false});
+      var L  = board.create('line',[D1,D2], {"name":"Directrix, $L$","withLabel":true});
+      var P  = board.create('point',[5,5], {"name":"$P$"});
+      var D  = board.create('point',[function() {return D1.X();},function() {return P.Y();}], {"name":"$D$"});
+      var X  = board.create('point',[+5,0], {"name":"X", "visible":false});
+
+      var p = board.create(
+        'line',
+        [[function(){return D.X();},0], [0,0]],
+        {
+          name:'p',
+          straightFirst:false,
+          straightLast:false,
+          dash:2,
+          fixed:true,
+          withLabel:false
+        }
+      );  
+      var r = board.create(
+        'line',
+        [
+          [
+            function(){return F.X();},function(){return F.Y()}
+          ],
+          [
+            function(){return P.X();},function(){return P.Y()}
+          ]
+        ],
+        {
+          name:'r',
+          straightFirst:false,
+          straightLast:false,
+          dash:2,
+          fixed:true,
+          withLabel:false
+        }
+      );  
+      var DP = board.create(
+        'line',
+        [
+          [
+            function(){return D.X();},function(){return D.Y()}
+          ],
+          [
+            function(){return P.X();},function(){return P.Y()}
+          ]
+        ],
+        {
+          name:'DP',
+          straightFirst:false,
+          straightLast:false,
+          dash:2,
+          fixed:true,
+          withLabel:false
+        }
+      );
+      var theta = board.create(
+        'angle',
+        [X,F,P],
+        {
+          name: '$\\theta$',
+          type:'sector',
+          orthoType:'square',
+          orthoSensitivity:2,
+          radius:2.0
+        }
+      );
+    </script>
+    <p>
+      <b>Geometry of conic sections</b>
+    </p>
+    <p>
+      Solving for $r$,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      r &amp; = &amp; \frac{e p}{1 - e \cos \theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      When $\theta = \pi /2$, the radius is equal to the semi-latus rectum (<i>half-side straight</i>).
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      l &amp; = &amp; e p
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      i.e., the semi-latus rectum is the eccentricity times the focal parameter.
+    </p>
+    <p>
+      In applications involving orbits we often introduce the reciprocal of $r$, $u$ so that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      u &amp; = &amp; \frac{1}{r} = \frac{1}{l} (1 - e \cos \theta)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Put the origin at the focus and use cartesian coordinates
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x &amp; = &amp; r \cos \theta
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y &amp; = &amp; r \sin \theta
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      r &amp; = &amp; (x^2+y^2)^\frac{1}{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The equation for the orbit becomes
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      (1-e^2)x^2 + y^2 - 2 e l x - l^2 &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Parabola</h3>
+    <p>
+      When $e = 1$, the point $P$ is equidistant from the focus $F$ and the directrix $L$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y^2 &amp; = &amp; 2 p x + p^2
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Ellipse</h3>
+    <p>
+      When $e \lt 1$, $1 / r$ never becomes zero, and so $r$ remains finite.
+    </p>
+    <p>
+      Comparing the equation for the orbit with the equation of an ellipse (where the parameters $a,b,c$ are defined already)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \left( \frac{x-c}{a} \right)^2 + \left( \frac{y}{b} \right)^2 &amp; = &amp; 1
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We find for the <b>linear eccentricity</b>, $c$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      c &amp; = &amp; \frac{le}{1-e^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We find for the <b>minor semi-axis</b>, $b$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      b &amp; = &amp; \frac{l}{(1-e^2)^{\frac{1}{2}}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We find for the <b>major semi-axis</b>, $a$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a &amp; = &amp; \frac{l}{1-e^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We have also proved that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      ae &amp; = &amp; c
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      With a little algebra we can also show
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      c &amp; = &amp; \sqrt{a^2 - b^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e &amp; = &amp; \sqrt{1 - (b/a)^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      and
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      l &amp; = &amp; \frac{b^2}{a}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Hyperbola</h3>
+  </section>
+</article>
