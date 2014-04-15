@@ -2,18 +2,297 @@
 layout: master
 title: Geometric Physics • Classical Mechanics • Celestial Mechanics
 ---
-<h1>Celestial Mechanics</h1>
-
-<h3>Earth's motion around the Sun, not as simple as I thought</h3>
-
-<iframe width="640" height="360" src="//www.youtube.com/embed/82p-DYgGFjI?rel=0" frameborder="0" allowfullscreen></iframe>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"></h3>
+<article>
+  <div class="page-header">
+    <h1>Celestial Mechanics</h1>
   </div>
-  <div class="panel-body">
+  <section>
+    <h3>Earth's motion around the Sun, not as simple as I thought</h3>
+    <iframe width="640" height="360" src="//www.youtube.com/embed/82p-DYgGFjI?rel=0" frameborder="0" allowfullscreen></iframe>
+  </section>
+  <section>
+    <h3>Kepler Motion and Conic Orbits using Newton's Equations</h3>
     <p>
+      It is common to treat Kepler Motion using Lagrange's Equations. Here we use only basic trigonometry and single variable calculus to obtain the same results.
     </p>
-  </div>
-</div>
+    <p>
+      We'll introduce the coordinate transformation between Cartesian coordinates and Polar coordinates. We'll perform differentiation in Cartesian coordinates because the unit vectors are constant and then transform the acceleration to Polar coordinates. We will then consider a central force.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{r} &amp; = &amp; x \UnitVector{i} + y \UnitVector{j}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x &amp; = &amp; r \cos \theta
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y &amp; = &amp; r \sin \theta
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Vector{r} &amp; = &amp; r ( \cos \theta \UnitVector{i} + \sin \theta \UnitVector{j} )
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \UnitVector{r} &amp; = &amp; ( \cos \theta \UnitVector{i} + \sin \theta \UnitVector{j} )
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \UnitVector{\theta} &amp; = &amp; ( \cos \theta \UnitVector{j} - \sin \theta \UnitVector{i} )
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{\UnitVector{r}} &amp; = &amp; \dot{\theta} \UnitVector{\theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{\UnitVector{\theta}} &amp; = &amp; - \dot{\theta} \UnitVector{r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{\Vector{r}} &amp; = &amp; \dot{r} \UnitVector{r} + r \dot{\theta} \UnitVector{\theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \ddot{\Vector{r}}
+      &amp; = &amp;
+      [\ddot{r}- r\dot{\theta}^2]\UnitVector{r}+[2\dot{r}\dot{\theta}+r\ddot{\theta}]\UnitVector{\theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The radial force we shall denote as $Q_r$, so with $\mu$ the reduced mass,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \mu ( \ddot{r}- r\dot{\theta}^2) &amp; = &amp; Q_r
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The tangential force is zero
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      2\dot{r}\dot{\theta}+r\ddot{\theta} &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This equation expresses the conservation of angular momentum. The magnitude of the angular momentum $L$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      L &amp; = &amp; \mu r^2 \dot{\theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Now consider the reciprocal of the radial distance $r$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      u &amp; = &amp; \frac{1}{r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Differentiating with respect to $\theta$ gives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{du}{d \theta}
+      &amp; = &amp;
+      - \frac{1}{r^2} \frac{dr}{d \theta}
+      &amp; = &amp;
+      - \frac{1}{r^2} \frac{dr}{dt} \frac{dt}{d \theta}
+      &amp; = &amp;
+      - \frac{1}{r^2} \frac{dr}{dt} \frac{dt}{d \theta}
+      &amp; = &amp;
+      - \frac{\dot{r}}{r^2 \dot{\theta}}
+      &amp; = &amp;
+      - \frac{\mu \dot{r}}{L}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Differentiating a second time  with respect to $\theta$ gives
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d^2u}{d \theta^2}
+      &amp; = &amp;
+      - \frac{\mu \ddot{r}}{\dot{\theta}L}
+      &amp; = &amp;
+      - \frac{Q_r + \mu r \dot{\theta}^2}{\dot{\theta}L}
+      &amp; = &amp;
+      - \frac{\mu r^2 Q_r}{L^2} - \frac{1}{r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Finally, expressing this result in terms of $u$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d^2u}{d \theta^2} + u
+      &amp; = &amp;
+      - \frac{\mu Q_r}{L^2 u^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For an inverse square law
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Q_r &amp; = &amp; \frac{\kappa}{r^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{d^2u}{d \theta^2} + u
+      &amp; = &amp;
+      - \frac{\mu \kappa}{L^2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This equation can be integrated to give
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      u &amp; = &amp; \frac{1}{r} = - \frac{\mu \kappa}{L^2} [1 - e \cos(\theta -\theta_0)]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Thus, the equation of a body under a central force is a conic section. This is the generalized form of <b>Kepler's First Law</b>. For a planet, $\kappa \lt 0$, and $e \lt 1$. The orbit of a planet is an ellipse with the sun at the focus.
+    </p>
+    <p>
+      The angular momentum is related to the rate at which the radius vector sweeps out area
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{A}
+      &amp; = &amp;
+      \frac{1}{2} \Norm{\Vector{r} \times \Vector{v}}
+      &amp; = &amp;
+      \frac{1}{2} \Norm{r\UnitVector{r} \times (\dot{r} \UnitVector{r} + r \dot{\theta} \UnitVector{\theta})}
+      &amp; = &amp;
+      \frac{r^2 \dot{\theta}}{2}
+      &amp; = &amp;
+      \frac{L}{2 \mu}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is <b>Kepler's Second Law</b>. The radius vector sweeps out equal areas in equal times.
+    </p>
+    <p>
+      We now consider the period of the orbit. We now require some results for ellipses and orbits. The area of the ellipse, $A$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      A
+      &amp; = &amp;
+      \pi a b
+      &amp; = &amp;
+      \pi a a^{\frac{1}{2}} l^{\frac{1}{2}}
+      &amp; = &amp;
+      \pi a^{\frac{3}{2}} L (\frac{-1}{\mu \kappa})^{\frac{1}{2}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The period $T$ is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      T
+      &amp; = &amp;
+      \frac{A}{\dot{A}}
+      &amp; = &amp;
+      2 \pi (\frac{\mu}{-\kappa})^{\frac{1}{2}} a^{\frac{3}{2}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Inserting
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \kappa &amp; = &amp; - G M m
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \mu &amp; = &amp; \frac{M m}{M + m}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      T
+      &amp; = &amp;
+      2 \pi (\frac{1}{G(M+m)})^{\frac{1}{2}} a^{\frac{3}{2}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      As long as $M \gg m$, we have <b>Kepler's Third Law</b>. The sqaure of the periods of the planets are proportional to the cubes of the major semi-axis.
+    </p>
+  </section>
+
+</article>
