@@ -3,7 +3,9 @@ layout: master
 title: Geometric Physics • Thermodynamics
 ---
 <article>
-  <h1>Thermodynamics</h1>
+  <div class="page-header">
+    <h1>Thermodynamics</h1>
+  </div>
   <section>
     <h3>Thermal Equilibrium</h3>
     <p>A condition in which two bodies in thermal contact have no net exchange of energy in the form of heat.</p>
@@ -61,6 +63,125 @@ title: Geometric Physics • Thermodynamics
         <li>$T_{H}$ is the temperature of the input gas</li>
         <li>$T_{C}$ is the temperature of the exhaust gas</li>
       </ul>
+    </p>
+  </section>
+  <section>
+    <h3>Statistical Mechanics</h3>
+    <p>
+      <b>All microstates corresponding to a given macrostate are equally probable</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Distributing $q$ Quanta among $N$ Oscillators</h3>
+    <p>
+      This is equivalent to the problem of computing the number of color arrangements of objects drawn from a bag where the objects come in two colors.
+    </p>
+    <p>
+      Consider $q$ quanta and $N-1$ boundaries. Start by thinking of them as $q+N-1$ distinguishable objects and then correct for the separate indistinguishability of the quanta and boundaries.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \Omega &amp; = &amp; \frac{(q + N - 1)!}{q!(N-1)!}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Thermal Equilibrium of Blocks in Contact</h3>
+    <p>
+      The equilibrium macrostate corresponds to the most probable microstate.
+    </p>
+    <p>
+      The distribution of the number of ways is very sharply peaked.
+    </p>
+  </section>
+  <section>
+    <h3>Definition of Entropy</h3>
+    <p>
+      I don't like this being introduced without motivation.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      S &amp; = &amp; k_B \ln \Omega
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The Boltzmann constant is $k_B = 1.38 \times 10^{-23} J/K$.
+    </p>
+    <p>
+      Entropy has units joules per kelvin.
+    </p>
+  </section>
+  <section>
+    <h3>Condition for Thermal Equilibrium</h3>
+    <p>
+      <b>In equilibrium, the most probable energy distribution is the one that maximizes the total entropy</b>.
+    </p>
+  </section>
+  <section>
+    <h3>Second Law of Thermodynamics</h3>
+    <p>
+      <b>In a closed system that is not in equilibrium, the most probable consequence is that the entropy of the system will increase</b>.
+    </p>
+    <p>
+      I find this a bit difficult to accept without some statement about how accessible certain microstates are.
+    </p>
+  </section>
+  <section>
+    <h3>Reversible and Irreversible Processes</h3>
+    <p>
+      A <b>reversible</b> process is one in which the <b>total entropy change is zero</b>.
+    </p>
+    <p>
+      An <b>irreversible</b> process is one in which the <b>total entropy increases</b>.
+    </p>
+    <p>
+      There is nothing to stop the total entropy of a closed system from going down, it's just very unlikely. So an irreversible process may reverse in principle (it does not violate the conservation laws of physics), but is extremely unlikely to do so.
+    </p>
+  </section>
+  <section>
+    <h3>Temperature</h3>
+    <p>
+      At equilibrium, the total entropy $S = S_1 + S_2$ is maximized with respect to any heat energy transfer.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial S}{\partial q_1}
+      &amp; = &amp;
+      \frac{\partial S_1}{\partial q_1} + \frac{\partial S_2}{\partial q_1} = 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      But since $dq_1 = -dq_2$, we have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{\partial S_1}{\partial q_1}
+      &amp; = &amp;
+      \frac{\partial S_2}{\partial q_2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      So temperature is some function of $\partial S / \partial Q$.
+    </p>
+    <p>
+      But heat flows from hot to cold and to the object whose entropy increases more, so
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{1}{T}
+      &amp; = &amp;
+      \frac{\partial S}{\partial Q}
+      \end{eqnarray}
+      $
     </p>
   </section>
 </article>
