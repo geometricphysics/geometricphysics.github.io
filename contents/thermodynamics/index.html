@@ -49,12 +49,461 @@ title: Geometric Physics • Thermodynamics
   </section>
   <section>
     <h3>The Carnot Cycle</h3>
-    <p>A heat engine utilizing the Carnot cycle has the highest possible efficiency consistent with the Second Law of Thermodynamics.</p>
-    <p>A Carnot cycle uses isothermal ($\Delta T = 0$) and adiabatic ($Q = 0$) compressions and expansions of a gas.</p>
+    <p>
+      A heat engine utilizing the Carnot cycle has the highest possible efficiency consistent with the Second Law of Thermodynamics.
+    </p>
+    <p>
+      We use as our model for a heat engine, an ideal gas enclosed by a cylinder and piston. The heat engine moves between hot and cold resevoirs with temperatures $T_H$ and $T_C$ respectively. When in contact with a resevoir we perform an isothermal process. In between we perform adiabatic changes in order to match the temperatures.
+    </p>
+    <p>
+      The following table, to be completed, shows the effects of the various processes in the cycle.
+    </p>
+    <table border='1'>
+      <tr>
+        <th>Process</th>
+        <th colspan='3'>Before</th>
+        <th colspan='3'>After</th>
+        <th>Q</th>
+        <th>W</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Adiabatic Compression</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td>0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Isothermal Expansion</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Adiabatic Expansion</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Isothermal Compression</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <h4>Adiabatic Compression</h4>
+    <p>
+      The heat engine is thermally isolated. All the work done on the gas goes to increasing the thermal energy of the gas.
+    </p>
+    <p>
+      The thermal energy of the gas depends only on the temperature.
+    </p>
     <p>
       $
       \begin{eqnarray}
-        e_{C} &amp; = &amp; \frac{T_{H} - T_{C}}{T_{H}} \\
+      dE_{thermal} &amp; = &amp; N C_V dT
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dW &amp; = &amp; -P dV
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dQ &amp; = &amp; 0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dE_{thermal} &amp; = &amp; dQ + dW
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      N C_V dT &amp; = &amp; -P dV
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We first calculate the final volume by eliminating $P$ using the ideal gas law.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      N C_V dT &amp; = &amp; - \left(\frac{N k_B T}{V} \right) dV
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{C_V}{k_B} \int_{T_i}^{T_f} \frac{dT}{T} &amp; = &amp; - \int_{V_i}^{V_f} \frac{dV}{V}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{C_V}{k_B} \ln \frac{T_f}{T_i} &amp; = &amp; - \ln \frac{V_f}{V_i}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \left( \frac{T_f}{T_i} \right)^{\frac{C_V}{k_B}} &amp; = &amp; \frac{V_i}{V_f}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      So the final volume, after the adiabatic compression, is uniquely determined.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      T^{(\frac{C_V}{k_B})} V &amp; = &amp; constant
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We can determine the final pressure by using the ideal gas law on this result. We could also have found the pressure-temperature relationship more directly using $d(PV) = N K_B dT$. In either case we get the results
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{1}{P} T^{(\frac{C_P}{k_B})} &amp; = &amp; constant
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      P V^{\gamma} &amp; = &amp; constant, \gamma = \frac{C_P}{C_V}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The work done $W$ is the change in thermal energy. We can now complete the first row of our table.
+    </p>
+    <table border='1'>
+      <tr>
+        <th>Process</th>
+        <th colspan='3'>Before</th>
+        <th colspan='3'>After</th>
+        <th>Q</th>
+        <th>W</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Adiabatic Compression</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>0</td>
+        <td>$N C_V (T_H - T_C)$</td>
+      </tr>
+      <tr>
+        <td>Isothermal Expansion</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Adiabatic Expansion</td>
+        <td></td>
+        <td></td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Isothermal Compression</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <h4>Isothermal Expansion</h4>
+    <p>
+      The heat engine is now placed in contact with the hot resevoir. The piston is allowed to move (by slowly unloading the force on the piston). Since the change is isothermal, the governing equation is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        P V &amp; = &amp; constant
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In the isothermal expansion, the final pressure-volume combination is not uniquely determined because any pairing will do as long as the temperature is held constant. The final pressure, or volume, will depend upon how much we unload the piston. If we assume that the final pressure is $\alpha P_0$ then we are being completely general. In realistic engines, $\alpha$ may be close to unity.
+    </p>
+    <p>
+      Since the gas is expanding, it will do work on the pistion. However, to keep our signs straight we will compute the work done on the gas by the piston, which we expect to be negative!
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        dW &amp; = &amp; -P dV &amp; = &amp; - \left( \frac{N k_B T}{V} \right) dV
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Because the temperature is constant, this can be easily integrated.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        W &amp; = &amp; -P dV &amp; = &amp; - N k_B T \ln \left(\frac{V_f}{V_i} \right)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The temperature of the gas does not change and so the heat flow into the engine is the negative of 
+    </p>
+    <p>
+      We can now complete the second row of our table.
+    </p>
+    <table border='1'>
+      <tr>
+        <th>Process</th>
+        <th colspan='3'>Before</th>
+        <th colspan='3'>After</th>
+        <th>Q</th>
+        <th>W</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Adiabatic Compression</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>0</td>
+        <td>$N C_V (T_H - T_C)$</td>
+      </tr>
+      <tr>
+        <td>Isothermal Expansion</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>$\alpha P_0$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}} \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>$+N k_B T_H (\ln \frac{1}{\alpha} + \frac{C_P}{k_B} \ln \frac{T_H}{T_C})$</td>
+        <td>$-N k_B T_H (\ln \frac{1}{\alpha} + \frac{C_P}{k_B} \ln \frac{T_H}{T_C})$</td>
+      </tr>
+      <tr>
+        <td>Adiabatic Expansion</td>
+        <td>$\alpha P_0$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}} \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>0</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Isothermal Compression</td>
+        <td></td>
+        <td></td>
+        <td>$T_C$</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+    <h4>Adiabatic Expansion</h4>
+    <p>
+      We have already derived the expressions for adiabatic changes, so we complete the third row.
+    </p>
+    <table border='1'>
+      <tr>
+        <th>Process</th>
+        <th colspan='3'>Before</th>
+        <th colspan='3'>After</th>
+        <th>Q</th>
+        <th>W</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th>Pressure</th>
+        <th>Volume</th>
+        <th>Temperature</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Adiabatic Compression</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>0</td>
+        <td>$N C_V (T_H - T_C)$</td>
+      </tr>
+      <tr>
+        <td>Isothermal Expansion</td>
+        <td>$P_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$V_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>$\alpha P_0$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}} \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>$+N k_B T_H (\frac{C_P}{k_B} \ln \frac{T_H}{T_C} - \ln \alpha)$</td>
+        <td>$-N k_B T_H (\ln \frac{1}{\alpha} + \frac{C_P}{k_B} \ln \frac{T_H}{T_C})$</td>
+      </tr>
+      <tr>
+        <td>Adiabatic Expansion</td>
+        <td>$\alpha P_0$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}} \left(\frac{T_C}{T_H} \right)^{\frac{C_V}{k_B}}$</td>
+        <td>$T_H$</td>
+        <td>$\alpha P_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$T_C$</td>
+        <td>0</td>
+        <td>$N C_V (T_C - T_H) $</td>
+      </tr>
+      <tr>
+        <td>Isothermal Compression</td>
+        <td>$\alpha P_0 \left(\frac{T_C}{T_H} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$\frac{1}{\alpha} V_0 \left(\frac{T_H}{T_C} \right)^{\frac{C_P}{k_B}}$</td>
+        <td>$T_C$</td>
+        <td>$P_0$</td>
+        <td>$V_0$</td>
+        <td>$T_C$</td>
+        <td>$+N k_B T_C (\ln \alpha - \frac{C_P}{k_B} \ln \frac{T_H}{T_C})$</td>
+        <td>$-N k_B T_C (\ln \alpha - \frac{C_P}{k_B} \ln \frac{T_H}{T_C})$</td>
+      </tr>
+    </table>
+    <h4>Isothermal Compression</h4>
+    <p>
+      We can see that we shall need to compress the gas to restore the original pressure and volume. Since $PV = constant$, we will be able to adjust the loading on the pistion to restore the original pressure and volume exactly.
+    </p>
+    <h4>Efficiency</h4>
+    <p>
+      The heat flowing from the hot resevoir to the engine is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Q_H &amp; = &amp; +N k_B T_H (\frac{C_P}{k_B} \ln \frac{T_H}{T_C} - \ln \alpha)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      How much of this gets converted to work done by the gas? The work done by the gas is the negative of the work done on the gas over the entire cycle. The contributions from the adiabatic changes cancel exactly.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      W
+      &amp; = &amp;
+      N k_B T_H (\ln \frac{1}{\alpha} + \frac{C_P}{k_B} \ln \frac{T_H}{T_C})
+      + N k_B T_C (\ln \alpha - \frac{C_P}{k_B} \ln \frac{T_H}{T_C}) \\
+      &amp; = &amp;
+      N k_B (T_H - T_C) (\frac{C_P}{k_B} \ln \frac{T_H}{T_C} - \ln \alpha)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We see that the efficiency of the Carnot engine is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        e_{C}
+        &amp; = &amp;
+        \frac{W}{Q_H}
+        &amp; = &amp;
+        \frac{T_{H} - T_{C}}{T_{H}}
+        &amp; = &amp;
+        1 - \frac{T_{C}}{T_{H}}
       \end{eqnarray}
       $
       where
@@ -63,6 +512,9 @@ title: Geometric Physics • Thermodynamics
         <li>$T_{H}$ is the temperature of the input gas</li>
         <li>$T_{C}$ is the temperature of the exhaust gas</li>
       </ul>
+    </p>
+    <p>
+      The efficiency does not even depend upon how much work we try to extract per cycle by varying $\alpha$. The efficiency only depends on the temperatures of the hot and cold resevoirs.
     </p>
   </section>
   <section>
