@@ -1,0 +1,273 @@
+---
+layout: master
+title: Geometric Physics • Classical Mechanics • Rutherford Scattering
+---
+<article>
+  <div class="page-header">
+    <h1>Rutherford Scattering <small></small></h1>
+  </div>
+  <section>
+    <img src="{{ site.url }}/{{ site.folder }}img/285px-Light_bulb.png" width="40" height="40" alt="Warning: Notation" style="float:left;margin:0 5px 0 0;"></img>
+    <h3></h3>
+    <p>
+      <b>Warning: Mathematical Notation</b> Physicists often use the same name for a function and distinguish functions by the combination of name and types of parameters. Mathematicians are more inclined to ensure that functions are uniquely defined by their names alone. The benefit for the physicist is not having to invent new names for related concepts. In fact, some computer languages are able to distinguish functions in the same manner. The price for the physicist is some ambiguity in whether $f(args)$ refers to the function $f$ itself, or to the value resulting from the execution of the function with the specified arguments. Watch out for this in what follows.
+    </p>
+  </section>
+  <section>
+    <h3>Total Scattering Cross Section, $\sigma$</h3>
+    <p>
+      Suppose there is a flux of $N \colon L^{-2}$ particles per unit area toward a region where a (scattering) process can occur. If $n \colon 1$ particles undergo this process, the <b>cross section</b>, $\sigma \colon L^2$ for that process is defined as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma &amp; = &amp; \frac{n}{N}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      In other words, $\sigma$ can be thought of as the effective area of a target in the path of the flux.
+    </p>
+  </section>
+  <section>
+    <h3>Differential Cross Section, $\sigma(\theta, \phi)$</h3>
+    <p>
+      If we are interested in how the scattering varies according to direction from the force center then we need an appropriate coordinate system. We use <b>Spherical Polar Coordinates</b> with the polar $\theta = 0$ direction aligned with the initial velocity and arbitrarily choose the azimuth $\phi = 0$ to be upwards.
+    </p>
+    <p>
+      Then $\theta$ denotes the angle through which a particle is scattered, and $\phi$ denotes the plane containing the initial and final velocity vectors.
+    </p>
+    <p>
+      The <b>differential scattering cross section</b> $\sigma(\theta, \phi)$ for scattering into an element of solid angle $d \omega$ about the direction specified by the angles $\theta$ and $\phi$ is the <em>cross section per unit solid angle</em>.
+    </p>
+    <p>
+      Recall that the solid angle is defined as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d\omega
+      &amp; = &amp;
+      \frac{dA}{r^2} = \frac{(r d\theta)(r \sin \theta d\phi)}{r^2} = \sin \theta d\theta d\phi
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      d\sigma &amp; = &amp; \sigma(\theta, \phi) d\omega
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Polar Cross Section, $\sigma(\theta)$</h3>
+    <p>
+      This isn't usual terminology, but I will use the term <b>Polar Cross Section</b> to distiguish from the other cross section functions.
+    </p>
+    <p>
+      If the force is central then we expect there to be azimuthal symmetry, the cross section is independent of $\phi$. We define
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma(\theta)
+      &amp; = &amp;
+      \int_{\phi = 0}^{2 \pi} \sigma(\theta, \phi) d\phi
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma
+      &amp; = &amp;
+      \int_{\theta = 0}^{\pi} \sigma(\theta) \sin \theta d\theta
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Impact Parameter</h3>
+    <p>
+      Suppose that the force center lies on the polar axis of our coordinate system. Consider an incident particle travelling parallel to the axis. The <b>impact parameter</b> is the distance $s$ from the force center that the particle would pass if there were no force acting.
+    </p>
+  </section>
+  <section>
+    <h3>Conservation of Particles</h3>
+    <p>
+      All incoming particles in the annulus from $s$ to $s + ds$ will be scattered into a polar angle range $\theta$ to $\theta - d\theta$. The minus sign occurs because as the impact parameter increases, the scattering angle decreases. Since <b>the flux of particles must be conserved</b>, we must have
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      s d\phi ds &amp; = &amp; -\sigma(\theta, \phi) \sin \theta d\theta d\phi
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma(\theta, \phi) &amp; = &amp; - \frac{s}{\sin \theta} \frac{ds}{d\theta}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The relationship between the impact parameter $s$ and the scattering angle $\theta$ can be determined from knowing that the particle follows a unique hyperbolic orbit for a given total energy.
+    </p>
+  </section>
+  <section>
+    <h3>Rutherford scattering formula</h3>
+    <p>
+      We now wish to find $\sigma(\theta)$ when the force between the particles is an inverse square force. It may be useful to consider how $\sigma(\theta)$ depends upon the radial dependence.
+    </p>
+    <p>
+      From our previous study of orbital motion under a central inverse square law force we found the orbit equation
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      u &amp; = &amp; \frac{\mu \kappa}{l^2}(e \cos \theta - 1)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      (I have set $\theta_0$ to zero by making the polar axis the symmetry axis for scattering).
+    </p>
+    <p>
+      The asymptotic directions for which $r$ is infinite are given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e \cos \psi &amp; = &amp; 1
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The scattering angle $\theta$ is related to $\psi$ by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \theta &amp; = &amp; \pi - 2 \psi
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The relationship between $e$ and the scattering angle is then
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e \cos(\frac{\pi}{2} - \frac{\theta}{2}) &amp; = &amp; 1
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Therefore
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e \sin \frac{\theta}{2} &amp; = &amp; 1
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The relationship between the eccentricity and the energy $E$ and anhular momentum $l$ is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e &amp; = &amp; \left(1 + \frac{2 E l^2}{\mu \kappa^2}\right)^{\frac{1}{2}}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The total energy of the system $E$ is a constant of the motion
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      E &amp; = &amp; \frac{1}{2} \mu v^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The angular momentum is related to the impact parameter
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      l &amp; = &amp; \mu v s
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      With a little algebra we find
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      s &amp; = &amp; \frac{\kappa}{\mu v^2} \cot \frac{\theta}{2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Let's try and be a bit slick here...
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma(\theta, \phi)
+      &amp; = &amp;
+      - \frac{s}{\sin \theta} \frac{ds}{d\theta} \\
+      &amp; = &amp;
+      - \frac{1}{2} \frac{1}{\sin \theta} \frac{d(s^2)}{d\theta} \\
+      &amp; = &amp;
+      - \frac{\kappa^2}{2 \mu^2 v^4} \frac{1}{\sin \theta} \frac{d(\cot^2\frac{\theta}{2})}{d\theta} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      If we now make the substitution $x = \sin \frac{\theta}{2}$, then $\sin \theta d\theta = 2 d(x^2)$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma(\theta, \phi)
+      &amp; = &amp;
+      - \frac{\kappa^2}{4 \mu^2 v^4} \frac{d(\frac{1-x^2}{x^2})}{d(x^2)} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substitute again $y = x^2$,
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \sigma(\theta, \phi)
+      &amp; = &amp;
+      - \frac{\kappa^2}{4 \mu^2 v^4} \frac{d(\frac{1}{y}-1)}{dy} \\
+      &amp; = &amp;
+      \frac{\kappa^2}{4 \mu^2 v^4} \frac{1}{y^2} \\
+      &amp; = &amp;
+      \frac{\kappa^2}{4 \mu^2 v^4} \frac{1}{x^4} \\
+      &amp; = &amp;
+      \frac{\kappa^2}{4 \mu^2 v^4} \frac{1}{\sin^4 \frac{\theta}{2}} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is the <b>Rutherford scattering formula</b>.
+    </p>
+  </section>
+</article>

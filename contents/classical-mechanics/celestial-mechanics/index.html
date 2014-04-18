@@ -91,12 +91,12 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       $
     </p>
     <p>
-      The radial force we shall denote as $Q_r$, so with $\mu$ the reduced mass,
+      The radial force we shall denote as $F_r$, so with $\mu$ the reduced mass,
     </p>
     <p>
       $
       \begin{eqnarray}
-      \mu ( \ddot{r}- r\dot{\theta}^2) &amp; = &amp; Q_r
+      \mu ( \ddot{r}- r\dot{\theta}^2) &amp; = &amp; F_r
       \end{eqnarray}
       $
     </p>
@@ -111,12 +111,12 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       $
     </p>
     <p>
-      This equation expresses the conservation of angular momentum. The magnitude of the angular momentum $L$ is given by
+      This equation expresses the conservation of angular momentum. The magnitude of the angular momentum $l$ is given by
     </p>
     <p>
       $
       \begin{eqnarray}
-      L &amp; = &amp; \mu r^2 \dot{\theta}
+      l &amp; = &amp; \mu r^2 \dot{\theta}
       \end{eqnarray}
       $
     </p>
@@ -146,7 +146,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       &amp; = &amp;
       - \frac{\dot{r}}{r^2 \dot{\theta}}
       &amp; = &amp;
-      - \frac{\mu \dot{r}}{L}
+      - \frac{\mu \dot{r}}{l}
       \end{eqnarray}
       $
     </p>
@@ -158,11 +158,11 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       \begin{eqnarray}
       \frac{d^2u}{d \theta^2}
       &amp; = &amp;
-      - \frac{\mu \ddot{r}}{\dot{\theta}L}
+      - \frac{\mu \ddot{r}}{\dot{\theta}l}
       &amp; = &amp;
-      - \frac{Q_r + \mu r \dot{\theta}^2}{\dot{\theta}L}
+      - \frac{F_r + \mu r \dot{\theta}^2}{\dot{\theta}l}
       &amp; = &amp;
-      - \frac{\mu r^2 Q_r}{L^2} - \frac{1}{r}
+      - \frac{\mu r^2 F_r}{l^2} - \frac{1}{r}
       \end{eqnarray}
       $
     </p>
@@ -174,7 +174,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       \begin{eqnarray}
       \frac{d^2u}{d \theta^2} + u
       &amp; = &amp;
-      - \frac{\mu Q_r}{L^2 u^2}
+      - \frac{\mu F_r}{l^2 u^2}
       \end{eqnarray}
       $
     </p>
@@ -184,7 +184,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
     <p>
       $
       \begin{eqnarray}
-      Q_r &amp; = &amp; \frac{\kappa}{r^2}
+      F_r &amp; = &amp; \frac{\kappa}{r^2}
       \end{eqnarray}
       $
     </p>
@@ -196,7 +196,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       \begin{eqnarray}
       \frac{d^2u}{d \theta^2} + u
       &amp; = &amp;
-      - \frac{\mu \kappa}{L^2}
+      - \frac{\mu \kappa}{l^2}
       \end{eqnarray}
       $
     </p>
@@ -206,7 +206,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
     <p>
       $
       \begin{eqnarray}
-      u &amp; = &amp; \frac{1}{r} = - \frac{\mu \kappa}{L^2} [1 - e \cos(\theta -\theta_0)]
+      u &amp; = &amp; \frac{1}{r} = - \frac{\mu \kappa}{l^2} [1 - e \cos(\theta -\theta_0)]
       \end{eqnarray}
       $
     </p>
@@ -227,7 +227,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       &amp; = &amp;
       \frac{r^2 \dot{\theta}}{2}
       &amp; = &amp;
-      \frac{L}{2 \mu}
+      \frac{l}{2 \mu}
       \end{eqnarray}
       $
     </p>
@@ -246,7 +246,7 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       &amp; = &amp;
       \pi a a^{\frac{1}{2}} l^{\frac{1}{2}}
       &amp; = &amp;
-      \pi a^{\frac{3}{2}} L (\frac{-1}{\mu \kappa})^{\frac{1}{2}}
+      \pi a^{\frac{3}{2}} l (\frac{-1}{\mu \kappa})^{\frac{1}{2}}
       \end{eqnarray}
       $
     </p>
@@ -294,5 +294,63 @@ title: Geometric Physics • Classical Mechanics • Celestial Mechanics
       As long as $M \gg m$, we have <b>Kepler's Third Law</b>. The sqaure of the periods of the planets are proportional to the cubes of the major semi-axis.
     </p>
   </section>
-
+  <section>
+    <h3>Energy, Angular Momentum, and Eccentricity</h3>
+    <p>
+      The total energy (excluding the energy of the center of mass) is given by
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      E &amp; = &amp; T + V = \frac{1}{2} \mu (\dot{r}^2 + r^2 \dot{\theta}^2) + \frac{\kappa}{r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Substituting in the expression for the angular momentum we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      E &amp; = &amp; \frac{1}{2} \mu \dot{r}^2 + \frac{1}{2} \frac{l^2}{\mu r^2} + \frac{\kappa}{r}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      It is easy to verify by differentiating that E is a constant of the motion, $\dot{E} = 0$.
+    </p>
+    <p>
+      We can relate the eccentricity $e$ to the energy $E$ and angular momentum $l$ by consirdering the <b>apsidal distances</b> when $\dot{r} = 0$. For the orbit equation we conclude (after differentiating wrt $t$ and setting $\dot{r} = 0$) that
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{1}{r} &amp; = &amp; \frac{\mu \kappa}{l^2} (e - 1)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Remark: In the case $e \lt 1$ we actually get two solutions. Here, I am considering the hyperbolic case.
+    </p>
+    <p>
+      Setting $\dot{r} = 0$ in the equation for $E$ and substituting the expression for $r$ we get
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      E &amp; = &amp; \frac{1}{2} \frac{\mu \kappa^2}{l^2} (e^2-1)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Solving for $e$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      e &amp; = &amp; \left(1 + \frac{2 E l^2}{\mu \kappa^2}\right)^{\frac{1}{2}}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
 </article>
