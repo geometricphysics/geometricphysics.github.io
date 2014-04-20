@@ -1,0 +1,347 @@
+---
+layout: master
+title: Geometric Physics • Computational Physics • Numerical Differential Equations
+---
+<article>
+  <div class="page-header">
+    <h1>Numerical Differential Equations</h1>
+  </div>
+  <section>
+    <h3>Motivation</h3>
+    <p>
+      The essence of modeling is the process of describing a physical situation with differential equations.
+    </p>
+    <p>
+      We often want to determine the behavior of a function but cannot solve the for the function analytically. Instead we may have an implicit definition for the function and some values of the function at various points.
+    </p>
+    <p>
+      The goal of computational modeling is to use numerical methods to compute solutions to such implicit equations. The theory of numerical methods will also allow us to know whether such solutions are unique and accurate, and what the computing cost in time will be.
+    </p>
+  </section>
+  <section>
+    <h3>First Order Differential Equations</h3>
+    <p>
+      The following resource contains an excellent coverage of differential equations in general and obtaining exact solutions. This material focuses on numerical solutions.
+    </p>
+    <a href="http://tutorial.math.lamar.edu/Classes/DE/DE.aspx" target="_blank">Differential Equations</a>
+  </section>
+  <section>
+    <h3>1st-order Initial Value Problem</h3>
+    <a href="/contents/computational-physics/numerical-diff-eqns/notes_1.pdf" target="_blank">Simple Euler method and its modifications</a>
+    <p>
+      $
+      \begin{eqnarray}
+      \Primed{y}(x)
+      &amp; = &amp;
+      \frac{dy}{dx} &amp; = &amp; f(x,y), \quad y(x_0) &amp; = &amp; y_0
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is the most general first-order differential equation.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      dy &amp; = &amp; f(x,y) dx
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Notation</h3>
+    <p>
+      Divide the interval for the independent variable into $n$ equally spaced steps of length $h$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      x_i &amp; = &amp; x_0 + i h, \quad i = 0,1,\ldots,n \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Use lower-case for the exact values at each point in the domain.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y_i &amp; = &amp; y(x_i)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Use upper-case for the approximated values at each point in the domain.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_i
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Use Taylor's theorem to guide us towards a numerical solution
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y(x_i + h) &amp; = &amp; y(x_i) + \Primed{y}(x_i) h + O(h^2)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Translating this to index notation, and using the defining equation for $y$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y_{i+1} &amp; = &amp; y_{i} + f(x_{i}, y_{i}) h + O(h^2)
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Euler's method</h3>
+    <p>
+      Ignoring terms of order $h^2$, our discretization becomes
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_{i+1} &amp; = &amp; Y_{i} + f(x_{i}, Y_{i}) h
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This is <b>Euler's method</b>.
+    </p>
+    <p>
+      The <b>local truncation error</b> is the error in each step (assuming $Y_i$ is accurate, i.e., $Y_i = y_i$)
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      LTE &amp; = &amp; \Norm{y_{i+1} - Y_{i+1}} = O(h^2)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The <b>discretization error</b> is a measure of how well the discretization used approximates the ODE.
+    </p>
+    <p>
+      The <b>global error</b> is how well the solution mathes the exact result over the entire interval. Establishing an upper bound for the global error is of key importance. Roughly speaking, because the number of steps goes as $h$, if the truncation error is $O(h^n)$, the global error is $O(h^{n-1})$.
+    </p>
+  </section>
+  <section>
+    <h3>Runge-Kutta methods</h3>
+    <a href="/contents/computational-physics/numerical-diff-eqns/notes_2.pdf" target="_blank">Runge-Kutta methods</a>
+    <p>
+      A clue to improving Euler's method comes from considering the improvements to left-Riemann integration by the Trapezoid or Midpoint method. The issue is that Euler's method always underestimates the curvature because it uses the derivative based only on the left side of the step. The basic idea is to find a better estimate for the slope by using another point. Suppose we are trying to compute $Y_{i+1}$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_{i+1} &amp; = &amp; Y_{i} + f(x_{i}, Y_{i}) h
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Trapezoid method</h3>
+    <p>
+       We modify the Euler discretization as follows
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f_{left} &amp; = &amp; f(x_i, Y_i) \\
+      Y_{euler} &amp; = &amp; Y_i + f_{left} h \\
+      f_{right} &amp; = &amp; f(x_i + h, Y_{euler}) \\
+      f_{average} &amp; = &amp; \frac{1}{2} ( f_{left} + f_{right}) ) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + f_{average} h
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Midpoint method</h3>
+    <p>
+       We modify the Euler discretization as follows
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f_{left} &amp; = &amp; f(x_i, Y_i) \\
+      Y_{midpoint} &amp; = &amp; Y_i + f_{left} \frac{h}{2} \\
+      f_{midpoint} &amp; = &amp; f(x_i + \frac{h}{2}, Y_{midpoint}) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + f_{midpoint} h
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Generalizing Euler's method</h3>
+    <p>
+      The Trapezoid and Midpoint methods are two of an infinite number of choices we could have made for where to compute $f$ the second time. We also have no insight into what sort of improvement has been made in terms of local, discretization and global errors.
+    </p>
+    <p>
+      First we generalize the Trapezoid method
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f_{left} &amp; = &amp; f(x_i, Y_i) \\
+      Y_{euler} &amp; = &amp; Y_i + f_{left} h \\
+      f_{right} &amp; = &amp; f(x_i + h, Y_{euler}) \\
+      f_{average} &amp; = &amp; \frac{1}{2} ( f_{left} + f_{right}) ) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + f_{average} h
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Replace $f_{left} h$ by $\kappa_1$, $f_{right} h$ by $\kappa_2$, and insert $\alpha = 1, \beta = 1, a = \frac{1}{2}, b = \frac{1}{2}$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \kappa_1 &amp; = &amp; h f(x_i, Y_i) \\
+      \kappa_2 &amp; = &amp; h f(x_i + \alpha h, Y_i + \beta \kappa_1) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + a \kappa_1 + b \kappa_2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+       Let's do something similar with the Midpoint method
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      f_{left} &amp; = &amp; f(x_i, Y_i) \\
+      Y_{midpoint} &amp; = &amp; Y_i + f_{left} \frac{h}{2} \\
+      f_{midpoint} &amp; = &amp; f(x_i + \frac{h}{2}, Y_{midpoint}) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + f_{midpoint} h
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Replace $f_{left} h$ by $\kappa_1$, $f_{midpoint} h$ by $\kappa_2$, and insert $\alpha = \frac{1}{2}, \beta = \frac{1}{2}, a = 0, b = 1$
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \kappa_1 &amp; = &amp; h f(x_i, Y_i) \\
+      \kappa_2 &amp; = &amp; h f(x_i + \alpha h, Y_i + \beta \kappa_1) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + a \kappa_1 + b \kappa_2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The formulae appear to be quite similar. Is it possible to use other values for the cefficients? To answer this question we expand the formula for $Y_{i+1}$ and compare it to the Taylor expansion for $y(x_{i+1})$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_{i+1} &amp; = &amp; Y_{i} + a h f(x_i, Y_i) + b h f(x_i + \alpha h, Y_i + \beta h f(x_i, Y_i)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      This requires us to use a 2D Taylor expansion.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_{i+1} &amp; = &amp; Y_{i} + a h f(x_i, Y_i) + b h [f(x_i,Y_i) + \alpha h f_x (x_i, Y_i) + \beta h f_y (x_i, Y_i) + O(h^2) ]
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Collecting together coefficients in powers of $h$ we obtain
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      Y_{i+1}
+      &amp; = &amp;
+      Y_{i} +
+      [(a + b) f(x_i, Y_i)] h +
+      b [\alpha f_x (x_i, Y_i) + \beta f_y (x_i, Y_i) ] h^2 +
+      O(h^3)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The Taylor expansion for $y$ about $x_i$ to $O(h^3)$ is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y(x_i + h) &amp; = &amp; y(x_i) + y^{'}(x_i) h + \frac{1}{2} y^{''}(x_i) h^2 + O(h^3)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      We make the following substitutions
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y^{'}(x_i) &amp; = &amp; f(x_i,y_i)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Consequently
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y^{''}(x_i) &amp; = &amp; f_x(x_i,y_i) + f_y(x_i,y_i) f(x_i,y_i)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      giving
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      y(x_i + h) &amp; = &amp; y(x_i) + f(x_i,y_i) h + \frac{1}{2} [f_x(x_i,y_i) + f_y(x_i,y_i) f(x_i,y_i)] h^2 + O(h^3)
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Comparing coefficients to ensure $O(h^3)$ local truncation error
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a + b &amp; = &amp; 1, \quad \alpha b = \frac{1}{2}, \quad \beta b = \frac{1}{2}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Runge-Kutta Methods</h3>
+    <p>
+      The generalization of the Euler equation leads to the Runge-Kutta method.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \kappa_1 &amp; = &amp; h f(x_i, Y_i) \\
+      \kappa_2 &amp; = &amp; h f(x_i + \alpha h, Y_i + \beta \kappa_1) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + a \kappa_1 + b \kappa_2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      a + b &amp; = &amp; 1, \quad \alpha b = \frac{1}{2}, \quad \beta b = \frac{1}{2}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+</article>
