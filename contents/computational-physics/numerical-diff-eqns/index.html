@@ -323,25 +323,64 @@ title: Geometric Physics • Computational Physics • Numerical Differential Eq
     </p>
   </section>
   <section>
-    <h3>Runge-Kutta Methods</h3>
+    <h3>Runge-Kutta 2 Method</h3>
     <p>
-      The generalization of the Euler equation leads to the Runge-Kutta method.
+      The generalization of the Euler equation leads to the Runge-Kutta 2 method.
     </p>
     <p>
       $
       \begin{eqnarray}
-      \kappa_1 &amp; = &amp; h f(x_i, Y_i) \\
-      \kappa_2 &amp; = &amp; h f(x_i + \alpha h, Y_i + \beta \kappa_1) \\
-      Y_{i+1} &amp; = &amp; Y_{i} + a \kappa_1 + b \kappa_2
-      \end{eqnarray}
-      $
-    </p>
-    <p>
-      $
-      \begin{eqnarray}
-      a + b &amp; = &amp; 1, \quad \alpha b = \frac{1}{2}, \quad \beta b = \frac{1}{2}
+      k_1 &amp; = &amp; h f(x_i, Y_i) \\
+      k_2 &amp; = &amp; h f(x_i + \alpha h, Y_i + \alpha k_1) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + \left(1-\frac{1}{2 \alpha}\right) k_1 + \frac{1}{2 \alpha} k_2
       \end{eqnarray}
       $
     </p>
   </section>
-</article>
+  <section>
+    <h3>Runge-Kutta 3 Method</h3>
+    <p>
+      The generalization of the Runge-Kutta 2 Method adds $\kappa_3$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      k_1 &amp; = &amp; h f(x_i, Y_i) \\
+      k_2 &amp; = &amp; h f(x_i + \alpha_2 h, Y_i + \beta_{21} k_1) \\
+      k_3 &amp; = &amp; h f(x_i + \alpha_3 h, Y_i + \beta_{31} k_1 + \beta_{32} k_2) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + a_1 k_1 + a_2 k_2 + a_3 k_3
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Runge-Kutta 4 Method</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      k_1 &amp; = &amp; h f(x_i, Y_i) \\
+      k_2 &amp; = &amp; h f(x_i + \alpha_2 h, Y_i + \beta_{21} k_1) \\
+      k_3 &amp; = &amp; h f(x_i + \alpha_3 h, Y_i + \beta_{31} k_1 + \beta_{32} k_2) \\
+      k_4 &amp; = &amp; h f(x_i + \alpha_4 h, Y_i + \beta_{41} k_1 + \beta_{42} k_2 + \beta_{43} k_3) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + a_1 k_1 + a_2 k_2 + a_3 k_3 + a_4 k_4
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+    <h3>Runge-Kutta N Method</h3>
+    <p>
+      The completely general Runge-Kutta Method is
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \kappa_j &amp; = &amp; h f(x_i + \alpha_j h, Y_i + \sum_{k=1}^{j-1} \beta_{jk} \kappa_k) \\
+      Y_{i+1} &amp; = &amp; Y_{i} + \sum_{j=1}^{N} a_j \kappa_j
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The coefficients are obtained by requiring the local truncation error to be $O(h^{N+1})$.
+    </p>
+  </section></article>
