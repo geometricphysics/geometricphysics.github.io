@@ -494,12 +494,92 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
   <section>
     <h3>Kinetic Energy of Rotation</h3>
     <p>
-      Applying the general properties of the angular momentum linear transformation we find<br/><br/>
+      An easy route to the kinetic energy of a rotating body is by applying a few vector identities.
+    </p>
+    <p>
       $
       \begin{eqnarray}
-        \frac{d}{d t}(\frac{1}{2} \vec{\omega} \cdot \vec{L}(\vec{\omega}))
-          &amp; = &amp; \vec{\omega} \cdot \frac{d}{d t} \vec{L}(\vec{\omega}) \\
-          &amp; = &amp; \vec{\omega} \cdot \vec{N} \\
+      K &amp; = &amp; \sum_i \frac{1}{2} m_i \Vector{v_i}^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The rigid body condition amounts to all particles sharing the same angular velocity $\Vector{\omega}$, with $\Vector{v_i} = \Vector{\omega} \times \Vector{r_i}$.
+    </p>
+    <p>
+      Substitute this into our expression for the kinetic energy and pull the factor of $1/2$ out front.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \frac{1}{2} \sum_i m_i \Vector{v_i} \cdot (\Vector{\omega} \times \Vector{r_i})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Cyclically permute the triple scalar product to get the angular velocity out in front.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \frac{1}{2} \Vector{\omega} \cdot \sum_i (\Vector{r_i} \times m_i \Vector{v_i})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Recognize that the sum is the angular momentum.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \frac{1}{2} \Vector{\omega} \cdot \Vector{L}(\Vector{\omega})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      Under the usual symmetry conditions for the moment of inertia tensor, this simplifies to
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      K &amp; = &amp; \frac{1}{2} I \Vector{\omega}^2
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      It's easy to differentiate this scalar equation to show $\dot{K} = \omega \Gamma$. With a bit mork work we can find the more general expression when the moment of inertia is a tensor.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \frac{d}{d t}(\frac{1}{2} \Vector{\omega} \cdot \Vector{L}(\Vector{\omega}))
+          &amp; = &amp; \frac{1}{2} \dot{\Vector{\omega}} \cdot \Vector{L}(\Vector{\omega}) + \frac{1}{2} \Vector{\omega} \cdot \dot{\Vector{L}}(\Vector{\omega}) \\
+          &amp; = &amp; \frac{1}{2} \Vector{\omega} \cdot \Vector{L}(\Vector{\dot{\omega}}) + \frac{1}{2} \Vector{\omega} \cdot \dot{\Vector{L}}(\Vector{\omega})
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The last step follows from the <b>Symmetric</b> property of the angular momentum. By differentiating $\Vector{L}$ it is possible to identify $\Vector{L}(\dot{\omega})$ as one of the resulting terms. Other terms are zero because $\dot{\Vector{x_i}} = \Vector{\omega} \times \Vector{x_i}$. We'll do this step explicitely because there are some surprising cancellations:
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \dot{\Vector{L}}(\vectorOmega)
+      &amp; = &amp;
+      \sum_i m_i \left[2 (\vectorX_i \cdot \dot{\vectorX_i}) \vectorOmega + (\vectorX_i)^2 \dot{\vectorOmega} - (\dot{\vectorOmega} \cdot \vectorX_i) \vectorX_i - (\vectorOmega \cdot \dot{\vectorX_i}) \vectorX_i - (\vectorOmega \cdot \vectorX_i) \dot{\vectorX_i} \right] \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      The first and fourth term vanish because $\dot{\vectorX_i} = \vectorOmega \cross \vectorX_i$. The last term will vanish upon taking the scalar product with $\vectorOmega$. What remains is $\vectorBigL(\dot{\vectorOmega})$. So we have the identity $\vectorOmega \cdot \dot{\vectorBigL}(\vectorOmega) = \vectorOmega \cdot \vectorBigL(\dot{\vectorOmega})$.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+        \frac{d}{d t}(\frac{1}{2} \Vector{\omega} \cdot \Vector{L}(\Vector{\omega}))
+          &amp; = &amp; \frac{1}{2} \Vector{\omega} \cdot \Vector{L}(\Vector{\dot{\omega}}) + \frac{1}{2} \Vector{\omega} \cdot \dot{\Vector{L}}(\Vector{\omega}) \\
+          &amp; = &amp; \vectorOmega \cdot \dot{\vectorBigL}(\vectorOmega) \\
+          &amp; = &amp; \vectorOmega \cdot \vectorBigN \\
       \end{eqnarray}
       $
     </p>
@@ -512,6 +592,9 @@ title: Geometric Physics • Classical Mechanics • Rigid Body Motion
       $
       <br/><br/>
       is the <b>rotational kinetic energy</b>.
+    </p>
+    <p>
+      Of course, we should show that the rotational kinetic energy about the center of mass splits of from the translational kinetic energy of the center of mass.
     </p>
   </section>
 </article>
