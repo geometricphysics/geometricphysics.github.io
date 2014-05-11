@@ -138,17 +138,37 @@ title: Geometric Physics • Mathematical Methods • Geometric Optics
   <section>
     <h3>Apparent depth of an object in a liquid</h3>
     <p>
-      Assuming that the image of the object is actually above the source object, a derivation of the apparent depth $s$ in terms of the true depth $d$ yields
+      By definition we assume that the image of the submersed object is vertically aligned with the object itself. Let the object be submersed at a distance $d$. Let the image appear to be at a depth $s$. Let the subscript $1$ refer to the quantities above the liquid and $2$ those below.
+      By considering the horizontal distance from the objects to where the light ray leaves the liquid we obtain
     </p>
     <p>
       $
       \begin{eqnarray}
-      \frac{s}{d} &amp; = &amp; \frac{n_{air}}{n_{liquid}} \frac{\cos \theta_{air}}{\cos \theta_{liquid}}
+      s \tan \theta_1 &amp; = &amp; d \tan \theta_2
       \end{eqnarray}
       $
     </p>
     <p>
-      (This formula is exact and requires some double-angle trig). For small angles, the cosine factors become unity.
+      Hence
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{s}{d}
+      &amp; = &amp; \frac{\tan \theta_2}{\tan \theta_1} \\
+      &amp; = &amp; \frac{\sin \theta_2}{\sin \theta_1} \frac{\cos \theta_1}{\tan \theta_2} \\
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \frac{s}{d} &amp; = &amp; \frac{n_1}{n_2} \frac{\cos \theta_1}{\cos \theta_2}
+      \end{eqnarray}
+      $
+    </p>
+    <p>
+      For small angles, the cosine factors become unity.
     </p>
   </section>
   <section>
@@ -173,13 +193,13 @@ title: Geometric Physics • Mathematical Methods • Geometric Optics
       $f$ is <b>negative</b> for a <b>diverging lens</b> and a <b>convex mirror</b>.
     </p>
     <p>
-      $\UnitVector{d}_{source}$ is a vector from the source to the lens. This determines the sign for $d_{source}$.
+      $\UnitVector{d}_{source}$ is a vector from the source to the lens or mirror. This determines the sign for $d_{source}$.
     </p>
     <p>
-      For a <b>lens</b>,   $\UnitVector{d}_{image} = + \UnitVector{d}_{source}$.
+      For a <b>lens</b>,   $\UnitVector{d}_{image} = + \UnitVector{d}_{source}$. The source and image unit vectors are in the same direction anticipating <b>transmission</b> by the optics.
     </p>
     <p>
-      For a <b>mirror</b>, $\UnitVector{d}_{image} = - \UnitVector{d}_{source}$.
+      For a <b>mirror</b>, $\UnitVector{d}_{image} = - \UnitVector{d}_{source}$. The source and image unit vectors are in opposite directions anticipating <b>reflection</b> by the optics.
     </p>
     <p>
       The source distances that divide regimes are $2f$ and $f$. Although many texts do not perform the derivation of the thin lens formula, the center of curvature is at a distance $2f$.

@@ -4261,6 +4261,9 @@ Sk.configure = function(options)
     Sk.sysargv = options["sysargv"] || Sk.sysargv;
     goog.asserts.assert(goog.isArrayLike(Sk.sysargv));
 
+    Sk.snapToAngle = options["snapToAngle"] || Sk.snapToAngle;
+    goog.asserts.assertBoolean(Sk.snapToAngle, "Sk.snapToAngle must be set to a JavaScript boolean value.");
+
     Sk.physics = options["physics"] || Sk.physics;
     goog.asserts.assertBoolean(Sk.physics, "Sk.physics must be set to a JavaScript boolean value.");
 
@@ -4354,6 +4357,14 @@ if (!Sk.inBrowser)
 }
 
 /**
+ * Determines whether trigonometric functions make approximations.
+ * For pedagogical purposes, this defaults to true.
+ * @type {boolean}
+ */
+Sk.snapToAngle = true;
+goog.exportSymbol("Sk.snapToAngle", Sk.snapToAngle);
+
+/**
  * The physics mode.
  * @type {boolean}
  */
@@ -4369,6 +4380,7 @@ goog.exportSymbol("Sk.flyweight", Sk.flyweight);
 /**
  * The flyweight mode for strings (in development).
  * This is not quite production-ready.
+ * Do not use this parameter; it will go away!
  * @type {boolean}
  */
 Sk.flyString = true;
@@ -6524,6 +6536,18 @@ Sk.builtin.none = {none$:
         {
             return Sk.builtin.stringToPy("None");
         }
+        None.prototype.u$acos = function()
+        {
+            return this;
+        }
+        None.prototype.u$asin = function()
+        {
+            return this;
+        }
+        None.prototype.u$atan = function()
+        {
+            return this;
+        }
         return Object.create(None.prototype, {v: {value: null, enumerable: true}});
     })()
 };
@@ -7951,7 +7975,7 @@ goog.exportSymbol("Sk.abstr.numberInplaceBinOp", Sk.abstr.numberInplaceBinOp);
   {
     case Sk.abstr.unaryOp.USub:
     {
-        return obj.nu$negative          ? obj.nu$negative        : obj['__neg__'];
+        return obj.u$negative          ? obj.u$negative        : obj['__neg__'];
     }
     case Sk.abstr.unaryOp.Invert:
     {
@@ -7959,7 +7983,7 @@ goog.exportSymbol("Sk.abstr.numberInplaceBinOp", Sk.abstr.numberInplaceBinOp);
     }
     case Sk.abstr.unaryOp.UAdd:
     {
-        return obj.nb$positive          ? obj.nb$positive        : obj['__pos__'];
+        return obj.u$positive          ? obj.u$positive        : obj['__pos__'];
     }
     default:
     {
@@ -13020,49 +13044,69 @@ Sk.builtin.NumberPy.prototype.nb$inplace_lshift = Sk.builtin.NumberPy.prototype.
 
 Sk.builtin.NumberPy.prototype.nb$inplace_rshift = Sk.builtin.NumberPy.prototype.nb$rshift;
 
-Sk.builtin.NumberPy.prototype.nu$negative = function()
+Sk.builtin.NumberPy.prototype.u$negative = function()
 {
     return Sk.builtin.numberPy(-this.v, this.skType);
 };
 
-Sk.builtin.NumberPy.prototype.nb$positive = function()
+Sk.builtin.NumberPy.prototype.u$positive = function()
 {
     return this;
 };
 
-Sk.builtin.NumberPy.prototype.nb$cos = function()
+Sk.builtin.NumberPy.prototype.u$cos = function()
 {
-    return Sk.builtin.numberPy(Math.cos(this.v), this.skType);
+    return Sk.builtin.numberToPy(Sk.math.cos(this.v));
 };
 
-Sk.builtin.NumberPy.prototype.nb$sin = function()
+Sk.builtin.NumberPy.prototype.u$sin = function()
 {
-    return Sk.builtin.numberPy(Math.sin(this.v), this.skType);
+    return Sk.builtin.numberToPy(Sk.math.sin(this.v));
 };
 
-Sk.builtin.NumberPy.prototype.nb$tan = function()
+Sk.builtin.NumberPy.prototype.u$tan = function()
 {
-    return Sk.builtin.numberPy(Math.tan(this.v), this.skType);
+    return Sk.builtin.numberToPy(Sk.math.tan(this.v));
 };
 
-Sk.builtin.NumberPy.prototype.nu$exponential = function()
+Sk.builtin.NumberPy.prototype.u$acos = function()
 {
-    return Sk.builtin.numberPy(Math.exp(this.v), this.skType);
+    return Sk.builtin.numberToPy(Math.acos(this.v));
 };
 
-Sk.builtin.NumberPy.prototype.nu$abs = function()
+Sk.builtin.NumberPy.prototype.u$asin = function()
+{
+    return Sk.builtin.numberToPy(Math.asin(this.v));
+};
+
+Sk.builtin.NumberPy.prototype.u$atan = function()
+{
+    return Sk.builtin.numberToPy(Math.atan(this.v));
+};
+
+Sk.builtin.NumberPy.prototype.u$exp = function()
+{
+    return Sk.builtin.numberToPy(Math.exp(this.v));
+};
+
+Sk.builtin.NumberPy.prototype.u$abs = function()
 {
     return Sk.builtin.numberPy(Math.abs(this.v), this.skType);
 };
 
-Sk.builtin.NumberPy.prototype.nu$magnitude = function()
+Sk.builtin.NumberPy.prototype.u$magnitude = function()
 {
     return Sk.builtin.numberPy(Math.abs(this.v), this.skType);
 };
 
-Sk.builtin.NumberPy.prototype.nu$quadrance = function()
+Sk.builtin.NumberPy.prototype.u$quadrance = function()
 {
     return Sk.builtin.numberPy(this.v * this.v, this.skType);
+};
+
+Sk.builtin.NumberPy.prototype.u$sqrt = function()
+{
+    return Sk.builtin.numberPy(Math.sqrt(this.v), this.skType);
 };
 
 Sk.builtin.NumberPy.prototype.nb$nonzero = function()
@@ -13789,12 +13833,12 @@ Sk.builtin.lng.prototype.nb$xor = function(other)
 
 Sk.builtin.lng.prototype.nb$inplace_xor = Sk.builtin.lng.prototype.nb$xor;
 
-Sk.builtin.lng.prototype.nu$negative = function()
+Sk.builtin.lng.prototype.u$negative = function()
 {
   return new Sk.builtin.lng(this.biginteger.negate());
 };
 
-Sk.builtin.lng.prototype.nb$positive = function() { return this.clone(); };
+Sk.builtin.lng.prototype.u$positive = function() { return this.clone(); };
 
 Sk.builtin.lng.prototype.nb$nonzero = function()
 {
@@ -16620,9 +16664,7 @@ Sk.ffh = Sk.ffh || {};
 var SPECIAL_METHOD_ADD     = '__add__';
 var SPECIAL_METHOD_CLIFFORD_CONJUGATE = '__cliffordConjugate__';
 var SPECIAL_METHOD_CONJUGATE = '__conjugate__';
-var SPECIAL_METHOD_DIV     = '__div__';
 var SPECIAL_METHOD_EQ      = '__eq__';
-var SPECIAL_METHOD_COS     = '__cos__';
 var SPECIAL_METHOD_EXP     = '__exp__';
 var SPECIAL_METHOD_GETITEM = '__getitem__';
 var SPECIAL_METHOD_INVERT  = '__invert__';
@@ -16634,11 +16676,8 @@ var SPECIAL_METHOD_POS     = '__pos__';
 var SPECIAL_METHOD_REPR    = '__repr__';
 var SPECIAL_METHOD_RMUL    = '__rmul__';
 var SPECIAL_METHOD_RSHIFT  = '__rshift__';
-var SPECIAL_METHOD_SIN     = '__sin__';
-var SPECIAL_METHOD_SQRT    = '__sqrt__';
 var SPECIAL_METHOD_STR     = '__str__';
 var SPECIAL_METHOD_SUB     = '__sub__';
-var SPECIAL_METHOD_TAN     = '__tan__';
 var SPECIAL_METHOD_XOR     = '__xor__';
 
 /**
@@ -16695,7 +16734,8 @@ Sk.ffh.multiply = function(lhsPy, rhsPy) {
 };
 goog.exportSymbol("Sk.ffh.multiply", Sk.ffh.multiply);
 
-Sk.ffh.divide = function(lhsPy, rhsPy) {
+Sk.ffh.divide = function(lhsPy, rhsPy)
+{
   return Sk.abstr.numberBinOp(lhsPy, rhsPy, "Div");
 };
 goog.exportSymbol("Sk.ffh.divide", Sk.ffh.divide);
@@ -16778,25 +16818,43 @@ goog.exportSymbol("Sk.ffh.conjugate", Sk.ffh.conjugate);
 
 Sk.ffh.cos = function(valuePy)
 {
-  return Sk.ffh.unaryExec("cos", SPECIAL_METHOD_COS, valuePy, "nb$cos");
+  return Sk.ffh.unaryExec("cos", '__cos__', valuePy, "u$cos");
 };
 goog.exportSymbol("Sk.ffh.cos", Sk.ffh.cos);
 
 Sk.ffh.sin = function(valuePy)
 {
-  return Sk.ffh.unaryExec("sin", SPECIAL_METHOD_SIN, valuePy, "nb$sin");
+  return Sk.ffh.unaryExec("sin", '__sin__', valuePy, "u$sin");
 };
 goog.exportSymbol("Sk.ffh.sin", Sk.ffh.sin);
 
 Sk.ffh.tan = function(valuePy)
 {
-  return Sk.ffh.unaryExec("tan", SPECIAL_METHOD_TAN, valuePy, "nb$tan");
+  return Sk.ffh.unaryExec("tan", '__tan__', valuePy, "u$tan");
 };
 goog.exportSymbol("Sk.ffh.tan", Sk.ffh.tan);
 
+Sk.ffh.acos = function(valuePy)
+{
+  return Sk.ffh.unaryExec("acos", '__acos__', valuePy, "u$acos");
+};
+goog.exportSymbol("Sk.ffh.acos", Sk.ffh.acos);
+
+Sk.ffh.asin = function(valuePy)
+{
+  return Sk.ffh.unaryExec("asin", '__asin__', valuePy, "u$asin");
+};
+goog.exportSymbol("Sk.ffh.asin", Sk.ffh.asin);
+
+Sk.ffh.atan = function(valuePy)
+{
+  return Sk.ffh.unaryExec("atan", '__atan__', valuePy, "u$atan");
+};
+goog.exportSymbol("Sk.ffh.atan", Sk.ffh.atan);
+
 Sk.ffh.exp = function(valuePy)
 {
-  return Sk.ffh.unaryExec("exp", SPECIAL_METHOD_EXP, valuePy, "nu$exponential");
+  return Sk.ffh.unaryExec("exp", SPECIAL_METHOD_EXP, valuePy, "u$exp");
 };
 goog.exportSymbol("Sk.ffh.exp", Sk.ffh.exp);
 
@@ -16841,25 +16899,25 @@ goog.exportSymbol("Sk.ffh.nonzero", Sk.ffh.nonzero);
 
 Sk.ffh.abs = function(valuePy)
 {
-  return Sk.ffh.unaryExec("abs", '__abs__', valuePy, "nu$abs");
+  return Sk.ffh.unaryExec("abs", '__abs__', valuePy, "u$abs");
 };
 goog.exportSymbol("Sk.ffh.abs", Sk.ffh.abs);
 
 Sk.ffh.magnitude = function(valuePy)
 {
-  return Sk.ffh.unaryExec("magnitude", '__magnitude__', valuePy, "nu$magnitude");
+  return Sk.ffh.unaryExec("magnitude", '__magnitude__', valuePy, "u$magnitude");
 };
 goog.exportSymbol("Sk.ffh.magnitude", Sk.ffh.magnitude);
 
 Sk.ffh.quadrance = function(valuePy)
 {
-  return Sk.ffh.unaryExec("quadrance", '__quadrance__', valuePy, "nu$quadrance");
+  return Sk.ffh.unaryExec("quadrance", '__quadrance__', valuePy, "u$quadrance");
 };
 goog.exportSymbol("Sk.ffh.quadrance", Sk.ffh.quadrance);
 
 Sk.ffh.sqrt = function(valuePy)
 {
-  return Sk.ffh.unaryExec("sqrt", SPECIAL_METHOD_SQRT, valuePy);
+  return Sk.ffh.unaryExec("sqrt", '__sqrt__', valuePy, "u$sqrt");
 };
 goog.exportSymbol("Sk.ffh.sqrt", Sk.ffh.sqrt);
 
@@ -26483,97 +26541,163 @@ Sk.math.PI_TIMES_7_OVER_4 = 7 * Math.PI / 4;
 Sk.math.PI_TIMES_8_OVER_4 = 2 * Math.PI;
 Sk.math.EPSILON           = 0.000000001
 
-Sk.math.isCloseTo = function(x1, x2, epsilon) {
+Sk.math.isCloseTo = function(x1, x2, epsilon)
+{
   return Math.abs(x1 - x2) < epsilon;
 }
 
-Sk.math.cos = function(x) {
-  if (Sk.math.isCloseTo(Math.abs(x), 0, Sk.math.EPSILON)) {
+/**
+ * @param {number} x
+ * @return {number}
+ */
+Sk.math.cos = function(x)
+{
+  if (!Sk.snapToAngle)
+  {
+    return Math.cos(x);
+  }
+
+  if (Sk.math.isCloseTo(Math.abs(x), 0, Sk.math.EPSILON))
+  {
     return +1;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON))
+  {
     return +Math.SQRT1_2;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON))
+  {
     return 0;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON))
+  {
     return -Math.SQRT1_2;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON))
+  {
     return -1;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON))
+  {
     return -Math.SQRT1_2;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON))
+  {
     return 0;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON))
+  {
     return +Math.SQRT1_2;
   }
-  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON)) {
+  else if (Sk.math.isCloseTo(Math.abs(x), Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON))
+  {
     return +1;
   }
-  else {
+  else
+  {
     return Math.cos(x);
   }
 };
 
-Sk.math.sin = function(x) {
-  if (Sk.math.isCloseTo(x, 0, Sk.math.EPSILON)) {
-    return 0;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON)) {
-    return Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON)) {
-    return +1;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON)) {
-    return Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON)) {
-    return 0;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON)) {
-    return -Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON)) {
-    return -1;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON)) {
-    return -Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON)) {
-    return 0;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON)) {
-    return -Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON)) {
-    return -1;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON)) {
-    return -Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON)) {
-    return 0;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON)) {
-    return +Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON)) {
-    return +1;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON)) {
-    return +Math.SQRT1_2;
-  }
-  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON)) {
-    return 0;
-  }
-  else {
+/**
+ * @param {number} x
+ * @return {number}
+ */
+Sk.math.sin = function(x)
+{
+  if (!Sk.snapToAngle)
+  {
     return Math.sin(x);
+  }
+
+  if (Sk.math.isCloseTo(x, 0, Sk.math.EPSILON))
+  {
+    return 0;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON))
+  {
+    return Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON))
+  {
+    return +1;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON))
+  {
+    return Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON))
+  {
+    return 0;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON))
+  {
+    return -Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON))
+  {
+    return -1;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON))
+  {
+    return -Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, +Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON))
+  {
+    return 0;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_1_OVER_4, Sk.math.EPSILON))
+  {
+    return -Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_2_OVER_4, Sk.math.EPSILON))
+  {
+    return -1;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_3_OVER_4, Sk.math.EPSILON))
+  {
+    return -Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_4_OVER_4, Sk.math.EPSILON))
+  {
+    return 0;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_5_OVER_4, Sk.math.EPSILON))
+  {
+    return +Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_6_OVER_4, Sk.math.EPSILON))
+  {
+    return +1;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_7_OVER_4, Sk.math.EPSILON))
+  {
+    return +Math.SQRT1_2;
+  }
+  else if (Sk.math.isCloseTo(x, -Sk.math.PI_TIMES_8_OVER_4, Sk.math.EPSILON))
+  {
+    return 0;
+  }
+  else
+  {
+    return Math.sin(x);
+  }
+};
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+Sk.math.tan = function(x)
+{
+  if (!Sk.snapToAngle)
+  {
+    return Math.tan(x);
+  }
+  else
+  {
+    // FIXME: Optimize
+    return Sk.math.sin(x) / Sk.math.cos(x);
   }
 };
 
@@ -26599,67 +26723,70 @@ mod.sqrt2   = Sk.builtin.numberToPy(Math.SQRT2);
 mod.sqrt1_2 = Sk.builtin.numberToPy(Math.SQRT1_2);
 mod.tao     = Sk.builtin.numberToPy(2 * Math.PI);
 
-mod.cliffordConjugate = Sk.ffi.functionPy(function(x) {
+mod.cliffordConjugate = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("cliffordConjugate", arguments, 1, 1);
-  if (Sk.ffi.isNum(x)) {
+  if (Sk.ffi.isNum(x))
+  {
     // The Clifford Conjugate of a JavaScript number is just itself.
     return x;
   }
-  else {
+  else
+  {
     return Sk.ffh.cliffordConjugate(x);
   }
 });
 
-mod.fabs = Sk.ffi.functionPy(function(x) {
+mod.fabs = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("fabs", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   return Sk.builtin.numberToPy(Math.abs(Sk.builtin.asnum$(x)));
 });
 
-mod.asin = Sk.ffi.functionPy(function(rad) {
-  Sk.ffi.checkFunctionArgs("asin", arguments, 1, 1);
-  Sk.builtin.pyCheckType("rad", "number", Sk.builtin.checkNumber(rad));
-  return Sk.builtin.numberToPy(Math.asin(Sk.builtin.asnum$(rad)));
-});
+mod.asin = Sk.ffi.functionPy(function(xPy) {return Sk.ffh.asin(xPy);});
+mod.acos = Sk.ffi.functionPy(function(xPy) {return Sk.ffh.acos(xPy);});
+mod.atan = Sk.ffi.functionPy(function(xPy) {return Sk.ffh.atan(xPy);});
 
-mod.acos = Sk.ffi.functionPy(function(rad) {
-  Sk.ffi.checkFunctionArgs("acos", arguments, 1, 1);
-  Sk.builtin.pyCheckType("rad", "number", Sk.builtin.checkNumber(rad));
-  return Sk.builtin.numberToPy(Math.acos(Sk.builtin.asnum$(rad)));
-});
-
-mod.atan = Sk.ffi.functionPy(function(rad) {
-  Sk.ffi.checkFunctionArgs("atan", arguments, 1, 1);
-  Sk.builtin.pyCheckType("rad", "number", Sk.builtin.checkNumber(rad));
-  return Sk.builtin.numberToPy(Math.atan(Sk.builtin.asnum$(rad)));
-});
-
-mod.atan2 = Sk.ffi.functionPy(function(y, x) {
+mod.atan2 = Sk.ffi.functionPy(function(y, x)
+{
   Sk.ffi.checkFunctionArgs("atan2", arguments, 2, 2);
   Sk.builtin.pyCheckType("y", "number", Sk.builtin.checkNumber(y));
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   return Sk.builtin.numberToPy(Math.atan2(Sk.builtin.asnum$(y), Sk.builtin.asnum$(x)));
 });
+
 /**
  * exp
  */
-mod.exp = Sk.ffi.functionPy(function(anglePy) {
+mod.exp = Sk.ffi.functionPy(function(argPy)
+{
   Sk.ffi.checkFunctionArgs("exp", arguments, 1, 1);
-  if (Sk.ffi.isNum(anglePy)) {
-    return Sk.builtin.numberToPy(Math.exp(Sk.ffi.remapToJs(anglePy)));
+  if (Sk.ffi.isNum(argPy))
+  {
+    return Sk.builtin.numberToPy(Math.exp(Sk.ffi.remapToJs(argPy)));
   }
-  else {
-    return Sk.ffh.exp(anglePy);
+  else
+  {
+    return Sk.ffh.exp(argPy);
   }
 });
 
-function makeTrigFunction(name, f1, f2) {
-  return function(anglePy) {
+function makeTrigFunction(name, f1, f2)
+{
+  goog.asserts.assertString(name);
+  goog.asserts.assertFunction(f1);
+  goog.asserts.assertFunction(f2);
+
+  return function(anglePy)
+  {
     Sk.ffi.checkFunctionArgs(name, arguments, 1, 1);
-    if (Sk.ffi.isNum(anglePy)) {
+    if (Sk.ffi.isNum(anglePy))
+    {
       return Sk.builtin.numberToPy(f1(Sk.ffi.remapToJs(anglePy)));
     }
-    else {
+    else
+    {
       return f2(anglePy);
     }
   };
@@ -26676,9 +26803,10 @@ mod.sin = Sk.ffi.functionPy(makeTrigFunction("sin", Sk.math.sin, Sk.ffh.sin));
 /**
  * tan
  */
-mod.tan = Sk.ffi.functionPy(makeTrigFunction("tan", Math.tan, Sk.ffh.tan));
+mod.tan = Sk.ffi.functionPy(makeTrigFunction("tan", Sk.math.tan, Sk.ffh.tan));
 
-mod.asinh = Sk.ffi.functionPy(function(x) {
+mod.asinh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("asinh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26686,7 +26814,8 @@ mod.asinh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(Math.log(L));
 });
 
-mod.acosh = Sk.ffi.functionPy(function(x) {
+mod.acosh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("acosh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26694,7 +26823,8 @@ mod.acosh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(Math.log(L));
 });
 
-mod.atanh = Sk.ffi.functionPy(function(x) {
+mod.atanh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("atanh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26702,7 +26832,8 @@ mod.atanh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(Math.log(L)/2);
 });
 
-mod.sinh = Sk.ffi.functionPy(function(x) {
+mod.sinh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("sinh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26713,7 +26844,8 @@ mod.sinh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(result);
 });
 
-mod.cosh = Sk.ffi.functionPy(function(x) {
+mod.cosh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("cosh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26724,7 +26856,8 @@ mod.cosh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(result);
 });
 
-mod.tanh = Sk.ffi.functionPy(function(x) {
+mod.tanh = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("tanh", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Sk.builtin.asnum$(x);
@@ -26735,35 +26868,42 @@ mod.tanh = Sk.ffi.functionPy(function(x) {
   return Sk.builtin.numberToPy(result);
 });
 
-mod.ceil = Sk.ffi.functionPy(function(x) {
+mod.ceil = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("ceil", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   return Sk.builtin.numberToPy(Math.ceil(Sk.builtin.asnum$(x)));
 });
 
-mod.floor = Sk.ffi.functionPy(function(x) {
+mod.floor = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("floor", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   return Sk.builtin.numberToPy(Math.floor(Sk.builtin.asnum$(x)));
 });
 
-mod.sqrt = Sk.ffi.functionPy(function(x) {
+mod.sqrt = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("sqrt", arguments, 1, 1);
-  if (Sk.ffi.isNum(x)) {
+  if (Sk.ffi.isNum(x))
+  {
     return Sk.builtin.numberToPy(Math.sqrt(Sk.ffi.remapToJs(x)));
   }
-  else {
+  else
+  {
     return Sk.ffh.sqrt(x);
   }
 });
 
-mod.trunc = Sk.ffi.functionPy(function(x) {
+mod.trunc = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("trunc", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   return Sk.builtin.numberToPy(Sk.builtin.asnum$(x)|0);
 });
 
-mod.log = Sk.ffi.functionPy(function(x, base) {
+mod.log = Sk.ffi.functionPy(function(x, base)
+{
   Sk.ffi.checkFunctionArgs("log", arguments, 1, 2);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
 
@@ -26779,35 +26919,40 @@ mod.log = Sk.ffi.functionPy(function(x, base) {
   }
 });
 
-mod.log10 = Sk.ffi.functionPy(function(x) {
+mod.log10 = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("log10", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   var ret = Math.log(Sk.builtin.asnum$(x)) / Math.log(10);
   return Sk.builtin.numberToPy(ret);
 });
 
-mod.pow = Sk.ffi.functionPy(function(x,y) {
+mod.pow = Sk.ffi.functionPy(function(x,y)
+{
   Sk.ffi.checkFunctionArgs("pow", arguments, 2, 2);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   Sk.builtin.pyCheckType("y", "number", Sk.builtin.checkNumber(y));
   return Sk.builtin.numberToPy(Math.pow(Sk.builtin.asnum$(x), Sk.builtin.asnum$(y)));
 });
 
-mod.radians = Sk.ffi.functionPy(function(deg) {
+mod.radians = Sk.ffi.functionPy(function(deg)
+{
   Sk.ffi.checkFunctionArgs("radians", arguments, 1, 1);
   Sk.builtin.pyCheckType("deg", "number", Sk.builtin.checkNumber(deg));
   var ret = Math.PI / 180.0 * Sk.builtin.asnum$(deg);
   return Sk.builtin.numberToPy(ret);
 });
 
-mod.degrees = Sk.ffi.functionPy(function(rad) {
+mod.degrees = Sk.ffi.functionPy(function(rad)
+{
   Sk.ffi.checkFunctionArgs("degrees", arguments, 1, 1);
   Sk.builtin.pyCheckType("rad", "number", Sk.builtin.checkNumber(rad));
   var ret = 180.0 / Math.PI * Sk.builtin.asnum$(rad);
   return Sk.builtin.numberToPy(ret);
 });
 
-mod.hypot = Sk.ffi.functionPy(function(x, y) {
+mod.hypot = Sk.ffi.functionPy(function(x, y)
+{
   Sk.ffi.checkFunctionArgs("hypot", arguments, 2, 2);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   Sk.builtin.pyCheckType("y", "number", Sk.builtin.checkNumber(y));
@@ -26816,7 +26961,8 @@ mod.hypot = Sk.ffi.functionPy(function(x, y) {
   return Sk.builtin.numberToPy(Math.sqrt((x*x)+(y*y)));
 });
 
-mod.factorial = Sk.ffi.functionPy(function(x) {
+mod.factorial = Sk.ffi.functionPy(function(x)
+{
   Sk.ffi.checkFunctionArgs("factorial", arguments, 1, 1);
   Sk.builtin.pyCheckType("x", "number", Sk.builtin.checkNumber(x));
   x = Math.floor(Sk.builtin.asnum$(x));
@@ -26831,12 +26977,15 @@ mod.factorial = Sk.ffi.functionPy(function(x) {
 /**
  * conjugate
  */
-mod.conjugate = Sk.ffi.functionPy(function(numberPy) {
+mod.conjugate = Sk.ffi.functionPy(function(numberPy)
+{
   Sk.ffi.checkFunctionArgs("conjugate", arguments, 1, 1);
-  if (Sk.ffi.isNum(numberPy)) {
+  if (Sk.ffi.isNum(numberPy))
+  {
     return numberPy;
   }
-  else {
+  else
+  {
     return Sk.ffh.conjugate(numberPy);
   }
 });
@@ -26844,7 +26993,8 @@ mod.conjugate = Sk.ffi.functionPy(function(numberPy) {
 /**
  * magnitude
  */
-mod.magnitude = Sk.ffi.functionPy(function(numberPy) {
+mod.magnitude = Sk.ffi.functionPy(function(numberPy)
+{
   Sk.ffi.checkFunctionArgs("magnitude", arguments, 1, 1);
   return Sk.ffh.magnitude(numberPy);
 });
@@ -26852,7 +27002,8 @@ mod.magnitude = Sk.ffi.functionPy(function(numberPy) {
 /**
  * quadrance
  */
-mod.quadrance = Sk.ffi.functionPy(function(numberPy) {
+mod.quadrance = Sk.ffi.functionPy(function(numberPy)
+{
   Sk.ffi.checkFunctionArgs("quadrance", arguments, 1, 1);
   return Sk.ffh.quadrance(numberPy);
 });
@@ -28074,10 +28225,10 @@ mod[QUATERNION] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     }
     return selfPy;
   });
-  $loc.nb$positive = function() {
+  $loc.u$positive = function() {
     return this;
   };
-  $loc.nu$negative = function() {
+  $loc.u$negative = function() {
     var q = Sk.ffi.remapToJs(this);
     return wxyzToPy(-q.w, -q.x, -q.y, -q.z);
   };
@@ -33629,17 +33780,7 @@ var METHOD_CLONE        = "clone";
  * @const
  * @type {string}
  */
-var METHOD_COS          = "cos";
-/**
- * @const
- * @type {string}
- */
 var METHOD_DOT          = "dot";
-/**
- * @const
- * @type {string}
- */
-var METHOD_SIN          = "sin";
 /**
  * @const
  * @type {string}
@@ -34377,11 +34518,11 @@ mod[EUCLIDEAN_2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
       return selfPy;
     }
   });
-  $loc.nu$negative = function() {
+  $loc.u$negative = function() {
     var self = Sk.ffi.remapToJs(this);
     return coordsJsToE2Py(-self.w, -self.x, -self.y, -self.xy);
   };
-  $loc.nb$positive = function() {
+  $loc.u$positive = function() {
     return this;
   };
   $loc.nb$invert = function() {
@@ -34408,8 +34549,9 @@ mod[EUCLIDEAN_2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var self = Sk.ffi.remapToJs(selfPy);
     return coordsJsToE2Py(self.w, -self.x, -self.y, -self.xy);
   });
-  $loc.__cos__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(METHOD_COS, arguments, 0, 0);
+  $loc.__cos__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("cos", arguments, 0, 0);
     var mv = Sk.ffi.remapToJs(selfPy);
     var x = mv.w;
     var y = mv.xy;
@@ -34419,8 +34561,9 @@ mod[EUCLIDEAN_2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var sinhY = sinh(y);
     return coordsJsToE2Py(cosX * coshY, 0, 0, - sinX * sinhY);
   });
-  $loc.__sin__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(METHOD_SIN, arguments, 0, 0);
+  $loc.__sin__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("sin", arguments, 0, 0);
     var mv = Sk.ffi.remapToJs(selfPy);
     var x = mv.w;
     var y = mv.xy;
@@ -34430,7 +34573,31 @@ mod[EUCLIDEAN_2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var sinhY = sinh(y);
     return coordsJsToE2Py(sinX * coshY, 0, 0, cosX * sinhY);
   });
-  $loc.__exp__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__tan__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("tan", arguments, 0, 0);
+    return Sk.ffh.divide(Sk.ffh.sin(selfPy), Sk.ffh.cos(selfPy))
+  });
+  $loc.__acos__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("acos", arguments, 0, 0);
+    var selfJs = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE2Py(Math.acos(selfJs.w), 0, 0, 0);
+  });
+  $loc.__asin__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("asin", arguments, 0, 0);
+    var selfJs = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE2Py(Math.asin(selfJs.w), 0, 0, 0);
+  });
+  $loc.__atan__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("atan", arguments, 0, 0);
+    var selfJs = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE2Py(Math.atan(selfJs.w), 0, 0, 0);
+  });
+  $loc.__exp__ = Sk.ffi.functionPy(function(selfPy)
+  {
     Sk.ffi.checkMethodArgs(METHOD_EXP, arguments, 0, 0);
     var mv = Sk.ffi.remapToJs(selfPy);
     var x = mv.w;
@@ -34440,47 +34607,58 @@ mod[EUCLIDEAN_2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var s = Sk.math.sin(y);
     return coordsJsToE2Py(e * c, 0, 0, e * s);
   });
-  $loc.__abs__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__abs__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var mv = Sk.ffi.remapToJs(selfPy);
     return Sk.ffi.numberToFloatPy(Math.sqrt(mv.w * mv.w + mv.x * mv.x + mv.y * mv.y + mv.xy * mv.xy));
   });
-  $loc.__magnitude__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__magnitude__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var mv = Sk.ffi.remapToJs(selfPy);
     return coordsJsToE2Py(Math.sqrt(mv.w * mv.w + mv.x * mv.x + mv.y * mv.y + mv.xy * mv.xy), 0, 0, 0);
   });
-  $loc.__quadrance__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__quadrance__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var mv = Sk.ffi.remapToJs(selfPy);
     return coordsJsToE2Py(mv.w * mv.w + mv.x * mv.x + mv.y * mv.y + mv.xy * mv.xy, 0, 0, 0);
   });
-  $loc.__sqrt__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__sqrt__ = Sk.ffi.functionPy(function(selfPy)
+  {
     Sk.ffi.checkMethodArgs(METHOD_SQRT, arguments, 0, 0);
     var mv = Sk.ffi.remapToJs(selfPy);
     return coordsJsToE2Py(Math.sqrt(mv.w), 0, 0, 0);
   });
-  $loc.__repr__ = Sk.ffi.functionPy(function(mv) {
+  $loc.__repr__ = Sk.ffi.functionPy(function(mv)
+  {
     mv = Sk.ffi.remapToJs(mv);
     return Sk.builtin.stringToPy(EUCLIDEAN_2 + "(" + [mv.w, mv.x, mv.y, mv.xy].map(function(x) {return String(x);}).join(", ") + ")");
   });
-  $loc.__str__ = Sk.ffi.functionPy(function(mv) {
+  $loc.__str__ = Sk.ffi.functionPy(function(mv)
+  {
     mv = Sk.ffi.remapToJs(mv);
-    if (mv.isNaN()) {
+    if (mv.isNaN())
+    {
       return Sk.builtin.stringToPy("NaN");
     }
-    else {
+    else
+    {
       return Sk.builtin.stringToPy(stringFromCoordinates([mv.w, mv.x, mv.y, mv.xy], [ONE_NAME, E1_NAME, E2_NAME, PSEUDOSCALAR_NAME], "*"));
     }
   });
-  $loc.__eq__ = Sk.ffi.functionPy(function(a, b) {
+  $loc.__eq__ = Sk.ffi.functionPy(function(a, b)
+  {
     a = Sk.ffi.remapToJs(a);
     b = Sk.ffi.remapToJs(b);
     return (a.w === b.w) && (a.x === b.x) && (a.y === b.y) && (a.xy === b.xy);
   });
-  $loc.__ne__ = Sk.ffi.functionPy(function(a, b) {
+  $loc.__ne__ = Sk.ffi.functionPy(function(a, b)
+  {
     a = Sk.ffi.remapToJs(a);
     b = Sk.ffi.remapToJs(b);
     return (a.w !== b.w) || (a.x !== b.x) || (a.y !== b.y) || (a.xy !== b.xy);
   });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(mvPy, name) {
+  $loc.__getattr__ = Sk.ffi.functionPy(function(mvPy, name)
+  {
     var mv = Sk.ffi.remapToJs(mvPy);
     switch(name) {
       case PROP_W: {
@@ -34720,11 +34898,6 @@ var METHOD_DOT                 = "dot";
  * @const
  * @type {string}
  */
-var METHOD_EXP                 = "exp";
-/**
- * @const
- * @type {string}
- */
 var METHOD_COPY                = "copy";
 /**
  * @const
@@ -34845,7 +35018,7 @@ var ARG_VALUE                  = "value";
  * @const
  * @type {string}
  */
-var UNIT_SCALAR_NAME          = "1";
+var ONE_NAME                   = Sk.builtin.numberToFloatStringJs(1, 10, true);
 /**
  * @const
  * @type {string}
@@ -34978,7 +35151,7 @@ function stringFromCoordinates(coordinates, labels)
       {
         // We indicate that we want to retain the sign, even though we already have the absolute value.
         sb.push(Sk.builtin.numberToFloatStringJs(n, 10, true));
-        if (label !== "1")
+        if (label !== ONE_NAME)
         {
           sb.push("*");
           return sb.push(label);
@@ -35379,21 +35552,25 @@ function compute(f, a, b, coord, pack) {
   return pack(x0, x1, x2, x3, x4, x5, x6, x7);
 }
 
-mod[Sk.e3ga.SCALAR_E3] = Sk.ffi.functionPy(function(wPy, mutablePy) {
+mod[Sk.e3ga.SCALAR_E3] = Sk.ffi.functionPy(function(wPy, mutablePy)
+{
   Sk.ffi.checkFunctionArgs(Sk.e3ga.SCALAR_E3, arguments, 1, 2);
   Sk.ffi.checkArgType(PROP_W, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(wPy), wPy);
-  if (Sk.ffi.isDefined(mutablePy)) {
+  if (Sk.ffi.isDefined(mutablePy))
+  {
     Sk.ffi.checkArgType(PROP_MUTABLE, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(mutablePy), mutablePy);
   }
   return coordsJsToE3Py(Sk.ffi.numberToJs(wPy), 0, 0, 0, 0, 0, 0, 0, Sk.ffi.remapToJs(mutablePy));
 });
 
-mod[Sk.e3ga.VECTOR_E3] = Sk.ffi.functionPy(function(xPy, yPy, zPy, mutablePy) {
+mod[Sk.e3ga.VECTOR_E3] = Sk.ffi.functionPy(function(xPy, yPy, zPy, mutablePy)
+{
   Sk.ffi.checkFunctionArgs(Sk.e3ga.VECTOR_E3, arguments, 3, 4);
   Sk.ffi.checkArgType(PROP_X, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(xPy), xPy);
   Sk.ffi.checkArgType(PROP_Y, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(yPy), yPy);
   Sk.ffi.checkArgType(PROP_Z, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(zPy), zPy);
-  if (Sk.ffi.isDefined(mutablePy)) {
+  if (Sk.ffi.isDefined(mutablePy))
+  {
     Sk.ffi.checkArgType(PROP_MUTABLE, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(mutablePy), mutablePy);
   }
   var x = Sk.ffi.numberToJs(xPy);
@@ -35402,12 +35579,14 @@ mod[Sk.e3ga.VECTOR_E3] = Sk.ffi.functionPy(function(xPy, yPy, zPy, mutablePy) {
   return coordsJsToE3Py(0, x, y, z, 0, 0, 0, 0, Sk.ffi.remapToJs(mutablePy));
 });
 
-mod[Sk.e3ga.BIVECTOR_E3] = Sk.ffi.functionPy(function(xy, yz, zx, mutablePy) {
+mod[Sk.e3ga.BIVECTOR_E3] = Sk.ffi.functionPy(function(xy, yz, zx, mutablePy)
+{
   Sk.ffi.checkFunctionArgs(Sk.e3ga.BIVECTOR_E3, arguments, 3, 4);
   Sk.ffi.checkArgType(PROP_XY, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(xy), xy);
   Sk.ffi.checkArgType(PROP_YZ, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(yz), yz);
   Sk.ffi.checkArgType(PROP_ZX, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(zx), zx);
-  if (Sk.ffi.isDefined(mutablePy)) {
+  if (Sk.ffi.isDefined(mutablePy))
+  {
     Sk.ffi.checkArgType(PROP_MUTABLE, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(mutablePy), mutablePy);
   }
   xy = Sk.ffi.numberToJs(xy);
@@ -35416,22 +35595,28 @@ mod[Sk.e3ga.BIVECTOR_E3] = Sk.ffi.functionPy(function(xy, yz, zx, mutablePy) {
   return coordsJsToE3Py(0, 0, 0, 0, xy, yz, zx, 0, Sk.ffi.remapToJs(mutablePy));
 });
 
-mod[Sk.e3ga.PSEUDOSCALAR_E3] = Sk.ffi.functionPy(function(xyz, mutablePy) {
+mod[Sk.e3ga.PSEUDOSCALAR_E3] = Sk.ffi.functionPy(function(xyz, mutablePy)
+{
   Sk.ffi.checkFunctionArgs(Sk.e3ga.PSEUDOSCALAR_E3, arguments, 1, 2);
   Sk.ffi.checkArgType(PROP_XYZ, Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(xyz), xyz);
-  if (Sk.ffi.isDefined(mutablePy)) {
+  if (Sk.ffi.isDefined(mutablePy))
+  {
     Sk.ffi.checkArgType(PROP_MUTABLE, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(mutablePy), mutablePy);
   }
   xyz = Sk.ffi.numberToJs(xyz);
   return coordsJsToE3Py(0, 0, 0, 0, 0, 0, 0, xyz, Sk.ffi.remapToJs(mutablePy));
 });
 
-mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(self, w, x, y, z, xy, yz, zx, xyz, mutablePy) {
+mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc)
+{
+  $loc.__init__ = Sk.ffi.functionPy(function(self, w, x, y, z, xy, yz, zx, xyz, mutablePy)
+  {
     Sk.ffi.checkMethodArgs(Sk.e3ga.EUCLIDEAN_3, arguments, 1, 9);
-    switch(Sk.ffi.getType(w)) {
+    switch(Sk.ffi.getType(w))
+    {
       case Sk.ffi.PyType.FLOAT:
-      case Sk.ffi.PyType.INT: {
+      case Sk.ffi.PyType.INT:
+      {
         Sk.ffi.checkMethodArgs(Sk.e3ga.EUCLIDEAN_3, arguments, 8, 9);
         Sk.ffi.checkArgType(PROP_W,    Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(w), w);
         Sk.ffi.checkArgType(PROP_X,    Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(x), x);
@@ -35441,7 +35626,8 @@ mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
         Sk.ffi.checkArgType(PROP_YZ,   Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(yz), yz);
         Sk.ffi.checkArgType(PROP_ZX,   Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(zx), zx);
         Sk.ffi.checkArgType(PROP_XYZ,  Sk.ffi.PyType.FLOAT, Sk.ffi.isNum(xyz), xyz);
-        if (Sk.ffi.isDefined(mutablePy)) {
+        if (Sk.ffi.isDefined(mutablePy))
+        {
           Sk.ffi.checkArgType(PROP_MUTABLE, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(mutablePy), mutablePy);
         }
         w   = Sk.ffi.remapToJs(w);
@@ -35458,12 +35644,14 @@ mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
         Sk.ffi.referenceToPy(new THREE.Euclidean3(vector, quaternion, xyz, mutable), Sk.e3ga.EUCLIDEAN_3, undefined, self);
       }
       break;
-      case Sk.ffi.PyType.INSTANCE: {
+      case Sk.ffi.PyType.INSTANCE:
+      {
         Sk.ffi.checkMethodArgs(Sk.e3ga.EUCLIDEAN_3, arguments, 1, 1);
         Sk.ffi.referenceToPy(Sk.ffi.remapToJs(w), Sk.e3ga.EUCLIDEAN_3, undefined, self);
       }
       break;
-      default: {
+      default:
+      {
         throw new Sk.builtin.AssertionError("09eaed05-6d9d-4ded-a499-e4c480a9ed68, getType(w) => " + Sk.ffi.getType(w));
       }
     }
@@ -36492,34 +36680,75 @@ mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
       }
     }
   });
-  $loc.__cliffordConjugate__ = Sk.ffi.functionPy(function(selfPy) {
+  $loc.__cliffordConjugate__ = Sk.ffi.functionPy(function(selfPy)
+  {
     Sk.ffi.checkMethodArgs(METHOD_CLIFFORD_CONJUGATE, arguments, 0, 0);
     var self = Sk.ffi.remapToJs(selfPy);
     return coordsJsToE3Py(self.w, -self.x, -self.y, -self.z, -self.xy, -self.yz, -self.zx, self.xyz);
   });
-  $loc.__exp__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(METHOD_EXP, arguments, 0, 0);
+  $loc.__cos__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("cos", arguments, 0, 0);
+    var self = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE3Py(Sk.math.cos(self.w), 0, 0, 0, 0, 0, 0, 0);
+  });
+  $loc.__sin__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("sin", arguments, 0, 0);
+    var self = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE3Py(Sk.math.sin(self.w), 0, 0, 0, 0, 0, 0, 0);
+  });
+  $loc.__tan__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("tan", arguments, 0, 0);
+    return Sk.ffh.divide(Sk.ffh.sin(selfPy), Sk.ffh.cos(selfPy))
+  });
+  $loc.__acos__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("acos", arguments, 0, 0);
+    var self = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE3Py(Math.acos(self.w), 0, 0, 0, 0, 0, 0, 0);
+  });
+  $loc.__asin__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("asin", arguments, 0, 0);
+    var self = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE3Py(Math.asin(self.w), 0, 0, 0, 0, 0, 0, 0);
+  });
+  $loc.__atan__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("atan", arguments, 0, 0);
+    var self = Sk.ffi.remapToJs(selfPy);
+    return coordsJsToE3Py(Math.atan(self.w), 0, 0, 0, 0, 0, 0, 0);
+  });
+  $loc.__exp__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    Sk.ffi.checkMethodArgs("exp", arguments, 0, 0);
     var self = Sk.ffi.remapToJs(selfPy);
     var quaternion = self.quaternion;
     var xy = -quaternion.z;
     var yz = -quaternion.x;
     var zx = -quaternion.y;
-    if (xy === 0 && yz === 0) {
+    if (xy === 0 && yz === 0)
+    {
       var c = Sk.math.cos(zx);
       var s = Sk.math.sin(zx);
       return coordsJsToE3Py(c, 0, 0, 0, 0, 0, s, 0);
     }
-    else if (yz === 0 && zx === 0) {
+    else if (yz === 0 && zx === 0)
+    {
       var c = Sk.math.cos(xy);
       var s = Sk.math.sin(xy);
       return coordsJsToE3Py(c, 0, 0, 0, s, 0, 0, 0);
     }
-    else if (zx === 0 && xy === 0) {
+    else if (zx === 0 && xy === 0)
+    {
       var c = Sk.math.cos(yz);
       var s = Sk.math.sin(yz);
       return coordsJsToE3Py(c, 0, 0, 0, 0, s, 0, 0);
     }
-    else {
+    else
+    {
       var angle = Math.sqrt(xy * xy + yz * yz + zx * zx);
       var c = Sk.math.cos(angle);
       var s = Sk.math.sin(angle);
@@ -36600,7 +36829,7 @@ mod[Sk.e3ga.EUCLIDEAN_3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var yz  = self.yz;
     var zx  = self.zx;
     var xyz = self.xyz;
-    return Sk.builtin.stringToPy(stringFromCoordinates([w, x, y, z, xy, yz, zx, xyz], [UNIT_SCALAR_NAME, UNIT_VECTOR_NAME_E1, UNIT_VECTOR_NAME_E2, UNIT_VECTOR_NAME_E3, UNIT_BIVECTOR_NAME_E12, UNIT_BIVECTOR_NAME_E23, UNIT_BIVECTOR_NAME_E31, PSEUDOSCALAR_NAME]));
+    return Sk.builtin.stringToPy(stringFromCoordinates([w, x, y, z, xy, yz, zx, xyz], [ONE_NAME, UNIT_VECTOR_NAME_E1, UNIT_VECTOR_NAME_E2, UNIT_VECTOR_NAME_E3, UNIT_BIVECTOR_NAME_E12, UNIT_BIVECTOR_NAME_E23, UNIT_BIVECTOR_NAME_E31, PSEUDOSCALAR_NAME]));
   });
 }, Sk.e3ga.EUCLIDEAN_3, []);
 /*
@@ -37427,11 +37656,11 @@ mod[LORENTZIAN] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
       return selfPy;
     }
   });
-  $loc.nu$negative = function() {
+  $loc.u$negative = function() {
     var self = Sk.ffi.remapToJs(this);
     return coordJsToLorentzianPy(-self.w, -self.x, -self.y, -self.xy);
   };
-  $loc.nb$positive = function() {
+  $loc.u$positive = function() {
     return this;
   };
   $loc.nb$invert = function() {
@@ -38799,7 +39028,7 @@ var CANDELA           = "candela";
  * @const
  * @type {!Array.<string>}
  */
-var SI_LABELS         = ["kg", "m", "s", "C", "K", "mol", "cd"];
+var SI_LABELS         = ["kg", "m", "s", "C", "K", "mol", "cd", "rad"];
 /**
  * @const
  * @type {string}
@@ -38810,6 +39039,11 @@ var NEWTON            = "newton";
  * @type {string}
  */
 var JOULE             = "joule";
+/**
+ * @const
+ * @type {string}
+ */
+var SWIRL             = "swirl";
 /**
  * @const
  * @type {string}
@@ -38844,6 +39078,11 @@ var DEGREE            = "degree";
  * @const
  * @type {string}
  */
+var TAU               = "tau";
+/**
+ * @const
+ * @type {string}
+ */
 var DIMLESS           = "dimensionless";
 
 var isMeasurePy    = function(valuePy) {return Sk.ffi.isInstance(valuePy, MEASURE);};
@@ -38852,7 +39091,7 @@ var isUnitPy       = function(valuePy) {return Sk.ffi.isInstance(valuePy, UNIT);
 /**
  * Be selective about which classes can be treated as quantities in a measure.
  */
-var isQuantityPy     = function(valuePy)
+var isQuantityPy = function(valuePy)
 {
   if (Sk.ffi.isNum(valuePy))
   {
@@ -38882,6 +39121,17 @@ var isQuantityPy     = function(valuePy)
   {
     return false;
   }
+};
+
+/**
+ * @param {Object} uomJs
+ * @param {number} numer
+ * @param {number} denom
+ * @return {boolean}
+ */
+var isAngle = function(uomJs, numer, denom)
+{
+  return uomJs.dimensions.dimensionless() && uomJs.dimensions.angle.numer === numer && uomJs.dimensions.angle.denom === denom;
 };
 
 Sk.builtin.defineFractions(mod, RATIONAL, function(n, d) {return new BLADE.Rational(n, d)});
@@ -39046,8 +39296,8 @@ mod[UNIT] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
           var angle = unitJs.scale;
           var dimensions = unitJs.dimensions;
           var labels = unitJs.labels;
-          var cosAngle = new BLADE[UNIT](Sk.math.sin(angle), dimensions, labels);
-          return Sk.ffi.callsim(mod[UNIT], Sk.ffi.referenceToPy(cosAngle, UNIT));
+          var sinAngle = new BLADE[UNIT](Sk.math.sin(angle), dimensions, labels);
+          return Sk.ffi.callsim(mod[UNIT], Sk.ffi.referenceToPy(sinAngle, UNIT));
         });
       }
       default: {
@@ -39149,6 +39399,7 @@ mod[UNIT] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var other = Sk.ffi.remapToJs(otherPy);
     var rhs = Sk.ffi.remapToJs(selfPy);
     var scale = other / rhs.scale;
+    // FIXME: This will break when BLADE changes. Push down into BLADE.
     // TODO: Unary minus or negate() for Rational.
     // TODO: Reciprocal or inverse() for Dimensions.
     var M = new BLADE[RATIONAL](-rhs.dimensions.M.numer, rhs.dimensions.M.denom);
@@ -39158,7 +39409,8 @@ mod[UNIT] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     var temperature = new BLADE[RATIONAL](-rhs.dimensions.temperature.numer, rhs.dimensions.temperature.denom);
     var amount = new BLADE[RATIONAL](-rhs.dimensions.amount.numer, rhs.dimensions.amount.denom);
     var intensity = new BLADE[RATIONAL](-rhs.dimensions.intensity.numer, rhs.dimensions.intensity.denom);
-    var dimensions = new BLADE[DIMENSIONS](M, L, T, Q, temperature, amount, intensity);
+    var angle     = new BLADE[RATIONAL](-rhs.dimensions.angle.numer, rhs.dimensions.angle.denom);
+    var dimensions = new BLADE[DIMENSIONS](M, L, T, Q, temperature, amount, intensity, angle);
     var labels = rhs.labels;
     return Sk.ffi.callsim(mod[UNIT], Sk.ffi.numberToFloatPy(scale), Sk.ffi.referenceToPy(dimensions, DIMENSIONS), Sk.ffi.remapToPy(labels));
   });
@@ -39186,73 +39438,71 @@ mod[UNIT] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
   });
   $loc.__str__ = Sk.ffi.functionPy(function(unitPy) {
     var unitJs = Sk.ffi.remapToJs(unitPy);
-    var custom = Sk.ffi.customToJs(unitPy);
-    if (custom.name) {
-      return Sk.builtin.stringToPy(custom.name);
-    }
-    else
+    var patterns =
+    [
+      [-1,1,-3,1, 2,1, 2,1, 0,1, 0,1, 0,1, 0,1, "F/m"],
+      [-1,1,-2,1, 1,1, 2,1, 0,1, 0,1, 0,1, 0,1, "S"],
+      [-1,1,-2,1, 2,1, 2,1, 0,1, 0,1, 0,1, 0,1, "F"],
+      [-1,1, 3,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "N·m ** 2/kg ** 2"],
+      [ 0,1, 0,1,-2,1, 0,1, 0,1, 0,1, 0,1, 1,1, "rad/s/s"],
+      [ 0,1, 0,1,-1,1, 0,1, 0,1, 0,1, 0,1, 1,1, "rad/s"],
+      [ 0,1, 0,1,-1,1, 0,1, 0,1, 0,1, 0,1, 0,1, "Hz"],
+      [ 0,1, 0,1,-1,1, 1,1, 0,1, 0,1, 0,1, 0,1, "A"],
+      [ 0,1, 1,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "m/s ** 2"],
+      [ 0,1, 1,1,-1,1, 0,1, 0,1, 0,1, 0,1, 0,1, "m/s"],
+      [ 1,1, 1,1,-1,1, 0,1, 0,1, 0,1, 0,1, 0,1, "kg·m/s"],
+      [ 1,1,-1,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "Pa"],
+      [ 1,1,-1,1,-1,1, 0,1, 0,1, 0,1, 0,1, 0,1, "Pa·s"],
+      [ 1,1, 0,1,-3,1, 0,1, 0,1, 0,1, 0,1, 0,1, "W/m ** 2"],
+      [ 1,1, 0,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "N/m"],
+      [ 1,1, 0,1,-1,1,-1,1, 0,1, 0,1, 0,1, 0,1, "T"],
+      [ 1,1, 1,1,-3,1, 0,1,-1,1, 0,1, 0,1, 0,1, "W/(m·K)"],
+      [ 1,1, 1,1,-2,1,-1,1, 0,1, 0,1, 0,1, 0,1, "V/m"],
+      [ 1,1, 1,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "N"],
+      [ 1,1, 1,1, 0,1,-2,1, 0,1, 0,1, 0,1, 0,1, "H/m"],
+      [ 1,1, 2,1,-2,1, 0,1,-1,1, 0,1, 0,1, 0,1, "J/K"],
+      [ 0,1, 2,1,-2,1, 0,1,-1,1, 0,1, 0,1, 0,1, "J/(kg·K)"],
+      [ 1,1, 2,1,-2,1, 0,1,-1,1,-1,1, 0,1, 0,1, "J/(mol·K)"],
+      [ 1,1, 2,1,-2,1, 0,1, 0,1,-1,1, 0,1, 0,1, "J/mol"],
+      [ 1,1, 2,1,-2,1, 0,1, 0,1, 0,1, 0,1, 0,1, "J"],
+      [ 1,1, 2,1,-1,1, 0,1, 0,1, 0,1, 0,1, 0,1, "J·s"],
+      [ 1,1, 2,1,-3,1, 0,1, 0,1, 0,1, 0,1, 0,1, "W"],
+      [ 1,1, 2,1,-2,1,-1,1, 0,1, 0,1, 0,1, 0,1, "V"],
+      [ 1,1, 2,1,-1,1,-2,1, 0,1, 0,1, 0,1, 0,1, "Ω"],
+      [ 1,1, 2,1, 0,1,-2,1, 0,1, 0,1, 0,1, 0,1, "H"],
+      [ 1,1, 2,1,-1,1,-1,1, 0,1, 0,1, 0,1, 0,1, "Wb"]
+    ];
+    var M           = unitJs.dimensions.M;
+    var L           = unitJs.dimensions.L;
+    var T           = unitJs.dimensions.T;
+    var Q           = unitJs.dimensions.Q;
+    var temperature = unitJs.dimensions.temperature;
+    var amount      = unitJs.dimensions.amount;
+    var intensity   = unitJs.dimensions.intensity;
+    var angle       = unitJs.dimensions.angle;
+    for (var i = 0, len = patterns.length; i < len; i++)
     {
-      var patterns = [
-        [-1,1,-3,1, 2,1, 2,1, 0,1, 0,1, 0,1, "F/m"],
-        [-1,1,-2,1, 1,1, 2,1, 0,1, 0,1, 0,1, "S"],
-        [-1,1,-2,1, 2,1, 2,1, 0,1, 0,1, 0,1, "F"],
-        [-1,1, 3,1,-2,1, 0,1, 0,1, 0,1, 0,1, "N·m ** 2/kg ** 2"],
-        [ 0,1, 0,1,-1,1, 0,1, 0,1, 0,1, 0,1, "Hz"],
-        [ 0,1, 0,1,-1,1, 1,1, 0,1, 0,1, 0,1, "A"],
-        [ 0,1, 1,1,-2,1, 0,1, 0,1, 0,1, 0,1, "m/s ** 2"],
-        [ 0,1, 1,1,-1,1, 0,1, 0,1, 0,1, 0,1, "m/s"],
-        [ 1,1, 1,1,-1,1, 0,1, 0,1, 0,1, 0,1, "kg·m/s"],
-        [ 1,1,-1,1,-2,1, 0,1, 0,1, 0,1, 0,1, "Pa"],
-        [ 1,1,-1,1,-1,1, 0,1, 0,1, 0,1, 0,1, "Pa·s"],
-        [ 1,1, 0,1,-3,1, 0,1, 0,1, 0,1, 0,1, "W/m ** 2"],
-        [ 1,1, 0,1,-2,1, 0,1, 0,1, 0,1, 0,1, "N/m"],
-        [ 1,1, 0,1,-1,1,-1,1, 0,1, 0,1, 0,1, "T"],
-        [ 1,1, 1,1,-3,1, 0,1,-1,1, 0,1, 0,1, "W/(m·K)"],
-        [ 1,1, 1,1,-2,1,-1,1, 0,1, 0,1, 0,1, "V/m"],
-        [ 1,1, 1,1,-2,1, 0,1, 0,1, 0,1, 0,1, "N"],
-        [ 1,1, 1,1, 0,1,-2,1, 0,1, 0,1, 0,1, "H/m"],
-        [ 1,1, 2,1,-2,1, 0,1,-1,1, 0,1, 0,1, "J/K"],
-        [ 0,1, 2,1,-2,1, 0,1,-1,1, 0,1, 0,1, "J/(kg·K)"],
-        [ 1,1, 2,1,-2,1, 0,1,-1,1,-1,1, 0,1, "J/(mol·K)"],
-        [ 1,1, 2,1,-2,1, 0,1, 0,1,-1,1, 0,1, "J/mol"],
-        [ 1,1, 2,1,-2,1, 0,1, 0,1, 0,1, 0,1, "J"],
-        [ 1,1, 2,1,-1,1, 0,1, 0,1, 0,1, 0,1, "J·s"],
-        [ 1,1, 2,1,-3,1, 0,1, 0,1, 0,1, 0,1, "W"],
-        [ 1,1, 2,1,-2,1,-1,1, 0,1, 0,1, 0,1, "V"],
-        [ 1,1, 2,1,-1,1,-2,1, 0,1, 0,1, 0,1, "Ω"],
-        [ 1,1, 2,1, 0,1,-2,1, 0,1, 0,1, 0,1, "H"],
-        [ 1,1, 2,1,-1,1,-1,1, 0,1, 0,1, 0,1, "Wb"]
-      ];
-      var M           = unitJs.dimensions.M;
-      var L           = unitJs.dimensions.L;
-      var T           = unitJs.dimensions.T;
-      var Q           = unitJs.dimensions.Q;
-      var temperature = unitJs.dimensions.temperature;
-      var amount      = unitJs.dimensions.amount;
-      var intensity   = unitJs.dimensions.intensity;
-      for (var i = 0, len = patterns.length; i < len; i++)
+      var pattern = patterns[i];
+      if (M.numer           === pattern[0]  && M.denom           === pattern[1]  &&
+          L.numer           === pattern[2]  && L.denom           === pattern[3]  &&
+          T.numer           === pattern[4]  && T.denom           === pattern[5]  &&
+          Q.numer           === pattern[6]  && Q.denom           === pattern[7]  &&
+          temperature.numer === pattern[8]  && temperature.denom === pattern[9]  &&
+          amount.numer      === pattern[10] && amount.denom      === pattern[11] &&
+          intensity.numer   === pattern[12] && intensity.denom   === pattern[13] &&
+          angle.numer       === pattern[14] && angle.denom       === pattern[15])
       {
-        var pattern = patterns[i];
-        if (M.numer           === pattern[0]  && M.denom           === pattern[1]  &&
-            L.numer           === pattern[2]  && L.denom           === pattern[3]  &&
-            T.numer           === pattern[4]  && T.denom           === pattern[5]  &&
-            Q.numer           === pattern[6]  && Q.denom           === pattern[7]  &&
-            temperature.numer === pattern[8]  && temperature.denom === pattern[9]  &&
-            amount.numer      === pattern[10] && amount.denom      === pattern[11] &&
-            intensity.numer   === pattern[12] && intensity.denom   === pattern[13])
+        if (unitJs.scale !== 1)
         {
-          if (unitJs.scale !== 1)
-          {
-            return Sk.builtin.stringToPy(unitJs.scale + " * " + pattern[14]);
-          }
-          else
-          {
-            return Sk.builtin.stringToPy(pattern[14]);
-          }
+          return Sk.builtin.stringToPy(unitJs.scale + " * " + pattern[16]);
+        }
+        else
+        {
+          return Sk.builtin.stringToPy(pattern[16]);
         }
       }
-      return Sk.builtin.stringToPy("" + unitJs);
     }
+    return Sk.builtin.stringToPy("" + unitJs);
   });
   $loc.__repr__ = Sk.ffi.functionPy(function(unitPy) {
     var props = [{"name":PROP_DIMENSIONS, "kind":"__repr__"}];
@@ -39500,74 +39750,77 @@ mod[MEASURE] = Sk.ffi.buildClass(mod, function($gbl, $loc)
     var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
     return Sk.ffi.callsim(mod[MEASURE], quantityPy, uomPy);
   });
-  $loc.__cos__ = Sk.ffi.functionPy(function(selfPy) {
-    var quantityPy;
+  $loc.__cos__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
     var uomJs      = Sk.ffi.remapToJs(uomPy);
-    var custom     = Sk.ffi.customToJs(uomPy);
-    Sk.ffi.checkArgType(PROP_UOM, "dimensionless", uomJs.dimensions.dimensionless(), uomPy);
-    switch(custom.name) {
-      case RADIAN: {
-        quantityPy = Sk.ffh.cos(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
-      break;
-      case DEGREE: {
-        quantityPy = Sk.ffi.gattr(selfPy, PROP_QUANTITY);
-        quantityPy = Sk.ffh.multiply(quantityPy, Sk.ffi.numberToFloatPy(Math.PI/180));
-        quantityPy = Sk.ffh.cos(quantityPy);
-      }
-      break;
-      default: {
-        quantityPy = Sk.ffh.cos(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to cos function must be an angle.");
     }
+    var quantityPy = Sk.ffh.cos(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
     return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[DIMLESS], PROP_UOM));
   });
-  $loc.__sin__ = Sk.ffi.functionPy(function(selfPy) {
-    var quantityPy;
+  $loc.__sin__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
     var uomJs      = Sk.ffi.remapToJs(uomPy);
-    var custom     = Sk.ffi.customToJs(uomPy);
-    Sk.ffi.checkArgType(PROP_UOM, "dimensionless", uomJs.dimensions.dimensionless(), uomPy);
-    switch(custom.name) {
-      case RADIAN: {
-        quantityPy = Sk.ffh.sin(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
-      break;
-      case DEGREE: {
-        quantityPy = Sk.ffi.gattr(selfPy, PROP_QUANTITY);
-        quantityPy = Sk.ffh.multiply(quantityPy, Sk.ffi.numberToFloatPy(Math.PI/180));
-        quantityPy = Sk.ffh.sin(quantityPy);
-      }
-      break;
-      default: {
-        quantityPy = Sk.ffh.sin(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to sin function must be an angle.");
     }
+    var quantityPy = Sk.ffh.sin(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
     return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[DIMLESS], PROP_UOM));
   });
-  $loc.__tan__ = Sk.ffi.functionPy(function(selfPy) {
-    var quantityPy;
+  $loc.__tan__ = Sk.ffi.functionPy(function(selfPy)
+  {
     var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
     var uomJs      = Sk.ffi.remapToJs(uomPy);
-    var custom     = Sk.ffi.customToJs(uomPy);
-    Sk.ffi.checkArgType(PROP_UOM, "dimensionless", uomJs.dimensions.dimensionless(), uomPy);
-    switch(custom.name) {
-      case RADIAN: {
-        quantityPy = Sk.ffh.tan(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
-      break;
-      case DEGREE: {
-        quantityPy = Sk.ffi.gattr(selfPy, PROP_QUANTITY);
-        quantityPy = Sk.ffh.multiply(quantityPy, Sk.ffi.numberToFloatPy(Math.PI/180));
-        quantityPy = Sk.ffh.tan(quantityPy);
-      }
-      break;
-      default: {
-        quantityPy = Sk.ffh.tan(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
-      }
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to tan function must be an angle.");
     }
+    var quantityPy = Sk.ffh.tan(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
     return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[DIMLESS], PROP_UOM));
+  });
+  $loc.__acos__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
+    var uomJs      = Sk.ffi.remapToJs(uomPy);
+    /*
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to cos function must be an angle.");
+    }
+    */
+    var quantityPy = Sk.ffh.acos(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
+    return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[RADIAN], PROP_UOM));
+  });
+  $loc.__asin__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
+    var uomJs      = Sk.ffi.remapToJs(uomPy);
+    /*
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to cos function must be an angle.");
+    }
+    */
+    var quantityPy = Sk.ffh.asin(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
+    return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[RADIAN], PROP_UOM));
+  });
+  $loc.__atan__ = Sk.ffi.functionPy(function(selfPy)
+  {
+    var uomPy      = Sk.ffi.gattr(selfPy, PROP_UOM);
+    var uomJs      = Sk.ffi.remapToJs(uomPy);
+    /*
+    if (!isAngle(uomJs, 1, 1))
+    {
+      throw new Sk.builtin.TypeError("Argument to cos function must be an angle.");
+    }
+    */
+    var quantityPy = Sk.ffh.atan(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
+    return Sk.ffi.callsim(mod[MEASURE], quantityPy, Sk.ffi.gattr(mod[RADIAN], PROP_UOM));
   });
   $loc.__exp__ = Sk.ffi.functionPy(function(selfPy) {
     var quantityPy = Sk.ffh.exp(Sk.ffi.gattr(selfPy, PROP_QUANTITY));
@@ -39617,7 +39870,7 @@ mod[MEASURE] = Sk.ffi.buildClass(mod, function($gbl, $loc)
     return Sk.ffi.callsim(mod[MEASURE], onePy, unitPy);
   }
 
-  mod[DIMLESS]  = makeUnitPy(new BLADE.Unit(1, new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), SI_LABELS));
+  mod[DIMLESS]  = makeUnitPy(BLADE.UNIT_DIMLESS);
 
   mod[KILOGRAM] = makeUnitPy(BLADE.UNIT_KILOGRAM);
   mod[METER]    = makeUnitPy(BLADE.UNIT_METER);
@@ -39634,15 +39887,14 @@ mod[MEASURE] = Sk.ffi.buildClass(mod, function($gbl, $loc)
 
   mod[NEWTON]   = Sk.ffh.divide(Sk.ffh.multiply(mod[KILOGRAM], mod[METER]), Sk.ffh.multiply(mod[SECOND], mod[SECOND]));
   mod[JOULE]    = Sk.ffh.multiply(mod[NEWTON], mod[METER]);
+  mod[SWIRL]    = Sk.ffh.multiply(mod[JOULE], mod[SECOND]);
   mod[WATT]     = Sk.ffh.divide(mod[JOULE], mod[SECOND]);
   mod[VOLT]     = Sk.ffh.divide(mod[JOULE], mod[COULOMB]);
-  mod[TESLA]    = makeUnitPy(new BLADE.Unit(1, new BLADE.Dimensions(1, 0, -1, -1, 0, 0, 0), SI_LABELS));
+  mod[TESLA]    = Sk.ffh.divide(mod[SWIRL], Sk.ffh.multiply(mod[COULOMB], Sk.ffh.multiply(mod[METER], mod[METER])));
 
-  var radianPy  = Sk.ffi.callsim(mod[UNIT], onePy, Sk.ffi.referenceToPy(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), DIMENSIONS), Sk.ffi.remapToPy(SI_LABELS), Sk.builtin.stringToPy("radian"));
-  mod[RADIAN]   = makeUnitPy(Sk.ffi.remapToJs(radianPy));
-
-  var degreePy  = Sk.ffi.callsim(mod[UNIT], onePy, Sk.ffi.referenceToPy(new BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), DIMENSIONS), Sk.ffi.remapToPy(SI_LABELS), Sk.builtin.stringToPy("degree"));
-  mod[DEGREE]   = makeUnitPy(Sk.ffi.remapToJs(degreePy));
+  mod[RADIAN]   = makeUnitPy(BLADE.UNIT_RADIAN);
+  mod[TAU]      = makeUnitPy(BLADE.UNIT_TAU);
+  mod[DEGREE]   = makeUnitPy(BLADE.UNIT_DEGREE);
 })();
 
 };
@@ -46213,7 +46465,7 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
 
 };
 }).call(this);
-/* bladejs - 0.9.64
+/* bladejs - 0.9.69
  * JavaScript Geometric Algebra library.
  * 
  */
@@ -46245,23 +46497,36 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
   };
 
   Dimensions = (function() {
-    function Dimensions(mass, length, time, charge, temperature, amount, intensity) {
+    function Dimensions(mass, length, time, charge, temperature, amount, intensity, angle) {
       if (typeof mass === 'number') {
         this.M = new BLADE.Rational(mass, 1);
       } else if (mass instanceof BLADE.Rational) {
         this.M = mass;
       } else {
-        throw new Error("mass must be a Rational or number");
+        throw {
+          name: "DimensionError",
+          message: "mass must be a Rational or number"
+        };
       }
       if (typeof length === 'number') {
         this.L = new BLADE.Rational(length, 1);
-      } else {
+      } else if (length instanceof BLADE.Rational) {
         this.L = length;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "length must be a Rational or number"
+        };
       }
       if (typeof time === 'number') {
         this.T = new BLADE.Rational(time, 1);
-      } else {
+      } else if (time instanceof BLADE.Rational) {
         this.T = time;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "time must be a Rational or number"
+        };
       }
       if (typeof charge === 'number') {
         this.Q = new BLADE.Rational(charge, 1);
@@ -46303,10 +46568,20 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
           message: "(luminous) intensity must be a Rational or number"
         };
       }
+      if (typeof angle === 'number') {
+        this.angle = new BLADE.Rational(angle, 1);
+      } else if (angle instanceof BLADE.Rational) {
+        this.angle = angle;
+      } else {
+        throw {
+          name: "DimensionError",
+          message: "angle must be a Rational or number"
+        };
+      }
     }
 
     Dimensions.prototype.compatible = function(rhs) {
-      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q) && this.temperature.equals(rhs.temperature) && this.amount.equals(rhs.amount) && this.intensity.equals(rhs.intensity)) {
+      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q) && this.temperature.equals(rhs.temperature) && this.amount.equals(rhs.amount) && this.intensity.equals(rhs.intensity) && this.angle.equals(rhs.angle)) {
         return this;
       } else {
         throw {
@@ -46317,23 +46592,27 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     };
 
     Dimensions.prototype.mul = function(rhs) {
-      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q), this.temperature.add(rhs.temperature), this.amount.add(rhs.amount), this.intensity.add(rhs.intensity));
+      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q), this.temperature.add(rhs.temperature), this.amount.add(rhs.amount), this.intensity.add(rhs.intensity), this.angle.add(rhs.angle));
     };
 
     Dimensions.prototype.div = function(rhs) {
-      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q), this.temperature.sub(rhs.temperature), this.amount.sub(rhs.amount), this.intensity.sub(rhs.intensity));
+      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q), this.temperature.sub(rhs.temperature), this.amount.sub(rhs.amount), this.intensity.sub(rhs.intensity), this.angle.sub(rhs.angle));
     };
 
     Dimensions.prototype.pow = function(exponent) {
-      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent), this.temperature.mul(exponent), this.amount.mul(exponent), this.intensity.mul(exponent));
+      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent), this.temperature.mul(exponent), this.amount.mul(exponent), this.intensity.mul(exponent), this.angle.mul(exponent));
     };
 
     Dimensions.prototype.dimensionless = function() {
       return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero();
     };
 
+    Dimensions.prototype.isZero = function() {
+      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero() && this.angle.isZero();
+    };
+
     Dimensions.prototype.toString = function() {
-      return [stringify(this.M, 'mass'), stringify(this.L, 'length'), stringify(this.T, 'time'), stringify(this.Q, 'charge'), stringify(this.temperature, 'thermodynamic temperature'), stringify(this.amount, 'amount of substance'), stringify(this.intensity, 'luminous intensity')].filter(function(x) {
+      return [stringify(this.M, 'mass'), stringify(this.L, 'length'), stringify(this.T, 'time'), stringify(this.Q, 'charge'), stringify(this.temperature, 'thermodynamic temperature'), stringify(this.amount, 'amount of substance'), stringify(this.intensity, 'luminous intensity'), stringify(this.angle, 'angle')].filter(function(x) {
         return typeof x === 'string';
       }).join(" * ");
     };
@@ -47322,8 +47601,8 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
 
   Unit = (function() {
     function Unit(scale, dimensions, labels) {
-      if (labels.length !== 7) {
-        throw new Error("Expecting 7 elements in the labels array.");
+      if (labels.length !== 8) {
+        throw new Error("Expecting 8 elements in the labels array.");
       }
       this.scale = scale;
       this.dimensions = dimensions;
@@ -47388,9 +47667,9 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     Unit.prototype.toString = function() {
       var operatorStr, scaleString, unitsString;
 
-      operatorStr = this.scale === 1 || this.dimensions.dimensionless() ? "" : " ";
+      operatorStr = this.scale === 1 || this.dimensions.isZero() ? "" : " ";
       scaleString = this.scale === 1 ? "" : "" + this.scale;
-      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6])].filter(function(x) {
+      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6]), stringify(this.dimensions.angle, this.labels[7])].filter(function(x) {
         return typeof x === 'string';
       }).join(" ");
       return "" + scaleString + operatorStr + unitsString;
@@ -47402,23 +47681,31 @@ mod[WORKBENCH] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
 
   this.BLADE.Unit = Unit;
 
-  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd"];
+  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd", "rad"];
 
-  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_DIMLESS = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_AMPERE = new Unit(1, new this.BLADE.Dimensions(0, 0, -1, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_AMPERE = new Unit(1, new this.BLADE.Dimensions(0, 0, -1, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
 
-  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_RADIAN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_TAU = new Unit(2 * Math.PI, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
+
+  this.BLADE.UNIT_DEGREE = new Unit(Math.PI / 180, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
 
 }).call(this);
 

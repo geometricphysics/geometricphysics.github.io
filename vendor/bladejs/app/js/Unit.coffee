@@ -13,8 +13,8 @@ stringify = (rational, label) ->
 
 class Unit
   constructor: (scale, dimensions, labels) ->
-    if labels.length isnt 7
-      throw new Error("Expecting 7 elements in the labels array.")
+    if labels.length isnt 8
+      throw new Error("Expecting 8 elements in the labels array.")
     @scale = scale
     @dimensions = dimensions
     @labels = labels
@@ -54,18 +54,32 @@ class Unit
     else
       throw new Error("Illegal Argument for div: " + rhs)
   toString: ()->
-    operatorStr = if @scale is 1 or @dimensions.dimensionless() then "" else " "
+    operatorStr = if @scale is 1 or @dimensions.isZero() then "" else " "
     scaleString = if @scale is 1 then "" else "#{@scale}"
-    unitsString = [stringify(@dimensions.M, @labels[0]), stringify(@dimensions.L, @labels[1]), stringify(@dimensions.T, @labels[2]), stringify(@dimensions.Q, @labels[3]), stringify(@dimensions.temperature, @labels[4]), stringify(@dimensions.amount, @labels[5]), stringify(@dimensions.intensity, @labels[6])].filter((x) -> typeof x is 'string').join(" ")
+    unitsString =
+      [
+        stringify(@dimensions.M, @labels[0]),
+        stringify(@dimensions.L, @labels[1]),
+        stringify(@dimensions.T, @labels[2]),
+        stringify(@dimensions.Q, @labels[3]),
+        stringify(@dimensions.temperature, @labels[4]),
+        stringify(@dimensions.amount, @labels[5]),
+        stringify(@dimensions.intensity, @labels[6])
+        stringify(@dimensions.angle, @labels[7])
+      ].filter((x) -> typeof x is 'string').join(" ")
     return "#{scaleString}#{operatorStr}#{unitsString}"
 
 @BLADE.Unit = Unit
-@BLADE.UNIT_SYMBOLS = ["kg","m","s","C","K","mol","cd"]
-@BLADE.UNIT_KILOGRAM = new Unit(1, new @BLADE.Dimensions(1,0, 0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_METER    = new Unit(1, new @BLADE.Dimensions(0,1, 0,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_SECOND   = new Unit(1, new @BLADE.Dimensions(0,0, 1,0,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_AMPERE   = new Unit(1, new @BLADE.Dimensions(0,0,-1,1,0,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_KELVIN   = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,1,0,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_MOLE     = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,0,1,0), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0,0, 0,0,0,0,1), @BLADE.UNIT_SYMBOLS)
-@BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0,0, 0,1,0,0,0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_SYMBOLS = ["kg","m","s","C","K","mol","cd", "rad"]
+@BLADE.UNIT_DIMLESS  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_KILOGRAM = new Unit(1, new @BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_METER    = new Unit(1, new @BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_SECOND   = new Unit(1, new @BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_AMPERE   = new Unit(1, new @BLADE.Dimensions(0, 0,-1, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_KELVIN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_MOLE     = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_CANDELA  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_COULOMB  = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0, 0), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_RADIAN   = new Unit(1, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_TAU      = new Unit(2 * Math.PI, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)
+@BLADE.UNIT_DEGREE   = new Unit(Math.PI/180, new @BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0, 1), @BLADE.UNIT_SYMBOLS)

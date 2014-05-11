@@ -3,20 +3,20 @@
   "version": "0.0.1",
   "main": "index.html",
   "description": "",
-  "author":
-  {
+  "author": {
     "name": "David Holmes",
     "email": "david.geo.holmes@gmail.com"
   },
-  "repository":
-  {
+  "repository": {
     "type": "git",
     "url": "git://github.com/geometricphysics/geometricphysics.git"
   },
-  "dependencies":
-  {
-    "davinci": "0.9.201",
+  "dependencies": {
+    "davinci": "0.9.202",
     "threejs": "latest",
     "ace-builds": "1.1.3"
+  },
+  "resolutions": {
+    "bladejs": "0.9.69"
   }
 }
