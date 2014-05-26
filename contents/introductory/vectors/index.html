@@ -142,9 +142,8 @@ title: Geometric Physics • Introductory • Vectors
   </section>
   <section>
     <h3>Geometry Zen DaVinci library (standalone)</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <div id="editor" style="height: 700px;">from browser import *
+<davinci-edit>
+<davinci-code console-id='myconsole'>from browser import *
 from geometry import *
 from math import *
 
@@ -187,55 +186,17 @@ def terminate(time):
 def setUp():
     pass
 
-def tearDown():
+def tearDown(e):
+    if e:
+        print e
+    print "Goodbye"
     pass
 
 WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
-</div>
-        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
-        <pre id="output" style=""></pre>
-      </div>
-      <div class="col-md-6">
-        <canvas id="mycanvas" width="600" height="700"></canvas>
-      </div>
-    </div>
-    <br/>
-    <script>
-      var editor = ace.edit("editor");
-      editor.setTheme("ace/theme/twilight");
-      editor.getSession().setMode("ace/mode/python");
-      editor.setShowInvisibles(true);
-      editor.setFontSize(15);
-    </script>
-    <script>
-      var box000 = (function(){
-        function outf(text)
-        {
-          var mypre = document.getElementById("output");
-          mypre.innerHTML = mypre.innerHTML + text;
-        }
-        function builtinRead(x)
-        {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          {
-            throw "File not found: '" + x + "'";
-          }
-          return Sk.builtinFiles["files"][x];
-        }
-        var sample = {
-          run: function() {
-            var editor = ace.edit("editor");
-            var program = editor.getValue();//document.getElementById("editor").value;
-            var mypre = document.getElementById("output");
-            mypre.innerHTML = '';
-            Sk.configure({"output": outf, "read": builtinRead});
-            eval(Sk.importMainWithBody("<stdin>", false, program));
-          }
-        };
-        return sample;
-      })();
-    </script>
-
+</davinci-code>
+</davinci-edit>
+    <davinci-console id="myconsole"></davinci-console>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
   </section>
   <section>
     <h3>Why do we care about vectors?</h3>

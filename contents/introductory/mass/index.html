@@ -7,20 +7,16 @@ title: Geometric Physics • Introductory • Mass
     <h1>Mass <small></small></h1>
   </div>
   <section>
-  </section>
-  <section>
     <h3>Mass and Acceleration</h3>
-    <div class="row">
-      <div class="col-md-12">
-        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
-        <div id="editor000" style="height: 800px;">from browser import *
+<davinci-edit>
+<davinci-code console-id='console-1'>from browser import *
 from three import *
 from workbench import *
 from math import pow
 
 space3D = CartesianSpace()
 
-workbench3D = Workbench(space3D.renderer, space3D.camera)
+workbench3D = Workbench3D(space3D.renderer.domElement, space3D.renderer, space3D.camera)
 
 giant = SphereBuilder().color("red").radius(0.2).build()
 giant.position = VectorE3(0.0, 4.0, 0.0)
@@ -38,6 +34,7 @@ dt = 0.1
 k = 0.1
 
 def setUp():
+    print "Hello"
     workbench3D.setUp()
 
 def tick(t):
@@ -52,57 +49,17 @@ def tick(t):
     space3D.render()
 
 def terminate(t):
-    return t > 60
+    return t > 6
 
-def tearDown():
+def tearDown(e):
+    if e:
+        print e
     workbench3D.tearDown()
+    print "Goodbye"
 
 WindowAnimationRunner(tick, terminate, setUp, tearDown).start()
-</div>
-        <pre id="output000" style=""></pre>
-      </div>
-    </div>
-    <br/>
-    <script>
-      var editor = ace.edit("editor000");
-      editor.setTheme("ace/theme/twilight");
-      editor.getSession().setMode("ace/mode/python");
-      editor.setShowInvisibles(true);
-      editor.setFontSize(15);
-    </script>
-    <script>
-      var box000 = (function(){
-        function outf(text)
-        {
-          var mypre = document.getElementById("output000");
-          mypre.innerHTML = mypre.innerHTML + text;
-        }
-        function builtinRead(x)
-        {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          {
-            throw "File not found: '" + x + "'";
-          }
-          return Sk.builtinFiles["files"][x];
-        }
-        var sample = {
-          run: function() {
-            var editor = ace.edit("editor000");
-            var program = editor.getValue();//document.getElementById("editor").value;
-            var mypre = document.getElementById("output000");
-            mypre.innerHTML = '';
-            Sk.configure({"output": outf, "read": builtinRead});
-            try {
-              eval(Sk.importMainWithBody("<stdin>", false, program));
-            }
-            catch(e) {
-              window.alert(e);
-            }
-          }
-        };
-        return sample;
-      })();
-    </script>
-
+</davinci-code>
+</davinci-edit>
+  <davinci-console id='console-1'></davinci-console>
   </section>
 </article>

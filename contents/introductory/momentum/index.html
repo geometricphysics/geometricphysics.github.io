@@ -88,10 +88,9 @@ title: Geometric Physics • Introductory • Momentum
     </p>
   </section>
   <section>
-    <h3>Linear Momentum in DaVinci Python</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <div id="editor000" style="height: 400px;">from e3ga import *
+    <h3>Calculating Linear Momentum in DaVinci Python</h3>
+<davinci-edit>
+<davinci-code console-id='console-1'>from e3ga import *
 from units import *
 
 m = ScalarE3(5) * kilogram
@@ -100,56 +99,9 @@ v = VectorE3(1,2,0) * meter / second
 p = m * v
 
 print p
-</div>
-        <button type="button" class="btn btn-default" onclick="box000.run()">Run</button>
-      </div>
-      <div class="col-md-6">
-        <pre id="output000" style=""></pre>
-        <!-- canvas id="mycanvas000" width="600" height="400"></canvas -->
-      </div>
-    </div>
-    <br/>
-    <script>
-      var editor = ace.edit("editor000");
-      editor.setTheme("ace/theme/twilight");
-      editor.getSession().setMode("ace/mode/python");
-      editor.setShowInvisibles(true);
-      editor.setFontSize(15);
-    </script>
-    <script>
-      var box000 = (function(){
-        function outf(text)
-        {
-          var mypre = document.getElementById("output000");
-          mypre.innerHTML = mypre.innerHTML + text;
-        }
-        function builtinRead(x)
-        {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          {
-            throw "File not found: '" + x + "'";
-          }
-          return Sk.builtinFiles["files"][x];
-        }
-        var sample = {
-          run: function() {
-            var editor = ace.edit("editor000");
-            var program = editor.getValue();//document.getElementById("editor").value;
-            var mypre = document.getElementById("output000");
-            mypre.innerHTML = '';
-            Sk.configure({"output": outf, "read": builtinRead});
-            try {
-              eval(Sk.importMainWithBody("<stdin>", false, program));
-            }
-            catch(e) {
-              window.alert(e);
-            }
-          }
-        };
-        return sample;
-      })();
-    </script>
-
+</davinci-code>
+</davinci-edit>
+  <davinci-console id='console-1'></davinci-console>
   </section>
   <section>
     <h3>Conservation of Linear Momentum</h3>
@@ -218,10 +170,9 @@ print p
     </p>
   </section>
   <section>
-    <h3>Angular Momentum in DaVinci Python</h3>
-    <div class="row">
-      <div class="col-md-6">
-        <div id="editor010" style="height: 400px;">from e3ga import *
+    <h3>Calculating Angular Momentum in DaVinci Python</h3>
+<davinci-edit>
+<davinci-code console-id='console-2'>from e3ga import *
 from units import *
 
 r = VectorE3(0,0,1) * meter
@@ -232,55 +183,8 @@ p = m * v
 L = r ^ p
 
 print L
-</div>
-        <button type="button" class="btn btn-default" onclick="box010.run()">Run</button>
-      </div>
-      <div class="col-md-6">
-        <pre id="output010" style=""></pre>
-        <!-- canvas id="mycanvas010" width="600" height="400"></canvas -->
-      </div>
-    </div>
-    <br/>
-    <script>
-      var editor = ace.edit("editor010");
-      editor.setTheme("ace/theme/twilight");
-      editor.getSession().setMode("ace/mode/python");
-      editor.setShowInvisibles(true);
-      editor.setFontSize(15);
-    </script>
-    <script>
-      var box010 = (function(){
-        function outf(text)
-        {
-          var mypre = document.getElementById("output010");
-          mypre.innerHTML = mypre.innerHTML + text;
-        }
-        function builtinRead(x)
-        {
-          if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-          {
-            throw "File not found: '" + x + "'";
-          }
-          return Sk.builtinFiles["files"][x];
-        }
-        var sample = {
-          run: function() {
-            var editor = ace.edit("editor010");
-            var program = editor.getValue();//document.getElementById("editor").value;
-            var mypre = document.getElementById("output010");
-            mypre.innerHTML = '';
-            Sk.configure({"output": outf, "read": builtinRead});
-            try {
-              eval(Sk.importMainWithBody("<stdin>", false, program));
-            }
-            catch(e) {
-              window.alert(e);
-            }
-          }
-        };
-        return sample;
-      })();
-    </script>
-
+</davinci-code>
+</davinci-edit>
+  <davinci-console id='console-2'></davinci-console>
   </section>
 </article>

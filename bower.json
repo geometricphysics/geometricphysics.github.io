@@ -12,11 +12,9 @@
     "url": "git://github.com/geometricphysics/geometricphysics.git"
   },
   "dependencies": {
-    "davinci": "0.9.202",
-    "threejs": "latest",
-    "ace-builds": "1.1.3"
-  },
-  "resolutions": {
-    "bladejs": "0.9.69"
+    "ace-builds": "~1.1.3",
+    "davinci": "~0.9.225",
+    "davinci-widgets": "~0.0.7",
+    "threejs": "latest"
   }
 }

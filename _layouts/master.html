@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xml:lang="en" ng-app="pagesApp">
+<html lang="en" xml:lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <!--link rel="stylesheet" type="text/css" href="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css"/-->
     <link rel="stylesheet" href="{{ site.url }}/{{ site.folder }}css/style.css">
     <!-- Ensure proper rendering and touch zooming (Bootstrap) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,20 +15,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
-    <!-- ACE code editor -->
-    <script src="{{ site.url }}/{{ site.folder }}vendor/ace-builds/src-noconflict/ace.js"></script>
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular.min.js"></script>
-    <script>
-      var pagesApp = angular.module('pagesApp', []);
-
-      pagesApp.config([
-        '$interpolateProvider',
-        function($interpolateProvider) {
-          return $interpolateProvider.startSymbol('{(').endSymbol(')}');
-        }
-      ]);
-    </script>
     <!-- JSXGraph must be loaded in the head in order to be available in pages -->
     <script type="text/javascript" src="http://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script>
   </head>
@@ -142,9 +127,19 @@
       });
     </script>
     <script type='text/javascript' src='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-    <script src="{{ site.url }}/{{ site.folder }}vendor/threejs/build/three.min.js"></script>
-    <script src="{{ site.url }}/{{ site.folder }}vendor/bladejs/dist/bladejs.js"></script>
-    <script src="{{ site.url }}/{{ site.folder }}vendor/davinci/davinci.min.js"></script>
-    <script src="{{ site.url }}/{{ site.folder }}vendor/davinci/davinci-stdlib.js"></script>
+    <script src="/vendor/davinci-widgets/load.js"></script>
+    <script src="/vendor/davinci-widgets/boot.js"></script>
+    <!--
+    <script>
+      angular.module('pagesApp', [])
+      /* Modify the interpolation so as to avoid conflicting with Jekyll */
+      .config([
+        '$interpolateProvider',
+        function($interpolateProvider) {
+          return $interpolateProvider.startSymbol('{(').endSymbol(')}');
+        }
+      ])
+    </script>
+  -->
   </body>
 </html>

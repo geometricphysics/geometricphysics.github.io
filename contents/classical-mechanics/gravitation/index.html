@@ -195,6 +195,20 @@ title: Geometric Physics • Classical Mechanics • Gravitation
     <p>
       <iframe width="560" height="315" src="//www.youtube.com/embed/SN1Q5ru2fI0?rel=0" frameborder="0" allowfullscreen></iframe>
     </p>
+<davinci-edit>
+<davinci-code console-id='cga'># Calculating Gravitational Attraction
+from units import *
+
+G = 6.67e-11 * newton * (meter ** 2) / (kilogram ** 2)
+m1 = m2 = 70 * kilogram
+r = 1.5 * meter
+
+F = G * m1 * m2 / r ** 2
+
+print "The magnitude of the force is %s" % (F)
+</davinci-code>
+</davinci-edit>
+<davinci-console id='cga'></davinci-console>
   </div>
 </div>
 
