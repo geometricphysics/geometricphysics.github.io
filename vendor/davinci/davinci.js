@@ -8013,28 +8013,23 @@ goog.exportSymbol("Sk.abstr.numberInplaceBinOp", Sk.abstr.numberInplaceBinOp);
  * @param {*} obj
  * @param {Sk.abstr.unaryOp} name
  */
- Sk.abstr.uboNameToSlotFunc_ = function(obj, name) {
-  if (obj === null)
-  {
+Sk.abstr.uoNameToSlotFunc_ = function(obj, name) {
+  if (obj === null) {
     return undefined;
-  };
+  }
   switch (name)
   {
-    case Sk.abstr.unaryOp.USub:
-    {
-        return obj.u$negative          ? obj.u$negative        : obj['__neg__'];
+    case Sk.abstr.unaryOp.USub: {
+      return obj.u$negative          ? obj.u$negative        : obj['__neg__'];
     }
-    case Sk.abstr.unaryOp.Invert:
-    {
-        return obj.nb$invert            ? obj.nb$invert          : obj['__invert__'];
+    case Sk.abstr.unaryOp.UAdd: {
+      return obj.u$positive          ? obj.u$positive        : obj['__pos__'];
     }
-    case Sk.abstr.unaryOp.UAdd:
-    {
-        return obj.u$positive          ? obj.u$positive        : obj['__pos__'];
+    case Sk.abstr.unaryOp.Invert: {
+      return obj.nb$invert           ? obj.nb$invert          : obj['__invert__'];
     }
-    default:
-    {
-        throw new Sk.builtin.AssertionError("7fb8237f-879b-4192-89ce-13ad6fa3b2d8 " + name);
+    default: {
+      throw new Sk.builtin.AssertionError("7fb8237f-879b-4192-89ce-13ad6fa3b2d8 " + name);
     }
   }
 };
@@ -8076,7 +8071,7 @@ Sk.abstr.numberUnaryOp = function(valuePy, op)
     }
     else
     {
-        var uop = Sk.abstr.uboNameToSlotFunc_(valuePy, op);
+        var uop = Sk.abstr.uoNameToSlotFunc_(valuePy, op);
         if (uop != undefined)
         {
             if (uop.call)
@@ -15041,74 +15036,88 @@ Sk.builtin.file.prototype['write'] = new Sk.builtin.func(function(self, str)
 
 
 goog.exportSymbol("Sk.builtin.file", Sk.builtin.file);
+goog.provide('Sk.ffi');
+
+
 /**
  * Sk.ffi is the Foreign Function Interface.
- *
- * Extension builders should use this interface to protect their code from changes.
- *
- * @type
- * {
- *   {
- *     remapToJs: function(Object, boolean=)
- *   }
- * }
  */
-Sk.ffi = Sk.ffi || {};
+
 
 /**
  * AssertionError
  * @typedef {!Sk.builtin.AssertionError}
  */
-Sk.ffi.AssertionError
-goog.exportSymbol("Sk.ffi.AssertionError", Sk.ffi.AssertionError);
+Sk.ffi.AssertionError;
+goog.exportSymbol('Sk.ffi.AssertionError', Sk.ffi.AssertionError);
+
+
 /**
  * Returns a new AssertionError.
  * @param {string} message The message string.
  * @return {Sk.ffi.AssertionError} The AssertionError.
  */
-Sk.ffi.assertionError = function(message) {return new Sk.builtin.AssertionError(message);};
-goog.exportSymbol("Sk.ffi.assertionError", Sk.ffi.assertionError);
+Sk.ffi.assertionError = function(message) {
+  return new Sk.builtin.AssertionError(message);
+};
+goog.exportSymbol('Sk.ffi.assertionError', Sk.ffi.assertionError);
+
 
 /**
  * AttributeError
  * @typedef {!Sk.builtin.AttributeError}
  */
-Sk.ffi.AttributeError
-goog.exportSymbol("Sk.ffi.AttributeError", Sk.ffi.AttributeError);
+Sk.ffi.AttributeError;
+goog.exportSymbol('Sk.ffi.AttributeError', Sk.ffi.AttributeError);
+
+
 /**
  * Returns a new AttributeError.
  * @param {string} message The message string.
  * @return {Sk.ffi.AttributeError}
  */
-Sk.ffi.attributeError = function(message) {return new Sk.builtin.AttributeError(message);};
-goog.exportSymbol("Sk.ffi.attributeError", Sk.ffi.attributeError);
+Sk.ffi.attributeError = function(message) {
+  return new Sk.builtin.AttributeError(message);
+};
+goog.exportSymbol('Sk.ffi.attributeError', Sk.ffi.attributeError);
+
 
 /**
  * NotImplementedError
  * @typedef {!Sk.builtin.NotImplementedError}
  */
-Sk.ffi.NotImplementedError
-goog.exportSymbol("Sk.ffi.NotImplementedError", Sk.ffi.NotImplementedError);
+Sk.ffi.NotImplementedError;
+goog.exportSymbol('Sk.ffi.NotImplementedError', Sk.ffi.NotImplementedError);
+
+
 /**
  * Returns a new NotImplementedError.
  * @param {string} message The message string.
  * @return {Sk.ffi.NotImplementedError} The NotImplementedError.
  */
-Sk.ffi.notImplementedError = function(message) {return new Sk.builtin.NotImplementedError(message);};
-goog.exportSymbol("Sk.ffi.notImplementedError", Sk.ffi.notImplementedError);
+Sk.ffi.notImplementedError = function(message) {
+  return new Sk.builtin.NotImplementedError(message);
+};
+goog.exportSymbol('Sk.ffi.notImplementedError', Sk.ffi.notImplementedError);
+
 
 /**
  * @typedef {!Sk.builtin.TypeError}
  */
-Sk.ffi.TypeError
-goog.exportSymbol("Sk.ffi.TypeError", Sk.ffi.TypeError);
+Sk.ffi.TypeError;
+goog.exportSymbol('Sk.ffi.TypeError', Sk.ffi.TypeError);
+
+
 /**
  * Returns a new TypeError.
  * @param {string} message The message string.
  * @return {Sk.ffi.TypeError} The TypeError.
  */
-Sk.ffi.typeError = function(message) {return new Sk.builtin.TypeError(message);};
-goog.exportSymbol("Sk.ffi.typeError", Sk.ffi.typeError);
+Sk.ffi.typeError = function(message) {
+  return new Sk.builtin.TypeError(message);
+};
+goog.exportSymbol('Sk.ffi.typeError', Sk.ffi.typeError);
+
 
 /**
  * FIXME: Having some problems using this to observe the type of a klass.
@@ -15116,29 +15125,30 @@ goog.exportSymbol("Sk.ffi.typeError", Sk.ffi.typeError);
  * @param {*} valuePy
  * @return {Sk.builtin.type}
  */
-Sk.ffi.type = function(valuePy)
-{
-    if (Sk.flyweight)
+Sk.ffi.type = function(valuePy) {
+
+  if (Sk.flyweight)
+  {
+    if (typeof valuePy === Sk.builtin.JsType.NUMBER)
     {
-        if (typeof valuePy === Sk.builtin.JsType.NUMBER)
-        {
-            return Sk.builtin.float_.prototype.ob$type;
-        }
+      return Sk.builtin.float_.prototype.ob$type;
     }
-    if (valuePy.constructor === Sk.builtin.NumberPy)
+  }
+  if (valuePy.constructor === Sk.builtin.NumberPy)
+  {
+    if (valuePy.skType === Sk.builtin.NumberPy.int$)
     {
-        if (valuePy.skType === Sk.builtin.NumberPy.int$)
-        {
-            return Sk.builtin.int_.prototype.ob$type;
-        }
-        else
-        {
-            return Sk.builtin.float_.prototype.ob$type;
-        }
+      return Sk.builtin.int_.prototype.ob$type;
     }
-    return valuePy.ob$type;
-}
-goog.exportSymbol("Sk.ffi.type", Sk.ffi.type);
+    else
+    {
+      return Sk.builtin.float_.prototype.ob$type;
+    }
+  }
+  return valuePy.ob$type;
+};
+goog.exportSymbol('Sk.ffi.type', Sk.ffi.type);
+
 
 /**
  * Enumeration for Python bool values.
@@ -15146,58 +15156,60 @@ goog.exportSymbol("Sk.ffi.type", Sk.ffi.type);
  * @enum {!Object}
  */
 Sk.ffi.bool = {True: Sk.builtin.bool.true$, False: Sk.builtin.bool.false$};
-goog.exportSymbol("Sk.ffi.bool", Sk.ffi.bool);
+goog.exportSymbol('Sk.ffi.bool', Sk.ffi.bool);
+
 
 /**
- * Converts a JavaScript boolean or null to the internal Python bool representation.
+ * Converts a JavaScript boolean or null to the Python bool representation.
  *
- * @param {?boolean=} valueJs
- * @param {boolean=} defaultJs
+ * @param {boolean|undefined} valueJs
+ * @param {boolean=} opt_defaultJs
  * @return {Sk.ffi.bool|Sk.builtin.none|undefined}
  */
-Sk.ffi.booleanToPy = function(valueJs, defaultJs)
-{
-    var t = typeof valueJs;
-    if (t === Sk.builtin.JsType.BOOLEAN)
+Sk.ffi.booleanToPy = function(valueJs, opt_defaultJs) {
+
+  var t = typeof valueJs;
+  if (t === Sk.builtin.JsType.BOOLEAN)
+  {
+    return valueJs ? Sk.ffi.bool.True : Sk.ffi.bool.False;
+  }
+  else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+  {
+    return Sk.builtin.none.none$;
+  }
+  else if (t === Sk.builtin.JsType.UNDEFINED)
+  {
+    var d = typeof opt_defaultJs;
+    if (d === Sk.builtin.JsType.BOOLEAN)
     {
-        return valueJs ? Sk.ffi.bool.True : Sk.ffi.bool.False;
+      return Sk.ffi.booleanToPy(Boolean(opt_defaultJs));
     }
-    else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+    else if (d === Sk.builtin.JsType.UNDEFINED)
     {
-        return Sk.builtin.none.none$;
+      return undefined;
     }
-    else if (t === Sk.builtin.JsType.UNDEFINED)
+    else if (d === Sk.builtin.JsType.OBJECT && opt_defaultJs === null)
     {
-        var d = typeof defaultJs;
-        if (d === Sk.builtin.JsType.BOOLEAN)
-        {
-            return Sk.ffi.booleanToPy(Boolean(defaultJs));
-        }
-        else if (d === Sk.builtin.JsType.UNDEFINED)
-        {
-            return undefined;
-        }
-        else if (d === Sk.builtin.JsType.OBJECT && defaultJs === null)
-        {
-            return Sk.builtin.none.none$;
-        }
-        else
-        {
-            throw Sk.ffi.err.
-                argument("defaultJs").
-                inFunction("Sk.ffi.booleanToPy").
-                mustHaveType([Sk.builtin.JsType.BOOLEAN, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
-        }
+      return Sk.builtin.none.none$;
     }
     else
     {
-        throw Sk.ffi.err.
-            argument("valueJs").
-            inFunction("Sk.ffi.booleanToPy").
-            mustHaveType([Sk.builtin.JsType.BOOLEAN, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
+      throw Sk.ffi.err.
+          argument('defaultJs').
+          inFunction('Sk.ffi.booleanToPy').
+          mustHaveType([Sk.builtin.JsType.BOOLEAN, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
     }
+  }
+  else
+  {
+    throw Sk.ffi.err.
+        argument('valueJs').
+            inFunction('Sk.ffi.booleanToPy').
+            mustHaveType([Sk.builtin.JsType.BOOLEAN, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
+  }
 };
-goog.exportSymbol("Sk.ffi.booleanToPy", Sk.ffi.booleanToPy);
+goog.exportSymbol('Sk.ffi.booleanToPy', Sk.ffi.booleanToPy);
+
 
 /**
  * Converts a JavaScript number or null to the internal Python float representation.
@@ -15206,49 +15218,50 @@ goog.exportSymbol("Sk.ffi.booleanToPy", Sk.ffi.booleanToPy);
  * @param {number=} defaultJs
  * @return {(Sk.builtin.NumberPy|number)|Sk.builtin.none|undefined}
  */
-Sk.ffi.numberToFloatPy = function(valueJs, defaultJs)
-{
-    var t = typeof valueJs;
-    if (t === Sk.builtin.JsType.NUMBER)
+Sk.ffi.numberToFloatPy = function(valueJs, defaultJs) {
+
+  var t = typeof valueJs;
+  if (t === Sk.builtin.JsType.NUMBER)
+  {
+    return Sk.builtin.numberToPy(/** @type {number} */ (valueJs));
+  }
+  else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+  {
+    return Sk.builtin.none.none$;
+  }
+  else if (t === Sk.builtin.JsType.UNDEFINED)
+  {
+    var d = typeof defaultJs;
+    if (d === Sk.builtin.JsType.NUMBER)
     {
-        return Sk.builtin.numberToPy(/** @type {number} */ (valueJs));
+      return Sk.ffi.numberToFloatPy(Number(defaultJs));
     }
-    else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+    else if (d === Sk.builtin.JsType.UNDEFINED)
     {
-        return Sk.builtin.none.none$;
+      return undefined;
     }
-    else if (t === Sk.builtin.JsType.UNDEFINED)
+    else if (d === Sk.builtin.JsType.OBJECT && defaultJs === null)
     {
-        var d = typeof defaultJs;
-        if (d === Sk.builtin.JsType.NUMBER)
-        {
-            return Sk.ffi.numberToFloatPy(Number(defaultJs));
-        }
-        else if (d === Sk.builtin.JsType.UNDEFINED)
-        {
-            return undefined;
-        }
-        else if (d === Sk.builtin.JsType.OBJECT && defaultJs === null)
-        {
-            return Sk.builtin.none.none$;
-        }
-        else
-        {
-            throw Sk.ffi.err.
-                argument("defaultJs").
-                inFunction("Sk.ffi.numberToFloatPy").
-                mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
-        }
+      return Sk.builtin.none.none$;
     }
     else
     {
-        throw Sk.ffi.err.
-            argument("valueJs").
-            inFunction("Sk.ffi.numberToFloatPy").
-            mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
+      throw Sk.ffi.err.
+          argument('defaultJs').
+          inFunction('Sk.ffi.numberToFloatPy').
+          mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
     }
+  }
+  else
+  {
+    throw Sk.ffi.err.
+        argument('valueJs').
+            inFunction('Sk.ffi.numberToFloatPy').
+            mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
+  }
 };
-goog.exportSymbol("Sk.ffi.numberToFloatPy", Sk.ffi.numberToFloatPy);
+goog.exportSymbol('Sk.ffi.numberToFloatPy', Sk.ffi.numberToFloatPy);
+
 
 /**
  * Converts a JavaScript number or null to the internal Python int representation.
@@ -15257,53 +15270,54 @@ goog.exportSymbol("Sk.ffi.numberToFloatPy", Sk.ffi.numberToFloatPy);
  * @param {number=} defaultJs
  * @return {Object|Sk.builtin.none|undefined}
  */
-Sk.ffi.numberToIntPy = function(valueJs, defaultJs)
-{
-    var t = typeof valueJs;
-    if (t === Sk.builtin.JsType.NUMBER)
+Sk.ffi.numberToIntPy = function(valueJs, defaultJs) {
+
+  var t = typeof valueJs;
+  if (t === Sk.builtin.JsType.NUMBER)
+  {
+    // This provides the canonical implementation for int.
+    return new Sk.builtin.NumberPy(valueJs, Sk.builtin.NumberPy.int$);
+  }
+  else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+  {
+    return Sk.builtin.none.none$;
+  }
+  else if (t === Sk.builtin.JsType.UNDEFINED)
+  {
+    var d = typeof defaultJs;
+    if (d === Sk.builtin.JsType.NUMBER)
     {
-        // This provides the canonical implementation for int.
-        return new Sk.builtin.NumberPy(valueJs, Sk.builtin.NumberPy.int$);
+      return Sk.ffi.numberToIntPy(Number(defaultJs));
     }
-    else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+    else if (d === Sk.builtin.JsType.UNDEFINED)
     {
-        return Sk.builtin.none.none$;
+      return undefined;
     }
-    else if (t === Sk.builtin.JsType.UNDEFINED)
+    else if (d === Sk.builtin.JsType.OBJECT && defaultJs === null)
     {
-        var d = typeof defaultJs;
-        if (d === Sk.builtin.JsType.NUMBER)
-        {
-            return Sk.ffi.numberToIntPy(Number(defaultJs));
-        }
-        else if (d === Sk.builtin.JsType.UNDEFINED)
-        {
-            return undefined;
-        }
-        else if (d === Sk.builtin.JsType.OBJECT && defaultJs === null)
-        {
-            return Sk.builtin.none.none$;
-        }
-        else
-        {
-            throw Sk.ffi.err.
-                argument("defaultJs").
-                inFunction("Sk.ffi.numberToIntPy").
-                mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
-        }
+      return Sk.builtin.none.none$;
     }
     else
     {
-        throw Sk.ffi.err.
-            argument("valueJs").
-            inFunction("Sk.ffi.numberToIntPy").
-            mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(" or "));
+      throw Sk.ffi.err.
+          argument('defaultJs').
+          inFunction('Sk.ffi.numberToIntPy').
+          mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
     }
+  }
+  else
+  {
+    throw Sk.ffi.err.
+        argument('valueJs').
+            inFunction('Sk.ffi.numberToIntPy').
+            mustHaveType([Sk.builtin.JsType.NUMBER, 'null', Sk.builtin.JsType.UNDEFINED].join(' or '));
+  }
 };
-goog.exportSymbol("Sk.ffi.numberToIntPy", Sk.ffi.numberToIntPy);
+goog.exportSymbol('Sk.ffi.numberToIntPy', Sk.ffi.numberToIntPy);
+
 
 /**
- * Wraps a JavaScript class 
+ * Wraps a JavaScript class
  * Usage:
  *
  * valuePy = Sk.ffi.referenceToPy(valueJs, "Classname", custom);
@@ -15320,75 +15334,84 @@ goog.exportSymbol("Sk.ffi.numberToIntPy", Sk.ffi.numberToIntPy);
  * @param {string} className
  * @param {Object=} custom Custom metadata that the caller wishes to retain.
  * @param {Object=} targetPy An optional destination for mapping reference types.
+ *
+ * @return {{v:?,tp$name:string,custom:(Object|null|undefined)}}
  */
-Sk.ffi.referenceToPy = function(valueJs, className, custom, targetPy)
-{
-    var t = typeof valueJs;
-    if (t === Sk.builtin.JsType.OBJECT || t === Sk.builtin.JsType.FUNCTION)
+Sk.ffi.referenceToPy = function(valueJs, className, custom, targetPy) {
+
+  var t = typeof valueJs;
+  if (t === Sk.builtin.JsType.OBJECT || t === Sk.builtin.JsType.FUNCTION)
+  {
+    if (typeof className === Sk.builtin.JsType.STRING)
     {
-        if (typeof className === Sk.builtin.JsType.STRING)
-        {
-            if (targetPy)
-            {
-                targetPy.v = valueJs;
-                targetPy.tp$name = className;
-                targetPy.custom = custom;
-            }
-            else
-            {
-                return {"v": valueJs, "tp$name": className, "custom": custom};
-            }
-        }
-        else
-        {
-            throw Sk.ffi.assertionError("9fad4b9e-4845-4a06-9bce-0aa7c68e1f03 [className is " + className + "]");
-        }
+      if (targetPy)
+      {
+        targetPy.v = valueJs;
+        targetPy.tp$name = className;
+        targetPy.custom = custom;
+      }
+      else
+      {
+        return {'v': valueJs, 'tp$name': className, 'custom': custom};
+      }
     }
     else
     {
-        throw Sk.ffi.assertionError("306f31df-f0a9-40a0-895b-d01308df8d6e typeof valueJs => " + t);
+      throw Sk.ffi.assertionError('9fad4b9e-4845-4a06-9bce-0aa7c68e1f03 [className is ' + className + ']');
     }
+  }
+  else
+  {
+    throw Sk.ffi.assertionError('306f31df-f0a9-40a0-895b-d01308df8d6e typeof valueJs => ' + t);
+  }
 };
-goog.exportSymbol("Sk.ffi.referenceToPy", Sk.ffi.referenceToPy);
+goog.exportSymbol('Sk.ffi.referenceToPy', Sk.ffi.referenceToPy);
+
 
 /**
  * Constructs a Python function.
- * 
+ *
  * Implementations should expect Python arguments and return Python values.
  *
  * @param {Function} code The implementation of the function.
+ *
+ * @return {Sk.builtin.func}
  */
-Sk.ffi.functionPy = function(code)
-{
-    return new Sk.builtin.func(code);
+Sk.ffi.functionPy = function(code) {
+  return new Sk.builtin.func(code);
 };
-goog.exportSymbol("Sk.ffi.functionPy", Sk.ffi.functionPy);
+goog.exportSymbol('Sk.ffi.functionPy', Sk.ffi.functionPy);
+
 
 /**
  * Constructs a Python list.
  *
  * @param {Array.<Object>=} valuesPy A JavaScript array of Python values.
+ *
+ * @return {Sk.builtin.list}
  */
-Sk.ffi.listPy = function(valuesPy)
-{
-    return new Sk.builtin.list(valuesPy);
+Sk.ffi.listPy = function(valuesPy) {
+  return new Sk.builtin.list(valuesPy);
 };
-goog.exportSymbol("Sk.ffi.listPy", Sk.ffi.listPy);
+goog.exportSymbol('Sk.ffi.listPy', Sk.ffi.listPy);
+
 
 /**
  * Constructs a Python tuple.
  *
  * @param {Array.<Object>|Object} valuesPy A JavaScript array of Python values.
+ *
+ * @return {Sk.builtin.tuple}
  */
-Sk.ffi.tuplePy = function(valuesPy)
-{
-    return new Sk.builtin.tuple(valuesPy);
+Sk.ffi.tuplePy = function(valuesPy) {
+  return new Sk.builtin.tuple(valuesPy);
 };
-goog.exportSymbol("Sk.ffi.tuplePy", Sk.ffi.tuplePy);
+goog.exportSymbol('Sk.ffi.tuplePy', Sk.ffi.tuplePy);
+
 
 /**
  * Wraps a JavaScript Object instance.
- * 
+ *
  * Usage:
  *
  * valuePy = Sk.ffi.remapToPy(valueJs, className);
@@ -15396,36 +15419,38 @@ goog.exportSymbol("Sk.ffi.tuplePy", Sk.ffi.tuplePy);
  * @param {Object|string|number|boolean|Function} valueJs The JavaScript value that must be represented in Python.
  * @param {string=} className The name of the class when wrapping a JavaScript object.
  * @param {Object=} custom Custom metadata that the caller wishes to retain.
+ *
+ * @return {?}
  */
 Sk.ffi.remapToPy = function(valueJs, className, custom)
-{
-    var t = typeof valueJs;
-    if (t === Sk.builtin.JsType.OBJECT) {
-        if (Object.prototype.toString.call(valueJs) === "[object Array]")
-        {
-            return new Sk.ffi.ObjectPy(/** @type {Object} */ (valueJs));
-            /*
+    {
+  var t = typeof valueJs;
+  if (t === Sk.builtin.JsType.OBJECT) {
+    if (Object.prototype.toString.call(valueJs) === '[object Array]')
+    {
+      return new Sk.ffi.ObjectPy(/** @type {Object} */ (valueJs));
+    /*
             var valuesPy = [];
             for (var i = 0; i < valueJs.length; ++i) {
                 valuesPy.push(Sk.ffi.remapToPy(valueJs[i]));
             }
             return Sk.ffi.listPy(valuesPy);
             */
-        }
-        else if (typeof className === Sk.builtin.JsType.STRING)
-        {
-            return Sk.ffi.referenceToPy(valueJs, className.toString(), custom);
-        }
-        else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
-        {
-            return Sk.builtin.none.none$;
-        }
-        else
-        {
-            // When presented with a vanilla JavaScript object,
-            // we can no longer treat it as a dictionary.
-            return new Sk.ffi.ObjectPy(/** @type {Object} */ (valueJs));
-            /*
+    }
+    else if (typeof className === Sk.builtin.JsType.STRING)
+    {
+      return Sk.ffi.referenceToPy(valueJs, className.toString(), custom);
+    }
+    else if (t === Sk.builtin.JsType.OBJECT && valueJs === null)
+    {
+      return Sk.builtin.none.none$;
+    }
+    else
+    {
+      // When presented with a vanilla JavaScript object,
+      // we can no longer treat it as a dictionary.
+      return new Sk.ffi.ObjectPy(/** @type {Object} */ (valueJs));
+      /*
             var kvsPy = [];
             for (var k in valueJs)
             {
@@ -15434,34 +15459,35 @@ Sk.ffi.remapToPy = function(valueJs, className, custom)
             }
             return new Sk.builtin.dict(kvsPy);
             */
-        }
     }
-    else if (t === Sk.builtin.JsType.STRING)
-    {
-        return Sk.builtin.stringToPy(/** @type {string} */ (valueJs));
-    }
-    else if (t === Sk.builtin.JsType.NUMBER)
-    {
-        return Sk.builtin.numberToPy(/** @type {number} */ (valueJs));
-    }
-    else if (t === Sk.builtin.JsType.BOOLEAN)
-    {
-        return Sk.ffi.booleanToPy(/** @type {boolean} */ (valueJs));
-    }
-    else if (t === Sk.builtin.JsType.FUNCTION)
-    {
-        return Sk.ffi.functionPy(/** @type {Function} */ (valueJs));
-    }
-    else if (t === Sk.builtin.JsType.UNDEFINED)
-    {
-        return Sk.builtin.none.none$;
-    }
-    else
-    {
-        throw Sk.ffi.assertionError("d39f7c01-213e-4ded-9e5c-209a2dc94b4c, typeof valueJs => " + t);
-    }
+  }
+  else if (t === Sk.builtin.JsType.STRING)
+  {
+    return Sk.builtin.stringToPy(/** @type {string} */ (valueJs));
+  }
+  else if (t === Sk.builtin.JsType.NUMBER)
+  {
+    return Sk.builtin.numberToPy(/** @type {number} */ (valueJs));
+  }
+  else if (t === Sk.builtin.JsType.BOOLEAN)
+  {
+    return Sk.ffi.booleanToPy(/** @type {boolean} */ (valueJs));
+  }
+  else if (t === Sk.builtin.JsType.FUNCTION)
+  {
+    return Sk.ffi.functionPy(/** @type {Function} */ (valueJs));
+  }
+  else if (t === Sk.builtin.JsType.UNDEFINED)
+  {
+    return Sk.builtin.none.none$;
+  }
+  else
+  {
+    throw Sk.ffi.assertionError('d39f7c01-213e-4ded-9e5c-209a2dc94b4c, typeof valueJs => ' + t);
+  }
 };
-goog.exportSymbol("Sk.ffi.remapToPy", Sk.ffi.remapToPy);
+goog.exportSymbol('Sk.ffi.remapToPy', Sk.ffi.remapToPy);
+
 
 /**
  * @nosideeffects
@@ -15469,10 +15495,11 @@ goog.exportSymbol("Sk.ffi.remapToPy", Sk.ffi.remapToPy);
  * @return {boolean}
  */
 Sk.ffi.isBool = function(valuePy)
-{
-    return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.BOOL;
+    {
+  return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.BOOL;
 };
-goog.exportSymbol("Sk.ffi.isBool", Sk.ffi.isBool);
+goog.exportSymbol('Sk.ffi.isBool', Sk.ffi.isBool);
+
 
 /**
  * Determines whether the Python value is an instance of a class with a specified class name.
@@ -15480,51 +15507,83 @@ goog.exportSymbol("Sk.ffi.isBool", Sk.ffi.isBool);
  * @nosideeffects
  * @param {Object} valuePy
  * @param {Sk.ffi.UnionType=} className An optional class name.
- * @return {boolean} Returns true if the value has the type Sk.ffi.PyType.INSTANCE and if the name matches the type name.
+ * @return {boolean} Returns true if the value has the type Sk.ffi.PyType.INSTANCE
+ * and if the name matches the type name.
  */
 Sk.ffi.isInstance = function(valuePy, className)
-{
-    if (Sk.ffi.getType(valuePy) === Sk.ffi.PyType.INSTANCE)
     {
-        var t = typeof className;
-        if (t === Sk.builtin.JsType.STRING)
-        {
-            return Sk.ffi.typeName(valuePy) === className;
-        }
-        else if (t === Sk.builtin.JsType.UNDEFINED)
-        {
-            return true;
-        }
-        else if (Object.prototype.toString.call(className) === '[object Array]') {
-            var name = Sk.ffi.typeName(valuePy);
-            return className.some(function(x) {return name === x;});
-        }
-        else
-        {
-            throw Sk.ffi.assertionError("caa41602-62da-4850-8f76-38d013f45a6c, typeof className => " + t);
-        }
+  if (Sk.ffi.getType(valuePy) === Sk.ffi.PyType.INSTANCE)
+  {
+    var t = typeof className;
+    if (t === Sk.builtin.JsType.STRING)
+    {
+      return Sk.ffi.typeName(valuePy) === className;
+    }
+    else if (t === Sk.builtin.JsType.UNDEFINED)
+    {
+      return true;
+    }
+    else if (Object.prototype.toString.call(className) === '[object Array]') {
+      var name = Sk.ffi.typeName(valuePy);
+      return className.some(function(x) {return name === x;});
     }
     else
     {
-        return false;
+      throw Sk.ffi.assertionError('caa41602-62da-4850-8f76-38d013f45a6c, typeof className => ' + t);
     }
+  }
+  else
+  {
+    return false;
+  }
 };
-goog.exportSymbol("Sk.ffi.isInstance", Sk.ffi.isInstance);
+goog.exportSymbol('Sk.ffi.isInstance', Sk.ffi.isInstance);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isDefined = function(valuePy) {return Sk.ffi.getType(valuePy) !== Sk.ffi.PyType.UNDEFINED;};
-goog.exportSymbol("Sk.ffi.isDefined", Sk.ffi.isDefined);
+goog.exportSymbol('Sk.ffi.isDefined', Sk.ffi.isDefined);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isObjectPy = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.OBJECT;};
-goog.exportSymbol("Sk.ffi.isObjectPy", Sk.ffi.isObjectPy);
+goog.exportSymbol('Sk.ffi.isObjectPy', Sk.ffi.isObjectPy);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isDict = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.DICT;};
-goog.exportSymbol("Sk.ffi.isDict", Sk.ffi.isDict);
+goog.exportSymbol('Sk.ffi.isDict', Sk.ffi.isDict);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isList = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.LIST;};
-goog.exportSymbol("Sk.ffi.isList", Sk.ffi.isList);
+goog.exportSymbol('Sk.ffi.isList', Sk.ffi.isList);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isTuple = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.TUPLE;};
-goog.exportSymbol("Sk.ffi.isTuple", Sk.ffi.isTuple);
+goog.exportSymbol('Sk.ffi.isTuple', Sk.ffi.isTuple);
+
 
 /**
  * @nosideeffects
@@ -15532,71 +15591,100 @@ goog.exportSymbol("Sk.ffi.isTuple", Sk.ffi.isTuple);
  * @return {boolean}
  */
 Sk.ffi.isFloat = function(valuePy)
-{
-    return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.FLOAT;
+    {
+  return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.FLOAT;
 };
-goog.exportSymbol("Sk.ffi.isFloat", Sk.ffi.isFloat);
+goog.exportSymbol('Sk.ffi.isFloat', Sk.ffi.isFloat);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isFunction = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.FUNCTION;};
-goog.exportSymbol("Sk.ffi.isFunction", Sk.ffi.isFunction);
+goog.exportSymbol('Sk.ffi.isFunction', Sk.ffi.isFunction);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isFunctionRef = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.FUNREF;};
-goog.exportSymbol("Sk.ffi.isFunctionRef", Sk.ffi.isFunctionRef);
+goog.exportSymbol('Sk.ffi.isFunctionRef', Sk.ffi.isFunctionRef);
+
 
 /**
  * @nosideeffects
  * @param {*} valuePy
  * @return {boolean}
  */
-Sk.ffi.isInt = function(valuePy)
-{
-    return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.INT;
+Sk.ffi.isInt = function(valuePy) {
+  return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.INT;
 };
-goog.exportSymbol("Sk.ffi.isInt", Sk.ffi.isInt);
+goog.exportSymbol('Sk.ffi.isInt', Sk.ffi.isInt);
+
 
 /**
  * @nosideeffects
  * @param {*} valuePy
  * @return {boolean}
  */
-Sk.ffi.isLong = function(valuePy)
-{
-    return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.LONG;
+Sk.ffi.isLong = function(valuePy) {
+  return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.LONG;
 };
-goog.exportSymbol("Sk.ffi.isLong", Sk.ffi.isLong);
+goog.exportSymbol('Sk.ffi.isLong', Sk.ffi.isLong);
+
 
 /**
  * @nosideeffects
  * @param {Object} valuePy
  * @return {boolean}
  */
-Sk.ffi.isBigInteger = function(valuePy)
-{
-    return valuePy instanceof Sk.builtin.biginteger;
+Sk.ffi.isBigInteger = function(valuePy) {
+  return valuePy instanceof Sk.builtin.biginteger;
 };
-goog.exportSymbol("Sk.ffi.isBigInteger", Sk.ffi.isBigInteger);
+goog.exportSymbol('Sk.ffi.isBigInteger', Sk.ffi.isBigInteger);
 
-Sk.ffi.isNone = function(valuePy)
-{
-    return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.NONE;
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
+Sk.ffi.isNone = function(valuePy) {
+  return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.NONE;
 };
-goog.exportSymbol("Sk.ffi.isNone", Sk.ffi.isNone);
+goog.exportSymbol('Sk.ffi.isNone', Sk.ffi.isNone);
 
-Sk.ffi.isNum = function(valuePy)
-{
-    if (valuePy instanceof Sk.builtin.NumberPy)
-    {
-        return true;
-    }
-    else
-    {
-        return Sk.ffi.isFloat(valuePy) || Sk.ffi.isInt(valuePy) || Sk.ffi.isLong(valuePy);
-    }
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
+Sk.ffi.isNum = function(valuePy) {
+  if (valuePy instanceof Sk.builtin.NumberPy)
+  {
+    return true;
+  }
+  else
+  {
+    return Sk.ffi.isFloat(valuePy) || Sk.ffi.isInt(valuePy) || Sk.ffi.isLong(valuePy);
+  }
 };
-goog.exportSymbol("Sk.ffi.isNum", Sk.ffi.isNum);
+goog.exportSymbol('Sk.ffi.isNum', Sk.ffi.isNum);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {boolean}
+ */
 Sk.ffi.isUndefined = function(valuePy) {return Sk.ffi.getType(valuePy) === Sk.ffi.PyType.UNDEFINED;};
-goog.exportSymbol("Sk.ffi.isUndefined", Sk.ffi.isUndefined);
+goog.exportSymbol('Sk.ffi.isUndefined', Sk.ffi.isUndefined);
+
 
 /**
  * Convenience function for asserting the number of arguments to a function.
@@ -15614,36 +15702,37 @@ goog.exportSymbol("Sk.ffi.isUndefined", Sk.ffi.isUndefined);
  * @return {number} The number of arguments.
  */
 Sk.ffi.checkFunctionArgs = function(prototype, args, minargs, maxargs, kwargs, free)
-{
-    var nargs = args.length;
-    var msg = "";
-
-    if (maxargs === undefined) { maxargs = Infinity; }
-    if (kwargs) { nargs -= 1; }
-    if (free) { nargs -= 1; }
-    if (nargs < minargs || nargs > maxargs)
     {
-        if (minargs === maxargs)
-        {
-            msg = prototype + " takes exactly " + minargs + " arguments";
-        }
-        else if (nargs < minargs)
-        {
-            msg = prototype + " takes at least " + minargs + " arguments";
-        }
-        else
-        {
-            msg = prototype + " takes at most " + maxargs + " arguments";
-        }
-        msg += " (" + nargs + " given)";
-        throw Sk.ffi.assertionError(msg);
+  var nargs = args.length;
+  var msg = '';
+
+  if (maxargs === undefined) { maxargs = Infinity; }
+  if (kwargs) { nargs -= 1; }
+  if (free) { nargs -= 1; }
+  if (nargs < minargs || nargs > maxargs)
+  {
+    if (minargs === maxargs)
+    {
+      msg = prototype + ' takes exactly ' + minargs + ' arguments';
+    }
+    else if (nargs < minargs)
+    {
+      msg = prototype + ' takes at least ' + minargs + ' arguments';
     }
     else
     {
-        return nargs;
+      msg = prototype + ' takes at most ' + maxargs + ' arguments';
     }
+    msg += ' (' + nargs + ' given)';
+    throw Sk.ffi.assertionError(msg);
+  }
+  else
+  {
+    return nargs;
+  }
 };
-goog.exportSymbol("Sk.ffi.checkFunctionArgs", Sk.ffi.checkFunctionArgs);
+goog.exportSymbol('Sk.ffi.checkFunctionArgs', Sk.ffi.checkFunctionArgs);
+
 
 /**
  * Convenience function for asserting the number of arguments to a method (callable attribute).
@@ -15662,27 +15751,31 @@ goog.exportSymbol("Sk.ffi.checkFunctionArgs", Sk.ffi.checkFunctionArgs);
  * @return {number} The number of arguments.
  */
 Sk.ffi.checkMethodArgs = function(prototype, args, minargs, maxargs, kwargs, free)
-{
-    return Sk.ffi.checkFunctionArgs(prototype, Array.prototype.slice.call(args, 1), minargs, maxargs, kwargs, free);
+    {
+  return Sk.ffi.checkFunctionArgs(prototype, Array.prototype.slice.call(args, 1), minargs, maxargs, kwargs, free);
 };
-goog.exportSymbol("Sk.ffi.checkMethodArgs", Sk.ffi.checkMethodArgs);
+goog.exportSymbol('Sk.ffi.checkMethodArgs', Sk.ffi.checkMethodArgs);
+
 
 /**
  * @typedef {(string|Sk.ffi.PyType)}
  */
-Sk.ffi.SimpleType
-goog.exportSymbol("Sk.ffi.SimpleType", Sk.ffi.SimpleType);
+Sk.ffi.SimpleType;
+goog.exportSymbol('Sk.ffi.SimpleType', Sk.ffi.SimpleType);
+
 
 /**
  * @typedef {(Sk.ffi.SimpleType|!Array.<Sk.ffi.SimpleType>)}
  */
-Sk.ffi.UnionType
-goog.exportSymbol("Sk.ffi.UnionType", Sk.ffi.UnionType);
+Sk.ffi.UnionType;
+goog.exportSymbol('Sk.ffi.UnionType', Sk.ffi.UnionType);
+
 
 /**
  * @typedef {function(Sk.ffi.UnionType): Sk.ffi.TypeError}
  */
-Sk.ffi.FunctionReturningTypeError
+Sk.ffi.FunctionReturningTypeError;
+
 
 /**
  * Convenience function for asserting the type of an argument.
@@ -15693,13 +15786,14 @@ Sk.ffi.FunctionReturningTypeError
  * @param {Object} valuePy The actual value of the operand.
  */
 Sk.ffi.checkArgType = function(name, expectedType, condition, valuePy)
-{
-    if (!condition)
     {
-        throw Sk.ffi.err.argument(name).mustHaveType(expectedType);
-    }
+  if (!condition)
+  {
+    throw Sk.ffi.err.argument(name).mustHaveType(expectedType);
+  }
 };
-goog.exportSymbol("Sk.ffi.checkArgType", Sk.ffi.checkArgType);
+goog.exportSymbol('Sk.ffi.checkArgType', Sk.ffi.checkArgType);
+
 
 /**
  * Convenience function for asserting the type of the LHS operand to a binary operator.
@@ -15710,14 +15804,15 @@ goog.exportSymbol("Sk.ffi.checkArgType", Sk.ffi.checkArgType);
  * @param {Object} valuePy The actual value of the operand.
  */
 Sk.ffi.checkLhsOperandType = function(opName, expectedType, condition, valuePy)
-{
-    if (!condition)
     {
-        // TODO: Push string literal down into the Sk.ffi.err structure.
-        throw Sk.ffi.err.operand("Left").toOperation(opName).mustHaveType(expectedType);
-    }
+  if (!condition)
+  {
+    // TODO: Push string literal down into the Sk.ffi.err structure.
+    throw Sk.ffi.err.operand('Left').toOperation(opName).mustHaveType(expectedType);
+  }
 };
-goog.exportSymbol("Sk.ffi.checkLhsOperandType", Sk.ffi.checkLhsOperandType);
+goog.exportSymbol('Sk.ffi.checkLhsOperandType', Sk.ffi.checkLhsOperandType);
+
 
 /**
  * Convenience function for asserting the type of the RHS operand to a binary operator.
@@ -15728,14 +15823,15 @@ goog.exportSymbol("Sk.ffi.checkLhsOperandType", Sk.ffi.checkLhsOperandType);
  * @param {Object} valuePy The actual value of the operand.
  */
 Sk.ffi.checkRhsOperandType = function(opName, expectedType, condition, valuePy)
-{
-    if (!condition)
     {
-        // TODO: Push string literal down into the Sk.ffi.err structure.
-        throw Sk.ffi.err.operand("Right").toOperation(opName).mustHaveType(expectedType);
-    }
+  if (!condition)
+  {
+    // TODO: Push string literal down into the Sk.ffi.err structure.
+    throw Sk.ffi.err.operand('Right').toOperation(opName).mustHaveType(expectedType);
+  }
 };
-goog.exportSymbol("Sk.ffi.checkRhsOperandType", Sk.ffi.checkRhsOperandType);
+goog.exportSymbol('Sk.ffi.checkRhsOperandType', Sk.ffi.checkRhsOperandType);
+
 
 /**
  * Enumeration for internal Python types.
@@ -15743,21 +15839,22 @@ goog.exportSymbol("Sk.ffi.checkRhsOperandType", Sk.ffi.checkRhsOperandType);
  * @enum {number}
  */
 Sk.ffi.PyType = {
-    'OBJECT':     1, // A (wrapper around a) JavaScript Object.
-    'DICT':       2,
-    'LIST':       3,
-    'TUPLE':      4,
-    'BOOL':       5,
-    'FLOAT':      6,
-    'INT':        7,
-    'LONG':       8,
-    'STR':        9,
-    'NONE':      10,
-    'FUNCTION':  11,
-    'INSTANCE':  12,
-    'UNDEFINED': -1,
-    'FUNREF':    -2
+  'OBJECT': 1, // A (wrapper around a) JavaScript Object.
+  'DICT': 2,
+  'LIST': 3,
+  'TUPLE': 4,
+  'BOOL': 5,
+  'FLOAT': 6,
+  'INT': 7,
+  'LONG': 8,
+  'STR': 9,
+  'NONE': 10,
+  'FUNCTION': 11,
+  'INSTANCE': 12,
+  'UNDEFINED': -1,
+  'FUNREF': -2
 };
+
 
 /**
  * @param {Sk.ffi.UnionType} kind
@@ -15765,255 +15862,237 @@ Sk.ffi.PyType = {
  * @return {string}
  */
 Sk.ffi.typeString = function(kind, name)
-{
-    /**
+    {
+  /**
      * @param {string} s
      * @return {string}
      */
-    function typeBrackets(s) {
-        return "<type '" + s + "'>";
-    }
-    /**
+  function typeBrackets(s) {
+    return "<type '" + s + "'>";
+  }
+  /**
      * @param {Sk.ffi.PyType} kind
      * @return {string}
      */
-    function typePy(kind) {
-        switch(kind)
+  function typePy(kind) {
+    switch (kind)
+    {
+      case Sk.ffi.PyType.OBJECT: {return typeBrackets('object');}
+      case Sk.ffi.PyType.DICT: {return typeBrackets('dict');}
+      case Sk.ffi.PyType.LIST: {return typeBrackets('list');}
+      case Sk.ffi.PyType.TUPLE: {return typeBrackets('tuple');}
+      case Sk.ffi.PyType.BOOL: {return typeBrackets('bool');}
+      case Sk.ffi.PyType.FLOAT: {return typeBrackets('float');}
+      case Sk.ffi.PyType.LONG: {return typeBrackets('long');}
+      case Sk.ffi.PyType.INT: {return typeBrackets('int');}
+      case Sk.ffi.PyType.STR: {return typeBrackets('str');}
+      case Sk.ffi.PyType.NONE: {return typeBrackets('NoneType');}
+      case Sk.ffi.PyType.FUNCTION: {return typeBrackets('function');}
+      default:
         {
-            case Sk.ffi.PyType.OBJECT:      {return typeBrackets('object');}
-            case Sk.ffi.PyType.DICT:        {return typeBrackets('dict');}
-            case Sk.ffi.PyType.LIST:        {return typeBrackets('list');}
-            case Sk.ffi.PyType.TUPLE:       {return typeBrackets('tuple');}
-            case Sk.ffi.PyType.BOOL:        {return typeBrackets('bool');}
-            case Sk.ffi.PyType.FLOAT:       {return typeBrackets('float');}
-            case Sk.ffi.PyType.LONG:        {return typeBrackets('long');}
-            case Sk.ffi.PyType.INT:         {return typeBrackets('int');}
-            case Sk.ffi.PyType.STR:         {return typeBrackets('str');}
-            case Sk.ffi.PyType.NONE:        {return typeBrackets('NoneType');}
-            case Sk.ffi.PyType.FUNCTION:    {return typeBrackets('function');}
-            default:
-            {
-                throw Sk.ffi.assertionError("fe2aed99-3b81-4a55-b3e8-61da7e734ac1, kind => " + kind);
-            }
+          throw Sk.ffi.assertionError('fe2aed99-3b81-4a55-b3e8-61da7e734ac1, kind => ' + kind);
         }
     }
-    /**
+  }
+  /**
      * @param {string} name
      * @return {string}
      */
-    function classBrackets(name) {
-        return "<class '" + name + "'>";
-    }
+  function classBrackets(name) {
+    return "<class '" + name + "'>";
+  }
 
-    if (typeof kind === Sk.builtin.JsType.STRING) {
-        return classBrackets(String(kind));
-    }
-    else if (typeof kind === Sk.builtin.JsType.NUMBER) {
-        switch(kind)
+  if (typeof kind === Sk.builtin.JsType.STRING) {
+    return classBrackets(String(kind));
+  }
+  else if (typeof kind === Sk.builtin.JsType.NUMBER) {
+    switch (kind)
+    {
+      case Sk.ffi.PyType.OBJECT:
+      case Sk.ffi.PyType.DICT:
+      case Sk.ffi.PyType.LIST:
+      case Sk.ffi.PyType.TUPLE:
+      case Sk.ffi.PyType.BOOL:
+      case Sk.ffi.PyType.FLOAT:
+      case Sk.ffi.PyType.LONG:
+      case Sk.ffi.PyType.INT:
+      case Sk.ffi.PyType.STR:
+      case Sk.ffi.PyType.NONE:
+      case Sk.ffi.PyType.FUNCTION:
         {
-            case Sk.ffi.PyType.OBJECT:
-            case Sk.ffi.PyType.DICT:
-            case Sk.ffi.PyType.LIST:
-            case Sk.ffi.PyType.TUPLE:
-            case Sk.ffi.PyType.BOOL:
-            case Sk.ffi.PyType.FLOAT:
-            case Sk.ffi.PyType.LONG:
-            case Sk.ffi.PyType.INT:
-            case Sk.ffi.PyType.STR:
-            case Sk.ffi.PyType.NONE:
-            case Sk.ffi.PyType.FUNCTION:
-            {
-                return typePy(kind);
-            }
-            case Sk.ffi.PyType.INSTANCE:
-            {
-                return classBrackets(String(name));
-            }
-            default:
-            {
-                // TODO: This should convert to Kleene ? for UNDEFINED?
-                throw Sk.ffi.assertionError("b15da19c-b080-4695-a157-cfcb740b265b, kind => " + kind);
-            }
+          return typePy(kind);
+        }
+      case Sk.ffi.PyType.INSTANCE:
+        {
+          return classBrackets(String(name));
+        }
+      default:
+        {
+          // TODO: This should convert to Kleene ? for UNDEFINED?
+          throw Sk.ffi.assertionError('b15da19c-b080-4695-a157-cfcb740b265b, kind => ' + kind);
         }
     }
-    else if (Object.prototype.toString.call(kind) === '[object Array]') {
-        return kind.map(function(x) {return Sk.ffi.typeString(x);}).join(" or ");
-    }
-    else {
-        throw Sk.ffi.assertionError("c32e2f75-a391-49aa-b567-b376955b4b4c, typeof kind => " + typeof kind);
-    }
+  }
+  else if (Object.prototype.toString.call(kind) === '[object Array]') {
+    return kind.map(function(x) {return Sk.ffi.typeString(x);}).join(' or ');
+  }
+  else {
+    throw Sk.ffi.assertionError('c32e2f75-a391-49aa-b567-b376955b4b4c, typeof kind => ' + typeof kind);
+  }
 };
-goog.exportSymbol("Sk.ffi.typeString", Sk.ffi.typeString);
+goog.exportSymbol('Sk.ffi.typeString', Sk.ffi.typeString);
+
 
 /**
  * Computes the internal Python representation type for the provided value.
  *
+ * @param {?} valuePy
+ *
  * @return {Sk.ffi.PyType} The Python type enumeration value.
  */
 Sk.ffi.getType = function(valuePy)
-{
-    if (Sk.flyweight)
     {
-        if (typeof valuePy === Sk.builtin.JsType.NUMBER)
-        {
-            return Sk.ffi.PyType.FLOAT;
-        }
+  if (Sk.flyweight)
+  {
+    if (typeof valuePy === Sk.builtin.JsType.NUMBER)
+    {
+      return Sk.ffi.PyType.FLOAT;
     }
+  }
 
-    if (typeof valuePy === Sk.builtin.JsType.UNDEFINED)
+  if (typeof valuePy === Sk.builtin.JsType.UNDEFINED)
+  {
+    return Sk.ffi.PyType.UNDEFINED;
+  }
+  else if (valuePy instanceof Sk.ffi.ObjectPy)
+  {
+    return Sk.ffi.PyType.OBJECT;
+  }
+  else if (valuePy instanceof Sk.builtin.object)
+  {
+    throw new Error('Ooch - object');
+  //      return Sk.ffi.PyType.DICT;
+  }
+  else if (valuePy instanceof Sk.builtin.dict)
+  {
+    return Sk.ffi.PyType.DICT;
+  }
+  else if (valuePy instanceof Sk.builtin.list)
+  {
+    return Sk.ffi.PyType.LIST;
+  }
+  else if (valuePy instanceof Sk.builtin.tuple)
+  {
+    return Sk.ffi.PyType.TUPLE;
+  }
+  else if (valuePy instanceof Sk.builtin.NumberPy)
+  {
+    // This is the legitimate test for a float in non-flyweight mode.
+    if (valuePy.skType === Sk.builtin.NumberPy.float$)
     {
-        return Sk.ffi.PyType.UNDEFINED;
+      if (Sk.flyweight)
+      {
+        goog.asserts.assertNumber(valuePy, "You're kidding me?");
+      }
+      else
+      {
+        return Sk.ffi.PyType.FLOAT;
+      }
     }
-    else if (valuePy instanceof Sk.ffi.ObjectPy)
+    else if (valuePy.skType === Sk.builtin.NumberPy.int$)
     {
-        return Sk.ffi.PyType.OBJECT;
-    }
-    else if (valuePy instanceof Sk.builtin.object)
-    {
-        throw new Error("Ooch - object");
-//      return Sk.ffi.PyType.DICT;
-    }
-    else if (valuePy instanceof Sk.builtin.dict)
-    {
-        return Sk.ffi.PyType.DICT;
-    }
-    else if (valuePy instanceof Sk.builtin.list)
-    {
-        return Sk.ffi.PyType.LIST;
-    }
-    else if (valuePy instanceof Sk.builtin.tuple)
-    {
-        return Sk.ffi.PyType.TUPLE;
-    }
-    else if (valuePy instanceof Sk.builtin.NumberPy)
-    {
-        // This is the legitimate test for a float in non-flyweight mode.
-        if (valuePy.skType === Sk.builtin.NumberPy.float$)
-        {
-            if (Sk.flyweight)
-            {
-                goog.asserts.assertNumber(valuePy, "You're kidding me?");
-            }
-            else
-            {
-                return Sk.ffi.PyType.FLOAT;
-            }
-        }
-        else if (valuePy.skType === Sk.builtin.NumberPy.int$)
-        {
-            return Sk.ffi.PyType.INT;
-        }
-        else
-        {
-            throw Sk.ffi.assertionError("typeofPy(" + valuePy + ") (Sk.builtin.NumberPy) skType=" + valuePy.skType);
-        }
-    }
-    else if (valuePy instanceof Sk.builtin.lng)
-    {
-        return Sk.ffi.PyType.LONG;
-    }
-    else if (valuePy === Sk.builtin.bool.true$)
-    {
-        return Sk.ffi.PyType.BOOL;
-    }
-    else if (valuePy === Sk.builtin.bool.false$)
-    {
-        return Sk.ffi.PyType.BOOL;
-    }
-    else if (valuePy === Sk.builtin.none.none$)
-    {
-        return Sk.ffi.PyType.NONE;
+      return Sk.ffi.PyType.INT;
     }
     else
     {
-        // FIXME: This is bad, we can easily get lost.
-        var x = typeof valuePy.v;
-        if (x !== Sk.builtin.JsType.UNDEFINED)
+      throw Sk.ffi.assertionError('typeofPy(' + valuePy + ') (Sk.builtin.NumberPy) skType=' + valuePy.skType);
+    }
+  }
+  else if (valuePy instanceof Sk.builtin.lng)
+  {
+    return Sk.ffi.PyType.LONG;
+  }
+  else if (valuePy === Sk.builtin.bool.true$)
+  {
+    return Sk.ffi.PyType.BOOL;
+  }
+  else if (valuePy === Sk.builtin.bool.false$)
+  {
+    return Sk.ffi.PyType.BOOL;
+  }
+  else if (valuePy === Sk.builtin.none.none$)
+  {
+    return Sk.ffi.PyType.NONE;
+  }
+  else
+  {
+    // FIXME: This is bad, we can easily get lost.
+    var x = typeof valuePy.v;
+    if (x !== Sk.builtin.JsType.UNDEFINED)
+    {
+      if (x === Sk.builtin.JsType.STRING)
+      {
+        return Sk.ffi.PyType.STR;
+      }
+      else if (x === Sk.builtin.JsType.OBJECT)
+      {
+        if (valuePy.tp$name)
         {
-            if (x === Sk.builtin.JsType.STRING)
-            {
-                return Sk.ffi.PyType.STR;
-            }
-            else if (x === Sk.builtin.JsType.OBJECT)
-            {
-                if (valuePy.tp$name)
-                {
-                    return Sk.ffi.PyType.INSTANCE;
-                }
-                else
-                {
-                    throw Sk.ffi.assertionError("0a459acc-9540-466b-ba1a-333f8215b61e");
-                }
-            }
-            else if (x === Sk.builtin.JsType.FUNCTION)
-            {
-                return Sk.ffi.PyType.FUNREF;
-            }
-            else
-            {
-                throw Sk.ffi.assertionError("bb971bb0-3751-49bb-ac24-8dab8a4bcd29 (x:'" + x + "')");
-            }
+          return Sk.ffi.PyType.INSTANCE;
         }
         else
         {
-            // TODO: It works, but why are there two ways of doing it?
-            return Sk.ffi.PyType.FUNCTION;
+          throw Sk.ffi.assertionError('0a459acc-9540-466b-ba1a-333f8215b61e');
         }
+      }
+      else if (x === Sk.builtin.JsType.FUNCTION)
+      {
+        return Sk.ffi.PyType.FUNREF;
+      }
+      else
+      {
+        throw Sk.ffi.assertionError("bb971bb0-3751-49bb-ac24-8dab8a4bcd29 (x:'" + x + "')");
+      }
     }
+    else
+    {
+      // TODO: It works, but why are there two ways of doing it?
+      return Sk.ffi.PyType.FUNCTION;
+    }
+  }
 };
-goog.exportSymbol("Sk.ffi.getType", Sk.ffi.getType);
+goog.exportSymbol('Sk.ffi.getType', Sk.ffi.getType);
 
+
+/**
+ * @param {?} valuePy
+ *
+ * @return {string}
+ */
 Sk.ffi.typeName = function(valuePy)
-{
-    if (Sk.flyweight)
     {
-        if (typeof valuePy === Sk.builtin.JsType.NUMBER)
-        {
-            return 'float';
-        }
-    }
-    if (valuePy instanceof Sk.builtin.NumberPy)
+  if (Sk.flyweight)
+  {
+    if (typeof valuePy === Sk.builtin.JsType.NUMBER)
     {
-        return valuePy.skType;
+      return 'float';
     }
-    else if (valuePy.tp$name !== undefined)
-    {
-        return valuePy.tp$name;
-    }
-    else 
-    {
-        return "<invalid type>";
-    }
-    /*
-    switch(Sk.ffi.getType(valuePy))
-    {
-        case Sk.ffi.PyType.INSTANCE:
-        case Sk.ffi.PyType.BOOL:
-        case Sk.ffi.PyType.FLOAT:
-        case Sk.ffi.PyType.INT:
-        case Sk.ffi.PyType.STR:
-        {
-            if (valuePy instanceof Sk.builtin.NumberPy)
-            {
-                return valuePy.skType;
-            }
-            else if (valuePy.tp$name !== undefined)
-            {
-                return valuePy.tp$name;
-            }
-            else 
-            {
-                return "<invalid type>";
-            }
-        }
-        default:
-        {
-            throw Sk.ffi.assertionError("0d35490f-ac78-45d7-ac5e-af6ef09278b1, Sk.ffi.getType(valuePy) => " + Sk.ffi.getType(valuePy));
-        }
-    }
-    */
+  }
+  if (valuePy instanceof Sk.builtin.NumberPy)
+  {
+    return valuePy.skType;
+  }
+  else if (valuePy.tp$name !== undefined)
+  {
+    return valuePy.tp$name;
+  }
+  else
+  {
+    return '<invalid type>';
+  }
 };
-goog.exportSymbol("Sk.ffi.typeName", Sk.ffi.typeName);
+goog.exportSymbol('Sk.ffi.typeName', Sk.ffi.typeName);
+
 
 /**
  * Converts the internal Python string representation to a JavaScript string.
@@ -16024,55 +16103,60 @@ goog.exportSymbol("Sk.ffi.typeName", Sk.ffi.typeName);
  *
  * @param {Object} valuePy
  * @param {string=} message
+ *
+ * @return {boolean}
  */
 Sk.ffi.booleanToJs = function(valuePy, message)
-{
-    if (valuePy === Sk.builtin.bool.true$)
     {
-        return true;
-    }
-    else if (valuePy === Sk.builtin.bool.false$)
+  if (valuePy === Sk.builtin.bool.true$)
+  {
+    return true;
+  }
+  else if (valuePy === Sk.builtin.bool.false$)
+  {
+    return false;
+  }
+  else
+  {
+    if (typeof message === Sk.builtin.JsType.STRING)
     {
-        return false;
+      throw Sk.ffi.typeError(String(message));
     }
     else
     {
-        if (typeof message === Sk.builtin.JsType.STRING)
-        {
-            throw Sk.ffi.typeError(String(message));
-        }
-        else
-        {
-            throw Sk.ffi.err.attribute("value").mustHaveType(Sk.ffi.PyType.BOOL);
-        }
+      throw Sk.ffi.err.attribute('value').mustHaveType(Sk.ffi.PyType.BOOL);
     }
+  }
 };
-goog.exportSymbol("Sk.ffi.booleanToJs", Sk.ffi.booleanToJs);
+goog.exportSymbol('Sk.ffi.booleanToJs', Sk.ffi.booleanToJs);
+
 
 /**
+ * @param {?} valuePy
  * @param {string=} message Optional customizable assertion message.
  *
  * @return {number}
  */
-Sk.ffi.numberToJs = function(valuePy, message)
-{
-    if (valuePy instanceof Sk.builtin.NumberPy)
+Sk.ffi.numberToJs = function(valuePy, message) {
+
+  if (valuePy instanceof Sk.builtin.NumberPy)
+  {
+    return Sk.builtin.asnum$(valuePy);
+  }
+  else
+  {
+    if (typeof message === Sk.builtin.JsType.STRING)
     {
-        return Sk.builtin.asnum$(valuePy);
+      throw Sk.ffi.typeError(String(message));
     }
     else
     {
-        if (typeof message === Sk.builtin.JsType.STRING)
-        {
-            throw Sk.ffi.typeError(String(message));
-        }
-        else
-        {
-            throw Sk.ffi.err.attribute("value").mustHaveType([Sk.ffi.PyType.FLOAT, Sk.ffi.PyType.INT, Sk.ffi.PyType.LONG]);
-        }
+      throw Sk.ffi.err.attribute('value').mustHaveType([Sk.ffi.PyType.FLOAT, Sk.ffi.PyType.INT, Sk.ffi.PyType.LONG]);
     }
+  }
 };
-goog.exportSymbol("Sk.ffi.numberToJs", Sk.ffi.numberToJs);
+goog.exportSymbol('Sk.ffi.numberToJs', Sk.ffi.numberToJs);
+
 
 /**
  * Usage:
@@ -16081,216 +16165,236 @@ goog.exportSymbol("Sk.ffi.numberToJs", Sk.ffi.numberToJs);
  *
  * @param {*} valuePy The Python value to be mapped.
  * @param {boolean=} shallow
+ *
+ * @return {?}
  */
-Sk.ffi.remapToJs = function(valuePy, shallow)
-{
-    Sk.ffi.checkFunctionArgs("Sk.ffi.remapToJs", arguments, 1, 2);
-    if (Sk.flyweight)
-    {
-        if (typeof valuePy === Sk.builtin.JsType.NUMBER) {
-            return valuePy;
-        }
+Sk.ffi.remapToJs = function(valuePy, shallow) {
+
+  Sk.ffi.checkFunctionArgs('Sk.ffi.remapToJs', arguments, 1, 2);
+  if (Sk.flyweight)
+  {
+    if (typeof valuePy === Sk.builtin.JsType.NUMBER) {
+      return valuePy;
     }
-    switch(Sk.ffi.getType(valuePy))
-    {
-        case Sk.ffi.PyType.STR:
+  }
+  switch (Sk.ffi.getType(valuePy))
+  {
+    case Sk.ffi.PyType.STR:
+      {
+        return Sk.builtin.stringToJs(valuePy);
+      }
+    case Sk.ffi.PyType.OBJECT:
+      {
+        return valuePy.v;
+      }
+    case Sk.ffi.PyType.DICT:
+      {
+        var ret = {};
+        for (var iter = valuePy.tp$iter(), k = iter.tp$iternext(); k !== undefined; k = iter.tp$iternext())
         {
-            return Sk.builtin.stringToJs(valuePy);
+          var v = valuePy.mp$subscript(k);
+          if (v === undefined) {
+            v = null;
+          }
+          var kAsJs = Sk.ffi.remapToJs(k);
+          ret[kAsJs] = Sk.ffi.remapToJs(v);
         }
-        case Sk.ffi.PyType.OBJECT:
+        return ret;
+      }
+    case Sk.ffi.PyType.LIST:
+      {
+        if (shallow) {
+          return valuePy.v;
+        }
+        else {
+          var ret = [];
+          for (var i = 0; i < valuePy.v.length; ++i)
+          {
+            ret.push(Sk.ffi.remapToJs(valuePy.v[i]));
+          }
+          return ret;
+        }
+      }
+    case Sk.ffi.PyType.TUPLE:
+      {
+        var ret = [];
+        for (var i = 0; i < valuePy.v.length; ++i)
         {
-            return valuePy.v;
+          ret.push(Sk.ffi.remapToJs(valuePy.v[i]));
         }
-        case Sk.ffi.PyType.DICT:
+        return ret;
+      }
+    case Sk.ffi.PyType.BOOL:
+      {
+        if (valuePy === Sk.builtin.bool.true$)
         {
-            var ret = {};
-            for (var iter = valuePy.tp$iter(), k = iter.tp$iternext(); k !== undefined; k = iter.tp$iternext())
-            {
-                var v = valuePy.mp$subscript(k);
-                if (v === undefined) {
-                    v = null;
-                }
-                var kAsJs = Sk.ffi.remapToJs(k);
-                ret[kAsJs] = Sk.ffi.remapToJs(v);
-            }
-            return ret;
+          return true;
         }
-        case Sk.ffi.PyType.LIST:
+        else if (valuePy === Sk.builtin.bool.false$)
         {
-            if (shallow) {
-                return valuePy.v;
-            }
-            else {
-                var ret = [];
-                for (var i = 0; i < valuePy.v.length; ++i)
-                {
-                    ret.push(Sk.ffi.remapToJs(valuePy.v[i]));
-                }
-                return ret;
-            }
+          return false;
         }
-        case Sk.ffi.PyType.TUPLE:
+        else
         {
-            var ret = [];
-            for (var i = 0; i < valuePy.v.length; ++i)
-            {
-                ret.push(Sk.ffi.remapToJs(valuePy.v[i]));
-            }
-            return ret;
+          throw Sk.ffi.assertionError('5fd1f529-f9b2-4d0c-9775-36e782973986');
         }
-        case Sk.ffi.PyType.BOOL:
+      }
+    case Sk.ffi.PyType.FLOAT:
+      {
+        if (Sk.flyweight)
         {
-            if (valuePy === Sk.builtin.bool.true$)
-            {
-                return true;
-            }
-            else if (valuePy === Sk.builtin.bool.false$)
-            {
-                return false;
-            }
-            else
-            {
-                throw Sk.ffi.assertionError("5fd1f529-f9b2-4d0c-9775-36e782973986");
-            }
+          goog.asserts.assertNumber(valuePy, '5fd1f529-f9b2-4d0c-9775-36e782973986');
         }
-        case Sk.ffi.PyType.FLOAT:
+        else
         {
-            if (Sk.flyweight)
-            {
-                goog.asserts.assertNumber(valuePy, "5fd1f529-f9b2-4d0c-9775-36e782973986");
-            }
-            else
-            {
-                return Sk.builtin.asnum$(valuePy);
-            }
+          return Sk.builtin.asnum$(valuePy);
         }
-        case Sk.ffi.PyType.INT:
-        case Sk.ffi.PyType.LONG:
-        {
-            return Sk.builtin.asnum$(valuePy);
-        }
-        case Sk.ffi.PyType.INSTANCE:
-        {
-            // TODO: This is being exercised, but we should assert the tp$name.
-            // I think the pattern here suggests that we have a Sk.builtin.something
-            return valuePy.v;
-        }
-        case Sk.ffi.PyType.FUNREF:
-        {
-            return valuePy.v;
-        }
-        case Sk.ffi.PyType.UNDEFINED:
-        {
-            return undefined;
-        }
-        case Sk.ffi.PyType.NONE:
-        {
-            return null;
-        }
-        case Sk.ffi.PyType.FUNCTION: {
-            return function() {
-                var argsJs = Array.prototype.slice.call(arguments, 0);
-                var argsPy = argsJs.map(function(argJs) {return Sk.ffi.remapToPy(argJs);});
-                return Sk.ffi.remapToJs(Sk.misceval.apply(valuePy, undefined, undefined, undefined, argsPy));
-            };
-        }
-        default:
-        {
-            throw Sk.ffi.assertionError("20be4da2-63e8-4fff-9359-7ab46eba4702 " + Sk.ffi.getType(valuePy));
-        }
+      }
+    case Sk.ffi.PyType.INT:
+    case Sk.ffi.PyType.LONG:
+      {
+        return Sk.builtin.asnum$(valuePy);
+      }
+    case Sk.ffi.PyType.INSTANCE:
+      {
+        // TODO: This is being exercised, but we should assert the tp$name.
+        // I think the pattern here suggests that we have a Sk.builtin.something
+        return valuePy.v;
+      }
+    case Sk.ffi.PyType.FUNREF:
+      {
+        return valuePy.v;
+      }
+    case Sk.ffi.PyType.UNDEFINED:
+      {
+        return undefined;
+      }
+    case Sk.ffi.PyType.NONE:
+      {
+        return null;
+      }
+    case Sk.ffi.PyType.FUNCTION: {
+      return function() {
+        var argsJs = Array.prototype.slice.call(arguments, 0);
+        var argsPy = argsJs.map(function(argJs) {return Sk.ffi.remapToPy(argJs);});
+        return Sk.ffi.remapToJs(Sk.misceval.apply(valuePy, undefined, undefined, undefined, argsPy));
+      };
     }
+    default:
+      {
+        throw Sk.ffi.assertionError('20be4da2-63e8-4fff-9359-7ab46eba4702 ' + Sk.ffi.getType(valuePy));
+      }
+  }
 };
-goog.exportSymbol("Sk.ffi.remapToJs", Sk.ffi.remapToJs);
+goog.exportSymbol('Sk.ffi.remapToJs', Sk.ffi.remapToJs);
+
 
 /**
  *
  * @param {Object} valuePy The Python value containing the custom JavaScript object.
+ *
+ * @return {Object}
  */
-Sk.ffi.customToJs = function(valuePy)
-{
-    return valuePy.custom;
-}
-goog.exportSymbol("Sk.ffi.customToJs", Sk.ffi.customToJs);
+Sk.ffi.customToJs = function(valuePy) {
+  return valuePy.custom;
+};
+goog.exportSymbol('Sk.ffi.customToJs', Sk.ffi.customToJs);
+
+
+/**
+ * @param {?} globals
+ * @param {?} func
+ * @param {string} name
+ * @param {?} bases
+ *
+ * @return {?}
+ */
+Sk.ffi.buildClass = function(globals, func, name, bases) {
+  return Sk.misceval.buildClass(globals, func, name, bases);
+};
+goog.exportSymbol('Sk.ffi.buildClass', Sk.ffi.buildClass);
+
 
 /**
  *
- */
-Sk.ffi.buildClass = function(globals, func, name, bases)
-{
-    return Sk.misceval.buildClass(globals, func, name, bases);
-};
-goog.exportSymbol("Sk.ffi.buildClass", Sk.ffi.buildClass);
-
-/**
- * 
  * @param {Object} func the thing to call
- * @param {...*} args stuff to pass it
+ * @param {...*} var_args stuff to pass it
+ *
+ * @return {?}
  */
-Sk.ffi.callsim = function(func, args)
-{
-    var args = Array.prototype.slice.call(arguments, 1);
-    return Sk.misceval.apply(func, undefined, undefined, undefined, args);
+Sk.ffi.callsim = function(func, var_args) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return Sk.misceval.apply(func, undefined, undefined, undefined, args);
 };
-goog.exportSymbol("Sk.ffi.callsim", Sk.ffi.callsim);
+goog.exportSymbol('Sk.ffi.callsim', Sk.ffi.callsim);
+
 
 /**
  * Convenience function for implementing callable attributes.
  *
  * @param {Object} mod The module object.
  * @param {string} nameJs The name of the attribute.
- * @param {function()} functionJs A JavaScript function in which the arguments and return type are in the Python value space.
+ * @param {function()} functionJs A JavaScript function in which the
+ * arguments and return type are in the Python value space.
+ *
+ * @return {?}
  */
-Sk.ffi.callableToPy = function(mod, nameJs, functionJs)
-{
-    return Sk.ffi.callsim(Sk.ffi.buildClass(mod, function($gbl, $loc)
-    {
-        $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {Sk.ffi.referenceToPy(null, nameJs, null, selfPy);});
-        $loc.__call__ = Sk.ffi.functionPy(functionJs);
-        $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {return Sk.builtin.stringToPy(nameJs);});
-        $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {return Sk.builtin.stringToPy(nameJs);});
-    }, nameJs, []));
+Sk.ffi.callableToPy = function(mod, nameJs, functionJs) {
+  return Sk.ffi.callsim(Sk.ffi.buildClass(mod, function($gbl, $loc) {
+    $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {Sk.ffi.referenceToPy(null, nameJs, null, selfPy);});
+    $loc.__call__ = Sk.ffi.functionPy(functionJs);
+    $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {return Sk.builtin.stringToPy(nameJs);});
+    $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {return Sk.builtin.stringToPy(nameJs);});
+  }, nameJs, []));
 };
-goog.exportSymbol("Sk.ffi.callableToPy", Sk.ffi.callableToPy);
+goog.exportSymbol('Sk.ffi.callableToPy', Sk.ffi.callableToPy);
+
 
 /**
  * @param {Object} objectPy The Python object containing the attribute.
  * @param {string} name The name of the attribute.
+ *
+ * @return {?}
  */
-Sk.ffi.gattr = function(objectPy, name)
-{
-    return Sk.abstr.gattr(objectPy, name);
-}
-goog.exportSymbol("Sk.ffi.gattr", Sk.ffi.gattr);
+Sk.ffi.gattr = function(objectPy, name) {
+  return Sk.abstr.gattr(objectPy, name);
+};
+goog.exportSymbol('Sk.ffi.gattr', Sk.ffi.gattr);
+
 
 /**
  * @param {Object} objectPy The Python object containing the attribute.
  * @param {string} name The name of the attribute.
+ * @param {?} valuePy
+ *
+ * @return {?}
  */
-Sk.ffi.sattr = function(objectPy, name, valuePy)
-{
-    return Sk.abstr.sattr(objectPy, name, valuePy);
-}
-goog.exportSymbol("Sk.ffi.sattr", Sk.ffi.sattr);
+Sk.ffi.sattr = function(objectPy, name, valuePy) {
+  return Sk.abstr.sattr(objectPy, name, valuePy);
+};
+goog.exportSymbol('Sk.ffi.sattr', Sk.ffi.sattr);
+
 
 /**
- * @param {...*} args
+ * @param {...*} var_args
+ *
  * @return {!Sk.builtin.IndexError}
  */
-Sk.ffi.indexError = function(args)
-{
-    return new Sk.builtin.IndexError(args);
+Sk.ffi.indexError = function(var_args) {
+  return new Sk.builtin.IndexError(var_args);
 };
-goog.exportSymbol("Sk.ffi.indexError", Sk.ffi.indexError);
+goog.exportSymbol('Sk.ffi.indexError', Sk.ffi.indexError);
+
 
 /**
- * @param {...*} args
+ * @param {...*} var_args
  * @return {!Sk.builtin.ValueError}
  */
-Sk.ffi.valueError = function(args)
-{
-    return new Sk.builtin.ValueError(args);
+Sk.ffi.valueError = function(var_args) {
+  return new Sk.builtin.ValueError(var_args);
 };
-goog.exportSymbol("Sk.ffi.valueError", Sk.ffi.valueError);
+goog.exportSymbol('Sk.ffi.valueError', Sk.ffi.valueError);
+
 
 /**
  * Fluid API for building messages.
@@ -16311,196 +16415,142 @@ goog.exportSymbol("Sk.ffi.valueError", Sk.ffi.valueError);
  *   }
  * }
  */
-Sk.ffi.err =
-{
-    /**
-     * @param {string} name The name of the attribute.
-     * @return
-     * {
-     *   {
-     *     isNotGetableOnType: function(string): Sk.ffi.AttributeError,
-     *     isNotSetableOnType: function(string): Sk.ffi.AttributeError
-     *   }
-     * }
-     */
-    attribute: function(name) {
+Sk.ffi.err = {
+  /**
+   * @param {string} name The name of the attribute.
+   * @return
+   * {
+   *   {
+   *     isNotGetableOnType: function(string): Sk.ffi.AttributeError,
+   *     isNotSetableOnType: function(string): Sk.ffi.AttributeError
+   *   }
+   * }
+   */
+  attribute: function(name) {
+    return {
+      /**
+         * @param {Sk.ffi.UnionType} targetType The name of the type.
+         * @return {Sk.ffi.AttributeError}
+         */
+      isNotGetableOnType: function(targetType) {
+        return Sk.ffi.attributeError(name + ' is not an attribute of ' + Sk.ffi.typeString(targetType));
+      },
+      /**
+         * @param {string} targetType The name of the type.
+         * @return {Sk.ffi.AttributeError}
+         */
+      isNotSetableOnType: function(targetType) {
+        return Sk.ffi.attributeError(name + ' is not an attribute of ' + Sk.ffi.typeString(targetType));
+      }
+    };
+  },
+  /**
+   * @param {string} name The name of the argument.
+   * @return
+   * {
+   *   {
+   *     inFunction: function(string):{
+   *       mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
+   *     },
+   *     mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
+   *   }
+   * }
+   */
+  argument: function(name) {
+    return {
+      /**
+         * @param {string} functionName The name of the function.
+         * @return {{mustHaveType: Sk.ffi.FunctionReturningTypeError}}
+         */
+      inFunction: function(functionName) {
         return {
-            /**
-             * @param {Sk.ffi.UnionType} targetType The name of the type.
-             * @return {Sk.ffi.AttributeError}
-             */
-            isNotGetableOnType: function(targetType) {
-                return Sk.ffi.attributeError(name + " is not an attribute of " + Sk.ffi.typeString(targetType));
-            },
-            /**
-             * @param {string} targetType The name of the type.
-             * @return {Sk.ffi.AttributeError}
-             */
-            isNotSetableOnType: function(targetType) {
-                return Sk.ffi.attributeError(name + " is not an attribute of " + Sk.ffi.typeString(targetType));
-            }
+          /**
+                 * @param {Sk.ffi.UnionType} expectedType The name of the type.
+                 * @return {Sk.ffi.TypeError}
+                 */
+          mustHaveType: function(expectedType) {
+            return Sk.ffi.typeError("Expecting argument '" + name + "' in function '" + functionName + "' to have type " + Sk.ffi.typeString(expectedType) + '.');
+          }
         };
-    },
-    /**
-     * @param {string} name The name of the argument.
-     * @return
-     * {
-     *   {
-     *     inFunction: function(string):{
-     *       mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
-     *     },
-     *     mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
-     *   }
-     * }
-     */
-    argument: function(name) {
-        return {
-            /**
-             * @param {string} functionName The name of the function.
-             * @return {{mustHaveType: Sk.ffi.FunctionReturningTypeError}}
-             */
-            inFunction: function(functionName) {
-                return {
-                    /**
-                     * @param {Sk.ffi.UnionType} expectedType The name of the type.
-                     * @return {Sk.ffi.TypeError}
-                     */
-                    mustHaveType: function(expectedType) {
-                        return Sk.ffi.typeError("Expecting argument '" + name + "' in function '" + functionName + "' to have type " + Sk.ffi.typeString(expectedType) + ".");
-                    }
-                };
-            },
-            /**
-             * @param {Sk.ffi.UnionType} expectedType The name of the type.
-             * @return {Sk.ffi.TypeError}
-             */
-            mustHaveType: function(expectedType) {
-                return Sk.ffi.typeError(name + " must be a " + Sk.ffi.typeString(expectedType));
-            }
-        };
-    },
-    /**
-     * @param {string} name The name of the operand.
-     * @return
-     * {
-     *   {
-     *     toOperator: function(string):{
-     *       mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
-     *     }
-     *   }
-     * }
-     */
-    operand: function(name) {
-        return {
-            /**
-             * @param {string} opName The name of the function.
-             * @return {{mustHaveType: Sk.ffi.FunctionReturningTypeError}}
-             */
-            toOperation: function(opName) {
-                return {
-                    /**
-                     * @param {Sk.ffi.UnionType} expectedType The name of the type.
-                     * @return {Sk.ffi.TypeError}
-                     */
-                    mustHaveType: function(expectedType) {
-                        return Sk.ffi.typeError("Expecting operand '" + name + "' to operation '" + opName + "' to have type " + Sk.ffi.typeString(expectedType) + ".");
-                    }
-                };
-            }
-        };
-    }
-}
-goog.exportSymbol("Sk.ffi.err", Sk.ffi.err);
-
-/**
- * @deprecated Use Sk.ffi.remapToJs
+      },
+      /**
+         * @param {Sk.ffi.UnionType} expectedType The name of the type.
+         * @return {Sk.ffi.TypeError}
+         */
+      mustHaveType: function(expectedType) {
+        return Sk.ffi.typeError(name + ' must be a ' + Sk.ffi.typeString(expectedType));
+      }
+    };
+  },
+  /**
+ * @param {string} name The name of the operand.
+ * @return
+ * {
+ *   {
+ *     toOperator: function(string):{
+ *       mustHaveType: function(Sk.ffi.UnionType): Sk.ffi.TypeError
+ *     }
+ *   }
+ * }
  */
-Sk.ffi.callback = function(functionPy) { return Sk.ffi.remapToJs(functionPy); };
-goog.exportSymbol("Sk.ffi.callback", Sk.ffi.callback);
-
-/**
- * @deprecated Use Sk.ffi.referenceToPy (carefully).
- */
-Sk.ffi.stdwrap = function(type, towrap)
-{
-    var inst = new type();
-    inst['v'] = towrap;
-    return inst;
+  operand: function(name) {
+    return {
+      /**
+         * @param {string} opName The name of the function.
+         * @return {{mustHaveType: Sk.ffi.FunctionReturningTypeError}}
+         */
+      toOperation: function(opName) {
+        return {
+          /**
+                 * @param {Sk.ffi.UnionType} expectedType The name of the type.
+                 * @return {Sk.ffi.TypeError}
+                 */
+          mustHaveType: function(expectedType) {
+            return Sk.ffi.typeError("Expecting operand '" + name + "' to operation '" + opName + "' to have type " + Sk.ffi.typeString(expectedType) + '.');
+          }
+        };
+      }
+    };
+  }
 };
-goog.exportSymbol("Sk.ffi.stdwrap", Sk.ffi.stdwrap);
+goog.exportSymbol('Sk.ffi.err', Sk.ffi.err);
 
-/**
- * @deprecated Use Sk.ffi.remapToPy
- */
-Sk.ffi.basicwrap = function(obj) { return Sk.ffi.remapToPy(obj); };
-goog.exportSymbol("Sk.ffi.basicwrap", Sk.ffi.basicwrap);
 
-/**
- * @deprecated Use Sk.ffi.remapToJs
- */
-Sk.ffi.unwrapo = function(obj) { return Sk.ffi.remapToJs(obj); };
-goog.exportSymbol("Sk.ffi.unwrapo", Sk.ffi.unwrapo);
-
-/**
- * @deprecated Use Sk.ffi.remapToJs
- */
-Sk.ffi.unwrapn = function(obj) { return Sk.ffi.remapToJs(obj); };
-goog.exportSymbol("Sk.ffi.unwrapn", Sk.ffi.unwrapn);
 
 /**
  * @constructor
  * @param {Object} objectJs The JavaScript object.
  */
-Sk.ffi.ObjectPy = function(objectJs)
-{
-    this.v = objectJs;
-}
+Sk.ffi.ObjectPy = function(objectJs) {
+  this.v = objectJs;
+};
+
 
 /**
  * @param {string} name The name of the attribute.
+ *
+ * @return {?}
  */
-Sk.ffi.ObjectPy.prototype.tp$getattr = function(name)
-{
+Sk.ffi.ObjectPy.prototype.tp$getattr = function(name) {
   goog.asserts.assertString(name);
-  goog.asserts.assert(this.ob$type !== undefined, "object has no ob$type!");
+  goog.asserts.assert(this.ob$type !== undefined, 'object has no ob$type!');
   var selfJs = this.v;
   var propJs = this.v[name];
-  switch(typeof propJs)
+  switch (typeof propJs)
   {
     case 'function':
-    {
-//    return new Sk.builtin.func(propJs);
-      return new Sk.ffi.CallablePy(this.v, name);
-      /*
-      return Sk.ffi.callableToPy(mod, name, function(methodPy) {
-        Sk.ffi.checkFunctionArgs(name, arguments, 1);
-        var argumentsPy = Array.prototype.slice.call(arguments, 1);
-        var argumentsJs = [];
-        for (var i = 0; i < argumentsPy.length; ++i)
-        {
-          argumentsJs.push(Sk.ffi.remapToJs(argumentsPy[i]));
-        }
-        if (isConstructorFunction(name)) {
-          // Do I have to simulate the 'new' keyword? Maybe not!
-          var valueJs = new propJs(argumentsJs);
-          return Sk.ffi.callsim(mod[JS_WRAP_CLASS], Sk.ffi.referenceToPy(valueJs, name));
-        }
-        else {
-          var valueJs = propJs.apply(selfJs, argumentsJs);
-          return remapToPy(valueJs, className);
-        }
-      });
-      */
-    }
+      {
+        return new Sk.ffi.CallablePy(this.v, name);
+      }
     case 'number':
-    {
-      return Sk.ffi.numberToFloatPy(propJs);
-    }
+      {
+        return Sk.ffi.numberToFloatPy(propJs);
+      }
     case 'object':
-    {
-      // It may be that JavaScript clients have added methods to the prototype.
-      // e.g. d3 added append to an array.
-      return new Sk.ffi.ObjectPy(propJs);
+      {
+        // It may be that JavaScript clients have added methods to the prototype.
+        // e.g. d3 added append to an array.
+        return new Sk.ffi.ObjectPy(propJs);
       /*
       if (Object.prototype.toString.apply(propJs) === '[object Array]')
       {
@@ -16517,52 +16567,57 @@ Sk.ffi.ObjectPy.prototype.tp$getattr = function(name)
         return new Sk.ffi.ObjectPy(propJs);
       }
       */
-    }
+      }
     case 'boolean':
-    {
-      return Sk.ffi.booleanToPy(propJs);
-    }
-    case 'undefined':
-    {
-      switch(name)
       {
-        case 'append':
+        return Sk.ffi.booleanToPy(propJs);
+      }
+    case 'undefined':
+      {
+        switch (name)
         {
-          return new Sk.builtin.func(function(itemPy)
-          {
-            Sk.builtin.pyCheckArgs("append", arguments, 1, 1);
-            selfJs.push(Sk.ffi.remapToJs(itemPy));
-            return Sk.builtin.none.none$;
-          });
-        }
-        default:
-        {
-          return Sk.builtin.none.none$;
+          case 'append':
+            {
+              return new Sk.builtin.func(function(itemPy)
+                  {
+                    Sk.builtin.pyCheckArgs('append', arguments, 1, 1);
+                    selfJs.push(Sk.ffi.remapToJs(itemPy));
+                    return Sk.builtin.none.none$;
+                  });
+            }
+          default:
+            {
+              return Sk.builtin.none.none$;
+            }
         }
       }
-    }
     default:
-    {
-      goog.asserts.assertString(propJs);
-      return Sk.builtin.stringToPy(propJs);
-    }
+      {
+        goog.asserts.assertString(propJs);
+        return Sk.builtin.stringToPy(propJs);
+      }
   }
 };
 
-/**
- * @param {string} name The name of the attribute.
- */
-Sk.ffi.ObjectPy.prototype.tp$setattr = function(name, valuePy)
-{
-    goog.asserts.assert(typeof name === "string");
-    this.v[name] = Sk.ffi.remapToJs(valuePy);
-};
 
 /**
+ * @param {string} name The name of the attribute.
+ * @param {?} valuePy
  *
+ * @return {undefined}
  */
-Sk.ffi.ObjectPy.prototype.mp$subscript = function(index)
-{
+Sk.ffi.ObjectPy.prototype.tp$setattr = function(name, valuePy) {
+  goog.asserts.assert(typeof name === 'string');
+  this.v[name] = Sk.ffi.remapToJs(valuePy);
+};
+
+
+/**
+ * @param {?} index
+ *
+ * @return {?}
+ */
+Sk.ffi.ObjectPy.prototype.mp$subscript = function(index) {
   if (!Array.isArray(this.v))
   {
     throw new Sk.builtin.TypeError("'" + Sk.ffi.typeName(this) + "' object does not support indexing.");
@@ -16570,17 +16625,17 @@ Sk.ffi.ObjectPy.prototype.mp$subscript = function(index)
   if (Sk.misceval.isIndex(index))
   {
     var i = Sk.misceval.asIndex(index);
-    if (i !== undefined) 
+    if (i !== undefined)
     {
       if (i < 0)
       {
-          i = this.v.length + i;
-      } 
+        i = this.v.length + i;
+      }
       if (i < 0 || i >= this.v.length)
       {
-        throw new Sk.builtin.IndexError("list index out of range");
+        throw new Sk.builtin.IndexError('list index out of range');
       }
-      return this.v[i]
+      return Sk.ffi.remapToPy(this.v[i]);
     }
     else
     {
@@ -16593,64 +16648,113 @@ Sk.ffi.ObjectPy.prototype.mp$subscript = function(index)
     index.sssiter$(this, function(i, wrt) {ret.push(wrt.v[i]);});
     return new Sk.builtin.list(ret);
   }
-  throw new Sk.builtin.TypeError("list indices must be integers, not " + Sk.ffi.typeName(index));
+  throw new Sk.builtin.TypeError('list indices must be integers, not ' + Sk.ffi.typeName(index));
 };
 
-Sk.ffi.ObjectPy.prototype.tp$iter = function()
-{
-    var ret =
-    {
+
+/**
+ *
+ * @return {{tp$iter:?,$obj:?,$index:number,tp$iternext:?}}
+ */
+Sk.ffi.ObjectPy.prototype.tp$iter = function() {
+  var ret =
+      {
         tp$iter: function() { return ret; },
         $obj: this,
         $index: 0,
         tp$iternext: function()
         {
-            // todo; StopIteration
-            if (ret.$index >= ret.$obj.v.length) return undefined;
-            return Sk.ffi.remapToPy(ret.$obj.v[ret.$index++]);
+          // todo; StopIteration
+          if (ret.$index >= ret.$obj.v.length) return undefined;
+          return Sk.ffi.remapToPy(ret.$obj.v[ret.$index++]);
         }
-    };
-    return ret;
+      };
+  return ret;
+};
+
+
+/**
+ * @return {number}
+ */
+Sk.ffi.ObjectPy.prototype.sq$length = function() {
+  if (!Array.isArray(this.v))
+  {
+    throw new Sk.builtin.TypeError("'" + Sk.ffi.typeName(this) + "' object does not support len().");
+  }
+  return this.v.length;
 };
 
 
 /**
  * We will masquerade as a Python object created using object().
  */
-Sk.ffi.ObjectPy.prototype.tp$name = "ObjectPy";
+Sk.ffi.ObjectPy.prototype.tp$name = 'ObjectPy';
+
+
+/**
+ *
+ */
 Sk.ffi.ObjectPy.prototype.ob$type = Sk.builtin.type.makeIntoTypeObj('ObjectPy', Sk.ffi.ObjectPy);
 
-Sk.ffi.ObjectPy.prototype.tp$str = function()
-{
-    return Sk.builtin.stringToPy("" + this.v);
+
+/**
+ * @return {Sk.builtin.StringPy}
+ */
+Sk.ffi.ObjectPy.prototype.tp$str = function() {
+  return Sk.builtin.stringToPy('' + this.v);
 };
 
-Sk.ffi.ObjectPy.prototype.tp$repr = function()
-{
-    return Sk.builtin.stringToPy("" + this.v);
+
+/**
+ * @return {Sk.builtin.StringPy}
+ */
+Sk.ffi.ObjectPy.prototype.tp$repr = function() {
+  return Sk.builtin.stringToPy('' + this.v);
 };
 
-Sk.ffi.ObjectPy.prototype.nb$add = function(otherPy)
-{
-    return Sk.ffi.remapToPy(this.v.add(Sk.ffi.remapToJs(otherPy)));
-}
 
-Sk.ffi.ObjectPy.prototype.nb$sub = function(otherPy)
-{
-    return Sk.ffi.remapToPy(this.v.sub(Sk.ffi.remapToJs(otherPy)));
-}
+/**
+ * @param {?} otherPy
+ *
+ * @return {?}
+ */
+Sk.ffi.ObjectPy.prototype.nb$add = function(otherPy) {
+  return Sk.ffi.remapToPy(this.v.add(Sk.ffi.remapToJs(otherPy)));
+};
 
-Sk.ffi.ObjectPy.prototype.nb$mul = function(otherPy)
-{
-    return Sk.ffi.remapToPy(this.v.mul(Sk.ffi.remapToJs(otherPy)));
-}
 
-Sk.ffi.ObjectPy.prototype.nb$div = function(otherPy)
-{
-    return Sk.ffi.remapToPy(this.v.div(Sk.ffi.remapToJs(otherPy)));
-}
+/**
+ * @param {?} otherPy
+ *
+ * @return {?}
+ */
+Sk.ffi.ObjectPy.prototype.nb$sub = function(otherPy) {
+  return Sk.ffi.remapToPy(this.v.sub(Sk.ffi.remapToJs(otherPy)));
+};
 
-goog.exportSymbol("Sk.ffi.ObjectPy", Sk.ffi.ObjectPy);
+
+/**
+ * @param {?} otherPy
+ *
+ * @return {?}
+ */
+Sk.ffi.ObjectPy.prototype.nb$mul = function(otherPy) {
+  return Sk.ffi.remapToPy(this.v.mul(Sk.ffi.remapToJs(otherPy)));
+};
+
+
+/**
+ * @param {?} otherPy
+ *
+ * @return {?}
+ */
+Sk.ffi.ObjectPy.prototype.nb$div = function(otherPy) {
+  return Sk.ffi.remapToPy(this.v.div(Sk.ffi.remapToJs(otherPy)));
+};
+
+goog.exportSymbol('Sk.ffi.ObjectPy', Sk.ffi.ObjectPy);
+
+
 
 /**
  * FIXME: Do I really need a new class here. What about using ObjectPy?
@@ -16659,17 +16763,19 @@ goog.exportSymbol("Sk.ffi.ObjectPy", Sk.ffi.ObjectPy);
  * @param {Object} objectJs The JavaScript object.
  * @param {string} name The name of the function to call.
  */
-Sk.ffi.CallablePy = function(objectJs, name)
-{
+Sk.ffi.CallablePy = function(objectJs, name) {
   this.v = objectJs;
   this.name = name;
-}
+};
+
 
 /**
  * @param {Array.<Object>} args A JavaScript array containing Py objects!
+ * @param {?} kw
+ *
+ * @return {?}
  */
-Sk.ffi.CallablePy.prototype.tp$call = function(args, kw)
-{
+Sk.ffi.CallablePy.prototype.tp$call = function(args, kw) {
   var objectJs = this.v;
   var name = this.name;
   var propJs = objectJs[name];
@@ -16677,11 +16783,15 @@ Sk.ffi.CallablePy.prototype.tp$call = function(args, kw)
   /**
    * If it's a constructor function then we must call it using the new keyword.
    * The only clue we have got is the naming convention.
+   *
+   * @param {string} name
+   *
+   * @return {boolean}
    */
   function isConstructorFunction(name)
   {
     // Hacks for JSXGraph.
-    if (name === "Value" || name === "X" || name === "Y")
+    if (name === 'Value' || name === 'X' || name === 'Y')
     {
       return false;
     }
@@ -16698,144 +16808,157 @@ Sk.ffi.CallablePy.prototype.tp$call = function(args, kw)
   if (isConstructorFunction(name))
   {
     var createObject = function()
-    {
-        var that = Object.create(propJs.prototype);
-        // Invoke the constructor function, binding this to the new object.
-        var other = propJs.apply(that, argsJs);
-        // If the return value isn't an object, substitute the new object.
-        var valueJs = (typeof other === 'object' && other) || that;
-        return Sk.ffi.remapToPy(valueJs);
-    }
+        {
+      var that = Object.create(propJs.prototype);
+      // Invoke the constructor function, binding this to the new object.
+      var other = propJs.apply(that, argsJs);
+      // If the return value isn't an object, substitute the new object.
+      var valueJs = (typeof other === 'object' && other) || that;
+      return Sk.ffi.remapToPy(valueJs);
+    };
     try
     {
-        switch(argsJs.length)
-        {
-            case 0:
-            {
-                var valueJs = new propJs();
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 1:
-            {
-                var valueJs = new propJs(argsJs[0]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 2:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 3:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 4:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 5:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 6:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4], argsJs[5]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            case 7:
-            {
-                var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4], argsJs[5], argsJs[6]);
-                return Sk.ffi.remapToPy(valueJs);
-            }
-            default:
-            {
-                return createObject();
-            }
-        }
+      switch (argsJs.length)
+      {
+        case 0:
+          {
+            var valueJs = new propJs();
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 1:
+          {
+            var valueJs = new propJs(argsJs[0]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 2:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 3:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 4:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 5:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 6:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4], argsJs[5]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        case 7:
+          {
+            var valueJs = new propJs(argsJs[0], argsJs[1], argsJs[2], argsJs[3], argsJs[4], argsJs[5], argsJs[6]);
+            return Sk.ffi.remapToPy(valueJs);
+          }
+        default:
+          {
+            return createObject();
+          }
+      }
     }
-    catch(e)
+    catch (e)
     {
-        return createObject();
+      return createObject();
     }
   }
   else
   {
     return Sk.ffi.remapToPy(propJs.apply(objectJs, argsJs));
   }
-}
+};
+
 
 /**
  * @param {Sk.builtin.NumberPy} intPy
+ *
  * @return {Sk.builtin.lng}
  */
-Sk.ffi.promoteIntToLong = function(intPy)
-{
-    goog.asserts.assert(Sk.ffi.isInt(intPy));
-    // TODO: Optimize. We know that the argument is the internal int representation.
-    var valueJs = Sk.ffi.remapToJs(intPy);
-    goog.asserts.assertNumber(valueJs);
-    return new Sk.builtin.lng(valueJs)
+Sk.ffi.promoteIntToLong = function(intPy) {
+  goog.asserts.assert(Sk.ffi.isInt(intPy));
+  // TODO: Optimize. We know that the argument is the internal int representation.
+  var valueJs = Sk.ffi.remapToJs(intPy);
+  goog.asserts.assertNumber(valueJs);
+  return new Sk.builtin.lng(valueJs);
 };
-goog.exportSymbol("Sk.ffi.promoteIntToLong", Sk.ffi.promoteIntToLong);
+goog.exportSymbol('Sk.ffi.promoteIntToLong', Sk.ffi.promoteIntToLong);
+
 
 /**
  * Used to create longs in transformer, respects 0x, 0o, 0b, etc.
+ *
  * @param {string} s
  * @param {number} radix
+ *
  * @return {Sk.builtin.biginteger|Sk.builtin.lng}
  */
-Sk.ffi.longFromString = function(s, radix)
-{
-    goog.asserts.assertString(s, "s must be a string");
-//  goog.asserts.assertNumber(radix, "radix must be a number");
+Sk.ffi.longFromString = function(s, radix) {
+  goog.asserts.assertString(s, 's must be a string');
+  //  goog.asserts.assertNumber(radix, "radix must be a number");
 
-    // l/L are valid digits with radix >= 22
-    // goog.asserts.assert(s.charAt(s.length - 1) !== "L" && s.charAt(s.length - 1) !== 'l', "L suffix should be removed before here");
+  // l/L are valid digits with radix >= 22
+  // goog.asserts.assert(s.charAt(s.length - 1) !== "L" && s.charAt(s.length - 1) !== 'l', "L suffix should be removed before here");
 
-    /**
-     * @param {string} s
-     * @param {number} radix
-     * @return {Sk.builtin.biginteger}
-     */
-    var parser = function (s, radix)
+  /**
+   * @param {string} s
+   * @param {number} radix
+   * @return {Sk.builtin.biginteger}
+   */
+  var parser = function(s, radix) {
+    if (radix == 10)
     {
-        if (radix == 10)
-        {
-            return new Sk.builtin.biginteger(s);
-        }
-        else
-        {
-            return new Sk.builtin.biginteger(s, radix);
-        }
-    };
-
-    /**
-     * @param {Sk.builtin.biginteger} x
-     * @return {Sk.builtin.biginteger}
-     */
-    var negater = function(x)
+      return new Sk.builtin.biginteger(s);
+    }
+    else
     {
-        return x.negate();
-    };
+      return new Sk.builtin.biginteger(s, radix);
+    }
+  };
 
-    /**
-     * @const
-     */
-    var biginteger = Sk.str2number(s, radix, parser, negater, "long");
+  /**
+   * @param {Sk.builtin.biginteger} x
+   *
+   * @return {Sk.builtin.biginteger}
+   */
+  var negater = function(x) {
+    return x.negate();
+  };
 
-    return new Sk.builtin.lng(biginteger);
+  /**
+   * @const
+   */
+  var biginteger = Sk.str2number(s, radix, parser, negater, 'long');
+
+  return new Sk.builtin.lng(biginteger);
 };
-goog.exportSymbol("Sk.ffi.longFromString", Sk.ffi.longFromString);
+goog.exportSymbol('Sk.ffi.longFromString', Sk.ffi.longFromString);
+
 
 // TODO: These loaded here to prevent circularity issues.
-// Can we use Google Closure to help here? 
+// Can we use Google Closure to help here?
+/**
+ * @const
+ * @type {Sk.builtin.lng}
+ */
 Sk.ffi.MAX_INT = new Sk.builtin.lng(+Sk.builtin.lng.threshold$);
+goog.exportSymbol('Sk.ffi.MIN_INT', Sk.ffi.MIN_INT);
+
+
+/**
+ * @const
+ * @type {Sk.builtin.lng}
+ */
 Sk.ffi.MIN_INT = new Sk.builtin.lng(-Sk.builtin.lng.threshold$);
-goog.exportSymbol("Sk.ffi.MIN_INT", Sk.ffi.MIN_INT);
-goog.exportSymbol("Sk.ffi.MAX_INT", Sk.ffi.MAX_INT);
+goog.exportSymbol('Sk.ffi.MAX_INT', Sk.ffi.MAX_INT);
 Sk.ffh = Sk.ffh || {};
 
 var SPECIAL_METHOD_ADD     = '__add__';
@@ -30235,1640 +30358,1654 @@ return Sk.ffi.callsim(Sk.ffi.buildClass(mod, function($gbl, $loc) {
   });
 }, METHOD_REMOVE_EVENT_LISTENER, []));
 };
-Sk.geometry = Sk.geometry || {};
+goog.provide('Sk.geometry');
+
+
 /**
  * @const
  * @type {string}
  */
-Sk.geometry.ARROW_BUILDER                   = "ArrowBuilder";
+Sk.geometry.ARROW_BUILDER = 'ArrowBuilder';
+
+
 /**
  * @const
  * @type {string}
  */
-Sk.geometry.CYLINDER_BUILDER                = "CylinderBuilder";
+Sk.geometry.CYLINDER_BUILDER = 'CylinderBuilder';
+
+
 /**
  * @const
  * @type {string}
  */
-Sk.geometry.VORTEX_BUILDER                  = "VortexBuilder";
+Sk.geometry.VORTEX_BUILDER = 'VortexBuilder';
+
+
 /**
  * @const
  * @type {string}
  */
-Sk.geometry.VOLUME_BUILDER                  = "VolumeBuilder";
+Sk.geometry.VOLUME_BUILDER = 'VolumeBuilder';
+
+
 /**
  * @const
  * @type {string}
  */
-Sk.geometry.VOLUME                          = "Volume";
+Sk.geometry.VOLUME = 'Volume';
 
 (function() {
-/**
+  /**
 * @param {string} moduleName The name of the module.
-*/
-Sk.builtin.defineGeometry = function(mod, THREE, moduleName) {
-Sk.ffi.checkFunctionArgs("defineGeometry", arguments, 3, 3);
-/**
- * A Euclidean space described by Cartesian coordinates with 3 dimensions.
- *
- * @const
- * @type {string}
- */
-var CARTESIAN_SPACE                 = "CartesianSpace";
-/**
- * @const
- * @type {string}
- */
-var EUCLIDEAN_3                     = "Euclidean3";
-/**
- * @const
- * @type {string}
- */
-var COLOR                           = "Color";
-/**
- * @const
- * @type {string}
- */
-var SCENE                           = "Scene";
-/**
- * @const
- * @type {string}
- */
-var PERSPECTIVE_CAMERA              = "PerspectiveCamera";
-/**
- * @const
- * @type {string}
- */
-var CANVAS_RENDERER                 = "CanvasRenderer";
-/**
- * @const
- * @type {string}
- */
-var WEBGL_RENDERER                  = "WebGLRenderer";
-/**
- * @const
- * @type {string}
- */
-var PROP_ATTITUDE                   = "attitude";
-/**
- * @const
- * @type {string}
- */
-var PROP_AXIS                       = "axis";
-/**
- * @const
- * @type {string}
- */
-var PROP_ORIGIN                     = "origin";
-/**
- * @const
- * @type {string}
- */
-var PROP_ORIENTATION                = "orientation";
-/**
- * @const
- * @type {string}
- */
-var PROP_CAMERA                     = "camera";
-/**
- * @const
- * @type {string}
- */
-var PROP_RENDERER                   = "renderer";
-/**
- * @const
- * @type {string}
- */
-var PROP_VERTICES                   = "vertices";
-/**
- * @const
- * @type {string}
- */
-var PROP_SCENE                      = "scene";
-/**
- * @const
- * @type {string}
- */
-var PROP_COLOR                      = "color";
-/**
- * @const
- * @type {string}
- */
-var PROP_DEPTH                      = "depth";
-/**
- * @const
- * @type {string}
- */
-var PROP_HEIGHT                     = "height";
-/**
- * @const
- * @type {string}
- */
-var PROP_MAGNITUDE                  = "magnitude";
-/**
- * @const
- * @type {string}
- */
-var PROP_MATERIAL                   = "material";
-/**
- * @const
- * @type {string}
- */
-var PROP_NAME                       = "name";
-/**
- * @const
- * @type {string}
- */
-var PROP_RADIUS                     = "radius";
-/**
- * @const
- * @type {string}
- */
-var PROP_RADIUS_TOP                 = "radiusTop";
-/**
- * @const
- * @type {string}
- */
-var PROP_RADIUS_BOTTOM              = "radiusBottom";
-/**
- * @const
- * @type {string}
- */
-var PROP_SCALE                      = "scale";
-/**
- * @const
- * @type {string}
- */
-var PROP_SEGMENTS                   = "segments";
-/**
- * @const
- * @type {string}
- */
-var PROP_VOLUME                     = "volume";
-/**
- * @const
- * @type {string}
- */
-var PROP_WIDTH                      = "width";
-/**
- * @const
- * @type {string}
- */
-var PROP_WIREFRAME                  = "wireframe";
-/**
- * @const
- * @type {string}
- */
-var PROP_WIREFRAME_LINEWIDTH        = "wireframeLinewidth";
-/**
- * @const
- * @type {string}
- */
-var PROP_POSITION                   = "position";
-/**
- * @const
- * @type {string}
- */
-var PROP_UP                         = "up";
-/**
- * @const
- * @type {string}
- */
-var METHOD_ADD                      = "add";
-/**
- * @const
- * @type {string}
- */
-var METHOD_BUILD                    = "build";
-/**
- * @const
- * @type {string}
- */
-var METHOD_LOOK_AT                  = "lookAt";
-/**
- * @const
- * @type {string}
- */
-var METHOD_NORMALIZE                = "normalize";
-/**
- * @const
- * @type {string}
- */
-var METHOD_SET_CLEAR_COLOR          = "setClearColor";
-/**
- * @const
- * @type {string}
- */
-var METHOD_RENDER                   = "render";
-/**
- * @const
- * @type {string}
- */
-var METHOD_VIEW_SIZE                = "viewSize";
-/**
- * @const
- * @type {string}
- */
-var METHOD_SET_SIZE                 = "setSize";
-/**
- * @const
- * @type {string}
- */
-var METHOD_UPDATE_PROJECTION_MATRIX = "updateProjectionMatrix";
-/**
- * @const
- * @type {string}
- */
-var WORLD                           = "world";
-/**
- * @const
- * @type {string}
- */
-var CONE_BUILDER                    = "ConeBuilder";
-/**
- * @const
- * @type {string}
- */
-var CUBE_BUILDER                    = "CubeBuilder";
-/**
- * @const
- * @type {string}
- */
-var PLANE_BUILDER                   = "PlaneBuilder";
-/**
- * @const
- * @type {string}
- */
-var SPHERE_BUILDER                  = "SphereBuilder";
-/**
- * @const
- * @type {string}
- */
-var AMBIENT_LIGHT                   = "AmbientLight";
-/**
- * @const
- * @type {string}
- */
-var POINT_LIGHT                     = "PointLight";
-/**
- * @const
- * @type {string}
- */
-var LINE_BASIC_MATERIAL             = "LineBasicMaterial";
-/**
- * @const
- * @type {string}
- */
-var MESH_BASIC_MATERIAL             = "MeshBasicMaterial";
-/**
- * @const
- * @type {string}
- */
-var MESH_LAMBERT_MATERIAL           = "MeshLambertMaterial";
-/**
- * @const
- * @type {string}
- */
-var MESH_NORMAL_MATERIAL            = "MeshNormalMaterial";
-/**
- * @const
- * @type {string}
- */
-var BOX_GEOMETRY                    = "BoxGeometry";
-/**
- * @const
- * @type {string}
- */
-var CYLINDER_GEOMETRY               = "CylinderGeometry";
-/**
- * @const
- * @type {string}
- */
-var PLANE_GEOMETRY                  = "PlaneGeometry";
-/**
- * @const
- * @type {string}
- */
-var SPHERE_GEOMETRY                 = "SphereGeometry";
-/**
- * @const
- * @type {string}
- */
-var TORUS_GEOMETRY                  = "TorusGeometry";
-/**
- * @const
- * @type {string}
- */
-var LINE                            = "Line";
-/**
- * @const
- * @type {string}
- */
-var MESH                            = "Mesh";
-/**
- * @const
- * @type {string}
- */
-var GEOMETRY                        = "Geometry";
-/**
- * @const
- * @type {string}
- */
-var QUATERNION                      = "Quaternion";
-/**
- * @const
- * @type {string}
- */
-var VECTOR_3                        = "Vector3";
-/**
- * @const
- * @type {!Array.<Sk.ffi.PyType>}
- */
-var NUMBER                          = [Sk.ffi.PyType.FLOAT, Sk.ffi.PyType.INT, Sk.ffi.PyType.LONG];
-/**
- * @const
- * @type {number}
- */
-var DEFAULT_CUBE_LENGTH             = 1.0;
-/**
- * @const
- * @type {number}
- */
-var DEFAULT_CYLINDER_RADIUS         = 0.5;
-/**
- * @const
- * @type {number}
- */
-var DEFAULT_CYLINDER_HEIGHT         = 1.0;
-/**
- * @const
- * @type {number}
- */
-var DEFAULT_SPHERE_RADIUS           = 0.5;
-/**
- * @const
- * @type {number}
- */
-var DEFAULT_COLOR                   = 0xFFFFFF;
-/**
- * @const
- * @type {string}
- */
-var COMMA                           = ",";
-/**
- * @const
- * @type {string}
- */
-var SPACE                           = " ";
-/**
- * @const
- * @type {string}
- */
-var EQUAL                           = "=";
-/**
- * @const
- * @type {string}
- */
-var LPAREN                          = "(";
-/**
- * @const
- * @type {string}
- */
-var RPAREN                          = ")";
-/**
- * @const
- * @type {number}
- */
-var COLOR_GRID = 0x66A1D2
-var MATERIAL_GRID_MAJOR = new THREE[LINE_BASIC_MATERIAL]({"color": COLOR_GRID,"opacity":0.20,"transparent":true});
-var MATERIAL_GRID_MINOR = new THREE[LINE_BASIC_MATERIAL]({"color": COLOR_GRID,"opacity":0.02,"transparent":true});
-var e1 = new THREE[VECTOR_3](1, 0, 0);
-var e2 = new THREE[VECTOR_3](0, 1, 0);
-var e3 = new THREE[VECTOR_3](0, 0, 1);
-var E3  = new THREE[EUCLIDEAN_3](false, new THREE[VECTOR_3](0, 0, 1), new THREE[QUATERNION](0, 0, 0, 0), 0, false);
-var one = new THREE[EUCLIDEAN_3](false, new THREE[VECTOR_3](0, 0, 0), new THREE[QUATERNION](0, 0, 0, 1), 0, false);
+  */
+  Sk.builtin.defineGeometry = function(mod, THREE, moduleName) {
+    Sk.ffi.checkFunctionArgs('defineGeometry', arguments, 3, 3);
+    /**
+     * A Euclidean space described by Cartesian coordinates with 3 dimensions.
+     *
+     * @const
+     * @type {string}
+     */
+    var CARTESIAN_SPACE = 'CartesianSpace';
+    /**
+     * @const
+     * @type {string}
+     */
+    var EUCLIDEAN_3 = 'Euclidean3';
+    /**
+     * @const
+     * @type {string}
+     */
+    var COLOR = 'Color';
+    /**
+     * @const
+     * @type {string}
+     */
+    var SCENE = 'Scene';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PERSPECTIVE_CAMERA = 'PerspectiveCamera';
+    /**
+     * @const
+     * @type {string}
+     */
+    var CANVAS_RENDERER = 'CanvasRenderer';
+    /**
+     * @const
+     * @type {string}
+     */
+    var WEBGL_RENDERER = 'WebGLRenderer';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_ATTITUDE = 'attitude';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_AXIS = 'axis';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_ORIGIN = 'origin';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_ORIENTATION = 'orientation';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_CAMERA = 'camera';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_RENDERER = 'renderer';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_VERTICES = 'vertices';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_SCENE = 'scene';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_COLOR = 'color';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_DEPTH = 'depth';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_HEIGHT = 'height';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_MAGNITUDE = 'magnitude';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_MATERIAL = 'material';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_NAME = 'name';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_RADIUS = 'radius';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_RADIUS_TOP = 'radiusTop';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_RADIUS_BOTTOM = 'radiusBottom';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_SCALE = 'scale';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_SEGMENTS = 'segments';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_VOLUME = 'volume';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_WIDTH = 'width';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_WIREFRAME = 'wireframe';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_WIREFRAME_LINEWIDTH = 'wireframeLinewidth';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_POSITION = 'position';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PROP_UP = 'up';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_ADD = 'add';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_BUILD = 'build';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_LOOK_AT = 'lookAt';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_NORMALIZE = 'normalize';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_SET_CLEAR_COLOR = 'setClearColor';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_RENDER = 'render';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_VIEW_SIZE = 'viewSize';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_SET_SIZE = 'setSize';
+    /**
+     * @const
+     * @type {string}
+     */
+    var METHOD_UPDATE_PROJECTION_MATRIX = 'updateProjectionMatrix';
+    /**
+     * @const
+     * @type {string}
+     */
+    var WORLD = 'world';
+    /**
+     * @const
+     * @type {string}
+     */
+    var CONE_BUILDER = 'ConeBuilder';
+    /**
+     * @const
+     * @type {string}
+     */
+    var CUBE_BUILDER = 'CubeBuilder';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PLANE_BUILDER = 'PlaneBuilder';
+    /**
+     * @const
+     * @type {string}
+     */
+    var SPHERE_BUILDER = 'SphereBuilder';
+    /**
+     * @const
+     * @type {string}
+     */
+    var AMBIENT_LIGHT = 'AmbientLight';
+    /**
+     * @const
+     * @type {string}
+     */
+    var POINT_LIGHT = 'PointLight';
+    /**
+     * @const
+     * @type {string}
+     */
+    var LINE_BASIC_MATERIAL = 'LineBasicMaterial';
+    /**
+     * @const
+     * @type {string}
+     */
+    var MESH_BASIC_MATERIAL = 'MeshBasicMaterial';
+    /**
+     * @const
+     * @type {string}
+     */
+    var MESH_LAMBERT_MATERIAL = 'MeshLambertMaterial';
+    /**
+     * @const
+     * @type {string}
+     */
+    var MESH_NORMAL_MATERIAL = 'MeshNormalMaterial';
+    /**
+     * @const
+     * @type {string}
+     */
+    var BOX_GEOMETRY = 'BoxGeometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var CYLINDER_GEOMETRY = 'CylinderGeometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var PLANE_GEOMETRY = 'PlaneGeometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var SPHERE_GEOMETRY = 'SphereGeometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var TORUS_GEOMETRY = 'TorusGeometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var LINE = 'Line';
+    /**
+     * @const
+     * @type {string}
+     */
+    var MESH = 'Mesh';
+    /**
+     * @const
+     * @type {string}
+     */
+    var GEOMETRY = 'Geometry';
+    /**
+     * @const
+     * @type {string}
+     */
+    var QUATERNION = 'Quaternion';
+    /**
+     * @const
+     * @type {string}
+     */
+    var VECTOR_3 = 'Vector3';
+    /**
+     * @const
+     * @type {!Array.<Sk.ffi.PyType>}
+     */
+    var NUMBER = [Sk.ffi.PyType.FLOAT, Sk.ffi.PyType.INT, Sk.ffi.PyType.LONG];
+    /**
+     * @const
+     * @type {number}
+     */
+    var DEFAULT_CUBE_LENGTH = 1.0;
+    /**
+     * @const
+     * @type {number}
+     */
+    var DEFAULT_CYLINDER_RADIUS = 0.5;
+    /**
+     * @const
+     * @type {number}
+     */
+    var DEFAULT_CYLINDER_HEIGHT = 1.0;
+    /**
+     * @const
+     * @type {number}
+     */
+    var DEFAULT_SPHERE_RADIUS = 0.5;
+    /**
+     * @const
+     * @type {number}
+     */
+    var DEFAULT_COLOR = 0xFFFFFF;
+    /**
+     * @const
+     * @type {string}
+     */
+    var COMMA = ',';
+    /**
+     * @const
+     * @type {string}
+     */
+    var SPACE = ' ';
+    /**
+     * @const
+     * @type {string}
+     */
+    var EQUAL = '=';
+    /**
+     * @const
+     * @type {string}
+     */
+    var LPAREN = '(';
+    /**
+     * @const
+     * @type {string}
+     */
+    var RPAREN = ')';
+    /**
+     * @const
+     * @type {number}
+     */
+    var COLOR_GRID = 0x66A1D2;
+    var MATERIAL_GRID_MAJOR = new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_GRID, 'opacity': 0.20, 'transparent': true});
+    var MATERIAL_GRID_MINOR = new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_GRID, 'opacity': 0.02, 'transparent': true});
+    var e1 = new THREE[VECTOR_3](1, 0, 0);
+    var e2 = new THREE[VECTOR_3](0, 1, 0);
+    var e3 = new THREE[VECTOR_3](0, 0, 1);
+    var E3 = new THREE[EUCLIDEAN_3](false, new THREE[VECTOR_3](0, 0, 1), new THREE[QUATERNION](0, 0, 0, 0), 0, false);
+    var one = new THREE[EUCLIDEAN_3](false, new THREE[VECTOR_3](0, 0, 0), new THREE[QUATERNION](0, 0, 0, 1), 0, false);
 
-function isEuclidean3Py(valuePy) {return Sk.ffi.isInstance(valuePy, EUCLIDEAN_3);}
-function isVector3Py(valuePy) {return Sk.ffi.isInstance(valuePy, VECTOR_3);}
+    function isEuclidean3Py(valuePy) {return Sk.ffi.isInstance(valuePy, EUCLIDEAN_3);}
+    function isVector3Py(valuePy) {return Sk.ffi.isInstance(valuePy, VECTOR_3);}
 
-function methodName(targetPy) {
-  var target = Sk.ffi.remapToJs(targetPy);
-  return Sk.ffi.callableToPy(mod, PROP_NAME, function(methodPy, namePy) {
-    Sk.ffi.checkMethodArgs(PROP_NAME, arguments, 1, 1);
-    Sk.ffi.checkArgType(PROP_NAME, Sk.ffi.PyType.STR, Sk.builtin.isStringPy(namePy), namePy);
-    target[PROP_NAME] = Sk.builtin.stringToJs(namePy);
-    return targetPy;
-  });
-}
-
-function createMaterialPy(parameters) {
-
-  if (parameters[PROP_MATERIAL]) {
-    return parameters[PROP_MATERIAL];
-  }
-  else {
-    var args = {};
-
-    if (typeof parameters[PROP_COLOR] !== 'undefined') {
-      args[PROP_COLOR] = parameters[PROP_COLOR];
-    }
-    else {
-      args[PROP_COLOR] = DEFAULT_COLOR;
+    function methodName(targetPy) {
+      var target = Sk.ffi.remapToJs(targetPy);
+      return Sk.ffi.callableToPy(mod, PROP_NAME, function(methodPy, namePy) {
+        Sk.ffi.checkMethodArgs(PROP_NAME, arguments, 1, 1);
+        Sk.ffi.checkArgType(PROP_NAME, Sk.ffi.PyType.STR, Sk.builtin.isStringPy(namePy), namePy);
+        target[PROP_NAME] = Sk.builtin.stringToJs(namePy);
+        return targetPy;
+      });
     }
 
-    if (typeof parameters[PROP_WIREFRAME_LINEWIDTH] !== 'undefined') {
-        args[PROP_WIREFRAME_LINEWIDTH] = parameters[PROP_WIREFRAME_LINEWIDTH];
-    }
+    function createMaterialPy(parameters) {
 
-    if (typeof parameters[PROP_WIREFRAME] !== 'undefined') {
-      args[PROP_WIREFRAME] = parameters[PROP_WIREFRAME];
-      if (parameters[PROP_WIREFRAME]) {
-        return Sk.ffi.callsim(mod[MESH_BASIC_MATERIAL], Sk.ffi.remapToPy(args));
+      if (parameters[PROP_MATERIAL]) {
+        return parameters[PROP_MATERIAL];
       }
       else {
-        return Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
-      }
-    }
-    else {
-      args[PROP_WIREFRAME] = false;
-      return Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
-    }
-  }  
-}
+        var args = {};
 
-function completeMesh(geometryPy, parameters) {
-
-  function modifyMesh(meshPy) {
-    var mesh = Sk.ffi.remapToJs(meshPy);
-    if (parameters[PROP_NAME]) {
-      mesh.name = parameters[PROP_NAME];
-    }
-    return meshPy;
-  }
-
-  if (parameters[PROP_MATERIAL]) {
-    return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, parameters[PROP_MATERIAL]));
-  }
-  else {
-    var args = {};
-
-    if (typeof parameters[PROP_COLOR] !== 'undefined') {
-      args[PROP_COLOR] = parameters[PROP_COLOR];
-    }
-    else {
-      args[PROP_COLOR] = DEFAULT_COLOR;
-    }
-
-    if (typeof parameters[PROP_WIREFRAME_LINEWIDTH] !== 'undefined') {
-        args[PROP_WIREFRAME_LINEWIDTH] = parameters[PROP_WIREFRAME_LINEWIDTH];
-    }
-
-    if (typeof parameters[PROP_WIREFRAME] !== 'undefined') {
-      args[PROP_WIREFRAME] = parameters[PROP_WIREFRAME];
-      if (parameters[PROP_WIREFRAME]) {
-        var materialPy = Sk.ffi.callsim(mod[MESH_BASIC_MATERIAL], Sk.ffi.remapToPy(args));
-        return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
-      }
-      else {
-        var materialPy = Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
-        return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
-      }
-    }
-    else {
-      args[PROP_WIREFRAME] = false;
-      var materialPy = Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
-      return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
-    }
-  }
-}
-
-mod[WORLD] = Sk.ffi.functionPy(function()
-{
-  Sk.ffi.checkFunctionArgs(WORLD, arguments, 0, 0);
-  var scenePy = Sk.ffi.callsim(mod[SCENE]);
-  var scene = Sk.ffi.remapToJs(scenePy);
-
-  function addPointLight(x, y, z)
-  {
-    var pointLight = new THREE[POINT_LIGHT](0xFFFFFF);
-    pointLight.position.set(x, y, z);
-    scene.add(pointLight);
-  }
-
-  addPointLight(+5, +5, +5);
-
-  scene.add(new THREE[AMBIENT_LIGHT](0x222222));
-
-  return scenePy;
-});
-
-/**
- * @param {number} size The extent of the axes.
- */
-function createCartesianAxes(size) {
-  var COLOR_X_AXIS = 0xFF0000;
-  var COLOR_Y_AXIS = 0x00FF00;
-  var COLOR_Z_AXIS = 0x0000FF;
-  var geometries = [[+size,0,0],[0,+size,0],[0,0,+size],[-size,0,0],[0,-size,0],[0,0,-size]].map(function(v) {
-    var geometry = new THREE[GEOMETRY]();
-    geometry[PROP_VERTICES].push(new THREE[VECTOR_3](0, 0, 0));
-    geometry[PROP_VERTICES].push(new THREE[VECTOR_3](v[0], v[1], v[2]));
-    return geometry;
-  });
-
-  var axes = new THREE[Sk.three.OBJECT_3D]();
-  axes.add(new THREE[LINE](geometries[0], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_X_AXIS, "opacity": 0.5, "transparent":true})));
-  axes.add(new THREE[LINE](geometries[1], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_Y_AXIS, "opacity": 0.5, "transparent":true})));
-  axes.add(new THREE[LINE](geometries[2], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_Z_AXIS, "opacity": 0.5, "transparent":true})));
-  axes.add(new THREE[LINE](geometries[3], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_X_AXIS, "opacity": 0.2, "transparent":true})));
-  axes.add(new THREE[LINE](geometries[4], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_Y_AXIS, "opacity": 0.2, "transparent":true})));
-  axes.add(new THREE[LINE](geometries[5], new THREE[LINE_BASIC_MATERIAL]({"color":COLOR_Z_AXIS, "opacity": 0.2, "transparent":true})));
-  return axes;
-}
-
-/**
- * @param {number} majorSteps
- * @param {number} minorsPerMajorMark
- * @param {number} majorScale
- * @param {!Object} e
- * @param {!Object} o
- */
-function createCartesianLines(majorSteps, minorsPerMajorMark, majorScale, e, o) {
-  var grid = new THREE[Sk.three.OBJECT_3D]();
-  var steps = majorSteps * minorsPerMajorMark;
-  var minorScale = majorScale / minorsPerMajorMark;
-  var extent = majorSteps * majorScale;
-  var extentX = o.x * extent;
-  var extentY = o.y * extent;
-  var extentZ = o.z * extent;
-  for (var i = -steps; i <= steps; i += 1) {
-    if (i != 0) {
-      var t = i * minorScale;
-      var gridLineGeometry = new THREE[GEOMETRY]();
-      gridLineGeometry[PROP_VERTICES].push(new THREE[VECTOR_3](e.x*t-extentX, e.y*t-extentY, e.z*t-extentZ));
-      gridLineGeometry[PROP_VERTICES].push(new THREE[VECTOR_3](e.x*t+extentX, e.y*t+extentY, e.z*t+extentZ));
-      var material = (i % minorsPerMajorMark === 0) ? MATERIAL_GRID_MAJOR : MATERIAL_GRID_MINOR;
-      var line = new THREE[LINE](gridLineGeometry, material);
-      grid.add(line);
-    }
-  }
-  return grid;
-}
-
-mod[CARTESIAN_SPACE] = Sk.ffi.buildClass(mod, function($gbl, $loc)
-{
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy, scenePy, rendererPy)
-  {
-    var scene;
-    var renderer;
-    Sk.ffi.checkMethodArgs(CARTESIAN_SPACE, arguments, 0, 2);
-    if (!Sk.ffi.isDefined(scenePy))
-    {
-      scenePy = Sk.ffi.callsim(mod[WORLD]);
-    }
-    scene = Sk.ffi.remapToJs(scenePy);
-    if (!Sk.ffi.isDefined(rendererPy))
-    {
-      rendererPy = Sk.ffi.callsim(mod[WEBGL_RENDERER], Sk.ffi.remapToPy({"antialias": true}));
-    }
-    renderer = Sk.ffi.remapToJs(rendererPy);
-
-    var cameraPy = Sk.ffi.callsim(mod[PERSPECTIVE_CAMERA], Sk.ffi.numberToFloatPy(45), Sk.ffi.numberToFloatPy(1.0), Sk.ffi.numberToFloatPy(0.1), Sk.ffi.numberToFloatPy(10000));
-    var camera = Sk.ffi.remapToJs(cameraPy);
-    camera[PROP_UP].set(0, 0, 1);
-    camera[PROP_POSITION].set(+8, +4, +5);
-    camera[METHOD_LOOK_AT](scene.position);
-    renderer[METHOD_SET_CLEAR_COLOR](0x080808, 1.0);
-    scene.add(createCartesianAxes(1000));
-    scene.add(createCartesianLines(5, 10, 1.0, e1, e2));
-    scene.add(createCartesianLines(5, 10, 1.0, e2, e1));
-    Sk.ffi.referenceToPy({scenePy: scenePy, cameraPy: cameraPy, rendererPy: rendererPy}, CARTESIAN_SPACE, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var space = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_CAMERA: {
-        return space.cameraPy;
-      }
-      case PROP_ORIGIN: {
-        return Sk.ffi.gattr(space.scenePy, PROP_POSITION);
-      }
-      case PROP_RENDERER: {
-        return space.rendererPy;
-      }
-      case PROP_SCENE: {
-        return space.scenePy;
-      }
-      case METHOD_ADD: {
-        return Sk.ffi.gattr(space.scenePy, METHOD_ADD);
-      }
-      case METHOD_RENDER: {
-        return Sk.ffi.callableToPy(mod, METHOD_RENDER, function(methodPy) {
-          // Delegate the call to the renderer with scene and camera arguments.
-          methodPy = Sk.ffi.gattr(space.rendererPy, METHOD_RENDER);
-          return Sk.ffi.callsim(methodPy, space.scenePy, space.cameraPy);
-        });
-      }
-      case METHOD_VIEW_SIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_RENDER, function(methodPy, widthPy, heightPy) {
-          Sk.ffi.checkMethodArgs(METHOD_VIEW_SIZE, arguments, 2, 2);
-          Sk.ffi.checkArgType(PROP_WIDTH, Sk.ffi.PyType.INT, Sk.ffi.isInt(widthPy), widthPy);
-          Sk.ffi.checkArgType(PROP_HEIGHT, Sk.ffi.PyType.INT, Sk.ffi.isInt(heightPy), heightPy);
-          var width  = Sk.ffi.remapToJs(widthPy);
-          var height = Sk.ffi.remapToJs(heightPy);
-          var renderer = Sk.ffi.remapToJs(space.rendererPy);
-          renderer.setSize(width, height);
-          var camera = Sk.ffi.remapToJs(space.cameraPy);
-          camera.aspect = width / height;
-          camera[METHOD_UPDATE_PROJECTION_MATRIX]();
-        });
-      }
-      default: {
-        throw Sk.ffi.err.attribute(name).isNotGetableOnType(CARTESIAN_SPACE);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(CARTESIAN_SPACE);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(CARTESIAN_SPACE);
-  })
-}, CARTESIAN_SPACE, []);
-
-/**
- * @param {Object} selfPy
- * @param {string} name
- * @param {string} className
- */
-function builderGetAttr(selfPy, name, className) {
-  var self = Sk.ffi.remapToJs(selfPy);
-  switch(name) {
-    case PROP_ATTITUDE: {
-      return Sk.ffi.callableToPy(mod, name, function(methodPy, attitudePy) {
-        Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
-        Sk.ffi.checkArgType(name, EUCLIDEAN_3, isEuclidean3Py(attitudePy), attitudePy);
-        self[name] = Sk.ffi.remapToJs(attitudePy);
-        return selfPy;
-      });
-    }
-    case PROP_COLOR: {
-      return Sk.ffi.callableToPy(mod, name, function(methodPy, colorPy) {
-        Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
-        Sk.ffi.checkArgType(name, NUMBER, Sk.ffi.isNum(colorPy)||Sk.builtin.isStringPy(colorPy)||Sk.ffi.isInstance(colorPy, COLOR), colorPy);
-        self[name] = Sk.ffi.remapToJs(colorPy);
-        return selfPy;
-      });
-    }
-    case PROP_MATERIAL: {
-      return Sk.ffi.callableToPy(mod, PROP_MATERIAL, function(methodPy, materialPy) {
-        Sk.ffi.checkMethodArgs(PROP_MATERIAL, arguments, 1, 1);
-        Sk.ffi.checkArgType(PROP_MATERIAL, Sk.three.MATERIAL, Sk.ffi.isInstance(materialPy), materialPy);
-        self[PROP_MATERIAL] = materialPy;
-        return selfPy;
-      });
-    }
-    case PROP_NAME: {
-      return methodName(selfPy);
-    }
-    case PROP_SCALE: {
-      return Sk.ffi.callableToPy(mod, PROP_SCALE, function(methodPy, lengthPy) {
-        Sk.ffi.checkMethodArgs(PROP_SCALE, arguments, 1, 1);
-        Sk.ffi.checkArgType(PROP_SCALE, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(lengthPy) || Sk.ffi.isNone(lengthPy), lengthPy);
-        self[PROP_SCALE] = Sk.ffi.remapToJs(lengthPy);
-        return selfPy;
-      });
-    }
-    case PROP_VOLUME: {
-      return Sk.ffi.callableToPy(mod, PROP_VOLUME, function(methodPy, volumePy) {
-        Sk.ffi.checkMethodArgs(PROP_VOLUME, arguments, 1, 1);
-        Sk.ffi.checkArgType(PROP_VOLUME, NUMBER, Sk.ffi.isNum(volumePy) || Sk.ffi.isNone(volumePy), volumePy);
-        self[PROP_VOLUME] = Sk.ffi.remapToJs(volumePy);
-        return selfPy;
-      });
-    }
-    case PROP_WIREFRAME: {
-      return Sk.ffi.callableToPy(mod, name, function(methodPy, wireframePy) {
-        Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
-        Sk.ffi.checkArgType(name, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(wireframePy), wireframePy);
-        self[name] = Sk.ffi.remapToJs(wireframePy);
-        return selfPy;
-      });
-    }
-    case PROP_WIREFRAME_LINEWIDTH: {
-      return Sk.ffi.callableToPy(mod, name, function(methodPy, wireframeLinewidthPy) {
-        Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
-        Sk.ffi.checkArgType(name, Sk.ffi.PyType.INT, Sk.ffi.isInt(wireframeLinewidthPy), wireframeLinewidthPy);
-        self[name] = Sk.ffi.remapToJs(wireframeLinewidthPy);
-        return selfPy;
-      });
-    }
-    default: {
-      throw Sk.ffi.err.attribute(name).isNotGetableOnType(className);
-    }
-  }
-}
-/**
- * ArrowBuilder
- * @constructor
- */
-Sk.geometry.ArrowBuilder = function() {
-  this._innerPy = Sk.ffi.callsim(mod[Sk.geometry.ARROW_BUILDER]);
-}
-Sk.geometry.ArrowBuilder.prototype = {
-  constructor: Sk.geometry.ArrowBuilder,
-  axis: function(x, y, z) {
-    var xPy = Sk.ffi.numberToFloatPy(x);
-    var yPy = Sk.ffi.numberToFloatPy(y);
-    var zPy = Sk.ffi.numberToFloatPy(z);
-    var directionPy = Sk.ffi.callsim(mod[Sk.e3ga.VECTOR_E3], xPy, yPy, zPy);
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_AXIS), directionPy);
-    return this;
-  },
-  material: function(material) {
-    var materialPy = Sk.ffi.callsim(mod[Sk.three.MATERIAL], Sk.ffi.referenceToPy(material, Sk.three.MATERIAL));
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_MATERIAL), materialPy);
-    return this;
-  },
-  radius: function(radius) {
-    var radiusPy = Sk.ffi.numberToFloatPy(radius);
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_RADIUS), radiusPy);
-    return this;
-  },
-  build: function() {
-    return Sk.ffi.remapToJs(Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, METHOD_BUILD)));
-  }
-};
-/**
- * ArrowBuilder
- */
-mod[Sk.geometry.ARROW_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(Sk.geometry.ARROW_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, Sk.geometry.ARROW_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var arrow = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_MAGNITUDE: {
-        return Sk.ffi.callableToPy(mod, PROP_MAGNITUDE, function(methodPy, lengthPy) {
-          Sk.ffi.checkMethodArgs(PROP_MAGNITUDE, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_MAGNITUDE, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(lengthPy) || Sk.ffi.isNone(lengthPy), lengthPy);
-          arrow[PROP_MAGNITUDE] = Sk.ffi.remapToJs(lengthPy);
-          return selfPy;
-        });
-      }
-      case PROP_AXIS: {
-        return Sk.ffi.callableToPy(mod, PROP_AXIS, function(methodPy, axisPy) {
-          Sk.ffi.checkMethodArgs(PROP_AXIS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_AXIS, [EUCLIDEAN_3, Sk.ffi.PyType.NONE], Sk.ffi.isInstance(axisPy, EUCLIDEAN_3) || Sk.ffi.isNone(axisPy), axisPy);
-          arrow[PROP_AXIS] = Sk.ffi.remapToJs(axisPy);
-          return selfPy;
-        });
-      }
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          arrow[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          arrow[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{scale: number, attitude: Object, length: number, radius: number, axis: Object}}
-           */
-          function dimensionArrow() {
-            var dims = {};
-            dims.attitude = (arrow.attitude) ? arrow.attitude : one;
-            dims.axis     = (arrow[PROP_AXIS]) ? arrow[PROP_AXIS] : E3;
-            if (arrow.volume) {
-              var s = (arrow.scale)  ? arrow.scale  : 1;
-              var h = (arrow.length) ? arrow.length : DEFAULT_CYLINDER_HEIGHT;
-              var r = (arrow.radius) ? arrow.radius : DEFAULT_CYLINDER_RADIUS;
-              var alpha = r / h;
-              dims.radius = Math.pow(3 * alpha * arrow.volume / Math.PI, 1 / 3);
-              dims.length = dims.radius / alpha;
-            }
-            else {
-              dims.scale    = (arrow.scale)    ? arrow.scale    : 1;
-              dims.radius   = (arrow.radius)   ? arrow.radius   : DEFAULT_CYLINDER_RADIUS;
-              dims.length   = (arrow.length)   ? arrow.length   : DEFAULT_CYLINDER_HEIGHT;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionArrow();
-          var scalePy    = Sk.ffi.numberToFloatPy(dimensions[PROP_SCALE]);
-          var attitudePy = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_ATTITUDE], EUCLIDEAN_3));
-          var segmentsPy = Sk.ffi.numberToIntPy(arrow[PROP_SEGMENTS] ? arrow[PROP_SEGMENTS] : 32);
-          var lengthPy   = Sk.ffi.numberToFloatPy(dimensions[PROP_MAGNITUDE]);
-          var axisPy     = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_AXIS], EUCLIDEAN_3));
-          var geometryPy = Sk.ffi.callsim(mod[Sk.three.ARROW_GEOMETRY], scalePy, attitudePy, segmentsPy, lengthPy, undefined, undefined, undefined, axisPy);
-          return completeMesh(geometryPy, arrow);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-//        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, Sk.geometry.ARROW_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(Sk.geometry.ARROW_BUILDER + "(" + ")");
-  })
-}, Sk.geometry.ARROW_BUILDER, []);
-
-mod[CONE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(CONE_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, CONE_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var cone = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_HEIGHT: {
-        return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
-          Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
-          cone[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
-          return selfPy;
-        });
-      }
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          cone[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          cone[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{radius: number, height: number}}
-           */
-          function dimensionCone() {
-            var dims = {};
-            if (cone.volume) {
-              var r = (cone.radius) ? cone.radius : DEFAULT_CYLINDER_RADIUS;
-              var h = (cone.height) ? cone.height : DEFAULT_CYLINDER_HEIGHT;
-              var alpha = r / h;
-              dims.radius = Math.pow(3 * alpha * cone.volume / Math.PI, 1 / 3);
-              dims.height = dims.radius / alpha;
-            }
-            else {
-              dims.radius = (cone.radius) ? cone.radius : DEFAULT_CYLINDER_RADIUS;
-              dims.height = (cone.height) ? cone.height : DEFAULT_CYLINDER_HEIGHT;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions     = dimensionCone();
-          var radiusTop      = Sk.ffi.numberToFloatPy(0);
-          var radiusBottom   = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
-          var height         = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
-          var radialSegments = Sk.ffi.numberToIntPy(cone[PROP_SEGMENTS] ? cone[PROP_SEGMENTS] : 32);
-          var heightSegments = Sk.ffi.numberToIntPy(1);
-          var openEnded      = Sk.ffi.booleanToPy(false);
-          var geometryPy = Sk.ffi.callsim(mod[CYLINDER_GEOMETRY], radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded);
-          return completeMesh(geometryPy, cone);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-//        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, CONE_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(CONE_BUILDER + "(" + ")");
-  })
-}, CONE_BUILDER, []);
-
-mod[CUBE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(CUBE_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, CUBE_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var cube = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_DEPTH: {
-        return Sk.ffi.callableToPy(mod, PROP_DEPTH, function(methodPy, depthPy) {
-          Sk.ffi.checkMethodArgs(PROP_DEPTH, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_DEPTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(depthPy) || Sk.ffi.isNone(depthPy), depthPy);
-          cube[PROP_DEPTH] = Sk.ffi.remapToJs(depthPy);
-          return selfPy;
-        });
-      }
-      case PROP_HEIGHT: {
-        return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
-          Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
-          cube[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
-          return selfPy;
-        });
-      }
-      case PROP_WIDTH: {
-        return Sk.ffi.callableToPy(mod, PROP_WIDTH, function(methodPy, widthPy) {
-          Sk.ffi.checkMethodArgs(PROP_WIDTH, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_WIDTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(widthPy) || Sk.ffi.isNone(widthPy), widthPy);
-          cube[PROP_WIDTH] = Sk.ffi.remapToJs(widthPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          cube[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{width: number, height: number, depth: number}}
-           */
-          function dimensionCube() {
-            var dims = {};
-            if (cube[PROP_VOLUME]) {
-              var w = (cube.width)  ? cube.width  : DEFAULT_CUBE_LENGTH;
-              var h = (cube.height) ? cube.height : DEFAULT_CUBE_LENGTH;
-              var d = (cube.depth)  ? cube.depth  : DEFAULT_CUBE_LENGTH;
-              var alpha = Math.pow(cube[PROP_VOLUME] / (w * h * d), 1 / 3);
-              dims.width  = alpha * w;
-              dims.height = alpha * h;
-              dims.depth  = alpha * d;
-            }
-            else {
-              dims.width  = (cube.width)  ? cube.width  : DEFAULT_CUBE_LENGTH;
-              dims.height = (cube.height) ? cube.height : DEFAULT_CUBE_LENGTH;
-              dims.depth  = (cube.depth)  ? cube.depth  : DEFAULT_CUBE_LENGTH;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionCube();
-          var width      = Sk.ffi.numberToFloatPy(dimensions[PROP_WIDTH]);
-          var height     = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
-          var depth      = Sk.ffi.numberToFloatPy(dimensions[PROP_DEPTH]);
-          var segments   = Sk.ffi.numberToIntPy(cube[PROP_SEGMENTS] ? cube[PROP_SEGMENTS] : 1);
-          var geometryPy = Sk.ffi.callsim(mod[BOX_GEOMETRY], width, height, depth, segments, segments, segments);
-          return completeMesh(geometryPy, cube);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-          cube[PROP_DEPTH]  = 1;
-          cube[PROP_WIDTH]  = 1;
-          cube[PROP_HEIGHT] = 1;
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, CUBE_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(CUBE_BUILDER + "(" + ")");
-  })
-}, CUBE_BUILDER, []);
-/**
- * CylinderBuilder
- * @constructor
- */
-Sk.geometry.CylinderBuilder = function() {
-  this._innerPy = Sk.ffi.callsim(mod[Sk.geometry.CYLINDER_BUILDER]);
-}
-Sk.geometry.CylinderBuilder.prototype = {
-  constructor: Sk.geometry.CylinderBuilder,
-  axis: function(x, y, z) {
-    var xPy = Sk.ffi.numberToFloatPy(x);
-    var yPy = Sk.ffi.numberToFloatPy(y);
-    var zPy = Sk.ffi.numberToFloatPy(z);
-    var directionPy = Sk.ffi.callsim(mod[Sk.e3ga.VECTOR_E3], xPy, yPy, zPy);
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_AXIS), directionPy);
-    return this;
-  },
-  material: function(material) {
-    var materialPy = Sk.ffi.callsim(mod[Sk.three.MATERIAL], Sk.ffi.referenceToPy(material, Sk.three.MATERIAL));
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_MATERIAL), materialPy);
-    return this;
-  },
-  radius: function(radius) {
-    var radiusPy = Sk.ffi.numberToFloatPy(radius);
-    Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_RADIUS), radiusPy);
-    return this;
-  },
-  build: function() {
-    return Sk.ffi.remapToJs(Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, METHOD_BUILD)));
-  }
-};
-/**
- * CylinderBuilder
- */
-mod[Sk.geometry.CYLINDER_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(Sk.geometry.CYLINDER_BUILDER, arguments, 0, 0);
-    var self = {};
-    self[PROP_RADIUS_TOP]    = DEFAULT_CYLINDER_RADIUS;
-    self[PROP_RADIUS_BOTTOM] = DEFAULT_CYLINDER_RADIUS;
-    self[PROP_HEIGHT]        = DEFAULT_CYLINDER_HEIGHT;
-    Sk.ffi.referenceToPy(self, Sk.geometry.CYLINDER_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var cylinder = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_AXIS: {
-        return Sk.ffi.callableToPy(mod, PROP_AXIS, function(methodPy, axisPy) {
-          Sk.ffi.checkMethodArgs(PROP_AXIS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_AXIS, [EUCLIDEAN_3, Sk.ffi.PyType.NONE], Sk.ffi.isInstance(axisPy, EUCLIDEAN_3) || Sk.ffi.isNone(axisPy), axisPy);
-          cylinder[PROP_AXIS] = Sk.ffi.remapToJs(axisPy);
-          return selfPy;
-        });
-      }
-      case PROP_HEIGHT: {
-        return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
-          Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
-          cylinder[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
-          return selfPy;
-        });
-      }
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          cylinder[PROP_RADIUS_TOP]    = Sk.ffi.remapToJs(radiusPy);
-          cylinder[PROP_RADIUS_BOTTOM] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
-        });
-      }
-      case PROP_RADIUS_TOP: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS_TOP, function(methodPy, radiusTopPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS_TOP, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS_TOP, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusTopPy) || Sk.ffi.isNone(radiusTopPy), radiusTopPy);
-          cylinder[PROP_RADIUS_TOP] = Sk.ffi.remapToJs(radiusTopPy);
-          return selfPy;
-        });
-      }
-      case PROP_RADIUS_BOTTOM: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS_BOTTOM, function(methodPy, radiusBottomPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS_BOTTOM, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS_BOTTOM, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusBottomPy) || Sk.ffi.isNone(radiusBottomPy), radiusBottomPy);
-          cylinder[PROP_RADIUS_BOTTOM] = Sk.ffi.remapToJs(radiusBottomPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          cylinder[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{a: number, b: number, h: number, axis: Object}}
-           */
-          function dimensionCylinder() {
-            var dims = {};
-            dims.axis     = (cylinder[PROP_AXIS]) ? cylinder[PROP_AXIS] : E3;
-            if (cylinder.volume) {
-              var a = (typeof cylinder.radiusTop    === 'number') ? cylinder.radiusTop    : DEFAULT_CYLINDER_RADIUS;
-              var b = (typeof cylinder.radiusBottom === 'number') ? cylinder.radiusBottom : DEFAULT_CYLINDER_RADIUS;
-              var h = (typeof cylinder.height === 'number')       ? cylinder.height       : DEFAULT_CYLINDER_HEIGHT;
-              var alpha = Math.pow(3 * cylinder.volume / (b * (b + a) * h * Math.PI), 1 / 3);
-              dims.a = alpha * a;
-              dims.b = alpha * b;
-              dims.h = alpha * h;
-            }
-            else {
-              dims.a = (typeof cylinder.radiusTop === 'number')    ? cylinder.radiusTop    : DEFAULT_CYLINDER_RADIUS;
-              dims.b = (typeof cylinder.radiusBottom === 'number') ? cylinder.radiusBottom : DEFAULT_CYLINDER_RADIUS;
-              dims.h = (typeof cylinder.height === 'number')       ? cylinder.height       : DEFAULT_CYLINDER_HEIGHT;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionCylinder();
-          var radiusTop      = Sk.ffi.numberToFloatPy(dimensions.a);
-          var radiusBottom   = Sk.ffi.numberToFloatPy(dimensions.b);
-          var height         = Sk.ffi.numberToFloatPy(dimensions.h);
-          var radialSegments = Sk.ffi.numberToIntPy(cylinder[PROP_SEGMENTS] ? cylinder[PROP_SEGMENTS] : 32);
-          var heightSegments = Sk.ffi.numberToIntPy(1);
-          var openEnded      = Sk.ffi.booleanToPy(false);
-          var axisPy         = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_AXIS], EUCLIDEAN_3));
-          var geometryPy = Sk.ffi.callsim(mod[CYLINDER_GEOMETRY], radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, axisPy);
-          return completeMesh(geometryPy, cylinder);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-//        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, Sk.geometry.CYLINDER_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(Sk.geometry.CYLINDER_BUILDER + "(" + ")");
-  })
-}, Sk.geometry.CYLINDER_BUILDER, []);
-
-mod[PLANE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(PLANE_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, PLANE_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var plane = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_HEIGHT: {
-        return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
-          Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
-          plane[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
-          return selfPy;
-        });
-      }
-      case PROP_WIDTH: {
-        return Sk.ffi.callableToPy(mod, PROP_WIDTH, function(methodPy, widthPy) {
-          Sk.ffi.checkMethodArgs(PROP_WIDTH, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_WIDTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(widthPy) || Sk.ffi.isNone(widthPy), widthPy);
-          plane[PROP_WIDTH] = Sk.ffi.remapToJs(widthPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          plane[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{width: number, height: number}}
-           */
-          function dimensionPlane() {
-            var dims = {};
-            if (plane[PROP_VOLUME]) {
-              var w = (plane.width)  ? plane.width  : DEFAULT_CUBE_LENGTH;
-              var h = (plane.height) ? plane.height : DEFAULT_CUBE_LENGTH;
-              var alpha = Math.pow(plane[PROP_VOLUME] / (w * h), 1 / 2);
-              dims.width  = alpha * w;
-              dims.height = alpha * h;
-            }
-            else {
-              dims.width  = (plane.width)  ? plane.width  : DEFAULT_CUBE_LENGTH;
-              dims.height = (plane.height) ? plane.height : DEFAULT_CUBE_LENGTH;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionPlane();
-          var width      = Sk.ffi.numberToFloatPy(dimensions[PROP_WIDTH]);
-          var height     = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
-          var segments   = Sk.ffi.numberToIntPy(plane[PROP_SEGMENTS] ? plane[PROP_SEGMENTS] : 1);
-          var geometryPy = Sk.ffi.callsim(mod[PLANE_GEOMETRY], width, height, segments, segments);
-          return completeMesh(geometryPy, plane);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-//        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, PLANE_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(PLANE_BUILDER + "(" + ")");
-  })
-}, PLANE_BUILDER, []);
-
-mod[SPHERE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(SPHERE_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, SPHERE_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var args = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{radius: number}}
-           */
-          function dimensionSphere() {
-            var dims = {};
-            if (args[PROP_VOLUME]) {
-              var r = (args.radius) ? args.radius : DEFAULT_SPHERE_RADIUS;
-              dims.radius = Math.pow(3 * args[PROP_VOLUME] / (4 * Math.PI), 1 / 3);
-            }
-            else {
-              dims.radius = (args.radius) ? args.radius : DEFAULT_SPHERE_RADIUS;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionSphere();
-          var radius         = Sk.ffi.numberToFloatPy(dimensions.radius);
-          var widthSegments  = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 24);
-          var heightSegments = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 18);
-          var geometryPy = Sk.ffi.callsim(mod[SPHERE_GEOMETRY], radius, widthSegments, heightSegments);
-          return completeMesh(geometryPy, args);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-          args[PROP_RADIUS] = Math.pow(3 / (4 * Math.PI), 1 / 3);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, SPHERE_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(SPHERE_BUILDER + "(" + ")");
-  })
-}, SPHERE_BUILDER, []);
-/**
- * VolumeBuilder
- */
-mod[Sk.geometry.VOLUME_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(Sk.geometry.VOLUME_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, Sk.geometry.VOLUME_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var args = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
-        });
-      }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
-      }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{radius: number, height: number}}
-           */
-          function dimensionPlane() {
-            var dims = {};
-            if (args[PROP_VOLUME]) {
-              var w = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
-              var h = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
-              var alpha = Math.pow(args[PROP_VOLUME] / (w * h), 1 / 2);
-              dims.width  = alpha * w;
-              dims.height = alpha * h;
-            }
-            else {
-              dims.radius = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
-              dims.height = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
-            }
-            return dims;
-          }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionPlane();
-          var radius      = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
-          var radiusCone  = Sk.ffi.numberToFloatPy(0.08);
-          var radiusShaft = Sk.ffi.numberToFloatPy(0.01);
-          var lengthCone  = Sk.ffi.numberToFloatPy(0.2);
-          var lengthShaft = Sk.ffi.numberToFloatPy(0.8);
-          var arrows      = Sk.ffi.numberToIntPy(6);
-          var segments    = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 32);
-          return Sk.ffi.callsim(mod[Sk.geometry.VOLUME], createMaterialPy(args));
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-          args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, Sk.geometry.VOLUME_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(Sk.geometry.VOLUME_BUILDER + "(" + ")");
-  })
-}, Sk.geometry.VOLUME_BUILDER, []);
-/**
- * Volume
- */
-mod[Sk.geometry.VOLUME] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy, materialPy) {
-    Sk.ffi.checkMethodArgs(Sk.geometry.VOLUME, arguments, 1, 1);
-    var composite = new THREE[Sk.three.OBJECT_3D]();
-    var cylinder;
-    var arrow;
-    var cb = new Sk.geometry.CylinderBuilder();
-    cb.radius(0.01).material(Sk.ffi.remapToJs(materialPy));
-
-    cb.axis(1, 0, 0);
-    cylinder = cb.build();
-    cylinder.position.set(+0.0, +0.5, +0.5);
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(+0.0, +0.5, -0.5);
-    cylinder.name = "c1";
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(+0.0, -0.5, +0.5);
-    composite.add(cylinder);
-
-    cb.axis(0, 1, 0);
-    cylinder = cb.build();
-    cylinder.position.set(+0.5, +0.0, +0.5);
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(-0.5, +0.0, +0.5);
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(-0.5, +0.0, -0.5);
-    cylinder.name = "c2";
-    composite.add(cylinder);
-
-    cb.axis(0, 0, 1);
-    cylinder = cb.build();
-    cylinder.position.set(+0.5, -0.5, +0.0);
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(-0.5, +0.5, +0.0);
-    composite.add(cylinder);
-
-    cylinder = cb.build();
-    cylinder.position.set(-0.5, -0.5, +0.0);
-    composite.add(cylinder);
-
-    var ab = new Sk.geometry.ArrowBuilder();
-    ab.radius(0.01).material(Sk.ffi.remapToJs(materialPy));
-
-    ab.axis(1, 0, 0);
-    arrow = ab.build();
-    arrow.name = "e1";
-    arrow.position.set(+0.0, -0.5, -0.5);
-    composite.add(arrow);
-
-    ab.axis(0, 1, 0);
-    arrow = ab.build();
-    arrow.name = "e2";
-    arrow.position.set(+0.5, +0.0, -0.5);
-    composite.add(arrow);
-
-    ab.axis(0, 0, 1);
-    arrow = ab.build();
-    arrow.position.set(+0.5, +0.5, +0.0);
-    composite.add(arrow);
-
-    Sk.ffi.referenceToPy(composite, Sk.geometry.VOLUME, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var composite = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      default: {
-        return Sk.three.object3DGetAttr(Sk.geometry.VOLUME, selfPy, name);
-      }
-    }
-  });
-  $loc.__setattr__ = Sk.ffi.functionPy(function(selfPy, name, valuePy) {
-    var composite = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_ORIENTATION: {
-        Sk.ffi.checkArgType(name, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(valuePy), valuePy);
-        var orientation = Sk.ffi.remapToJs(valuePy);
-        var e1 = composite.getObjectByName("e1");
-        var c1 = composite.getObjectByName("c1");
-        var e2 = composite.getObjectByName("e2");
-        var c2 = composite.getObjectByName("c2");
-        if (orientation) {
-          e1.position.set(+0.0, -0.5, -0.5);
-          c1.position.set(+0.0, +0.5, -0.5);
-          e2.position.set(+0.5, +0.0, -0.5);
-          c2.position.set(-0.5, +0.0, -0.5);
+        if (typeof parameters[PROP_COLOR] !== 'undefined') {
+          args[PROP_COLOR] = parameters[PROP_COLOR];
         }
         else {
-          e1.position.set(+0.0, +0.5, -0.5);
-          c1.position.set(+0.0, -0.5, -0.5);
-          e2.position.set(-0.5, +0.0, -0.5);
-          c2.position.set(+0.5, +0.0, -0.5);
+          args[PROP_COLOR] = DEFAULT_COLOR;
+        }
+
+        if (typeof parameters[PROP_WIREFRAME_LINEWIDTH] !== 'undefined') {
+          args[PROP_WIREFRAME_LINEWIDTH] = parameters[PROP_WIREFRAME_LINEWIDTH];
+        }
+
+        if (typeof parameters[PROP_WIREFRAME] !== 'undefined') {
+          args[PROP_WIREFRAME] = parameters[PROP_WIREFRAME];
+          if (parameters[PROP_WIREFRAME]) {
+            return Sk.ffi.callsim(mod[MESH_BASIC_MATERIAL], Sk.ffi.remapToPy(args));
+          }
+          else {
+            return Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
+          }
+        }
+        else {
+          args[PROP_WIREFRAME] = false;
+          return Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
         }
       }
-      break;
-      default: {
-        return Sk.three.object3DSetAttr(Sk.geometry.VOLUME, selfPy, name, valuePy);
+    }
+
+    function completeMesh(geometryPy, parameters) {
+
+      function modifyMesh(meshPy) {
+        var mesh = Sk.ffi.remapToJs(meshPy);
+        if (parameters[PROP_NAME]) {
+          mesh.name = parameters[PROP_NAME];
+        }
+        return meshPy;
+      }
+
+      if (parameters[PROP_MATERIAL]) {
+        return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, parameters[PROP_MATERIAL]));
+      }
+      else {
+        var args = {};
+
+        if (typeof parameters[PROP_COLOR] !== 'undefined') {
+          args[PROP_COLOR] = parameters[PROP_COLOR];
+        }
+        else {
+          args[PROP_COLOR] = DEFAULT_COLOR;
+        }
+
+        if (typeof parameters[PROP_WIREFRAME_LINEWIDTH] !== 'undefined') {
+          args[PROP_WIREFRAME_LINEWIDTH] = parameters[PROP_WIREFRAME_LINEWIDTH];
+        }
+
+        if (typeof parameters[PROP_WIREFRAME] !== 'undefined') {
+          args[PROP_WIREFRAME] = parameters[PROP_WIREFRAME];
+          if (parameters[PROP_WIREFRAME]) {
+            var materialPy = Sk.ffi.callsim(mod[MESH_BASIC_MATERIAL], Sk.ffi.remapToPy(args));
+            return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
+          }
+          else {
+            var materialPy = Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
+            return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
+          }
+        }
+        else {
+          args[PROP_WIREFRAME] = false;
+          var materialPy = Sk.ffi.callsim(mod[MESH_LAMBERT_MATERIAL], Sk.ffi.remapToPy(args));
+          return modifyMesh(Sk.ffi.callsim(mod[MESH], geometryPy, materialPy));
+        }
       }
     }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    var names  = [];
-    var args = names.map(function(name) {return [name, Sk.ffi.remapToJs(Sk.ffh.str(Sk.ffi.gattr(selfPy, name)))].join(EQUAL);});
-    return Sk.builtin.stringToPy(Sk.geometry.VOLUME + LPAREN + args.join(COMMA + SPACE) + RPAREN);
-  });
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    var names  = [];
-    var argsPy = names.map(function(name) {return Sk.ffi.gattr(selfPy, name);});
-    var args = argsPy.map(function(valuePy) {return Sk.ffi.remapToJs(Sk.ffh.repr(valuePy));});
-    return Sk.builtin.stringToPy(Sk.geometry.VOLUME + LPAREN + args.join(COMMA + SPACE) + RPAREN);
-  });
-}, Sk.geometry.VOLUME, []);
-/**
- * VortexBuilder
- */
-mod[Sk.geometry.VORTEX_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
-  $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
-    Sk.ffi.checkMethodArgs(Sk.geometry.VORTEX_BUILDER, arguments, 0, 0);
-    Sk.ffi.referenceToPy({}, Sk.geometry.VORTEX_BUILDER, undefined, selfPy);
-  });
-  $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
-    var args = Sk.ffi.remapToJs(selfPy);
-    switch(name) {
-      case PROP_RADIUS: {
-        return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
-          Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
-          args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
-          return selfPy;
+
+    mod[WORLD] = Sk.ffi.functionPy(function()
+        {
+          Sk.ffi.checkFunctionArgs(WORLD, arguments, 0, 0);
+          var scenePy = Sk.ffi.callsim(mod[SCENE]);
+          var scene = Sk.ffi.remapToJs(scenePy);
+
+          function addPointLight(x, y, z)
+          {
+            var pointLight = new THREE[POINT_LIGHT](0xFFFFFF);
+            pointLight.position.set(x, y, z);
+            scene.add(pointLight);
+          }
+
+          addPointLight(+5, +5, +5);
+
+          scene.add(new THREE[AMBIENT_LIGHT](0x222222));
+
+          return scenePy;
         });
+
+    /**
+     * @param {number} size The extent of the axes.
+     */
+    function createCartesianAxes(size) {
+      var COLOR_X_AXIS = 0xFF0000;
+      var COLOR_Y_AXIS = 0x00FF00;
+      var COLOR_Z_AXIS = 0x0000FF;
+      var geometries = [[+size, 0, 0], [0, +size, 0], [0, 0, +size], [-size, 0, 0], [0, -size, 0], [0, 0, -size]].map(function(v) {
+        var geometry = new THREE[GEOMETRY]();
+        geometry[PROP_VERTICES].push(new THREE[VECTOR_3](0, 0, 0));
+        geometry[PROP_VERTICES].push(new THREE[VECTOR_3](v[0], v[1], v[2]));
+        return geometry;
+      });
+
+      var axes = new THREE[Sk.three.OBJECT_3D]();
+      axes.add(new THREE[LINE](geometries[0], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_X_AXIS, 'opacity': 0.5, 'transparent': true})));
+      axes.add(new THREE[LINE](geometries[1], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_Y_AXIS, 'opacity': 0.5, 'transparent': true})));
+      axes.add(new THREE[LINE](geometries[2], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_Z_AXIS, 'opacity': 0.5, 'transparent': true})));
+      axes.add(new THREE[LINE](geometries[3], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_X_AXIS, 'opacity': 0.2, 'transparent': true})));
+      axes.add(new THREE[LINE](geometries[4], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_Y_AXIS, 'opacity': 0.2, 'transparent': true})));
+      axes.add(new THREE[LINE](geometries[5], new THREE[LINE_BASIC_MATERIAL]({'color': COLOR_Z_AXIS, 'opacity': 0.2, 'transparent': true})));
+      return axes;
+    }
+
+    /**
+     * @param {number} majorSteps
+     * @param {number} minorsPerMajorMark
+     * @param {number} majorScale
+     * @param {!Object} e
+     * @param {!Object} o
+     */
+    function createCartesianLines(majorSteps, minorsPerMajorMark, majorScale, e, o) {
+      var grid = new THREE[Sk.three.OBJECT_3D]();
+      var steps = majorSteps * minorsPerMajorMark;
+      var minorScale = majorScale / minorsPerMajorMark;
+      var extent = majorSteps * majorScale;
+      var extentX = o.x * extent;
+      var extentY = o.y * extent;
+      var extentZ = o.z * extent;
+      for (var i = -steps; i <= steps; i += 1) {
+        if (i != 0) {
+          var t = i * minorScale;
+          var gridLineGeometry = new THREE[GEOMETRY]();
+          gridLineGeometry[PROP_VERTICES].push(new THREE[VECTOR_3](e.x * t - extentX, e.y * t - extentY, e.z * t - extentZ));
+          gridLineGeometry[PROP_VERTICES].push(new THREE[VECTOR_3](e.x * t + extentX, e.y * t + extentY, e.z * t + extentZ));
+          var material = (i % minorsPerMajorMark === 0) ? MATERIAL_GRID_MAJOR : MATERIAL_GRID_MINOR;
+          var line = new THREE[LINE](gridLineGeometry, material);
+          grid.add(line);
+        }
       }
-      case PROP_SEGMENTS: {
-        return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
-          Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
-          Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
-          args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
-          return selfPy;
-        });
+      return grid;
+    }
+
+    mod[CARTESIAN_SPACE] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy, scenePy, rendererPy, cameraPy) {
+        var scene;
+        var renderer;
+        var camera;
+        Sk.ffi.checkMethodArgs(CARTESIAN_SPACE + '(scene, renderer)', arguments, 0, 3);
+        if (!Sk.ffi.isDefined(scenePy))
+        {
+          scenePy = Sk.ffi.callsim(mod[WORLD]);
+        }
+        scene = Sk.ffi.remapToJs(scenePy);
+        if (!Sk.ffi.isDefined(rendererPy))
+        {
+          rendererPy = Sk.ffi.callsim(mod[WEBGL_RENDERER], Sk.ffi.remapToPy({'antialias': true}));
+        }
+        renderer = Sk.ffi.remapToJs(rendererPy);
+        if (!Sk.ffi.isDefined(cameraPy))
+        {
+          cameraPy = Sk.ffi.callsim(mod[PERSPECTIVE_CAMERA], Sk.ffi.numberToFloatPy(45), Sk.ffi.numberToFloatPy(1.0), Sk.ffi.numberToFloatPy(0.1), Sk.ffi.numberToFloatPy(10000));
+        }
+        camera = Sk.ffi.remapToJs(cameraPy);
+        camera[PROP_UP].set(0, 0, 1);
+        camera[PROP_POSITION].set(+8, +4, +5);
+        camera[METHOD_LOOK_AT](scene.position);
+
+        renderer[METHOD_SET_CLEAR_COLOR](0x080808, 1.0);
+
+        scene.add(createCartesianAxes(1000));
+        scene.add(createCartesianLines(5, 10, 1.0, e1, e2));
+        scene.add(createCartesianLines(5, 10, 1.0, e2, e1));
+        Sk.ffi.referenceToPy({'scenePy': scenePy, 'cameraPy': cameraPy, 'rendererPy': rendererPy}, CARTESIAN_SPACE, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var space = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_CAMERA: {
+            return space.cameraPy;
+          }
+          case PROP_ORIGIN: {
+            return Sk.ffi.gattr(space.scenePy, PROP_POSITION);
+          }
+          case PROP_RENDERER: {
+            return space.rendererPy;
+          }
+          case PROP_SCENE: {
+            return space.scenePy;
+          }
+          case METHOD_ADD: {
+            return Sk.ffi.gattr(space.scenePy, METHOD_ADD);
+          }
+          case METHOD_RENDER: {
+            return Sk.ffi.callableToPy(mod, METHOD_RENDER, function(methodPy) {
+              // Delegate the call to the renderer with scene and camera arguments.
+              methodPy = Sk.ffi.gattr(space.rendererPy, METHOD_RENDER);
+              return Sk.ffi.callsim(methodPy, space.scenePy, space.cameraPy);
+            });
+          }
+          case METHOD_VIEW_SIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_RENDER, function(methodPy, widthPy, heightPy) {
+              Sk.ffi.checkMethodArgs(METHOD_VIEW_SIZE, arguments, 2, 2);
+              Sk.ffi.checkArgType(PROP_WIDTH, Sk.ffi.PyType.INT, Sk.ffi.isInt(widthPy), widthPy);
+              Sk.ffi.checkArgType(PROP_HEIGHT, Sk.ffi.PyType.INT, Sk.ffi.isInt(heightPy), heightPy);
+              var width = Sk.ffi.remapToJs(widthPy);
+              var height = Sk.ffi.remapToJs(heightPy);
+              var renderer = Sk.ffi.remapToJs(space.rendererPy);
+              renderer.setSize(width, height);
+              var camera = Sk.ffi.remapToJs(space.cameraPy);
+              camera.aspect = width / height;
+              camera[METHOD_UPDATE_PROJECTION_MATRIX]();
+            });
+          }
+          default: {
+            throw Sk.ffi.err.attribute(name).isNotGetableOnType(CARTESIAN_SPACE);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(CARTESIAN_SPACE);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(CARTESIAN_SPACE);
+      });
+    }, CARTESIAN_SPACE, []);
+
+    /**
+     * @param {Object} selfPy
+     * @param {string} name
+     * @param {string} className
+     */
+    function builderGetAttr(selfPy, name, className) {
+      var self = Sk.ffi.remapToJs(selfPy);
+      switch (name) {
+        case PROP_ATTITUDE: {
+          return Sk.ffi.callableToPy(mod, name, function(methodPy, attitudePy) {
+            Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
+            Sk.ffi.checkArgType(name, EUCLIDEAN_3, isEuclidean3Py(attitudePy), attitudePy);
+            self[name] = Sk.ffi.remapToJs(attitudePy);
+            return selfPy;
+          });
+        }
+        case PROP_COLOR: {
+          return Sk.ffi.callableToPy(mod, name, function(methodPy, colorPy) {
+            Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
+            Sk.ffi.checkArgType(name, NUMBER, Sk.ffi.isNum(colorPy) || Sk.builtin.isStringPy(colorPy) || Sk.ffi.isInstance(colorPy, COLOR), colorPy);
+            self[name] = Sk.ffi.remapToJs(colorPy);
+            return selfPy;
+          });
+        }
+        case PROP_MATERIAL: {
+          return Sk.ffi.callableToPy(mod, PROP_MATERIAL, function(methodPy, materialPy) {
+            Sk.ffi.checkMethodArgs(PROP_MATERIAL, arguments, 1, 1);
+            Sk.ffi.checkArgType(PROP_MATERIAL, Sk.three.MATERIAL, Sk.ffi.isInstance(materialPy), materialPy);
+            self[PROP_MATERIAL] = materialPy;
+            return selfPy;
+          });
+        }
+        case PROP_NAME: {
+          return methodName(selfPy);
+        }
+        case PROP_SCALE: {
+          return Sk.ffi.callableToPy(mod, PROP_SCALE, function(methodPy, lengthPy) {
+            Sk.ffi.checkMethodArgs(PROP_SCALE, arguments, 1, 1);
+            Sk.ffi.checkArgType(PROP_SCALE, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(lengthPy) || Sk.ffi.isNone(lengthPy), lengthPy);
+            self[PROP_SCALE] = Sk.ffi.remapToJs(lengthPy);
+            return selfPy;
+          });
+        }
+        case PROP_VOLUME: {
+          return Sk.ffi.callableToPy(mod, PROP_VOLUME, function(methodPy, volumePy) {
+            Sk.ffi.checkMethodArgs(PROP_VOLUME, arguments, 1, 1);
+            Sk.ffi.checkArgType(PROP_VOLUME, NUMBER, Sk.ffi.isNum(volumePy) || Sk.ffi.isNone(volumePy), volumePy);
+            self[PROP_VOLUME] = Sk.ffi.remapToJs(volumePy);
+            return selfPy;
+          });
+        }
+        case PROP_WIREFRAME: {
+          return Sk.ffi.callableToPy(mod, name, function(methodPy, wireframePy) {
+            Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
+            Sk.ffi.checkArgType(name, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(wireframePy), wireframePy);
+            self[name] = Sk.ffi.remapToJs(wireframePy);
+            return selfPy;
+          });
+        }
+        case PROP_WIREFRAME_LINEWIDTH: {
+          return Sk.ffi.callableToPy(mod, name, function(methodPy, wireframeLinewidthPy) {
+            Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
+            Sk.ffi.checkArgType(name, Sk.ffi.PyType.INT, Sk.ffi.isInt(wireframeLinewidthPy), wireframeLinewidthPy);
+            self[name] = Sk.ffi.remapToJs(wireframeLinewidthPy);
+            return selfPy;
+          });
+        }
+        default: {
+          throw Sk.ffi.err.attribute(name).isNotGetableOnType(className);
+        }
       }
-      case METHOD_BUILD: {
-        return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
-          /**
-           * @return {{radius: number, height: number}}
-           */
-          function dimensionPlane() {
-            var dims = {};
-            if (args[PROP_VOLUME]) {
-              var w = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
-              var h = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
-              var alpha = Math.pow(args[PROP_VOLUME] / (w * h), 1 / 2);
-              dims.width  = alpha * w;
-              dims.height = alpha * h;
+    }
+    /**
+     * ArrowBuilder
+     * @constructor
+     */
+    Sk.geometry.ArrowBuilder = function() {
+      this._innerPy = Sk.ffi.callsim(mod[Sk.geometry.ARROW_BUILDER]);
+    };
+    Sk.geometry.ArrowBuilder.prototype = {
+      constructor: Sk.geometry.ArrowBuilder,
+      axis: function(x, y, z) {
+        var xPy = Sk.ffi.numberToFloatPy(x);
+        var yPy = Sk.ffi.numberToFloatPy(y);
+        var zPy = Sk.ffi.numberToFloatPy(z);
+        var directionPy = Sk.ffi.callsim(mod[Sk.e3ga.VECTOR_E3], xPy, yPy, zPy);
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_AXIS), directionPy);
+        return this;
+      },
+      material: function(material) {
+        var materialPy = Sk.ffi.callsim(mod[Sk.three.MATERIAL], Sk.ffi.referenceToPy(material, Sk.three.MATERIAL));
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_MATERIAL), materialPy);
+        return this;
+      },
+      radius: function(radius) {
+        var radiusPy = Sk.ffi.numberToFloatPy(radius);
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_RADIUS), radiusPy);
+        return this;
+      },
+      build: function() {
+        return Sk.ffi.remapToJs(Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, METHOD_BUILD)));
+      }
+    };
+    /**
+     * ArrowBuilder
+     */
+    mod[Sk.geometry.ARROW_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(Sk.geometry.ARROW_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, Sk.geometry.ARROW_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var arrow = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_MAGNITUDE: {
+            return Sk.ffi.callableToPy(mod, PROP_MAGNITUDE, function(methodPy, lengthPy) {
+              Sk.ffi.checkMethodArgs(PROP_MAGNITUDE, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_MAGNITUDE, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(lengthPy) || Sk.ffi.isNone(lengthPy), lengthPy);
+              arrow[PROP_MAGNITUDE] = Sk.ffi.remapToJs(lengthPy);
+              return selfPy;
+            });
+          }
+          case PROP_AXIS: {
+            return Sk.ffi.callableToPy(mod, PROP_AXIS, function(methodPy, axisPy) {
+              Sk.ffi.checkMethodArgs(PROP_AXIS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_AXIS, [EUCLIDEAN_3, Sk.ffi.PyType.NONE], Sk.ffi.isInstance(axisPy, EUCLIDEAN_3) || Sk.ffi.isNone(axisPy), axisPy);
+              arrow[PROP_AXIS] = Sk.ffi.remapToJs(axisPy);
+              return selfPy;
+            });
+          }
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              arrow[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              arrow[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{scale: number, attitude: Object, length: number, radius: number, axis: Object}}
+               */
+              function dimensionArrow() {
+                var dims = {};
+                dims.attitude = (arrow.attitude) ? arrow.attitude : one;
+                dims.axis = (arrow[PROP_AXIS]) ? arrow[PROP_AXIS] : E3;
+                if (arrow.volume) {
+                  var s = (arrow.scale) ? arrow.scale : 1;
+                  var h = (arrow.length) ? arrow.length : DEFAULT_CYLINDER_HEIGHT;
+                  var r = (arrow.radius) ? arrow.radius : DEFAULT_CYLINDER_RADIUS;
+                  var alpha = r / h;
+                  dims.radius = Math.pow(3 * alpha * arrow.volume / Math.PI, 1 / 3);
+                  dims.length = dims.radius / alpha;
+                }
+                else {
+                  dims.scale = (arrow.scale) ? arrow.scale : 1;
+                  dims.radius = (arrow.radius) ? arrow.radius : DEFAULT_CYLINDER_RADIUS;
+                  dims.length = (arrow.length) ? arrow.length : DEFAULT_CYLINDER_HEIGHT;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionArrow();
+              var scalePy = Sk.ffi.numberToFloatPy(dimensions[PROP_SCALE]);
+              var attitudePy = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_ATTITUDE], EUCLIDEAN_3));
+              var segmentsPy = Sk.ffi.numberToIntPy(arrow[PROP_SEGMENTS] ? arrow[PROP_SEGMENTS] : 32);
+              var lengthPy = Sk.ffi.numberToFloatPy(dimensions[PROP_MAGNITUDE]);
+              var axisPy = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_AXIS], EUCLIDEAN_3));
+              var geometryPy = Sk.ffi.callsim(mod[Sk.three.ARROW_GEOMETRY], scalePy, attitudePy, segmentsPy, lengthPy, undefined, undefined, undefined, axisPy);
+              return completeMesh(geometryPy, arrow);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              //        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, Sk.geometry.ARROW_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(Sk.geometry.ARROW_BUILDER + '(' + ')');
+      });
+    }, Sk.geometry.ARROW_BUILDER, []);
+
+    mod[CONE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(CONE_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, CONE_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var cone = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_HEIGHT: {
+            return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
+              Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
+              cone[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
+              return selfPy;
+            });
+          }
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              cone[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              cone[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{radius: number, height: number}}
+               */
+              function dimensionCone() {
+                var dims = {};
+                if (cone.volume) {
+                  var r = (cone.radius) ? cone.radius : DEFAULT_CYLINDER_RADIUS;
+                  var h = (cone.height) ? cone.height : DEFAULT_CYLINDER_HEIGHT;
+                  var alpha = r / h;
+                  dims.radius = Math.pow(3 * alpha * cone.volume / Math.PI, 1 / 3);
+                  dims.height = dims.radius / alpha;
+                }
+                else {
+                  dims.radius = (cone.radius) ? cone.radius : DEFAULT_CYLINDER_RADIUS;
+                  dims.height = (cone.height) ? cone.height : DEFAULT_CYLINDER_HEIGHT;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionCone();
+              var radiusTop = Sk.ffi.numberToFloatPy(0);
+              var radiusBottom = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
+              var height = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
+              var radialSegments = Sk.ffi.numberToIntPy(cone[PROP_SEGMENTS] ? cone[PROP_SEGMENTS] : 32);
+              var heightSegments = Sk.ffi.numberToIntPy(1);
+              var openEnded = Sk.ffi.booleanToPy(false);
+              var geometryPy = Sk.ffi.callsim(mod[CYLINDER_GEOMETRY], radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded);
+              return completeMesh(geometryPy, cone);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              //        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, CONE_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(CONE_BUILDER + '(' + ')');
+      });
+    }, CONE_BUILDER, []);
+
+    mod[CUBE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(CUBE_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, CUBE_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var cube = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_DEPTH: {
+            return Sk.ffi.callableToPy(mod, PROP_DEPTH, function(methodPy, depthPy) {
+              Sk.ffi.checkMethodArgs(PROP_DEPTH, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_DEPTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(depthPy) || Sk.ffi.isNone(depthPy), depthPy);
+              cube[PROP_DEPTH] = Sk.ffi.remapToJs(depthPy);
+              return selfPy;
+            });
+          }
+          case PROP_HEIGHT: {
+            return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
+              Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
+              cube[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
+              return selfPy;
+            });
+          }
+          case PROP_WIDTH: {
+            return Sk.ffi.callableToPy(mod, PROP_WIDTH, function(methodPy, widthPy) {
+              Sk.ffi.checkMethodArgs(PROP_WIDTH, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_WIDTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(widthPy) || Sk.ffi.isNone(widthPy), widthPy);
+              cube[PROP_WIDTH] = Sk.ffi.remapToJs(widthPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              cube[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{width: number, height: number, depth: number}}
+               */
+              function dimensionCube() {
+                var dims = {};
+                if (cube[PROP_VOLUME]) {
+                  var w = (cube.width) ? cube.width : DEFAULT_CUBE_LENGTH;
+                  var h = (cube.height) ? cube.height : DEFAULT_CUBE_LENGTH;
+                  var d = (cube.depth) ? cube.depth : DEFAULT_CUBE_LENGTH;
+                  var alpha = Math.pow(cube[PROP_VOLUME] / (w * h * d), 1 / 3);
+                  dims.width = alpha * w;
+                  dims.height = alpha * h;
+                  dims.depth = alpha * d;
+                }
+                else {
+                  dims.width = (cube.width) ? cube.width : DEFAULT_CUBE_LENGTH;
+                  dims.height = (cube.height) ? cube.height : DEFAULT_CUBE_LENGTH;
+                  dims.depth = (cube.depth) ? cube.depth : DEFAULT_CUBE_LENGTH;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionCube();
+              var width = Sk.ffi.numberToFloatPy(dimensions[PROP_WIDTH]);
+              var height = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
+              var depth = Sk.ffi.numberToFloatPy(dimensions[PROP_DEPTH]);
+              var segments = Sk.ffi.numberToIntPy(cube[PROP_SEGMENTS] ? cube[PROP_SEGMENTS] : 1);
+              var geometryPy = Sk.ffi.callsim(mod[BOX_GEOMETRY], width, height, depth, segments, segments, segments);
+              return completeMesh(geometryPy, cube);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              cube[PROP_DEPTH] = 1;
+              cube[PROP_WIDTH] = 1;
+              cube[PROP_HEIGHT] = 1;
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, CUBE_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(CUBE_BUILDER + '(' + ')');
+      });
+    }, CUBE_BUILDER, []);
+    /**
+     * CylinderBuilder
+     * @constructor
+     */
+    Sk.geometry.CylinderBuilder = function() {
+      this._innerPy = Sk.ffi.callsim(mod[Sk.geometry.CYLINDER_BUILDER]);
+    };
+    Sk.geometry.CylinderBuilder.prototype = {
+      constructor: Sk.geometry.CylinderBuilder,
+      axis: function(x, y, z) {
+        var xPy = Sk.ffi.numberToFloatPy(x);
+        var yPy = Sk.ffi.numberToFloatPy(y);
+        var zPy = Sk.ffi.numberToFloatPy(z);
+        var directionPy = Sk.ffi.callsim(mod[Sk.e3ga.VECTOR_E3], xPy, yPy, zPy);
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_AXIS), directionPy);
+        return this;
+      },
+      material: function(material) {
+        var materialPy = Sk.ffi.callsim(mod[Sk.three.MATERIAL], Sk.ffi.referenceToPy(material, Sk.three.MATERIAL));
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_MATERIAL), materialPy);
+        return this;
+      },
+      radius: function(radius) {
+        var radiusPy = Sk.ffi.numberToFloatPy(radius);
+        Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, PROP_RADIUS), radiusPy);
+        return this;
+      },
+      build: function() {
+        return Sk.ffi.remapToJs(Sk.ffi.callsim(Sk.ffi.gattr(this._innerPy, METHOD_BUILD)));
+      }
+    };
+    /**
+     * CylinderBuilder
+     */
+    mod[Sk.geometry.CYLINDER_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(Sk.geometry.CYLINDER_BUILDER, arguments, 0, 0);
+        var self = {};
+        self[PROP_RADIUS_TOP] = DEFAULT_CYLINDER_RADIUS;
+        self[PROP_RADIUS_BOTTOM] = DEFAULT_CYLINDER_RADIUS;
+        self[PROP_HEIGHT] = DEFAULT_CYLINDER_HEIGHT;
+        Sk.ffi.referenceToPy(self, Sk.geometry.CYLINDER_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var cylinder = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_AXIS: {
+            return Sk.ffi.callableToPy(mod, PROP_AXIS, function(methodPy, axisPy) {
+              Sk.ffi.checkMethodArgs(PROP_AXIS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_AXIS, [EUCLIDEAN_3, Sk.ffi.PyType.NONE], Sk.ffi.isInstance(axisPy, EUCLIDEAN_3) || Sk.ffi.isNone(axisPy), axisPy);
+              cylinder[PROP_AXIS] = Sk.ffi.remapToJs(axisPy);
+              return selfPy;
+            });
+          }
+          case PROP_HEIGHT: {
+            return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
+              Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
+              cylinder[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
+              return selfPy;
+            });
+          }
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              cylinder[PROP_RADIUS_TOP] = Sk.ffi.remapToJs(radiusPy);
+              cylinder[PROP_RADIUS_BOTTOM] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_RADIUS_TOP: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS_TOP, function(methodPy, radiusTopPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS_TOP, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS_TOP, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusTopPy) || Sk.ffi.isNone(radiusTopPy), radiusTopPy);
+              cylinder[PROP_RADIUS_TOP] = Sk.ffi.remapToJs(radiusTopPy);
+              return selfPy;
+            });
+          }
+          case PROP_RADIUS_BOTTOM: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS_BOTTOM, function(methodPy, radiusBottomPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS_BOTTOM, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS_BOTTOM, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusBottomPy) || Sk.ffi.isNone(radiusBottomPy), radiusBottomPy);
+              cylinder[PROP_RADIUS_BOTTOM] = Sk.ffi.remapToJs(radiusBottomPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              cylinder[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{a: number, b: number, h: number, axis: Object}}
+               */
+              function dimensionCylinder() {
+                var dims = {};
+                dims.axis = (cylinder[PROP_AXIS]) ? cylinder[PROP_AXIS] : E3;
+                if (cylinder.volume) {
+                  var a = (typeof cylinder.radiusTop === 'number') ? cylinder.radiusTop : DEFAULT_CYLINDER_RADIUS;
+                  var b = (typeof cylinder.radiusBottom === 'number') ? cylinder.radiusBottom : DEFAULT_CYLINDER_RADIUS;
+                  var h = (typeof cylinder.height === 'number') ? cylinder.height : DEFAULT_CYLINDER_HEIGHT;
+                  var alpha = Math.pow(3 * cylinder.volume / (b * (b + a) * h * Math.PI), 1 / 3);
+                  dims.a = alpha * a;
+                  dims.b = alpha * b;
+                  dims.h = alpha * h;
+                }
+                else {
+                  dims.a = (typeof cylinder.radiusTop === 'number') ? cylinder.radiusTop : DEFAULT_CYLINDER_RADIUS;
+                  dims.b = (typeof cylinder.radiusBottom === 'number') ? cylinder.radiusBottom : DEFAULT_CYLINDER_RADIUS;
+                  dims.h = (typeof cylinder.height === 'number') ? cylinder.height : DEFAULT_CYLINDER_HEIGHT;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionCylinder();
+              var radiusTop = Sk.ffi.numberToFloatPy(dimensions.a);
+              var radiusBottom = Sk.ffi.numberToFloatPy(dimensions.b);
+              var height = Sk.ffi.numberToFloatPy(dimensions.h);
+              var radialSegments = Sk.ffi.numberToIntPy(cylinder[PROP_SEGMENTS] ? cylinder[PROP_SEGMENTS] : 32);
+              var heightSegments = Sk.ffi.numberToIntPy(1);
+              var openEnded = Sk.ffi.booleanToPy(false);
+              var axisPy = Sk.ffi.callsim(mod[EUCLIDEAN_3], Sk.ffi.referenceToPy(dimensions[PROP_AXIS], EUCLIDEAN_3));
+              var geometryPy = Sk.ffi.callsim(mod[CYLINDER_GEOMETRY], radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, axisPy);
+              return completeMesh(geometryPy, cylinder);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              //        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, Sk.geometry.CYLINDER_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(Sk.geometry.CYLINDER_BUILDER + '(' + ')');
+      });
+    }, Sk.geometry.CYLINDER_BUILDER, []);
+
+    mod[PLANE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(PLANE_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, PLANE_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var plane = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_HEIGHT: {
+            return Sk.ffi.callableToPy(mod, PROP_HEIGHT, function(methodPy, heightPy) {
+              Sk.ffi.checkMethodArgs(PROP_HEIGHT, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_HEIGHT, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(heightPy) || Sk.ffi.isNone(heightPy), heightPy);
+              plane[PROP_HEIGHT] = Sk.ffi.remapToJs(heightPy);
+              return selfPy;
+            });
+          }
+          case PROP_WIDTH: {
+            return Sk.ffi.callableToPy(mod, PROP_WIDTH, function(methodPy, widthPy) {
+              Sk.ffi.checkMethodArgs(PROP_WIDTH, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_WIDTH, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(widthPy) || Sk.ffi.isNone(widthPy), widthPy);
+              plane[PROP_WIDTH] = Sk.ffi.remapToJs(widthPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              plane[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{width: number, height: number}}
+               */
+              function dimensionPlane() {
+                var dims = {};
+                if (plane[PROP_VOLUME]) {
+                  var w = (plane.width) ? plane.width : DEFAULT_CUBE_LENGTH;
+                  var h = (plane.height) ? plane.height : DEFAULT_CUBE_LENGTH;
+                  var alpha = Math.pow(plane[PROP_VOLUME] / (w * h), 1 / 2);
+                  dims.width = alpha * w;
+                  dims.height = alpha * h;
+                }
+                else {
+                  dims.width = (plane.width) ? plane.width : DEFAULT_CUBE_LENGTH;
+                  dims.height = (plane.height) ? plane.height : DEFAULT_CUBE_LENGTH;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionPlane();
+              var width = Sk.ffi.numberToFloatPy(dimensions[PROP_WIDTH]);
+              var height = Sk.ffi.numberToFloatPy(dimensions[PROP_HEIGHT]);
+              var segments = Sk.ffi.numberToIntPy(plane[PROP_SEGMENTS] ? plane[PROP_SEGMENTS] : 1);
+              var geometryPy = Sk.ffi.callsim(mod[PLANE_GEOMETRY], width, height, segments, segments);
+              return completeMesh(geometryPy, plane);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              //        args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, PLANE_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(PLANE_BUILDER + '(' + ')');
+      });
+    }, PLANE_BUILDER, []);
+
+    mod[SPHERE_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(SPHERE_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, SPHERE_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var args = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{radius: number}}
+               */
+              function dimensionSphere() {
+                var dims = {};
+                if (args[PROP_VOLUME]) {
+                  var r = (args.radius) ? args.radius : DEFAULT_SPHERE_RADIUS;
+                  dims.radius = Math.pow(3 * args[PROP_VOLUME] / (4 * Math.PI), 1 / 3);
+                }
+                else {
+                  dims.radius = (args.radius) ? args.radius : DEFAULT_SPHERE_RADIUS;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionSphere();
+              var radius = Sk.ffi.numberToFloatPy(dimensions.radius);
+              var widthSegments = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 24);
+              var heightSegments = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 18);
+              var geometryPy = Sk.ffi.callsim(mod[SPHERE_GEOMETRY], radius, widthSegments, heightSegments);
+              return completeMesh(geometryPy, args);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              args[PROP_RADIUS] = Math.pow(3 / (4 * Math.PI), 1 / 3);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, SPHERE_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(SPHERE_BUILDER + '(' + ')');
+      });
+    }, SPHERE_BUILDER, []);
+    /**
+     * VolumeBuilder
+     */
+    mod[Sk.geometry.VOLUME_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(Sk.geometry.VOLUME_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, Sk.geometry.VOLUME_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var args = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{radius: number, height: number}}
+               */
+              function dimensionPlane() {
+                var dims = {};
+                if (args[PROP_VOLUME]) {
+                  var w = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
+                  var h = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
+                  var alpha = Math.pow(args[PROP_VOLUME] / (w * h), 1 / 2);
+                  dims.width = alpha * w;
+                  dims.height = alpha * h;
+                }
+                else {
+                  dims.radius = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
+                  dims.height = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionPlane();
+              var radius = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
+              var radiusCone = Sk.ffi.numberToFloatPy(0.08);
+              var radiusShaft = Sk.ffi.numberToFloatPy(0.01);
+              var lengthCone = Sk.ffi.numberToFloatPy(0.2);
+              var lengthShaft = Sk.ffi.numberToFloatPy(0.8);
+              var arrows = Sk.ffi.numberToIntPy(6);
+              var segments = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 32);
+              return Sk.ffi.callsim(mod[Sk.geometry.VOLUME], createMaterialPy(args));
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, Sk.geometry.VOLUME_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(Sk.geometry.VOLUME_BUILDER + '(' + ')');
+      });
+    }, Sk.geometry.VOLUME_BUILDER, []);
+    /**
+     * Volume
+     */
+    mod[Sk.geometry.VOLUME] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy, materialPy) {
+        Sk.ffi.checkMethodArgs(Sk.geometry.VOLUME, arguments, 1, 1);
+        var composite = new THREE[Sk.three.OBJECT_3D]();
+        var cylinder;
+        var arrow;
+        var cb = new Sk.geometry.CylinderBuilder();
+        cb.radius(0.01).material(Sk.ffi.remapToJs(materialPy));
+
+        cb.axis(1, 0, 0);
+        cylinder = cb.build();
+        cylinder.position.set(+0.0, +0.5, +0.5);
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(+0.0, +0.5, -0.5);
+        cylinder.name = 'c1';
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(+0.0, -0.5, +0.5);
+        composite.add(cylinder);
+
+        cb.axis(0, 1, 0);
+        cylinder = cb.build();
+        cylinder.position.set(+0.5, +0.0, +0.5);
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(-0.5, +0.0, +0.5);
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(-0.5, +0.0, -0.5);
+        cylinder.name = 'c2';
+        composite.add(cylinder);
+
+        cb.axis(0, 0, 1);
+        cylinder = cb.build();
+        cylinder.position.set(+0.5, -0.5, +0.0);
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(-0.5, +0.5, +0.0);
+        composite.add(cylinder);
+
+        cylinder = cb.build();
+        cylinder.position.set(-0.5, -0.5, +0.0);
+        composite.add(cylinder);
+
+        var ab = new Sk.geometry.ArrowBuilder();
+        ab.radius(0.01).material(Sk.ffi.remapToJs(materialPy));
+
+        ab.axis(1, 0, 0);
+        arrow = ab.build();
+        arrow.name = 'e1';
+        arrow.position.set(+0.0, -0.5, -0.5);
+        composite.add(arrow);
+
+        ab.axis(0, 1, 0);
+        arrow = ab.build();
+        arrow.name = 'e2';
+        arrow.position.set(+0.5, +0.0, -0.5);
+        composite.add(arrow);
+
+        ab.axis(0, 0, 1);
+        arrow = ab.build();
+        arrow.position.set(+0.5, +0.5, +0.0);
+        composite.add(arrow);
+
+        Sk.ffi.referenceToPy(composite, Sk.geometry.VOLUME, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var composite = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          default: {
+            return Sk.three.object3DGetAttr(Sk.geometry.VOLUME, selfPy, name);
+          }
+        }
+      });
+      $loc.__setattr__ = Sk.ffi.functionPy(function(selfPy, name, valuePy) {
+        var composite = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_ORIENTATION: {
+            Sk.ffi.checkArgType(name, Sk.ffi.PyType.BOOL, Sk.ffi.isBool(valuePy), valuePy);
+            var orientation = Sk.ffi.remapToJs(valuePy);
+            var e1 = composite.getObjectByName('e1');
+            var c1 = composite.getObjectByName('c1');
+            var e2 = composite.getObjectByName('e2');
+            var c2 = composite.getObjectByName('c2');
+            if (orientation) {
+              e1.position.set(+0.0, -0.5, -0.5);
+              c1.position.set(+0.0, +0.5, -0.5);
+              e2.position.set(+0.5, +0.0, -0.5);
+              c2.position.set(-0.5, +0.0, -0.5);
             }
             else {
-              dims.radius = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
-              dims.height = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
+              e1.position.set(+0.0, +0.5, -0.5);
+              c1.position.set(+0.0, -0.5, -0.5);
+              e2.position.set(-0.5, +0.0, -0.5);
+              c2.position.set(+0.5, +0.0, -0.5);
             }
-            return dims;
           }
-          Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
-          var dimensions = dimensionPlane();
-          var radius      = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
-          var radiusCone  = Sk.ffi.numberToFloatPy(0.08);
-          var radiusShaft = Sk.ffi.numberToFloatPy(0.01);
-          var lengthCone  = Sk.ffi.numberToFloatPy(0.2);
-          var lengthShaft = Sk.ffi.numberToFloatPy(0.8);
-          var arrows      = Sk.ffi.numberToIntPy(6);
-          var segments    = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 32);
-          var geometryPy  = Sk.ffi.callsim(mod[Sk.three.VORTEX_GEOMETRY], radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrows, segments);
-          return completeMesh(geometryPy, args);
-        });
-      }
-      case METHOD_NORMALIZE: {
-        return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
-          Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
-          args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
-          return selfPy;
-        });
-      }
-      default: {
-        return builderGetAttr(selfPy, name, Sk.geometry.VORTEX_BUILDER);
-      }
-    }
-  });
-  $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
-    var self = Sk.ffi.remapToJs(selfPy);
-    return Sk.builtin.stringToPy("" + self);
-  })
-  $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
-    return Sk.builtin.stringToPy(Sk.geometry.VORTEX_BUILDER + "(" + ")");
-  })
-}, Sk.geometry.VORTEX_BUILDER, []);
+          break;
+          default: {
+            return Sk.three.object3DSetAttr(Sk.geometry.VOLUME, selfPy, name, valuePy);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        var names = [];
+        var args = names.map(function(name) {return [name, Sk.ffi.remapToJs(Sk.ffh.str(Sk.ffi.gattr(selfPy, name)))].join(EQUAL);});
+        return Sk.builtin.stringToPy(Sk.geometry.VOLUME + LPAREN + args.join(COMMA + SPACE) + RPAREN);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        var names = [];
+        var argsPy = names.map(function(name) {return Sk.ffi.gattr(selfPy, name);});
+        var args = argsPy.map(function(valuePy) {return Sk.ffi.remapToJs(Sk.ffh.repr(valuePy));});
+        return Sk.builtin.stringToPy(Sk.geometry.VOLUME + LPAREN + args.join(COMMA + SPACE) + RPAREN);
+      });
+    }, Sk.geometry.VOLUME, []);
+    /**
+     * VortexBuilder
+     */
+    mod[Sk.geometry.VORTEX_BUILDER] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
+      $loc.__init__ = Sk.ffi.functionPy(function(selfPy) {
+        Sk.ffi.checkMethodArgs(Sk.geometry.VORTEX_BUILDER, arguments, 0, 0);
+        Sk.ffi.referenceToPy({}, Sk.geometry.VORTEX_BUILDER, undefined, selfPy);
+      });
+      $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
+        var args = Sk.ffi.remapToJs(selfPy);
+        switch (name) {
+          case PROP_RADIUS: {
+            return Sk.ffi.callableToPy(mod, PROP_RADIUS, function(methodPy, radiusPy) {
+              Sk.ffi.checkMethodArgs(PROP_RADIUS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_RADIUS, [NUMBER, Sk.ffi.PyType.NONE], Sk.ffi.isNum(radiusPy) || Sk.ffi.isNone(radiusPy), radiusPy);
+              args[PROP_RADIUS] = Sk.ffi.remapToJs(radiusPy);
+              return selfPy;
+            });
+          }
+          case PROP_SEGMENTS: {
+            return Sk.ffi.callableToPy(mod, PROP_SEGMENTS, function(methodPy, segmentsPy) {
+              Sk.ffi.checkMethodArgs(PROP_SEGMENTS, arguments, 1, 1);
+              Sk.ffi.checkArgType(PROP_SEGMENTS, [Sk.ffi.PyType.INT, Sk.ffi.PyType.NONE], Sk.ffi.isInt(segmentsPy) || Sk.ffi.isNone(segmentsPy), segmentsPy);
+              args[PROP_SEGMENTS] = Sk.ffi.remapToJs(segmentsPy);
+              return selfPy;
+            });
+          }
+          case METHOD_BUILD: {
+            return Sk.ffi.callableToPy(mod, METHOD_BUILD, function(methodPy) {
+              /**
+               * @return {{radius: number, height: number}}
+               */
+              function dimensionPlane() {
+                var dims = {};
+                if (args[PROP_VOLUME]) {
+                  var w = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
+                  var h = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
+                  var alpha = Math.pow(args[PROP_VOLUME] / (w * h), 1 / 2);
+                  dims.width = alpha * w;
+                  dims.height = alpha * h;
+                }
+                else {
+                  dims.radius = (args.radius) ? args.radius : DEFAULT_CUBE_LENGTH;
+                  dims.height = (args.height) ? args.height : DEFAULT_CUBE_LENGTH;
+                }
+                return dims;
+              }
+              Sk.ffi.checkMethodArgs(METHOD_BUILD, arguments, 0, 0);
+              var dimensions = dimensionPlane();
+              var radius = Sk.ffi.numberToFloatPy(dimensions[PROP_RADIUS]);
+              var radiusCone = Sk.ffi.numberToFloatPy(0.08);
+              var radiusShaft = Sk.ffi.numberToFloatPy(0.01);
+              var lengthCone = Sk.ffi.numberToFloatPy(0.2);
+              var lengthShaft = Sk.ffi.numberToFloatPy(0.8);
+              var arrows = Sk.ffi.numberToIntPy(6);
+              var segments = Sk.ffi.numberToIntPy(args[PROP_SEGMENTS] ? args[PROP_SEGMENTS] : 32);
+              var geometryPy = Sk.ffi.callsim(mod[Sk.three.VORTEX_GEOMETRY], radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrows, segments);
+              return completeMesh(geometryPy, args);
+            });
+          }
+          case METHOD_NORMALIZE: {
+            return Sk.ffi.callableToPy(mod, METHOD_NORMALIZE, function(methodPy) {
+              Sk.ffi.checkMethodArgs(METHOD_NORMALIZE, arguments, 0, 0);
+              args[PROP_RADIUS] = Math.sqrt(1 / Math.PI);
+              return selfPy;
+            });
+          }
+          default: {
+            return builderGetAttr(selfPy, name, Sk.geometry.VORTEX_BUILDER);
+          }
+        }
+      });
+      $loc.__str__ = Sk.ffi.functionPy(function(selfPy) {
+        var self = Sk.ffi.remapToJs(selfPy);
+        return Sk.builtin.stringToPy('' + self);
+      });
+      $loc.__repr__ = Sk.ffi.functionPy(function(selfPy) {
+        return Sk.builtin.stringToPy(Sk.geometry.VORTEX_BUILDER + '(' + ')');
+      });
+    }, Sk.geometry.VORTEX_BUILDER, []);
 
-};
+  };
 }).call(this);
 (function() {
   Sk.builtin.defineHttp = function(mod) {
@@ -33850,6 +33987,8 @@ mod[PROBE_E3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
          * @param {number} x
          * @param {number} y
          * @param {number} z
+         *
+         * @return {THREE.Quaternion}
          */
         function quaternion(x, y, z) {
           if (z !== -1) {
@@ -33905,7 +34044,8 @@ mod[PROBE_E3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
         var grade1 = Sk.ffi.remapToJs(probe[PROP_GRADE_1]);
         if (x !== 0 || y !== 0 || z !== 0) {
           var s1 = Math.sqrt(x * x + y * y + z * z);
-          grade1.quaternion = quaternion(x/s1, y/s1, z/s1);
+          var q = quaternion(x/s1, y/s1, z/s1);
+          grade1.quaternion.set(q.x, q.y, q.z, q.w);
           show(grade1, s1);
         }
         else {
@@ -33916,7 +34056,8 @@ mod[PROBE_E3] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
         if (xy !== 0 || yz !== 0 || zx !== 0) {
           var norm2 = Math.sqrt(xy * xy + yz * yz + zx * zx);
           var s2 = Math.pow(norm2, 1 / 2);
-          grade2.quaternion = quaternion(yz/norm2, zx/norm2, xy/norm2);
+          var q = quaternion(yz/norm2, zx/norm2, xy/norm2);
+          grade2.quaternion.set(q.x, q.y, q.z, q.w);
           show(grade2, s2);
         }
         else {
@@ -41095,11 +41236,6 @@ var METHOD_CROSS               = "cross";
  * @const
  * @type {string}
  */
-var METHOD_COMPUTE_CENTROIDS   = "computeCentroids";
-/**
- * @const
- * @type {string}
- */
 var METHOD_COMPUTE_FACE_NORMALS = "computeFaceNormals";
 /**
  * @const
@@ -41426,7 +41562,6 @@ Sk.stdlib.CylinderGeometry = function (radiusTop, radiusBottom, height, radialSe
       this.faceVertexUvs[0].push([uv1, uv2, uv3]);
     }
   }
-  this.computeCentroids();
   this.computeFaceNormals();
 }
 Sk.stdlib.CylinderGeometry.prototype = Object.create(THREE.Geometry.prototype);
@@ -41503,7 +41638,6 @@ Sk.stdlib.PlaneGeometry = function (width, height, widthSegments, heightSegments
       this.faceVertexUvs[0].push([uvb.clone(), uvc, uvd.clone()]);
     }
   }
-  this.computeCentroids();
 };
 Sk.stdlib.PlaneGeometry.prototype = Object.create(THREE.Geometry.prototype);
 
@@ -41521,7 +41655,7 @@ Sk.stdlib.PlaneGeometry.prototype = Object.create(THREE.Geometry.prototype);
  * @param {number=} phiLength
  * @param {THREE.Quaternion=} attitude
  */
-THREE.RevolutionGeometry = function (points, generator, segments, phiStart, phiLength, attitude) {
+Sk.three.RevolutionGeometry = function (points, generator, segments, phiStart, phiLength, attitude) {
 
   THREE.Geometry.call( this );
 
@@ -41601,18 +41735,16 @@ THREE.RevolutionGeometry = function (points, generator, segments, phiStart, phiL
       ]);
     }
   }
-
-  this.computeCentroids();
   this.computeFaceNormals();
   this.computeVertexNormals();
 };
-THREE.RevolutionGeometry.prototype = Object.create(THREE.Geometry.prototype);
+Sk.three.RevolutionGeometry.prototype = Object.create(THREE.Geometry.prototype);
 
 /**
  * ArrowGeometry
  *
  * @constructor
- * @extends THREE.RevolutionGeometry
+ * @extends Sk.three.RevolutionGeometry
  * @param {number=} scale
  * @param {THREE.Quaternion=} attitude
  * @param {number=} segments
@@ -41622,9 +41754,8 @@ THREE.RevolutionGeometry.prototype = Object.create(THREE.Geometry.prototype);
  * @param {number=} lengthCone
  * @param {THREE.Vector3=} axis
  */
-THREE.ArrowGeometry = function(scale, attitude, segments, length, radiusShaft, radiusCone, lengthCone, axis)
+Sk.three.ArrowGeometry = function(scale, attitude, segments, length, radiusShaft, radiusCone, lengthCone, axis)
 {
-  debugger;
   scale        = scale || 1;
   attitude     = attitude || new THREE.Quaternion(0, 0, 0, 1);
   length       = (length || 1) * scale;
@@ -41691,9 +41822,9 @@ THREE.ArrowGeometry = function(scale, attitude, segments, length, radiusShaft, r
     return {"points": points, "generator": generator};
   };
   var arrow = computeArrow(axis);
-  THREE.RevolutionGeometry.call(this, arrow.points, arrow.generator, segments, 0, 2 * Math.PI, attitude);
+  Sk.three.RevolutionGeometry.call(this, arrow.points, arrow.generator, segments, 0, 2 * Math.PI, attitude);
 }
-THREE.ArrowGeometry.prototype = Object.create(THREE.RevolutionGeometry.prototype);
+Sk.three.ArrowGeometry.prototype = Object.create(Sk.three.RevolutionGeometry.prototype);
 
 /**
  * TorusGeometry
@@ -41772,7 +41903,6 @@ Sk.stdlib.TorusGeometry = function(radius, tube, radialSegments, tubularSegments
       this.faceVertexUvs[0].push([uvs[b].clone(), uvs[c].clone(), uvs[d].clone()]);
     }
   }
-  this.computeCentroids();
 };
 Sk.stdlib.TorusGeometry.prototype = Object.create(THREE.Geometry.prototype );
 
@@ -41789,7 +41919,7 @@ Sk.stdlib.TorusGeometry.prototype = Object.create(THREE.Geometry.prototype );
  * @param {number=} arrowSegments
  * @param {number=} radialSegments
  */
-THREE.VortexGeometry = function(radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrowSegments, radialSegments) {
+Sk.three.VortexGeometry = function(radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrowSegments, radialSegments) {
 
   THREE.Geometry.call(this);
 
@@ -41895,9 +42025,8 @@ THREE.VortexGeometry = function(radius, radiusCone, radiusShaft, lengthCone, len
       this.faceVertexUvs[0].push([uvs[b].clone(), uvs[c].clone(), uvs[d].clone()]);
     }
   }
-  this.computeCentroids();
 };
-THREE.VortexGeometry.prototype = Object.create(THREE.Geometry.prototype );
+Sk.three.VortexGeometry.prototype = Object.create(THREE.Geometry.prototype );
 /**
  * @param {string} name
  * @param {Object} valuePy
@@ -42010,7 +42139,11 @@ function setQuaternionProperty(className, targetPy, name, valuePy, aliasName)
   Sk.ffi.checkArgType(aliasName, EUCLIDEAN_3, isEuclidean3Py(valuePy), valuePy);
   var quaternionPy = Sk.ffi.gattr(valuePy, PROP_QUATERNION);
   Sk.ffi.checkArgType(aliasName, QUATERNION, isQuaternionPy(quaternionPy), quaternionPy);
-  Sk.ffi.remapToJs(targetPy)[name] = Sk.ffi.remapToJs(quaternionPy);
+
+  // Components must be set in order for the change to be reflected (since THREE 0.0.67).  
+  var targetJs = Sk.ffi.remapToJs(targetPy)[name];
+  var sourceJs = Sk.ffi.remapToJs(quaternionPy);
+  targetJs.set(sourceJs.x, sourceJs.y, sourceJs.z, sourceJs.w);
 }
 /**
  * @param {THREE.Vector3} vector
@@ -43230,7 +43363,7 @@ mod[Sk.three.ARROW_GEOMETRY] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
       return {"points": points, "generator": generator};
     };
     var arrow = computeArrow(axis);
-    Sk.ffi.referenceToPy(new THREE.RevolutionGeometry(arrow.points, arrow.generator, segments, 0, 2 * Math.PI, attitude), Sk.three.ARROW_GEOMETRY, undefined, selfPy);
+    Sk.ffi.referenceToPy(new Sk.three.RevolutionGeometry(arrow.points, arrow.generator, segments, 0, 2 * Math.PI, attitude), Sk.three.ARROW_GEOMETRY, undefined, selfPy);
   });
   $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
     return geometryGetAttr(Sk.three.ARROW_GEOMETRY, selfPy, name);
@@ -43460,7 +43593,7 @@ mod[LATHE_GEOMETRY] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     });
     // LatheGeometry assumes that the points are to be rotated about the z-axis.
     var generator = new THREE.Quaternion(0, 0, 1, 0);
-    Sk.ffi.referenceToPy(new THREE.RevolutionGeometry(points, generator, Sk.ffi.remapToJs(segmentsPy), Sk.ffi.remapToJs(phiStartPy), Sk.ffi.remapToJs(phiLengthPy)), LATHE_GEOMETRY, undefined, selfPy);
+    Sk.ffi.referenceToPy(new Sk.three.RevolutionGeometry(points, generator, Sk.ffi.remapToJs(segmentsPy), Sk.ffi.remapToJs(phiStartPy), Sk.ffi.remapToJs(phiLengthPy)), LATHE_GEOMETRY, undefined, selfPy);
   });
   $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
     return geometryGetAttr(LATHE_GEOMETRY, selfPy, name);
@@ -43643,7 +43776,7 @@ mod[REVOLUTION_GEOMETRY] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
     });
     var attitude   = Sk.ffi.remapToJs(attitudePy);
     var attitude = Sk.ffi.remapToJs(attitudePy) ? Sk.ffi.remapToJs(attitudePy).quaternion : undefined;
-    Sk.ffi.referenceToPy(new THREE.RevolutionGeometry(
+    Sk.ffi.referenceToPy(new Sk.three.RevolutionGeometry(
       points,
       Sk.ffi.remapToJs(generatorPy).quaternion,
       Sk.ffi.remapToJs(segmentsPy),
@@ -43944,7 +44077,7 @@ mod[Sk.three.VORTEX_GEOMETRY] = Sk.ffi.buildClass(mod, function($gbl, $loc)
     }
     var arrowSegments  = Sk.ffi.remapToJs(arrowSegmentsPy);
     var radialSegments = Sk.ffi.remapToJs(radialSegmentsPy);
-    var vortex = new THREE.VortexGeometry(radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrowSegments, radialSegments);
+    var vortex = new Sk.three.VortexGeometry(radius, radiusCone, radiusShaft, lengthCone, lengthShaft, arrowSegments, radialSegments);
     Sk.ffi.referenceToPy(vortex, Sk.three.VORTEX_GEOMETRY, undefined, selfPy);
   });
   $loc.__getattr__ = Sk.ffi.functionPy(function(vortexPy, name) {
@@ -44033,12 +44166,6 @@ function geometryGetAttr(className, geometryPy, name) {
         Sk.ffi.checkMethodArgs(name, arguments, 1, 1);
         Sk.ffi.checkArgType("matrix", Sk.three.MATRIX_4, Sk.ffi.isInstance(matrixPy, Sk.three.MATRIX_4), matrixPy);
         geometry.applyMatrix(Sk.ffi.remapToJs(matrixPy));
-      });
-    }
-    case METHOD_COMPUTE_CENTROIDS: {
-      return Sk.ffi.callableToPy(mod, name, function(methodPy) {
-        Sk.ffi.checkMethodArgs(name, arguments, 0, 0);
-        geometry.computeCentroids();
       });
     }
     case METHOD_COMPUTE_FACE_NORMALS: {
@@ -46833,1946 +46960,4 @@ mod[WORKBENCH_3D] = Sk.ffi.buildClass(mod, function($gbl, $loc)
 }, WORKBENCH_3D, []);
 
 };
-}).call(this);
-/* bladejs - 0.9.71
- * JavaScript Geometric Algebra library.
- * 
- */
-(function() {
-  this.BLADE = this.BLADE || {};
-
-}).call(this);
-
-(function() {
-  var BLADE, Dimensions, stringify;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  stringify = function(rational, label) {
-    if (rational.numer === 0) {
-      return null;
-    } else if (rational.denom === 1) {
-      if (rational.numer === 1) {
-        return "" + label;
-      } else {
-        return "" + label + " ** " + rational.numer;
-      }
-    } else {
-
-    }
-    return "" + label + " ** " + rational;
-  };
-
-  Dimensions = (function() {
-    function Dimensions(mass, length, time, charge, temperature, amount, intensity, unknown) {
-      if (arguments.length !== 7) {
-        throw {
-          name: "DimensionError",
-          message: "Expecting 7 arguments"
-        };
-      }
-      if (typeof mass === 'number') {
-        this.M = new BLADE.Rational(mass, 1);
-      } else if (mass instanceof BLADE.Rational) {
-        this.M = mass;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "mass must be a Rational or number"
-        };
-      }
-      if (typeof length === 'number') {
-        this.L = new BLADE.Rational(length, 1);
-      } else if (length instanceof BLADE.Rational) {
-        this.L = length;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "length must be a Rational or number"
-        };
-      }
-      if (typeof time === 'number') {
-        this.T = new BLADE.Rational(time, 1);
-      } else if (time instanceof BLADE.Rational) {
-        this.T = time;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "time must be a Rational or number"
-        };
-      }
-      if (typeof charge === 'number') {
-        this.Q = new BLADE.Rational(charge, 1);
-      } else if (charge instanceof BLADE.Rational) {
-        this.Q = charge;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "charge must be a Rational or number"
-        };
-      }
-      if (typeof temperature === 'number') {
-        this.temperature = new BLADE.Rational(temperature, 1);
-      } else if (temperature instanceof BLADE.Rational) {
-        this.temperature = temperature;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "(thermodynamic) temperature must be a Rational or number"
-        };
-      }
-      if (typeof amount === 'number') {
-        this.amount = new BLADE.Rational(amount, 1);
-      } else if (amount instanceof BLADE.Rational) {
-        this.amount = amount;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "amount (of substance) must be a Rational or number"
-        };
-      }
-      if (typeof intensity === 'number') {
-        this.intensity = new BLADE.Rational(intensity, 1);
-      } else if (intensity instanceof BLADE.Rational) {
-        this.intensity = intensity;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "(luminous) intensity must be a Rational or number"
-        };
-      }
-    }
-
-    Dimensions.prototype.compatible = function(rhs) {
-      if (this.M.equals(rhs.M) && this.L.equals(rhs.L) && this.T.equals(rhs.T) && this.Q.equals(rhs.Q) && this.temperature.equals(rhs.temperature) && this.amount.equals(rhs.amount) && this.intensity.equals(rhs.intensity)) {
-        return this;
-      } else {
-        throw {
-          name: "DimensionError",
-          message: "Dimensions must be equal (" + this + ", " + rhs + ")"
-        };
-      }
-    };
-
-    Dimensions.prototype.mul = function(rhs) {
-      return new BLADE.Dimensions(this.M.add(rhs.M), this.L.add(rhs.L), this.T.add(rhs.T), this.Q.add(rhs.Q), this.temperature.add(rhs.temperature), this.amount.add(rhs.amount), this.intensity.add(rhs.intensity));
-    };
-
-    Dimensions.prototype.div = function(rhs) {
-      return new BLADE.Dimensions(this.M.sub(rhs.M), this.L.sub(rhs.L), this.T.sub(rhs.T), this.Q.sub(rhs.Q), this.temperature.sub(rhs.temperature), this.amount.sub(rhs.amount), this.intensity.sub(rhs.intensity));
-    };
-
-    Dimensions.prototype.pow = function(exponent) {
-      return new BLADE.Dimensions(this.M.mul(exponent), this.L.mul(exponent), this.T.mul(exponent), this.Q.mul(exponent), this.temperature.mul(exponent), this.amount.mul(exponent), this.intensity.mul(exponent));
-    };
-
-    Dimensions.prototype.dimensionless = function() {
-      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero();
-    };
-
-    Dimensions.prototype.isZero = function() {
-      return this.M.isZero() && this.L.isZero() && this.T.isZero() && this.Q.isZero() && this.temperature.isZero() && this.amount.isZero() && this.intensity.isZero();
-    };
-
-    Dimensions.prototype.negative = function() {
-      return new BLADE.Dimensions(this.M.negative(), this.L.negative(), this.T.negative(), this.Q.negative(), this.temperature.negative(), this.amount.negative(), this.intensity.negative());
-    };
-
-    Dimensions.prototype.toString = function() {
-      return [stringify(this.M, 'mass'), stringify(this.L, 'length'), stringify(this.T, 'time'), stringify(this.Q, 'charge'), stringify(this.temperature, 'thermodynamic temperature'), stringify(this.amount, 'amount of substance'), stringify(this.intensity, 'luminous intensity')].filter(function(x) {
-        return typeof x === 'string';
-      }).join(" * ");
-    };
-
-    return Dimensions;
-
-  })();
-
-  this.BLADE.Dimensions = Dimensions;
-
-}).call(this);
-
-(function() {
-  var BLADE, Euclidean2, divide;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  divide = function(a00, a01, a10, a11, b00, b01, b10, b11, m) {
-    var c00, c01, c10, c11, i00, i01, i10, i11, k00, m00, m01, m10, m11, r00, r01, r10, r11, s00, s01, s10, s11, x00, x01, x10, x11;
-
-    r00 = +b00;
-    r01 = +b01;
-    r10 = +b10;
-    r11 = -b11;
-    m00 = b00 * r00 + b01 * r01 + b10 * r10 - b11 * r11;
-    m01 = 0;
-    m10 = 0;
-    m11 = 0;
-    c00 = +m00;
-    c01 = -m01;
-    c10 = -m10;
-    c11 = -m11;
-    s00 = r00 * c00 + r01 * c01 + r10 * c10 - r11 * c11;
-    s01 = r00 * c01 + r01 * c00 - r10 * c11 + r11 * c10;
-    s10 = r00 * c10 + r01 * c11 + r10 * c00 - r11 * c01;
-    s11 = r00 * c11 + r01 * c10 - r10 * c01 + r11 * c00;
-    k00 = b00 * s00 + b01 * s01 + b10 * s10 - b11 * s11;
-    i00 = s00 / k00;
-    i01 = s01 / k00;
-    i10 = s10 / k00;
-    i11 = s11 / k00;
-    x00 = a00 * i00 + a01 * i01 + a10 * i10 - a11 * i11;
-    x01 = a00 * i01 + a01 * i00 - a10 * i11 + a11 * i10;
-    x10 = a00 * i10 + a01 * i11 + a10 * i00 - a11 * i01;
-    x11 = a00 * i11 + a01 * i10 - a10 * i01 + a11 * i00;
-    if (typeof m !== 'undefined') {
-      m.w = x00;
-      m.x = x01;
-      m.y = x10;
-      return m.xy = x11;
-    } else {
-      return new BLADE.Euclidean2(x00, x01, x10, x11);
-    }
-  };
-
-  Euclidean2 = (function() {
-    function Euclidean2(w, x, y, xy) {
-      this.w = w || 0;
-      this.x = x;
-      this.y = y;
-      this.xy = xy;
-    }
-
-    Euclidean2.fromCartesian = function(w, x, y, xy) {
-      return new BLADE.Euclidean2(w, x, y, xy);
-    };
-
-    Euclidean2.fromPolar = function(w, r, theta, s) {
-      return new BLADE.Euclidean2(w, r * Math.cos(theta), r * Math.sin(theta), s);
-    };
-
-    Euclidean2.prototype.coordinates = function() {
-      return [this.w, this.x, this.y, this.xy];
-    };
-
-    Euclidean2.prototype.coordinate = function(index) {
-      switch (index) {
-        case 0:
-          return this.w;
-        case 1:
-          return this.x;
-        case 2:
-          return this.y;
-        case 3:
-          return this.xy;
-        default:
-          throw new Error("index must be in the range [0..3]");
-      }
-    };
-
-    Euclidean2.add = function(a, b) {
-      var a00, a01, a10, a11, b00, b01, b10, b11, x00, x01, x10, x11;
-
-      a00 = a[0];
-      a01 = a[1];
-      a10 = a[2];
-      a11 = a[3];
-      b00 = b[0];
-      b01 = b[1];
-      b10 = b[2];
-      b11 = b[3];
-      x00 = BLADE.e2gaASM.add00(a00, a01, a10, a11, b00, b01, b10, b11);
-      x01 = BLADE.e2gaASM.add01(a00, a01, a10, a11, b00, b01, b10, b11);
-      x10 = BLADE.e2gaASM.add10(a00, a01, a10, a11, b00, b01, b10, b11);
-      x11 = BLADE.e2gaASM.add11(a00, a01, a10, a11, b00, b01, b10, b11);
-      return [x00, x01, x10, x11];
-    };
-
-    Euclidean2.prototype.add = function(rhs) {
-      var xs;
-
-      xs = Euclidean2.add(this.coordinates(), rhs.coordinates());
-      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-    };
-
-    Euclidean2.sub = function(a, b) {
-      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
-
-      a0 = a[0];
-      a1 = a[1];
-      a2 = a[2];
-      a3 = a[3];
-      b0 = b[0];
-      b1 = b[1];
-      b2 = b[2];
-      b3 = b[3];
-      x0 = BLADE.bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
-      x1 = BLADE.bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
-      x2 = BLADE.bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
-      x3 = BLADE.bladeASM.subE2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
-      return [x0, x1, x2, x3];
-    };
-
-    Euclidean2.prototype.sub = function(rhs) {
-      var xs;
-
-      xs = Euclidean2.sub(this.coordinates(), rhs.coordinates());
-      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-    };
-
-    Euclidean2.mul = function(a, b) {
-      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
-
-      a0 = a[0];
-      a1 = a[1];
-      a2 = a[2];
-      a3 = a[3];
-      b0 = b[0];
-      b1 = b[1];
-      b2 = b[2];
-      b3 = b[3];
-      x0 = BLADE.bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
-      x1 = BLADE.bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
-      x2 = BLADE.bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
-      x3 = BLADE.bladeASM.mulE2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
-      return [x0, x1, x2, x3];
-    };
-
-    Euclidean2.prototype.mul = function(rhs) {
-      var xs;
-
-      if (typeof rhs === 'number') {
-        return new BLADE.Euclidean2(this.w * rhs, this.x * rhs, this.y * rhs, this.xy * rhs);
-      } else {
-        xs = Euclidean2.mul(this.coordinates(), rhs.coordinates());
-        return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-      }
-    };
-
-    Euclidean2.prototype.div = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Euclidean2(this.w / rhs, this.x / rhs, this.y / rhs, this.xy / rhs);
-      } else {
-        return divide(this.w, this.x, this.y, this.xy, rhs.w, rhs.x, rhs.y, rhs.xy, void 0);
-      }
-    };
-
-    Euclidean2.wedge = function(a, b) {
-      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
-
-      a0 = a[0];
-      a1 = a[1];
-      a2 = a[2];
-      a3 = a[3];
-      b0 = b[0];
-      b1 = b[1];
-      b2 = b[2];
-      b3 = b[3];
-      x0 = BLADE.bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
-      x1 = BLADE.bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
-      x2 = BLADE.bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
-      x3 = BLADE.bladeASM.extE2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
-      return [x0, x1, x2, x3];
-    };
-
-    Euclidean2.prototype.wedge = function(rhs) {
-      var xs;
-
-      xs = Euclidean2.wedge(this.coordinates(), rhs.coordinates());
-      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-    };
-
-    Euclidean2.lshift = function(a, b) {
-      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
-
-      a0 = a[0];
-      a1 = a[1];
-      a2 = a[2];
-      a3 = a[3];
-      b0 = b[0];
-      b1 = b[1];
-      b2 = b[2];
-      b3 = b[3];
-      x0 = BLADE.bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
-      x1 = BLADE.bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
-      x2 = BLADE.bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
-      x3 = BLADE.bladeASM.lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
-      return [x0, x1, x2, x3];
-    };
-
-    Euclidean2.prototype.lshift = function(rhs) {
-      var xs;
-
-      xs = Euclidean2.lshift(this.coordinates(), rhs.coordinates());
-      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-    };
-
-    Euclidean2.rshift = function(a, b) {
-      var a0, a1, a2, a3, b0, b1, b2, b3, x0, x1, x2, x3;
-
-      a0 = a[0];
-      a1 = a[1];
-      a2 = a[2];
-      a3 = a[3];
-      b0 = b[0];
-      b1 = b[1];
-      b2 = b[2];
-      b3 = b[3];
-      x0 = BLADE.bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 0);
-      x1 = BLADE.bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 1);
-      x2 = BLADE.bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 2);
-      x3 = BLADE.bladeASM.rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, 3);
-      return [x0, x1, x2, x3];
-    };
-
-    Euclidean2.prototype.rshift = function(rhs) {
-      var xs;
-
-      xs = Euclidean2.rshift(this.coordinates(), rhs.coordinates());
-      return new BLADE.Euclidean2(xs[0], xs[1], xs[2], xs[3]);
-    };
-
-    Euclidean2.prototype.grade = function(index) {
-      switch (index) {
-        case 0:
-          return new BLADE.Euclidean2(this.w, 0, 0, 0);
-        case 1:
-          return new BLADE.Euclidean2(0, this.x, this.y, 0);
-        case 2:
-          return new BLADE.Euclidean2(0, 0, 0, this.xy);
-        default:
-          return new BLADE.Euclidean2(0, 0, 0, 0);
-      }
-    };
-
-    Euclidean2.prototype.quadrance = function() {
-      var w, x, xy, y;
-
-      w = this.w;
-      x = this.x;
-      y = this.y;
-      xy = this.xy;
-      return w * w + x * x + y * y + xy * xy;
-    };
-
-    Euclidean2.prototype.isNaN = function() {
-      return isNaN(this.w) || isNaN(this.x) || isNaN(this.y) || isNaN(this.xy);
-    };
-
-    Euclidean2.prototype.toString = function() {
-      return BLADE.bladeSTR.stringFromCoordinates([this.w, this.x, this.y, this.xy], ["1", "e1", "e2", "e12"]);
-    };
-
-    Euclidean2.prototype.toStringIJK = function() {
-      return BLADE.bladeSTR.stringFromCoordinates(this.coordinates(), ["1", "i", "j", "I"]);
-    };
-
-    Euclidean2.prototype.toStringLATEX = function() {
-      return BLADE.bladeSTR.stringFromCoordinates(this.coordinates(), ["1", "e_{1}", "e_{2}", "e_{12}"]);
-    };
-
-    return Euclidean2;
-
-  })();
-
-  this.BLADE.Euclidean2 = Euclidean2;
-
-}).call(this);
-
-(function() {
-  var BLADE, Euclidean3, divide, mulE3;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  mulE3 = function(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    var x;
-
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index | 0;
-    x = 0.0;
-    switch (~(~index)) {
-      case 0:
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 - a4 * b4 - a5 * b5 - a6 * b6 - a7 * b7);
-        break;
-      case 1:
-        x = +(a0 * b1 + a1 * b0 - a2 * b4 + a3 * b6 + a4 * b2 - a5 * b7 - a6 * b3 - a7 * b5);
-        break;
-      case 2:
-        x = +(a0 * b2 + a1 * b4 + a2 * b0 - a3 * b5 - a4 * b1 + a5 * b3 - a6 * b7 - a7 * b6);
-        break;
-      case 3:
-        x = +(a0 * b3 - a1 * b6 + a2 * b5 + a3 * b0 - a4 * b7 - a5 * b2 + a6 * b1 - a7 * b4);
-        break;
-      case 4:
-        x = +(a0 * b4 + a1 * b2 - a2 * b1 + a3 * b7 + a4 * b0 - a5 * b6 + a6 * b5 + a7 * b3);
-        break;
-      case 5:
-        x = +(a0 * b5 + a1 * b7 + a2 * b3 - a3 * b2 + a4 * b6 + a5 * b0 - a6 * b4 + a7 * b1);
-        break;
-      case 6:
-        x = +(a0 * b6 - a1 * b3 + a2 * b7 + a3 * b1 - a4 * b5 + a5 * b4 + a6 * b0 + a7 * b2);
-        break;
-      case 7:
-        x = +(a0 * b7 + a1 * b5 + a2 * b6 + a3 * b4 + a4 * b3 + a5 * b1 + a6 * b2 + a7 * b0);
-    }
-    return +x;
-  };
-
-  divide = function(a000, a001, a010, a011, a100, a101, a110, a111, b000, b001, b010, b011, b100, b101, b110, b111, dst) {
-    var c000, c001, c010, c011, c100, c101, c110, c111, i000, i001, i010, i011, i100, i101, i110, i111, k000, m000, m001, m010, m011, m100, m101, m110, m111, r000, r001, r010, r011, r100, r101, r110, r111, s000, s001, s010, s011, s100, s101, s110, s111, w, x, x000, x001, x010, x011, x100, x101, x110, x111, xy, xyz, y, yz, z, zx;
-
-    r000 = +b000;
-    r001 = +b001;
-    r010 = +b010;
-    r011 = -b011;
-    r100 = +b100;
-    r101 = -b101;
-    r110 = -b110;
-    r111 = -b111;
-    m000 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 0);
-    m001 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 1);
-    m010 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 2);
-    m011 = 0;
-    m100 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, r000, r001, r010, r100, r011, r110, -r101, r111, 3);
-    m101 = 0;
-    m110 = 0;
-    m111 = 0;
-    c000 = +m000;
-    c001 = -m001;
-    c010 = -m010;
-    c011 = -m011;
-    c100 = -m100;
-    c101 = -m101;
-    c110 = -m110;
-    c111 = +m111;
-    s000 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 0);
-    s001 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 1);
-    s010 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 2);
-    s011 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 4);
-    s100 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 3);
-    s101 = -mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 6);
-    s110 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 5);
-    s111 = mulE3(r000, r001, r010, r100, r011, r110, -r101, r111, c000, c001, c010, c100, c011, c110, -c101, c111, 7);
-    k000 = mulE3(b000, b001, b010, b100, b011, b110, -b101, b111, s000, s001, s010, s100, s011, s110, -s101, s111, 0);
-    i000 = s000 / k000;
-    i001 = s001 / k000;
-    i010 = s010 / k000;
-    i011 = s011 / k000;
-    i100 = s100 / k000;
-    i101 = s101 / k000;
-    i110 = s110 / k000;
-    i111 = s111 / k000;
-    x000 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 0);
-    x001 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 1);
-    x010 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 2);
-    x011 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 4);
-    x100 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 3);
-    x101 = -mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 6);
-    x110 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 5);
-    x111 = mulE3(a000, a001, a010, a100, a011, a110, -a101, a111, i000, i001, i010, i100, i011, i110, -i101, i111, 7);
-    w = x000;
-    x = x001;
-    y = x010;
-    z = x100;
-    xy = x011;
-    yz = x110;
-    zx = -x101;
-    xyz = x111;
-    if (typeof dst !== 'undefined') {
-      dst.w = w;
-      dst.x = x;
-      dst.y = y;
-      dst.z = z;
-      dst.xy = xy;
-      dst.yz = yz;
-      dst.zx = zx;
-      return dst.xyz = xyz;
-    } else {
-      return new BLADE.Euclidean3(w, x, y, z, xy, yz, zx, xyz);
-    }
-  };
-
-  Euclidean3 = (function() {
-    function Euclidean3(w, x, y, z, xy, yz, zx, xyz) {
-      this.w = w || 0;
-      this.x = x || 0;
-      this.y = y || 0;
-      this.z = z || 0;
-      this.xy = xy || 0;
-      this.yz = yz || 0;
-      this.zx = zx || 0;
-      this.xyz = xyz || 0;
-    }
-
-    Euclidean3.fromCartesian = function(w, x, y, z, xy, yz, zx, xyz) {
-      return new BLADE.Euclidean3(w, x, y, z, xy, yz, zx, xyz);
-    };
-
-    Euclidean3.prototype.coordinates = function() {
-      return [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz];
-    };
-
-    Euclidean3.prototype.coordinate = function(index) {
-      switch (index) {
-        case 0:
-          return this.w;
-        case 1:
-          return this.x;
-        case 2:
-          return this.y;
-        case 3:
-          return this.z;
-        case 4:
-          return this.xy;
-        case 5:
-          return this.yz;
-        case 6:
-          return this.zx;
-        case 7:
-          return this.xyz;
-        default:
-          throw new Error("index must be in the range [0..7]");
-      }
-    };
-
-    Euclidean3.compute = function(f, a, b, coord, pack) {
-      var a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, x0, x1, x2, x3, x4, x5, x6, x7;
-
-      a0 = coord(a, 0);
-      a1 = coord(a, 1);
-      a2 = coord(a, 2);
-      a3 = coord(a, 3);
-      a4 = coord(a, 4);
-      a5 = coord(a, 5);
-      a6 = coord(a, 6);
-      a7 = coord(a, 7);
-      b0 = coord(b, 0);
-      b1 = coord(b, 1);
-      b2 = coord(b, 2);
-      b3 = coord(b, 3);
-      b4 = coord(b, 4);
-      b5 = coord(b, 5);
-      b6 = coord(b, 6);
-      b7 = coord(b, 7);
-      x0 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 0);
-      x1 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 1);
-      x2 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 2);
-      x3 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 3);
-      x4 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 4);
-      x5 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 5);
-      x6 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 6);
-      x7 = f(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, 7);
-      return pack(x0, x1, x2, x3, x4, x5, x6, x7);
-    };
-
-    Euclidean3.prototype.add = function(rhs) {
-      var coord, pack;
-
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.addE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-    };
-
-    Euclidean3.prototype.sub = function(rhs) {
-      var coord, pack;
-
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.subE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-    };
-
-    Euclidean3.prototype.mul = function(rhs) {
-      var coord, pack;
-
-      if (typeof rhs === 'number') {
-        return new BLADE.Euclidean3(this.w * rhs, this.x * rhs, this.y * rhs, this.z * rhs, this.xy * rhs, this.yz * rhs, this.zx * rhs, this.xyz * rhs);
-      } else {
-        coord = function(x, n) {
-          return x[n];
-        };
-        pack = function(w, x, y, z, xy, yz, zx, xyz) {
-          return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-        };
-        return Euclidean3.compute(BLADE.bladeASM.mulE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-      }
-    };
-
-    Euclidean3.prototype.div = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Euclidean3(this.w / rhs, this.x / rhs, this.y / rhs, this.z / rhs, this.xy / rhs, this.yz / rhs, this.zx / rhs, this.xyz / rhs);
-      } else {
-        return divide(this.w, this.x, this.y, this.xy, this.z, -this.zx, this.yz, this.xyz, rhs.w, rhs.x, rhs.y, rhs.xy, rhs.z, -rhs.zx, rhs.yz, rhs.xyz, void 0);
-      }
-    };
-
-    Euclidean3.prototype.wedge = function(rhs) {
-      var coord, pack;
-
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.extE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-    };
-
-    Euclidean3.prototype.lshift = function(rhs) {
-      var coord, pack;
-
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.lcoE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-    };
-
-    Euclidean3.prototype.rshift = function(rhs) {
-      var coord, pack;
-
-      coord = function(x, n) {
-        return x[n];
-      };
-      pack = function(w, x, y, z, xy, yz, zx, xyz) {
-        return Euclidean3.fromCartesian(w, x, y, z, xy, yz, zx, xyz);
-      };
-      return Euclidean3.compute(BLADE.bladeASM.rcoE3, [this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], [rhs.w, rhs.x, rhs.y, rhs.z, rhs.xy, rhs.yz, rhs.zx, rhs.xyz], coord, pack);
-    };
-
-    Euclidean3.prototype.grade = function(index) {
-      switch (index) {
-        case 0:
-          return Euclidean3.fromCartesian(this.w, 0, 0, 0, 0, 0, 0, 0);
-        case 1:
-          return Euclidean3.fromCartesian(0, this.x, this.y, this.z, 0, 0, 0, 0);
-        case 2:
-          return Euclidean3.fromCartesian(0, 0, 0, 0, this.xy, this.yz, this.zx, 0);
-        case 3:
-          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, this.xyz);
-        default:
-          return Euclidean3.fromCartesian(0, 0, 0, 0, 0, 0, 0, 0);
-      }
-    };
-
-    Euclidean3.prototype.dot = function(vector) {
-      return this.x * vector.x + this.y * vector.y + this.z * vector.z;
-    };
-
-    Euclidean3.prototype.cross = function(vector) {
-      var x, x1, x2, y, y1, y2, z, z1, z2;
-
-      x1 = this.x;
-      y1 = this.y;
-      z1 = this.z;
-      x2 = vector.x;
-      y2 = vector.y;
-      z2 = vector.z;
-      x = y1 * z2 - z1 * y2;
-      y = z1 * x2 - x1 * z2;
-      z = x1 * y2 - y1 * x2;
-      return new BLADE.Euclidean3(0, x, y, z, 0, 0, 0, 0);
-    };
-
-    Euclidean3.prototype.length = function() {
-      return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-    };
-
-    Euclidean3.prototype.toString = function() {
-      return BLADE.bladeSTR.stringFromCoordinates([this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], ["1", "e1", "e2", "e3", "e12", "e23", "e31", "e123"]);
-    };
-
-    Euclidean3.prototype.toStringIJK = function() {
-      return BLADE.bladeSTR.stringFromCoordinates([this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], ["1", "i", "j", "k", "ij", "jk", "ki", "I"]);
-    };
-
-    Euclidean3.prototype.toStringLATEX = function() {
-      return BLADE.bladeSTR.stringFromCoordinates([this.w, this.x, this.y, this.z, this.xy, this.yz, this.zx, this.xyz], ["1", "e_{1}", "e_{2}", "e_{3}", "e_{12}", "e_{23}", "e_{31}", "e_{123}"]);
-    };
-
-    return Euclidean3;
-
-  })();
-
-  this.BLADE.Euclidean3 = Euclidean3;
-
-}).call(this);
-
-(function() {
-  var BLADE, Line2;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  Line2 = (function() {
-    function Line2(a, b, c) {
-      this.a = a;
-      this.b = b;
-      this.c = c;
-    }
-
-    Line2.prototype.meetWithLine = function(line) {
-      var a1, a2, b1, b2, c1, c2, denom;
-
-      a1 = this.a;
-      b1 = this.b;
-      c1 = this.c;
-      a2 = line.a;
-      b2 = line.b;
-      c2 = line.c;
-      denom = a1 * b2 - a2 * b1;
-      return new BLADE.Point2((b1 * c2 - b2 * c1) / denom, (a2 * c1 - a1 * c2) / denom);
-    };
-
-    Line2.prototype.passesThroughPoint = function(point, epsilon) {
-      return Math.abs(this.a * point.x + this.b * point.y + this.c) < epsilon;
-    };
-
-    Line2.prototype.reflectPoint = function(point) {
-      var a, aSquared, b, bSquared, c, denom, sqsum, u, v, x, y;
-
-      a = this.a;
-      aSquared = a * a;
-      b = this.b;
-      bSquared = b * b;
-      c = this.c;
-      denom = aSquared - bSquared;
-      sqsum = aSquared + bSquared;
-      x = point.x;
-      y = point.y;
-      u = -(2 * a * (b * y + c) + x * sqsum) / denom;
-      v = (2 * b * (a * x + c) + y * sqsum) / denom;
-      return new BLADE.Point2(u, v);
-    };
-
-    return Line2;
-
-  })();
-
-  this.BLADE.Line2 = Line2;
-
-}).call(this);
-
-(function() {
-  var BLADE, Measure;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  Measure = (function() {
-    function Measure(quantity, uom) {
-      var scale;
-
-      scale = uom.scale;
-      if (scale === 1) {
-        this.quantity = quantity;
-        this.uom = uom;
-      } else {
-        this.quantity = quantity.mul(scale);
-        this.uom = new BLADE.Unit(1, uom.dimensions, uom.labels);
-      }
-    }
-
-    Measure.prototype.add = function(rhs) {
-      if (rhs instanceof BLADE.Measure) {
-        return new BLADE.Measure(this.quantity.add(rhs.quantity), this.uom.compatible(rhs.uom));
-      } else {
-        throw new Error("Measure.add(rhs): rhs must be a Measure.");
-      }
-    };
-
-    Measure.prototype.sub = function(rhs) {
-      if (rhs instanceof BLADE.Measure) {
-        return new BLADE.Measure(this.quantity.sub(rhs.quantity), this.uom.compatible(rhs.uom));
-      } else {
-        throw new Error("Measure.sub(rhs): rhs must be a Measure.");
-      }
-    };
-
-    Measure.prototype.mul = function(rhs) {
-      if (rhs instanceof BLADE.Measure) {
-        return new BLADE.Measure(this.quantity.mul(rhs.quantity), this.uom.mul(rhs.uom));
-      } else if (rhs instanceof BLADE.Unit) {
-        return new BLADE.Measure(this.quantity, this.uom.mul(rhs));
-      } else if (typeof rhs === 'number') {
-        return new BLADE.Measure(this.quantity.mul(rhs), this.uom);
-      } else {
-        throw new Error("Measure.mul(rhs): rhs must be a [Measure, Unit, number]");
-      }
-    };
-
-    Measure.prototype.div = function(rhs) {
-      if (rhs instanceof BLADE.Measure) {
-        return new BLADE.Measure(this.quantity.div(rhs.quantity), this.uom.div(rhs.uom));
-      } else if (rhs instanceof BLADE.Unit) {
-        return new BLADE.Measure(this.quantity, this.uom.div(rhs));
-      } else if (typeof rhs === 'number') {
-        return new BLADE.Measure(this.quantity.div(rhs), this.uom);
-      } else {
-        throw new Error("Measure.div(rhs): rhs must be a [Measure, Unit, number]");
-      }
-    };
-
-    Measure.prototype.wedge = function(rhs) {
-      if (rhs instanceof BLADE.Measure) {
-        return new BLADE.Measure(this.quantity.wedge(rhs.quantity), this.uom.mul(rhs.uom));
-      } else {
-        throw new Error("Measure.wedge(rhs): rhs must be a Measure");
-      }
-    };
-
-    Measure.prototype.toString = function() {
-      return "" + this.quantity + " " + this.uom;
-    };
-
-    return Measure;
-
-  })();
-
-  this.BLADE.Measure = Measure;
-
-}).call(this);
-
-(function() {
-  var BLADE, Point2;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  Point2 = (function() {
-    function Point2(x, y) {
-      this.x = x;
-      this.y = y;
-    }
-
-    Point2.prototype.joinToPoint = function(point) {
-      var x1, x2, y1, y2;
-
-      x1 = this.x;
-      y1 = this.y;
-      x2 = point.x;
-      y2 = point.y;
-      return new BLADE.Line2(y1 - y2, x2 - x1, x1 * y2 - x2 * y1);
-    };
-
-    Point2.prototype.liesOnLine = function(line, epsilon) {
-      return Math.abs(line.a * this.x + line.b * this.y + line.c) < epsilon;
-    };
-
-    Point2.prototype.quadrance = function(point) {
-      var dx, dy, x1, x2, y1, y2;
-
-      x1 = this.x;
-      y1 = this.y;
-      x2 = point.x;
-      y2 = point.y;
-      dx = x2 - x1;
-      dy = y2 - y1;
-      return dx * dx + dy * dy;
-    };
-
-    Point2.prototype.reflectAboutLine = function(line) {
-      var a, aSquared, b, bSquared, c, denom, sqsum, u, v, x, y;
-
-      a = line.a;
-      aSquared = a * a;
-      b = line.b;
-      bSquared = b * b;
-      c = line.c;
-      denom = aSquared - bSquared;
-      sqsum = aSquared + bSquared;
-      x = this.x;
-      y = this.y;
-      u = -(2 * a * (b * y + c) + x * sqsum) / denom;
-      v = (2 * b * (a * x + c) + y * sqsum) / denom;
-      return new BLADE.Point2(u, v);
-    };
-
-    Point2.prototype.signedArea = function(pointA2, pointA3) {
-      var v1, v2;
-
-      v1 = this.vectorTo(pointA2);
-      v2 = this.vectorTo(pointA3);
-      return v1.wedge(v2).mul(new BLADE.Euclidean2(0.5, 0, 0, 0));
-    };
-
-    Point2.prototype.vectorTo = function(point) {
-      return new BLADE.Euclidean2(0, point.x - this.x, point.y - this.y, 0);
-    };
-
-    return Point2;
-
-  })();
-
-  this.BLADE.Point2 = Point2;
-
-}).call(this);
-
-(function() {
-  var BLADE, Rational, gcd;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  gcd = function(a, b) {
-    var temp;
-
-    if (a < 0) {
-      a = -a;
-    }
-    if (b < 0) {
-      b = -b;
-    }
-    if (b > a) {
-      temp = a;
-      a = b;
-      b = temp;
-    }
-    while (true) {
-      a %= b;
-      if (a === 0) {
-        return b;
-      }
-      b %= a;
-      if (b === 0) {
-        return a;
-      }
-    }
-  };
-
-  Rational = (function() {
-    function Rational(n, d) {
-      var g;
-
-      if (d === 0) {
-        throw new Error("denominator must not be zero");
-      }
-      if (n === 0) {
-        g = 1;
-      } else {
-        g = gcd(Math.abs(n), Math.abs(d));
-      }
-      if (d < 0) {
-        n = -n;
-        d = -d;
-      }
-      this.numer = n / g;
-      this.denom = d / g;
-    }
-
-    Rational.prototype.add = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Rational(this.numer + this.denom * rhs, this.denom);
-      } else {
-        return new BLADE.Rational(this.numer * rhs.denom + this.denom * rhs.numer, this.denom * rhs.denom);
-      }
-    };
-
-    Rational.prototype.sub = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Rational(this.numer - this.denom * rhs, this.denom);
-      } else {
-        return new BLADE.Rational(this.numer * rhs.denom - this.denom * rhs.numer, this.denom * rhs.denom);
-      }
-    };
-
-    Rational.prototype.mul = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Rational(this.numer * rhs, this.denom);
-      } else {
-        return new BLADE.Rational(this.numer * rhs.numer, this.denom * rhs.denom);
-      }
-    };
-
-    Rational.prototype.div = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Rational(this.numer, this.denom * rhs);
-      } else {
-        return new BLADE.Rational(this.numer * rhs.denom, this.denom * rhs.numer);
-      }
-    };
-
-    Rational.prototype.isZero = function() {
-      return this.numer === 0;
-    };
-
-    Rational.prototype.negative = function() {
-      return new BLADE.Rational(-this.numer, this.denom);
-    };
-
-    Rational.prototype.equals = function(other) {
-      if (other instanceof BLADE.Rational) {
-        return this.numer * other.denom === this.denom * other.numer;
-      } else {
-        return false;
-      }
-    };
-
-    Rational.prototype.toString = function() {
-      return "" + this.numer + "/" + this.denom;
-    };
-
-    return Rational;
-
-  })();
-
-  this.BLADE.Rational = Rational;
-
-}).call(this);
-
-(function() {
-  var BLADE, Unit, stringify;
-
-  this.BLADE = this.BLADE || {};
-
-  BLADE = this.BLADE;
-
-  stringify = function(rational, label) {
-    if (rational.numer === 0) {
-      return null;
-    } else if (rational.denom === 1) {
-      if (rational.numer === 1) {
-        return "" + label;
-      } else {
-        return "" + label + " ** " + rational.numer;
-      }
-    } else {
-
-    }
-    return "" + label + " ** " + rational;
-  };
-
-  Unit = (function() {
-    function Unit(scale, dimensions, labels) {
-      if (labels.length !== 7) {
-        throw new Error("Expecting 7 elements in the labels array.");
-      }
-      this.scale = scale;
-      this.dimensions = dimensions;
-      this.labels = labels;
-    }
-
-    Unit.prototype.compatible = function(rhs) {
-      var dimensions;
-
-      if (rhs instanceof Unit) {
-        dimensions = this.dimensions.compatible(rhs.dimensions);
-        return this;
-      } else {
-        throw new Error("Illegal Argument for Unit.compatible: " + rhs);
-      }
-    };
-
-    Unit.prototype.add = function(rhs) {
-      if (rhs instanceof Unit) {
-        return new BLADE.Unit(this.scale + rhs.scale, this.dimensions.compatible(rhs.dimensions), this.labels);
-      } else {
-        throw new Error("Illegal Argument for Unit.add: " + rhs);
-      }
-    };
-
-    Unit.prototype.sub = function(rhs) {
-      if (rhs instanceof Unit) {
-        return new BLADE.Unit(this.scale - rhs.scale, this.dimensions.compatible(rhs.dimensions), this.labels);
-      } else {
-        throw new Error("Illegal Argument for Unit.sub: " + rhs);
-      }
-    };
-
-    Unit.prototype.mul = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Unit(this.scale * rhs, this.dimensions, this.labels);
-      } else if (rhs instanceof Unit) {
-        return new BLADE.Unit(this.scale * rhs.scale, this.dimensions.mul(rhs.dimensions), this.labels);
-      } else {
-        throw new Error("Illegal Argument for mul: " + rhs);
-      }
-    };
-
-    Unit.prototype.div = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Unit(this.scale / rhs, this.dimensions, this.labels);
-      } else if (rhs instanceof Unit) {
-        return new BLADE.Unit(this.scale / rhs.scale, this.dimensions.div(rhs.dimensions), this.labels);
-      } else {
-        throw new Error("Illegal Argument for div: " + rhs);
-      }
-    };
-
-    Unit.prototype.pow = function(rhs) {
-      if (typeof rhs === 'number') {
-        return new BLADE.Unit(Math.pow(this.scale, rhs), this.dimensions.pow(rhs), this.labels);
-      } else {
-        throw new Error("Illegal Argument for div: " + rhs);
-      }
-    };
-
-    Unit.prototype.inverse = function() {
-      return new BLADE.Unit(1 / this.scale, this.dimensions.negative(), this.labels);
-    };
-
-    Unit.prototype.toString = function() {
-      var operatorStr, scaleString, unitsString;
-
-      operatorStr = this.scale === 1 || this.dimensions.isZero() ? "" : " ";
-      scaleString = this.scale === 1 ? "" : "" + this.scale;
-      unitsString = [stringify(this.dimensions.M, this.labels[0]), stringify(this.dimensions.L, this.labels[1]), stringify(this.dimensions.T, this.labels[2]), stringify(this.dimensions.Q, this.labels[3]), stringify(this.dimensions.temperature, this.labels[4]), stringify(this.dimensions.amount, this.labels[5]), stringify(this.dimensions.intensity, this.labels[6])].filter(function(x) {
-        return typeof x === 'string';
-      }).join(" ");
-      return "" + scaleString + operatorStr + unitsString;
-    };
-
-    return Unit;
-
-  })();
-
-  this.BLADE.Unit = Unit;
-
-  this.BLADE.UNIT_SYMBOLS = ["kg", "m", "s", "C", "K", "mol", "cd"];
-
-  this.BLADE.UNIT_DIMLESS = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_KILOGRAM = new Unit(1, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_METER = new Unit(1, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_SECOND = new Unit(1, new this.BLADE.Dimensions(0, 0, 1, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_AMPERE = new Unit(1, new this.BLADE.Dimensions(0, 0, -1, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_KELVIN = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 1, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_MOLE = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 1, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_CANDELA = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 0, 0, 0, 1), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_COULOMB = new Unit(1, new this.BLADE.Dimensions(0, 0, 0, 1, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_INCH = new Unit(0.0254, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_FOOT = new Unit(0.3048, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_YARD = new Unit(0.9144, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_MILE = new Unit(1609.344, new this.BLADE.Dimensions(0, 1, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-  this.BLADE.UNIT_POUND = new Unit(0.45359237, new this.BLADE.Dimensions(1, 0, 0, 0, 0, 0, 0), this.BLADE.UNIT_SYMBOLS);
-
-}).call(this);
-
-/*
- * Blade.JS companion JavaScript library to blade.js or blade.min.js
- *
- * This asm.js part is kept separate to avoid issues caused by JavaScript compression.
- */
-(function() {
-this.BLADE = this.BLADE || {};
-this.BLADE.bladeASM = (function(stdlib, foreign, heap) {
-//"use asm";
-  // Section for imports and module variables.
-
-  // The following lines are by way of example only.
-  // var i32 = new stdlib.Int32Array(heap);
-  // var f64 = new stdlib.Float64Array(heap);
-  // var imul = stdlib.Math.imul;
-  // var a = 0;
-  // a = i32[0]|0;
-  // var b = 0.0;
-  // b = +f64[0];
-  function addE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 + b0);
-      }
-      break;
-      case 1: {
-        x = +(a1 + b1);
-      }
-      break;
-      case 2: {
-        x = +(a2 + b2);
-      }
-      break;
-      case 3: {
-        x = +(a3 + b3);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function subE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 - b0);
-      }
-      break;
-      case 1: {
-        x = +(a1 - b1);
-      }
-      break;
-      case 2: {
-        x = +(a2 - b2);
-      }
-      break;
-      case 3: {
-        x = +(a3 - b3);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function mulE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 - a3 * b3);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1 + a1 * b0 - a2 * b3 + a3 * b2);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2 + a1 * b3 + a2 * b0 - a3 * b1);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3 + a1 * b2 - a2 * b1 + a3 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function extE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1 + a1 * b0);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2           + a2 * b0);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3 + a1 * b2 - a2 * b1 + a3 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function lcoE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 - a3 * b3);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1           - a2 * b3);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2 + a1 * b3);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function rcoE2(a0, a1, a2, a3, b0, b1, b2, b3, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 - a3 * b3);
-      }
-      break;
-      case 1: {
-        x = +(        - a1 * b0           - a3 * b2);
-      }
-      break;
-      case 2: {
-        x = +(                  - a2 * b0 + a3 * b1);
-      }
-      break;
-      case 3: {
-        x = +(                              a3 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function addE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 + b0);
-      }
-      break;
-      case 1: {
-        x = +(a1 + b1);
-      }
-      break;
-      case 2: {
-        x = +(a2 + b2);
-      }
-      break;
-      case 3: {
-        x = +(a3 + b3);
-      }
-      break;
-      case 4: {
-        x = +(a4 + b4);
-      }
-      break;
-      case 5: {
-        x = +(a5 + b5);
-      }
-      break;
-      case 6: {
-        x = +(a6 + b6);
-      }
-      break;
-      case 7: {
-        x = +(a7 + b7);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function subE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 - b0);
-      }
-      break;
-      case 1: {
-        x = +(a1 - b1);
-      }
-      break;
-      case 2: {
-        x = +(a2 - b2);
-      }
-      break;
-      case 3: {
-        x = +(a3 - b3);
-      }
-      break;
-      case 4: {
-        x = +(a4 - b4);
-      }
-      break;
-      case 5: {
-        x = +(a5 - b5);
-      }
-      break;
-      case 6: {
-        x = +(a6 - b6);
-      }
-      break;
-      case 7: {
-        x = +(a7 - b7);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function mulE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 - a4 * b4 - a5 * b5 - a6 * b6 - a7 * b7);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1 + a1 * b0 - a2 * b4 + a3 * b6 + a4 * b2 - a5 * b7 - a6 * b3 - a7 * b5);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2 + a1 * b4 + a2 * b0 - a3 * b5 - a4 * b1 + a5 * b3 - a6 * b7 - a7 * b6);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3 - a1 * b6 + a2 * b5 + a3 * b0 - a4 * b7 - a5 * b2 + a6 * b1 - a7 * b4);
-      }
-      break;
-      case 4: {
-        x = +(a0 * b4 + a1 * b2 - a2 * b1 + a3 * b7 + a4 * b0 - a5 * b6 + a6 * b5 + a7 * b3);
-      }
-      break;
-      case 5: {
-        x = +(a0 * b5 + a1 * b7 + a2 * b3 - a3 * b2 + a4 * b6 + a5 * b0 - a6 * b4 + a7 * b1);
-      }
-      break;
-      case 6: {
-        x = +(a0 * b6 - a1 * b3 + a2 * b7 + a3 * b1 - a4 * b5 + a5 * b4 + a6 * b0 + a7 * b2);
-      }
-      break;
-      case 7: {
-        x = +(a0 * b7 + a1 * b5 + a2 * b6 + a3 * b4 + a4 * b3 + a5 * b1 + a6 * b2 + a7 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function extE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1 + a1 * b0);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2           + a2 * b0);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3                     + a3 * b0);
-      }
-      break;
-      case 4: {
-        x = +(a0 * b4 + a1 * b2 - a2 * b1           + a4* b0);
-      }
-      break;
-      case 5: {
-        x = +(a0 * b5           + a2 * b3 - a3 * b2           + a5 * b0);
-      }
-      break;
-      case 6: {
-        x = +(a0 * b6 - a1 * b3           + a3 * b1                     + a6 * b0);
-      }
-      break;
-      case 7: {
-        x = +(a0 * b7 + a1 * b5 + a2 * b6 + a3 * b4 + a4 * b3 + a5 * b1 + a6 * b2 + a7 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function lcoE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 - a4 * b4 - a5 * b5 - a6 * b6 - a7 * b7);
-      }
-      break;
-      case 1: {
-        x = +(a0 * b1           - a2 * b4 + a3 * b6           - a5 * b7);
-      }
-      break;
-      case 2: {
-        x = +(a0 * b2 + a1 * b4           - a3 * b5                     - a6 * b7);
-      }
-      break;
-      case 3: {
-        x = +(a0 * b3 - a1 * b6 + a2 * b5           - a4 * b7);
-      }
-      break;
-      case 4: {
-        x = +(a0 * b4                     + a3 * b7);
-      }
-      break;
-      case 5: {
-        x = +(a0 * b5 + a1 * b7);
-      }
-      break;
-      case 6: {
-        x = +(a0 * b6           + a2 * b7);
-      }
-      break;
-      case 7: {
-        x = +(a0 * b7);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  function rcoE3(a0, a1, a2, a3, a4, a5, a6, a7, b0, b1, b2, b3, b4, b5, b6, b7, index) {
-    a0 = +a0;
-    a1 = +a1;
-    a2 = +a2;
-    a3 = +a3;
-    a4 = +a4;
-    a5 = +a5;
-    a6 = +a6;
-    a7 = +a7;
-    b0 = +b0;
-    b1 = +b1;
-    b2 = +b2;
-    b3 = +b3;
-    b4 = +b4;
-    b5 = +b5;
-    b6 = +b6;
-    b7 = +b7;
-    index = index|0;
-    var x = 0.0;
-    switch(~(~index)) {
-      case 0: {
-        x = +(a0 * b0 + a1 * b1 + a2 * b2 + a3 * b3 - a4 * b4 - a5 * b5 - a6 * b6 - a7 * b7);
-      }
-      break;
-      case 1: {
-        x = +(        + a1 * b0                     + a4 * b2           - a6 * b3 - a7 * b5);
-      }
-      break;
-      case 2: {
-        x = +(                  + a2 * b0           - a4 * b1 + a5 * b3           - a7 * b6);
-      }
-      break;
-      case 3: {
-        x = +(                            + a3 * b0           - a5 * b2 + a6 * b1 - a7 * b4);
-      }
-      break;
-      case 4: {
-        x = +(                                      + a4 * b0                     + a7 * b3);
-      }
-      break;
-      case 5: {
-        x = +(                                                + a5 * b0           + a7 * b1);
-      }
-      break;
-      case 6: {
-        x = +(                                                          + a6 * b0 + a7 * b2);
-      }
-      break;
-      case 7: {
-        x = +(                                                                    + a7 * b0);
-      }
-      break;
-      default: {
-      }
-    }
-    return +x;
-  }
-  // Export section.
-  return {
-    addE2:addE2,
-    subE2:subE2,
-    mulE2:mulE2,
-    extE2:extE2,
-    lcoE2:lcoE2,
-    rcoE2:rcoE2,
-    addE3:addE3,
-    subE3:subE3,
-    mulE3:mulE3,
-    extE3:extE3,
-    lcoE3:lcoE3,
-    rcoE3:rcoE3
-  };
-})((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));
-}).call(this);
-
-(function() {
-this.BLADE = this.BLADE || {};
-this.BLADE.bladeSTR = (function() {
-
-  "use strict";
-
-  function stringFromCoordinates(coordinates, labels) {
-    var append, i, sb, str, _i, _ref;
-    sb = [];
-    append = function(number, label) {
-      var n;
-      if (number !== 0) {
-        if (number >= 0) {
-          if (sb.length > 0) {
-            sb.push("+");
-          }
-        } else {
-          sb.push("-");
-        }
-        n = Math.abs(number);
-        if (n === 1) {
-          return sb.push(label);
-        } else {
-          sb.push(n.toString());
-          if (label !== "1") {
-            sb.push("*");
-            return sb.push(label);
-          }
-        }
-      }
-    };
-    for (i = _i = 0, _ref = coordinates.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
-      append(coordinates[i], labels[i]);
-    }
-    if (sb.length > 0) {
-      str = sb.join("");
-    } else {
-      str = "0";
-    }
-    return str;
-  }
-
-  return {
-    stringFromCoordinates: stringFromCoordinates
-  };
-})();
-}).call(this);
-
-(function() {
-this.BLADE = this.BLADE || {};
-this.BLADE.e2gaASM = (function(stdlib, foreign, heap) {
-//"use asm";
-  function add00(a00, a01, a10, a11, b00, b01, b10, b11) {
-    a00 = +a00;
-    a01 = +a01;
-    a10 = +a10;
-    a11 = +a11;
-    b00 = +b00;
-    b01 = +b01;
-    b10 = +b10;
-    b11 = +b11;
-    return +(a00 + b00);
-  }
-  function add01(a00, a01, a10, a11, b00, b01, b10, b11) {
-    a00 = +a00;
-    a01 = +a01;
-    a10 = +a10;
-    a11 = +a11;
-    b00 = +b00;
-    b01 = +b01;
-    b10 = +b10;
-    b11 = +b11;
-    return +(a01 + b01);
-  }
-  function add10(a00, a01, a10, a11, b00, b01, b10, b11) {
-    a00 = +a00;
-    a01 = +a01;
-    a10 = +a10;
-    a11 = +a11;
-    b00 = +b00;
-    b01 = +b01;
-    b10 = +b10;
-    b11 = +b11;
-    return +(a10 + b10);
-  }
-  function add11(a00, a01, a10, a11, b00, b01, b10, b11) {
-    a00 = +a00;
-    a01 = +a01;
-    a10 = +a10;
-    a11 = +a11;
-    b00 = +b00;
-    b01 = +b01;
-    b10 = +b10;
-    b11 = +b11;
-    return +(a11 + b11);
-  }
-  // Export section.
-  return {
-    add00:add00,
-    add01:add01,
-    add10:add10,
-    add11:add11
-  };
-})((typeof window === 'object') ? window : undefined, {}, new ArrayBuffer(4 * 1024));
 }).call(this);
