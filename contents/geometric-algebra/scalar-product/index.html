@@ -7,15 +7,15 @@ title: Geometric Physics • Geometric Algebra • Scalar Product
     <h1>Scalar Product</h1>
   </div>
   <section>
-    <h3>Definition</h3>
+    <h3>Definition of the Scalar Product</h3>
     <p>
       For $k$-blades $\Blade{A} = \Vector{a_1} \wedge \ldots \wedge \Vector{a_k}$ and $\Blade{B} = \Vector{b_1} \wedge \ldots \wedge \Vector{b_k}$ and scalars $\alpha$ and $\beta$, the <em>scalar product</em> $\ast \, \colon \, \bigwedge^{k} \RealField^{n} \times \bigwedge^{k} \RealField^{n} \rightarrow \RealField$ is defined as
     </p>
     <p>
       $
       \begin{eqnarray}
-      \alpha \ast \beta &amp; = &amp; \alpha \beta \\
-      \Blade{A} \ast \Blade{B}
+      \ScalarProductGA{\alpha}{\beta} &amp; = &amp; \alpha \beta \\
+      \ScalarProductGA{\Blade{A}}{\Blade{B}}
       &amp; = &amp;
       \left|
       \begin{array}{cccc}
@@ -28,25 +28,111 @@ title: Geometric Physics • Geometric Algebra • Scalar Product
       \end{eqnarray}
       $
     </p>
+    <p>
+      For blades of unequal grades the scalar product is zero.
+    </p>
   </section>
   <section>
+    <h3>Computing the Scalar Product through the determinant</h3>
 <pre davinci-edit>
 <code davinci-code console-id='1'># Scalar Product
 from e3ga import *
+from matrix import *
+from math import *
 
-e1 = VectorE3(1,0,0)
-e2 = VectorE3(0,1,0)
-e3 = VectorE3(0,0,1)
+a1 = VectorE3(2,0,0)
+a2 = VectorE3(1,1,0)
+b1 = VectorE3(0,3,0)
+b2 = VectorE3(4,1,1)
 
-A = e1 ^ e2
+A = a1 ^ a2
+B = b1 ^ b2
 
-print A % A
-print A % ~A
+m = Matrix2x2(Matrix2x1(a1 % b2, a2 % b2), Matrix2x1(a1 % b1, a2 % b1))
 
-
-
+print det(m)
 </code>
-</pre>
 <davinci-console id='1'></davinci-console>
+</pre>
   </section>
+
+  <section>
+    <h3>Computing the Scalar Product directly using the <b>%</b> operator</h3>
+<pre davinci-edit>
+<code davinci-code console-id='2'># Computing the Scalar Product using %
+from e3ga import *
+
+a1 = VectorE3(2,0,0)
+a2 = VectorE3(1,1,0)
+b1 = VectorE3(0,3,0)
+b2 = VectorE3(4,1,1)
+
+A = a1 ^ a2
+B = b1 ^ b2
+
+# The Python modulo symbol is used for the scalar product.
+print A % B
+</code>
+<davinci-console id='2'></davinci-console>
+</pre>
+  </section>
+
+  <section>
+    <h3>Identities that follow from the symmetry of the determinant</h3>
+    <p>
+      The symmetry of the determinant implies some useful symmetries in the scalar product.
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \ScalarProductGA{\Blade{B}}{\Blade{A}}
+      &amp; = &amp;
+      \ScalarProductGA{\Blade{A}}{\Blade{B}}
+      &amp; = &amp;
+      \ScalarProductGA{\Reverse{\Blade{A}}}{\Reverse{\Blade{B}}}
+      \end{eqnarray}
+      $
+    </p>
+<pre davinci-edit>
+<code davinci-code console-id='3'># Demonstration of Scalar Product Identities
+from e3ga import *
+
+a1 = VectorE3(2,0,0)
+a2 = VectorE3(1,1,0)
+b1 = VectorE3(0,3,0)
+b2 = VectorE3(4,1,1)
+
+A = a1 ^ a2
+B = b1 ^ b2
+
+print A % B
+print B % A
+print ~A % ~B
+</code>
+<davinci-console id='3'></davinci-console>
+</pre>
+  </section>
+
+  <section>
+    <h3>The Squared Norm of a Blade</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \NormSquared{\Blade{A}} &amp; = &amp; \ScalarProductGA{\Blade{A}}{\Reverse{\Blade{A}}}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+
+  <section>
+    <h3>The Angle between Subspaces</h3>
+    <p>
+      $
+      \begin{eqnarray}
+      \cos \theta &amp; = &amp; \frac{\ScalarProductGA{\Blade{A}}{\Reverse{\Blade{B}}}}{\Norm{\Blade{A}} \Norm{\Blade{B}}}
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+
 <article>

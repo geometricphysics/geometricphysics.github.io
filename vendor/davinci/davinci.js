@@ -4453,9 +4453,8 @@ Sk.inputfun = function(args) {
 goog.exportSymbol('Sk.inputfun', Sk.inputfun);
 
 goog.require('goog.asserts');
-// builtins are supposed to come from the __builtin__ module, but we don't do
-// that yet.
-Sk.builtin = {};
+goog.provide('Sk.builtin');
+
 
 // todo; these should all be func objects too, otherwise str() of them won't
 // work, etc.
@@ -6966,7 +6965,10 @@ Sk.builtin.method.prototype.tp$repr = function()
     return Sk.builtin.stringToPy("<bound method " + this.im_self.ob$type.tp$name + "." + name
             + " of " + Sk.ffi.remapToJs(this.im_self.tp$repr()) + ">");
 };
-Sk.misceval = {};
+goog.provide('Sk.misceval');
+
+// goog.require('Sk.abstr');
+goog.require('Sk.builtin');
 
 Sk.misceval.isIndex = function(o)
 {
@@ -7678,7 +7680,11 @@ Sk.misceval.buildClass = function(globals, func, name, bases)
     return klass;
 };
 goog.exportSymbol("Sk.misceval.buildClass", Sk.misceval.buildClass);
-Sk.abstr = {};
+goog.provide('Sk.abstr');
+
+goog.require('Sk.builtin');
+goog.require('Sk.misceval');
+// goog.require('Sk.ffi');
 
 //
 //
@@ -7706,9 +7712,9 @@ Sk.abstr.boNameToSlotFuncLhs_ = function(obj, name) {
   switch (name)
   {
     case "Add":      return obj.nb$add          ? obj.nb$add :          obj['__add__'];
-    case "Sub":      return obj.nb$sub     ? obj.nb$sub :     obj['__sub__'];
-    case "Mult":     return obj.nb$mul     ? obj.nb$mul :     obj['__mul__'];
-    case "Div":      return obj.nb$div       ? obj.nb$div :       obj['__div__'];
+    case "Sub":      return obj.nb$sub          ? obj.nb$sub :          obj['__sub__'];
+    case "Mult":     return obj.nb$mul          ? obj.nb$mul :          obj['__mul__'];
+    case "Div":      return obj.nb$div          ? obj.nb$div :          obj['__div__'];
     case "FloorDiv": return obj.nb$floor_divide ? obj.nb$floor_divide : obj['__floordiv__'];
     case "Mod":      return obj.nb$remainder    ? obj.nb$remainder :    obj['__mod__'];
     case "Pow":      return obj.nb$power        ? obj.nb$power :        obj['__pow__'];
@@ -7726,9 +7732,9 @@ Sk.abstr.boNameToSlotFuncRhs_ = function(obj, name) {
   };
   switch (name) {
     case "Add":      return obj.nb$add          ? obj.nb$add :          obj['__radd__'];
-    case "Sub":      return obj.nb$sub     ? obj.nb$sub :     obj['__rsub__'];
-    case "Mult":     return obj.nb$mul     ? obj.nb$mul :     obj['__rmul__'];
-    case "Div":      return obj.nb$div       ? obj.nb$div :       obj['__rdiv__'];
+    case "Sub":      return obj.nb$sub          ? obj.nb$sub :          obj['__rsub__'];
+    case "Mult":     return obj.nb$mul          ? obj.nb$mul :          obj['__rmul__'];
+    case "Div":      return obj.nb$div          ? obj.nb$div :          obj['__rdiv__'];
     case "FloorDiv": return obj.nb$floor_divide ? obj.nb$floor_divide : obj['__rfloordiv__'];
     case "Mod":      return obj.nb$remainder    ? obj.nb$remainder :    obj['__rmod__'];
     case "Pow":      return obj.nb$power        ? obj.nb$power :        obj['__rpow__'];
@@ -7777,7 +7783,6 @@ Sk.abstr.binary_op_ = function(v, w, opname)
         }
         else
         {
-            // assume that vop is an __xxx__ type method
             ret = Sk.misceval.callsim(vop,v,w)
         }
         if (ret !== undefined) return ret;
@@ -7791,7 +7796,6 @@ Sk.abstr.binary_op_ = function(v, w, opname)
         }
         else
         {
-            // assume that wop is an __xxx__ type method
             ret = Sk.misceval.callsim(wop,w,v)
         }
         if (ret !== undefined) return ret;
@@ -7810,7 +7814,6 @@ Sk.abstr.binary_iop_ = function(v, w, opname)
         }
         else
         {
-            // assume that vop is an __xxx__ type method
             ret = Sk.misceval.callsim(vop,v,w);
         }
         if (ret !== undefined) return ret;
@@ -7824,7 +7827,6 @@ Sk.abstr.binary_iop_ = function(v, w, opname)
         }
         else
         {
-            // assume that wop is an __xxx__ type method
             ret = Sk.misceval.callsim(wop,w,v);
         }
         if (ret !== undefined) return ret;
@@ -8013,22 +8015,28 @@ goog.exportSymbol("Sk.abstr.numberInplaceBinOp", Sk.abstr.numberInplaceBinOp);
  * @param {*} obj
  * @param {Sk.abstr.unaryOp} name
  */
-Sk.abstr.uoNameToSlotFunc_ = function(obj, name) {
-  if (obj === null) {
+Sk.abstr.uoNameToSlotFunc_ = function(obj, name)
+{
+  if (obj === null)
+  {
     return undefined;
   }
   switch (name)
   {
-    case Sk.abstr.unaryOp.USub: {
+    case Sk.abstr.unaryOp.USub:
+    {
       return obj.u$negative          ? obj.u$negative        : obj['__neg__'];
     }
-    case Sk.abstr.unaryOp.UAdd: {
+    case Sk.abstr.unaryOp.UAdd:
+    {
       return obj.u$positive          ? obj.u$positive        : obj['__pos__'];
     }
-    case Sk.abstr.unaryOp.Invert: {
+    case Sk.abstr.unaryOp.Invert:
+    {
       return obj.nb$invert           ? obj.nb$invert          : obj['__invert__'];
     }
-    default: {
+    default:
+    {
       throw new Sk.builtin.AssertionError("7fb8237f-879b-4192-89ce-13ad6fa3b2d8 " + name);
     }
   }
@@ -16959,11 +16967,10 @@ goog.exportSymbol('Sk.ffi.MIN_INT', Sk.ffi.MIN_INT);
  */
 Sk.ffi.MIN_INT = new Sk.builtin.lng(-Sk.builtin.lng.threshold$);
 goog.exportSymbol('Sk.ffi.MAX_INT', Sk.ffi.MAX_INT);
-Sk.ffh = Sk.ffh || {};
+goog.provide('Sk.ffh');
 
 var SPECIAL_METHOD_ADD     = '__add__';
 var SPECIAL_METHOD_CLIFFORD_CONJUGATE = '__cliffordConjugate__';
-var SPECIAL_METHOD_CONJUGATE = '__conjugate__';
 var SPECIAL_METHOD_EQ      = '__eq__';
 var SPECIAL_METHOD_EXP     = '__exp__';
 var SPECIAL_METHOD_GETITEM = '__getitem__';
@@ -17117,10 +17124,23 @@ Sk.ffh.conjugate = function(numberPy)
   }
   else
   {
-    return Sk.ffh.unaryExec("", SPECIAL_METHOD_CONJUGATE, numberPy);
+    return Sk.ffh.unaryExec("", '__conjugate__', numberPy);
   }
 };
 goog.exportSymbol("Sk.ffh.conjugate", Sk.ffh.conjugate);
+
+Sk.ffh.determinant = function(numberPy)
+{
+  if (Sk.ffi.isNum(numberPy))
+  {
+    return numberPy;
+  }
+  else
+  {
+    return Sk.ffh.unaryExec("determinant", '__determinant__', numberPy);
+  }
+};
+goog.exportSymbol("Sk.ffh.determinant", Sk.ffh.determinant);
 
 Sk.ffh.cos = function(valuePy)
 {
@@ -17300,7 +17320,7 @@ goog.exportSymbol("Sk.ffh.evaluate", Sk.ffh.evaluate);
  * @param {*} longPy
  * @return {Sk.builtin.NumberPy|number}
  */
-Sk.ffi.promoteLongToFloat = function(longPy)
+Sk.ffh.promoteLongToFloat = function(longPy)
 {
     goog.asserts.assert(Sk.ffi.isLong(longPy));
 
@@ -17311,7 +17331,7 @@ Sk.ffi.promoteLongToFloat = function(longPy)
     goog.asserts.assertNumber(valueJs);
     return /** @type {Sk.builtin.NumberPy|number} */(Sk.builtin.numberToPy(valueJs));
 };
-goog.exportSymbol("Sk.ffi.promoteLongToFloat", Sk.ffi.promoteLongToFloat);
+goog.exportSymbol("Sk.ffh.promoteLongToFloat", Sk.ffh.promoteLongToFloat);
 /**
  * @constructor
  * @param {Object} iterable
@@ -26990,7 +27010,11 @@ Sk.stdlib.orientation = function(x, y, z) {
   }
 };
 goog.exportSymbol("Sk.stdlib.orientation", Sk.stdlib.orientation);
-Sk.math = Sk.math || {};
+goog.provide('Sk.math');
+
+goog.require('Sk.builtin');
+goog.require('Sk.ffh');
+goog.require('Sk.ffi');
 
 Sk.math.PI_TIMES_1_OVER_4 =     Math.PI / 4;
 Sk.math.PI_TIMES_2_OVER_4 =     Math.PI / 2;
@@ -27452,6 +27476,15 @@ mod.conjugate = Sk.ffi.functionPy(function(numberPy)
 });
 
 /**
+ * det
+ */
+mod.det = Sk.ffi.functionPy(function(numberPy)
+{
+  Sk.ffi.checkFunctionArgs("det", arguments, 1, 1);
+  return Sk.ffh.determinant(numberPy);
+});
+
+/**
  * magnitude
  */
 mod.magnitude = Sk.ffi.functionPy(function(numberPy)
@@ -27516,6 +27549,11 @@ var OP_MUL = "*";
  * @type {string}
  */
 var METHOD_CONJUGATE = "conjugate";
+/**
+ * @const
+ * @type {string}
+ */
+var METHOD_DETERMINANT = "determinant";
 /**
  * @const
  * @type {string}
@@ -27870,6 +27908,14 @@ mod[Sk.matrix.MATRIX_2x2] = Sk.ffi.buildClass(mod, function($gbl, $loc) {
   $loc.__conjugate__ = Sk.ffi.functionPy(function(selfPy) {
     Sk.ffi.checkMethodArgs(METHOD_CONJUGATE, arguments, 0, 0);
     return Sk.ffi.callsim(mod[Sk.matrix.MATRIX_2x2], Sk.ffh.conjugate(Sk.ffh.getitem(selfPy, 0)), Sk.ffh.conjugate(Sk.ffh.getitem(selfPy, 1)));
+  });
+  $loc.__determinant__ = Sk.ffi.functionPy(function(selfPy) {
+    Sk.ffi.checkMethodArgs(METHOD_DETERMINANT, arguments, 0, 0);
+    var a00 = Sk.ffh.getitem(Sk.ffh.getitem(selfPy, 0), 0);
+    var a01 = Sk.ffh.getitem(Sk.ffh.getitem(selfPy, 0), 1);
+    var a10 = Sk.ffh.getitem(Sk.ffh.getitem(selfPy, 1), 0);
+    var a11 = Sk.ffh.getitem(Sk.ffh.getitem(selfPy, 1), 1);
+    return Sk.ffh.sub(Sk.ffh.mul(a00, a11), Sk.ffh.mul(a01, a10));
   });
   $loc.__getattr__ = Sk.ffi.functionPy(function(selfPy, name) {
     var matrix = Sk.ffi.remapToJs(selfPy);
