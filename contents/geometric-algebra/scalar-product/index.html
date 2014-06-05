@@ -1,0 +1,52 @@
+---
+layout: master
+title: Geometric Physics • Geometric Algebra • Scalar Product
+---
+<article>
+  <div class='page-header'>
+    <h1>Scalar Product</h1>
+  </div>
+  <section>
+    <h3>Definition</h3>
+    <p>
+      For $k$-blades $\Blade{A} = \Vector{a_1} \wedge \ldots \wedge \Vector{a_k}$ and $\Blade{B} = \Vector{b_1} \wedge \ldots \wedge \Vector{b_k}$ and scalars $\alpha$ and $\beta$, the <em>scalar product</em> $\ast \, \colon \, \bigwedge^{k} \RealField^{n} \times \bigwedge^{k} \RealField^{n} \rightarrow \RealField$ is defined as
+    </p>
+    <p>
+      $
+      \begin{eqnarray}
+      \alpha \ast \beta &amp; = &amp; \alpha \beta \\
+      \Blade{A} \ast \Blade{B}
+      &amp; = &amp;
+      \left|
+      \begin{array}{cccc}
+      \Vector{a}_1 \cdot \Vector{b}_k &amp; \Vector{a}_1 \cdot \Vector{b}_{k-1} &amp; \cdots &amp; \Vector{a}_1 \cdot \Vector{b}_1 \\
+      \Vector{a}_2 \cdot \Vector{b}_k &amp; \Vector{a}_2 \cdot \Vector{b}_{k-1} &amp; \cdots &amp; \Vector{a}_2 \cdot \Vector{b}_1 \\
+      \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+      \Vector{a}_k \cdot \Vector{b}_k &amp; \Vector{a}_k \cdot \Vector{b}_{k-1} &amp; \cdots &amp; \Vector{a}_k \cdot \Vector{b}_1
+      \end{array}
+      \right|
+      \end{eqnarray}
+      $
+    </p>
+  </section>
+  <section>
+<pre davinci-edit>
+<code davinci-code console-id='1'># Scalar Product
+from e3ga import *
+
+e1 = VectorE3(1,0,0)
+e2 = VectorE3(0,1,0)
+e3 = VectorE3(0,0,1)
+
+A = e1 ^ e2
+
+print A % A
+print A % ~A
+
+
+
+</code>
+</pre>
+<davinci-console id='1'></davinci-console>
+  </section>
+<article>
