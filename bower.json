@@ -1,6 +1,6 @@
 {
   "name": "geometricphysics",
-  "version": "0.0.1",
+  "version": "0.9.241",
   "main": "index.html",
   "description": "",
   "author": {
@@ -12,6 +12,6 @@
     "url": "git://github.com/geometricphysics/geometricphysics.git"
   },
   "dependencies": {
-    "davinci-widgets": "~0.9.231"
+    "davinci": "~0.9.241"
   }
 }

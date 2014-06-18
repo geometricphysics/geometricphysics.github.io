@@ -1,0 +1,55 @@
+{
+  "name": "davinci-py",
+  "version": "0.9.241",
+  "author": {
+    "name": "David Holmes",
+    "email": "david.geo.holmes@gmail.com"
+  },
+  "main": [
+    "./davinci-py.js",
+    "./davinci-py.min.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/geometryzen/davinci-py.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geometryzen/davinci-py/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/geometryzen/davinci-py/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "r.js": "~2.1.14",
+    "requirejs": "~2.1.14",
+    "almond": "~0.2.9"
+  },
+  "keywords": [],
+  "ignore": [
+    "/manual-deps",
+    "/src",
+    "/test",
+    "/vendor",
+    ".bowerrc",
+    ".gitignore",
+    "bower.json",
+    "build.js",
+    "grunt.js",
+    "m.py",
+    "package.json"
+  ],
+  "homepage": "https://github.com/geometryzen/davinci-py",
+  "_release": "0.9.241",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.9.241",
+    "commit": "c88fa57d7c601c98235dcac861c0138be54bd94b"
+  },
+  "_source": "git://github.com/geometryzen/davinci-py.git",
+  "_target": "~0.9.241",
+  "_originalSource": "davinci-py"
+}
