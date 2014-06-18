@@ -5747,7 +5747,7 @@ define('davinci-py/asserts',[], function()
   return that;
 });
 
-define('davinci-py/tokenize',[], function()
+define('davinci-py/tokenize',['davinci-py/base', 'davinci-py/asserts'], function(base, asserts)
 {
     /*
      * This is a port of tokenize.py by Ka-Ping Yee.
@@ -5768,10 +5768,12 @@ define('davinci-py/tokenize',[], function()
 
     /**
      * @constructor
+     * @param {string} fileName
      */
-    var Tokenizer = function (filename, interactive, callback)
+    var Tokenizer = function (fileName, interactive, callback)
     {
-        this.filename = filename;
+        asserts.assert(base.isString(fileName), "fileName must be a string");
+        this.fileName = fileName;
         this.callback = callback;
         this.lnum = 0;
         this.parenlev = 0;
@@ -5986,27 +5988,61 @@ define('davinci-py/tokenize',[], function()
 
     /**
      * @param {string} message
-     * @param {string} filename
+     * @param {string} fileName
      * @param {number} begin
      * @param {number} end
      * @param {string|undefined} line
      */
-    function tokenError(message, filename, begin, end, line)
+    function tokenError(message, fileName, begin, end, line)
     {
         return new Error(message);
-    //  return new Sk.builtin.TokenError("EOF in multi-line string", this.filename, this.strstart[0], this.strstart[1], this.contline);
+    //  return new Sk.builtin.TokenError("EOF in multi-line string", this.fileName, this.strstart[0], this.strstart[1], this.contline);
     }
 
     /**
      * @param {string} message
-     * @param {string} filename
-     * @param {number} begin
-     * @param {number} end
-     * @param {string|undefined} line
+     * @param {string} fileName
+     * @param {Array.<number>} begin
+     * @param {Array.<number>} end
+     * @param {string|undefined} text
      */
-    function indentationError(message, filename, begin, end, line)
+    function indentationError(message, fileName, begin, end, text)
     {
-        return new Error(message);
+        if (!base.isArray(begin))
+        {
+            asserts.fail("begin must be Array.<number>");
+        }
+        if (!base.isArray(end))
+        {
+            asserts.fail("end must be Array.<number>");
+        }
+        var msg = function()
+        {
+            var ret = "";
+
+            if (message)
+                ret += message;
+            if (base.isDef(begin))
+                ret += " on line " + begin[0];
+
+            if (base.isDef(begin) && base.isDef(end) && base.isDef(text))
+            {
+                ret += "\n" + text + "\n";
+                for (var i = 0; i < begin[1]; ++i) ret += " ";
+                ret += "^\n";
+            }
+
+            return ret;
+        };
+        var e = new SyntaxError(msg(), fileName);
+        e.name = "IndentationError";
+        e.fileName = fileName;
+        if (base.isDef(begin))
+        {
+            e.lineNumber   = begin[0];
+            e.columnNumber = begin[1];
+        }
+        return e;
     }
 
     Tokenizer.prototype.generateTokens = function(line)
@@ -6043,10 +6079,7 @@ define('davinci-py/tokenize',[], function()
         'b': null, 'B': null
         };
 
-
-
         if (!line) line = '';
-        //print("LINE:'"+line+"'");
 
         this.lnum += 1;
         pos = 0;
@@ -6056,7 +6089,7 @@ define('davinci-py/tokenize',[], function()
         {
             if (!line)
             {
-                throw tokenError("EOF in multi-line string", this.filename, this.strstart[0], this.strstart[1], this.contline);
+                throw tokenError("EOF in multi-line string", this.fileName, this.strstart[0], this.strstart[1], this.contline);
             }
             this.endprog.lastIndex = 0;
             endmatch = this.endprog.test(line);
@@ -6074,7 +6107,9 @@ define('davinci-py/tokenize',[], function()
             {
                 if (this.callback(Tokenizer.Tokens.T_ERRORTOKEN, this.contstr + line,
                             this.strstart, [this.lnum, line.length], this.contline))
+                {
                     return 'done';
+                }
                 this.contstr = '';
                 this.contline = undefined;
                 return false;
@@ -6109,7 +6144,6 @@ define('davinci-py/tokenize',[], function()
                     if (this.callback(Tokenizer.Tokens.T_COMMENT, comment_token,
                                 [this.lnum, pos], [this.lnum, pos + comment_token.length], line))
                         return 'done';
-                    //print("HERE:1");
                     if (this.callback(Tokenizer.Tokens.T_NL, line.substring(nl_pos),
                                 [this.lnum, nl_pos], [this.lnum, line.length], line))
                         return 'done';
@@ -6117,7 +6151,6 @@ define('davinci-py/tokenize',[], function()
                 }
                 else
                 {
-                    //print("HERE:2");
                     if (this.callback(Tokenizer.Tokens.T_NL, line.substring(pos),
                                 [this.lnum, pos], [this.lnum, line.length], line))
                         return 'done';
@@ -6135,19 +6168,20 @@ define('davinci-py/tokenize',[], function()
             {
                 if (!contains(this.indents, column))
                 {
-                    throw indentationError("unindent does not match any outer indentation level", this.filename, this.lnum, pos, line);
+                    throw indentationError("unindent does not match any outer indentation level", this.fileName, [this.lnum, 0], [this.lnum, pos], line);
                 }
                 this.indents.splice(this.indents.length - 1, 1);
-                //print("dedent here");
                 if (this.callback(Tokenizer.Tokens.T_DEDENT, '', [this.lnum, pos], [this.lnum, pos], line))
+                {
                     return 'done';
+                }
             }
         }
         else // continued statement
         {
             if (!line)
             {
-                throw tokenError("EOF in multi-line statement", this.filename, this.lnum, 0, line);
+                throw tokenError("EOF in multi-line statement", this.fileName, this.lnum, 0, line);
             }
             this.continued = false;
         }
@@ -7591,9 +7625,9 @@ labels:
  [37, null],
  [44, null],
  [49, null],
- [45, null],
- [38, null],
  [40, null],
+ [38, null],
+ [45, null],
  [330, null],
  [29, null],
  [21, null],
@@ -7738,12 +7772,12 @@ tokens:
  37: 90,
  38: 94,
  39: 85,
- 40: 95,
+ 40: 93,
  41: 86,
  42: 88,
  43: 89,
  44: 91,
- 45: 93,
+ 45: 95,
  46: 84,
  47: 87,
  48: 62,
@@ -8733,7 +8767,7 @@ alias.prototype._fields = [
   return that;
 });
 
-define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci-py/asserts'], function(tables, Tokenizer, asserts)
+define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci-py/base', 'davinci-py/asserts'], function(tables, Tokenizer, base, asserts)
 {
     var OpMap = tables.OpMap;
     var ParseTables = tables.ParseTables;
@@ -8741,14 +8775,40 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
 
     /**
      * @param {string} message
-     * @param {string} filename
-     * @param {number=} begin
-     * @param {number=} end
-     * @param {string=} line
+     * @param {string} fileName
+     * @param {Array.<number>=} begin
+     * @param {Array.<number>=} end
+     * @param {string=} text
      */
-    function parseError(message, filename, begin, end, line)
+    function parseError(message, fileName, begin, end, text)
     {
-        return new Error(message);
+        var msg = function()
+        {
+            var ret = "";
+
+            if (message)
+                ret += message;
+            if (base.isDef(begin))
+                ret += " on line " + begin[0];
+
+            if (base.isDef(begin) && base.isDef(begin) && base.isDef(begin))
+            {
+                ret += "\n" + text + "\n";
+                for (var i = 0; i < begin[1]; ++i) ret += " ";
+                ret += "^\n";
+            }
+
+            return ret;
+        };
+        var e = new SyntaxError(msg(), fileName);
+        e.name = "ParseError";
+        e.fileName = fileName;
+        if (base.isDef(begin))
+        {
+            e.lineNumber   = begin[0];
+            e.columnNumber = begin[1];
+        }
+        return e;
     }
 
     /**
@@ -8874,11 +8934,9 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
                 }
             }
 
-            //print("findInDfa: " + JSON.stringify(arcs)+" vs. " + tp.state);
             if (findInDfa(arcs, [0, tp.state]))
             {
                 // an accepting state, pop it and try somethign else
-                //print("WAA");
                 this.pop();
                 if (this.stack.length === 0)
                 {
@@ -8888,8 +8946,7 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
             else
             {
                 // no transition
-                var errline = context[0][0];
-                throw parseError("bad input", this.filename, errline, context);
+                throw parseError("bad input", this.filename, context[0], context[1], context[2]);
             }
         }
     };
@@ -8904,16 +8961,13 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
             ilabel = this.grammar.keywords.hasOwnProperty(value) && this.grammar.keywords[value];
             if (ilabel)
             {
-                //print("is keyword");
                 return ilabel;
             }
         }
         ilabel = this.grammar.tokens.hasOwnProperty(type) && this.grammar.tokens[type];
-        if (!ilabel) {
-            // throw parseError("bad token", type, value, context);
-            // Questionable modification to put line number in position 2
-            // like everywhere else and filename in position 1.
-            throw parseError("bad token", this.filename, context[0][0], context);
+        if (!ilabel)
+        {
+            throw parseError("bad token", this.filename, context[0], context[1], context[2]);
         }
         return ilabel;
     };
@@ -8924,8 +8978,8 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
         var dfa = this.stack[this.stack.length - 1].dfa;
         var state = this.stack[this.stack.length - 1].state;
         var node = this.stack[this.stack.length - 1].node;
-        //print("context", context);
-        var newnode = {
+        var newnode =
+        {
             type: type, 
             value: value,
             lineno: context[0][0],         // throwing away end here to match cpython
@@ -9021,7 +9075,6 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
         var T_OP = Tokenizer.Tokens.T_OP;
         var tokenizer = new Tokenizer(filename, style === "single_input", function(type, value, start, end, line)
                 {
-                    //print(JSON.stringify([type, value, start, end, line]));
                     var s_lineno = start[0];
                     var s_column = start[1];
                     /*
@@ -9040,7 +9093,6 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
                             lineno += 1;
                             column = 0;
                         }
-                        //print("  not calling addtoken");
                         return undefined;
                     }
                     if (type === T_OP)
@@ -9055,7 +9107,6 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
         return function(line)
         {
             var ret = tokenizer.generateTokens(line);
-            //print("tok:"+ret);
             if (ret)
             {
                 if (ret !== "done")
@@ -9072,7 +9123,6 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
     {
         var parseFunc = makeParser(filename);
         if (input.substr(input.length - 1, 1) !== "\n") input += "\n";
-        //print("input:"+input);
         var lines = input.split("\n");
         var ret;
         for (var i = 0; i < lines.length; ++i)
@@ -9200,14 +9250,28 @@ define(
 
     /**
      * @param {string} message
-     * @param {string} filename
-     * @param {number=} begin
-     * @param {number=} end
-     * @param {string=} line
+     * @param {string} fileName
+     * @param {number} lineNumber
      */
-    function syntaxError(message, filename, begin, end, line)
+    function syntaxError(message, fileName, lineNumber)
     {
-        return new Error(message);
+        asserts.assert(base.isString(message), "message must be a string");
+        asserts.assert(base.isString(fileName), "fileName must be a string");
+        asserts.assert(base.isNumber(lineNumber), "lineNumber must be a number");
+        var msg = function()
+        {
+            var ret = "";
+
+            if (message)
+                ret += message;
+            ret += " on line " + lineNumber;
+
+            return ret;
+        };
+        var e = new SyntaxError(msg(), fileName);
+        e.fileName = fileName;
+        e.lineNumber = lineNumber;
+        return e;
     }
 
     /** @constructor */
@@ -11215,7 +11279,7 @@ define(
     return that;
 });
 
-define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], function(astnodes, asserts)
+define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/base', 'davinci-py/asserts'], function(astnodes, base, asserts)
 {
     /* Flags for def-use information */
 
@@ -11261,14 +11325,35 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
 
     /**
      * @param {string} message
-     * @param {string} filename
-     * @param {number=} begin
-     * @param {number=} end
-     * @param {string=} line
+     * @param {string} fileName
+     * @param {number=} lineNumber
      */
-    function syntaxError(message, filename, begin, end, line)
+    function syntaxError(message, fileName, lineNumber)
     {
-        return new Error(message);
+        asserts.assert(base.isString(message), "message must be a string");
+        asserts.assert(base.isString(fileName), "fileName must be a string");
+        if (base.isDef(lineNumber))
+        {
+            asserts.assert(base.isNumber(lineNumber), "lineNumber must be a number");
+        }
+        var msg = function()
+        {
+            var ret = "";
+
+            if (message)
+                ret += message;
+            if (base.isDef(lineNumber))
+                ret += " on line " + lineNumber;
+
+            return ret;
+        };
+        var e = new SyntaxError(msg(), fileName);
+        e.fileName = fileName;
+        if (typeof lineNumber === 'number')
+        {
+            e.lineNumber   = lineNumber;
+        }
+        return e;
     }
 
     /**
@@ -11499,11 +11584,11 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
 
     /**
      * @constructor
-     * @param {string} filename
+     * @param {string} fileName
      */
-    function SymbolTable(filename)
+    function SymbolTable(fileName)
     {
-        this.filename = filename;
+        this.fileName = fileName;
         this.cur = null;
         this.top = null;
         this.stack = [];
@@ -11588,7 +11673,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
             else
             {
                 // Tuple isn't supported
-                throw syntaxError("invalid expression in parameter list", this.filename);
+                throw syntaxError("invalid expression in parameter list", this.fileName);
             }
         }
     };
@@ -11630,7 +11715,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
         {
             if ((flag & DEF_PARAM) && (val & DEF_PARAM))
             {
-                throw syntaxError("duplicate argument '" + name + "' in function definition", this.filename, lineno);
+                throw syntaxError("duplicate argument '" + name + "' in function definition", this.fileName, lineno);
             }
             val |= flag;
         }
@@ -11708,7 +11793,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
                     this.cur.returnsValue = true;
                     if (this.cur.generator)
                     {
-                        throw syntaxError("'return' with argument inside generator", this.filename);
+                        throw syntaxError("'return' with argument inside generator", this.fileName);
                     }
                 }
                 break;
@@ -11793,11 +11878,11 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
                     {
                         if (cur & DEF_LOCAL)
                         {
-                            throw syntaxError("name '" + name + "' is assigned to before global declaration", this.filename, s.lineno);
+                            throw syntaxError("name '" + name + "' is assigned to before global declaration", this.fileName, s.lineno);
                         }
                         else
                         {
-                            throw syntaxError("name '" + name + "' is used prior to global declaration", this.filename, s.lineno);
+                            throw syntaxError("name '" + name + "' is used prior to global declaration", this.fileName, s.lineno);
                         }
                     }
                     this.addDef(name, DEF_GLOBAL, s.lineno);
@@ -11874,7 +11959,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
                 this.cur.generator = true;
                 if (this.cur.returnsValue)
                 {
-                    throw syntaxError("'return' with argument inside generator", this.filename);
+                    throw syntaxError("'return' with argument inside generator", this.fileName);
                 }
                 break;
             case astnodes.Compare:
@@ -11953,7 +12038,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
             {
                 if (this.cur.blockType !== ModuleBlock)
                 {
-                    throw syntaxError("import * only allowed at module level", this.filename);
+                    throw syntaxError("import * only allowed at module level", this.fileName);
                 }
             }
         }
@@ -12114,7 +12199,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
     {
         if (flags & DEF_GLOBAL)
         {
-            if (flags & DEF_PARAM) throw syntaxError("name '" + name + "' is local and global", this.filename, ste.lineno);
+            if (flags & DEF_PARAM) throw syntaxError("name '" + name + "' is local and global", this.fileName, ste.lineno);
             dict[name] = GLOBAL_EXPLICIT;
             global[name] = null;
             if (bound && bound[name] !== undefined) delete bound[name];
@@ -12155,11 +12240,11 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/asserts'], func
 
     /**
      * @param {Object} ast
-     * @param {string} filename
+     * @param {string} fileName
      */
-    var symbolTable = function(ast, filename)
+    var symbolTable = function(ast, fileName)
     {
-        var ret = new SymbolTable(filename);
+        var ret = new SymbolTable(fileName);
 
         ret.enterBlock("top", ModuleBlock, ast, 0);
         ret.top = ret.cur;
@@ -25475,14 +25560,14 @@ Sk.gensymcount = 0;
 
 /**
  * @constructor
- * @param {string} filename
+ * @param {string} fileName
  * @param {Object} st
  * @param {number} flags
  * @param {string=} sourceCodeForAnnotation used to add original source to listing if desired
  */
-function Compiler(filename, st, flags, sourceCodeForAnnotation)
+function Compiler(fileName, st, flags, sourceCodeForAnnotation)
 {
-    this.filename = filename;
+    this.fileName = fileName;
     /**
      * @type {Object}
      * @private
@@ -25577,12 +25662,22 @@ Compiler.prototype.annotateSource = function(ast)
     {
         var lineno = ast.lineno;
         var col_offset = ast.col_offset;
-        out("\n//\n// line ", lineno, ":\n// ", this.getSourceLine(lineno), "\n// ");
-        for (var i = 0; i < col_offset; ++i) out(" ");
-        out("^\n//\n");
+        out('\n//');
+        out('\n// line ', lineno, ':');
+        out('\n// ', this.getSourceLine(lineno));
 
-        out("\nSk.currLineNo = ",lineno, ";\nSk.currColNo = ",col_offset,"\n\n");
-        out("\nSk.currFilename = '",this.filename,"';\n\n");
+        //
+        out('\n// ');
+        for (var i = 0; i < col_offset; ++i)
+        {
+            out(" ");
+        }
+        out("^");
+
+        out("\n//");
+
+        out('\nSk.currLineNo = ', lineno, ';Sk.currColNo = ', col_offset, ';');
+        out("\nSk.currFilename = '", this.fileName, "';\n\n");
     }
 };
 
@@ -26279,7 +26374,6 @@ Compiler.prototype.outputAllUnits = function()
         {
             ret += "case " + i + ": /* --- " + blocks[i]._name + " --- */";
             ret += blocks[i].join('');
-
             ret += "throw new Sk.builtin.SystemError('internal error: unterminated block');";
         }
         ret += unit.suffixCode;
@@ -27393,18 +27487,18 @@ Compiler.prototype.cprint = function(s)
     goog.asserts.assert(s instanceof astnodes.Print);
     var dest = 'null';
     if (s.dest)
+    {
         dest = this.vexpr(s.dest);
+    }
 
     var n = s.values.length;
-    // todo; dest disabled
     for (var i = 0; i < n; ++i)
     {
-        // TODO: This is performing a dictionary lookup. We need to go through a gateway function.
-        out('Sk.misceval.print_(', /*dest, ',',*/ "Sk.ffi.remapToJs(new Sk.builtins['str'](", this.vexpr(s.values[i]), ')));');
+        out("Sk.misceval.print_(Sk.ffi.remapToJs(new Sk.builtins['str'](", this.vexpr(s.values[i]), ")));");
     }
     if (s.nl)
     {
-        out('Sk.misceval.print_(', /*dest, ',*/ '"\\n");');
+        out("Sk.misceval.print_('\\n');");
     }
 };
 
@@ -27462,17 +27556,17 @@ Compiler.prototype.cmod = function(mod)
 
 /**
  * @param {string} source the code
- * @param {string} filename where it came from
+ * @param {string} fileName where it came from
  * @param {string} mode one of 'exec', 'eval', or 'single'
  *
  * @return {{funcname: string, code: string}}
  */
-Sk.compile = function(source, filename, mode)
+Sk.compile = function(source, fileName, mode)
 {
-    var cst = parser.parse(filename, source);
-    var ast = builder.astFromParse(cst, filename);
-    var st = symtable.symbolTable(ast, filename);
-    var c = new Compiler(filename, st, 0, source);
+    var cst = parser.parse(fileName, source);
+    var ast = builder.astFromParse(cst, fileName);
+    var st = symtable.symbolTable(ast, fileName);
+    var c = new Compiler(fileName, st, 0, source);
     return {"funcname": c.cmod(ast), "code": c.result.join('')};
 };
 goog.exportSymbol("Sk.compile", Sk.compile);
@@ -27561,11 +27655,6 @@ Sk.importSetUpPath = function()
         Sk.doOneTimeInitialization();
     }
 };
-
-if (COMPILED)
-{
-    var js_beautify = function(x) { return x; };
-}
 
 /**
  * @param {string} name name of module to import
@@ -27746,38 +27835,32 @@ Sk.importModuleInternalNoBody_ = function(name, dumpJS, overrideName)
 Sk.evaluateModule = function(module, co, dumpJS, modname)
 {
     module.$js = co.code; // todo; only in DEBUG?
-    var finalcode = co.code;
+    var finalCode = co.code;
     if (Sk.dateSet == null || !Sk.dateSet)
     {
-        finalcode = 'Sk.execStart = new Date();\n' + co.code;
+        finalCode = 'Sk.execStart = new Date();\n' + co.code;
         Sk.dateSet = true;
     }
 
     {
         if (dumpJS)
         {
-            var withLineNumbers = function(code)
+            var options =
             {
-                var beaut = js_beautify(co.code);
-                var lines = beaut.split("\n");
-                for (var i = 1; i <= lines.length; ++i)
-                {
-                    var width = ("" + i).length;
-                    var pad = "";
-                    for (var j = width; j < 5; ++j) pad += " ";
-                    lines[i - 1] = "/* " + pad + i + " */ " + lines[i - 1];
-                }
-                return lines.join("\n");
+                indent_size: 2,
+                preserve_newlines: false,
+                brace_style: 'expand'
             };
-            finalcode = withLineNumbers(co.code);
-            Sk.debugout(finalcode);
+            var beautifulCode = js_beautify(co.code, options);
+            finalCode = beautifulCode;
+            Sk.debugout(finalCode);
         }
     }
 
     var namestr = "Sk.builtin.stringToPy('" + modname + "')";
-    finalcode += "\n" + co.funcname + "(" + namestr + ");";
+    finalCode += "\n" + co.funcname + "(" + namestr + ");";
 
-    var modlocs = goog.global['eval'](finalcode);
+    var modlocs = goog.global['eval'](finalCode);
 
     // pass in __name__ so the module can set it (so that the code can access
     // it), but also set it after we're done so that builtins don't have to
