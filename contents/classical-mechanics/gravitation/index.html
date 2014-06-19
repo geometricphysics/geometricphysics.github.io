@@ -2,6 +2,18 @@
 layout: master
 title: Geometric Physics • Classical Mechanics • Gravitation
 ---
+<script src="/vendor/ace-builds/src-noconflict/ace.js"></script>
+
+<script src="/vendor/bladejs/dist/bladejs.min.js"></script>
+<script src="/vendor/threejs/build/three.min.js"></script>
+<script src="/vendor/EaselJS/lib/easeljs-0.7.1.min.js"></script>
+<script src="/vendor/TweenJS/lib/tweenjs-0.5.1.min.js"></script>
+<script src="/vendor/EaselJS/lib/movieclip-0.7.1.min.js"></script>
+
+<script src="/vendor/davinci/davinci.min.js"></script>
+<script src="/vendor/davinci/davinci-stdlib.js"></script>
+<script src="/js/samples-manager.js"></script>
+
 <h1>Gravitation</h1>
 
 <div class="panel panel-default">
@@ -195,8 +207,7 @@ title: Geometric Physics • Classical Mechanics • Gravitation
     <p>
       <iframe width="560" height="315" src="//www.youtube.com/embed/SN1Q5ru2fI0?rel=0" frameborder="0" allowfullscreen></iframe>
     </p>
-<davinci-edit>
-<davinci-code console-id='cga'># Calculating Gravitational Attraction
+<div id="editorGravCalc" style="height: 300px;"># Calculating Gravitational Attraction
 from units import *
 
 G = 6.67e-11 * newton * (meter ** 2) / (kilogram ** 2)
@@ -206,11 +217,18 @@ r = 1.5 * meter
 F = G * m1 * m2 / r ** 2
 
 print "The magnitude of the force is %s" % (F)
-</davinci-code>
-</davinci-edit>
-<davinci-console id='cga'></davinci-console>
-  </div>
 </div>
+<br/>
+<button type="button" class="btn btn-primary" onclick="samples['GravCalc'].run()">Run</button>
+<button type="button" class="btn btn-default" onclick="samples['GravCalc'].clear()">Clear</button>
+<button type="button" class="btn btn-danger"  onclick="samples['GravCalc'].reset()">Reset</button>
+<br/>
+<br/>
+<pre id="outputGravCalc" style=""></pre>
+<hr/>
+<script>
+  samples['GravCalc'] = sample('GravCalc');
+</script>
 
 <div class="panel panel-default">
   <div class="panel-heading">
