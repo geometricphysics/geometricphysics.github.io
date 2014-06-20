@@ -1,0 +1,67 @@
+// declare var EIGHT: any;
+
+declare module EIGHT
+{
+  interface Euclidean3
+  {
+    w: number;
+    x: number;
+    y: number;
+    z: number;
+    xy: number;
+    yz: number;
+    zx: number;
+    xyz: number;
+  }
+  interface Scene
+  {
+    add(mesh: Mesh): void;
+    tearDown(): void;
+    onContextLoss(): void;
+    onContextGain(context: WebGLContext): void;
+  }
+  interface Canvas
+  {
+  }
+  interface WebGLContext
+  {
+  }
+  interface Geometry
+  {
+  }
+  interface Mesh
+  {
+    attitude: Euclidean3;
+    position: Euclidean3;
+  }
+  interface WebGLContextMonitor
+  {
+    start(): void;
+    stop(): void;
+  }
+  interface WebGLRenderer
+  {
+    canvas: Canvas;
+    context: WebGLContext;
+    onContextLoss(): void;
+    onContextGain(context: WebGLContext): void;
+    render(scene, camera): void;
+  }
+  interface WindowAnimationRunner
+  {
+    start(): void;
+    stop(): void;
+  }
+  static scene(): Scene;
+  static perspectiveCamera(fov: number, aspect: number, near: number, far: number): any;
+  static webGLRenderer(): WebGLRenderer;
+  static mesh(geometry): Mesh;
+  static boxGeometry(): Geometry;
+  static prismGeometry(): Geometry;
+  static scalarE3(w: number): any;
+  static vectorE3(x: number, y: number, z: number): Euclidean3;
+  static bivectorE3(xy: number, yz: number, zx: number): any;
+  static workbench3D(canvas, renderer, camera, window): any;
+  static windowAnimationRunner(tick, terminate, setUp, tearDown, window): WindowAnimationRunner;
+  static webGLContextMonitor(canvas: Canvas, contextLoss: {(): void;}, contextGain: {(context: WebGLContext): void;}): WebGLContextMonitor;
+}

@@ -29,9 +29,12 @@ define(function(require, exports, module) {
     var refMarkers = [];
     var errorMarkers =[];
 
-    function loadTypeScriptLibrary(){
+    // This stuff seems to provide the code assist.
+    function loadTypeScriptLibrary()
+    {
         var libnames = [
-            "typescripts/lib.d.ts"
+            "typescripts/lib.d.ts",
+            "typescripts/eightjs.d.ts"
         ];
 
         // Add a non network script to get the balls rolling more quickly
@@ -307,7 +310,9 @@ define(function(require, exports, module) {
         document.getElementById('output').style.fontSize='14px';
 
         loadTypeScriptLibrary();
-        loadFile("samples/greeter.ts");
+
+        // TODO: Nice to make this data driven from the UI.
+        loadFile("samples/eight.ts");
 
         editor.addEventListener("change", onUpdateDocument);
         editor.addEventListener("changeSelection", onChangeCursor);
@@ -385,8 +390,14 @@ define(function(require, exports, module) {
 
         workerOnCreate(function(){//TODO use worker init event
 
-            ["typescripts/lib.d.ts"].forEach(function(libname){
-                appFileService.readFile(libname, function(content){
+            [
+                "typescripts/lib.d.ts",
+                "typescripts/eightjs.d.ts",
+                "typescripts/stats.js.d.ts"
+            ].forEach(function(libname)
+            {
+                appFileService.readFile(libname, function(content)
+                {
                     var params = {
                         data: {
                             name:libname,

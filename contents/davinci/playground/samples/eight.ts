@@ -1,4 +1,4 @@
-var eight = window.EIGHT;
+var eight = EIGHT;
 
 var glwin = window.open("","","width=800,height=600");
 
@@ -18,6 +18,8 @@ box.position = eight.vectorE3(-1.0,-0.5,-5.0);
 var prism = eight.mesh(eight.prismGeometry());
 scene.add(prism);
 prism.position = eight.vectorE3(0.0,0.0,-5.0);
+
+
 
 var workbench3D = eight.workbench3D(renderer.canvas, renderer, camera, glwin);
 
