@@ -1,6 +1,6 @@
 var eight = EIGHT;
 
-var glwin = window.open("","","width=800,height=600");
+var glwin = window.open("","","width=800, height=600");
 
 glwin.document.body.style.backgroundColor = "202020";
 glwin.document.body.style.overflow = "hidden";
@@ -18,8 +18,6 @@ box.position = eight.vectorE3(-1.0,-0.5,-5.0);
 var prism = eight.mesh(eight.prismGeometry());
 scene.add(prism);
 prism.position = eight.vectorE3(0.0,0.0,-5.0);
-
-
 
 var workbench3D = eight.workbench3D(renderer.canvas, renderer, camera, glwin);
 
@@ -40,7 +38,6 @@ glwin.document.body.appendChild(stats.domElement);
 
 function tick(t) {
   stats.begin();
-  // Klunky math until we get the operator overloading and GA carried over to JavaScript!
   var c = eight.scalarE3(Math.cos(angle/2));
   var s = eight.scalarE3(Math.sin(angle/2));
   var R = c.sub(B.mul(s));
@@ -52,7 +49,7 @@ function tick(t) {
   stats.end();
 }
 
-function terminate(t) {return false;}
+function terminate(t: number) {return false;}
 
 function tearDown(e) {
   monitor.stop();

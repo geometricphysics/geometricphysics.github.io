@@ -12,6 +12,8 @@ declare module EIGHT
     yz: number;
     zx: number;
     xyz: number;
+    sub(mv: Euclidean3): Euclidean3;
+    mul(mv: Euclidean3): Euclidean3;
   }
   interface Scene
   {
@@ -58,10 +60,10 @@ declare module EIGHT
   static mesh(geometry): Mesh;
   static boxGeometry(): Geometry;
   static prismGeometry(): Geometry;
-  static scalarE3(w: number): any;
+  static scalarE3(w: number): Euclidean3;
   static vectorE3(x: number, y: number, z: number): Euclidean3;
-  static bivectorE3(xy: number, yz: number, zx: number): any;
+  static bivectorE3(xy: number, yz: number, zx: number): Euclidean3;
   static workbench3D(canvas, renderer, camera, window): any;
-  static windowAnimationRunner(tick, terminate, setUp, tearDown, window): WindowAnimationRunner;
+  static windowAnimationRunner(tick, terminate: {(time: number): boolean;}, setUp, tearDown, window): WindowAnimationRunner;
   static webGLContextMonitor(canvas: Canvas, contextLoss: {(): void;}, contextGain: {(context: WebGLContext): void;}): WebGLContextMonitor;
 }
