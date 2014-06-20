@@ -1763,17 +1763,28 @@ define('davinci-py/tokenize',['davinci-py/base', 'davinci-py/asserts'], function
     }
 
     /**
+     * @constructor
+     * @extends SyntaxError
      * @param {string} message
      * @param {string} fileName
-     * @param {number} begin
-     * @param {number} end
-     * @param {string|undefined} line
+     * @param {number} lineNumber
+     * @param {number} columnNumber
      */
-    function tokenError(message, fileName, begin, end, line)
+    function TokenError(message, fileName, lineNumber, columnNumber)
     {
-        return new Error(message);
-    //  return new Sk.builtin.TokenError("EOF in multi-line string", this.fileName, this.strstart[0], this.strstart[1], this.contline);
+        asserts.assert(base.isString(message), "message must be a string");
+        asserts.assert(base.isString(fileName), "fileName must be a string");
+        asserts.assert(base.isNumber(lineNumber), "lineNumber must be a number");
+        asserts.assert(base.isNumber(columnNumber), "columnNumber must be a number");
+
+        this.name = "TokenError";
+        this.message = message;
+        this.fileName = fileName;
+        this.lineNumber = lineNumber;
+        this.columnNumber = columnNumber;
     }
+    TokenError.prototype = new SyntaxError();
+    TokenError.prototype.constructor = TokenError;
 
     /**
      * @param {string} message
@@ -1792,25 +1803,7 @@ define('davinci-py/tokenize',['davinci-py/base', 'davinci-py/asserts'], function
         {
             asserts.fail("end must be Array.<number>");
         }
-        var msg = function()
-        {
-            var ret = "";
-
-            if (message)
-                ret += message;
-            if (base.isDef(begin))
-                ret += " on line " + begin[0];
-
-            if (base.isDef(begin) && base.isDef(end) && base.isDef(text))
-            {
-                ret += "\n" + text + "\n";
-                for (var i = 0; i < begin[1]; ++i) ret += " ";
-                ret += "^\n";
-            }
-
-            return ret;
-        };
-        var e = new SyntaxError(msg(), fileName);
+        var e = new SyntaxError(message, fileName);
         e.name = "IndentationError";
         e.fileName = fileName;
         if (base.isDef(begin))
@@ -1865,7 +1858,7 @@ define('davinci-py/tokenize',['davinci-py/base', 'davinci-py/asserts'], function
         {
             if (!line)
             {
-                throw tokenError("EOF in multi-line string", this.fileName, this.strstart[0], this.strstart[1], this.contline);
+                throw new TokenError("EOF in multi-line string", this.fileName, this.strstart[0], this.strstart[1]);
             }
             this.endprog.lastIndex = 0;
             endmatch = this.endprog.test(line);
@@ -1957,7 +1950,7 @@ define('davinci-py/tokenize',['davinci-py/base', 'davinci-py/asserts'], function
         {
             if (!line)
             {
-                throw tokenError("EOF in multi-line statement", this.fileName, this.lnum, 0, line);
+                throw new TokenError("EOF in multi-line statement", this.fileName, this.lnum, 0);
             }
             this.continued = false;
         }
@@ -2362,17 +2355,17 @@ dfas:
         37: 1}],
  258: [[[[40, 1]], [[25, 0], [37, 0], [0, 1]]],
        {6: 1, 8: 1, 9: 1, 14: 1, 18: 1, 21: 1, 25: 1, 29: 1, 32: 1, 37: 1}],
- 259: [[[[18, 1], [8, 2], [9, 5], [29, 4], [32, 3], [14, 6], [21, 2]],
-        [[18, 1], [0, 1]],
-        [[0, 2]],
-        [[41, 7], [42, 2]],
-        [[43, 2], [44, 8], [45, 8]],
-        [[46, 9], [47, 2]],
+ 259: [[[[21, 1], [8, 1], [32, 4], [29, 3], [9, 2], [14, 5], [18, 6]],
+        [[0, 1]],
+        [[41, 7], [42, 1]],
+        [[43, 1], [44, 8], [45, 8]],
+        [[46, 9], [47, 1]],
         [[48, 10]],
-        [[42, 2]],
-        [[43, 2]],
-        [[47, 2]],
-        [[14, 2]]],
+        [[18, 6], [0, 6]],
+        [[42, 1]],
+        [[43, 1]],
+        [[47, 1]],
+        [[14, 1]]],
        {8: 1, 9: 1, 14: 1, 18: 1, 21: 1, 29: 1, 32: 1}],
  260: [[[[49, 1]], [[50, 0], [0, 1]]],
        {6: 1, 8: 1, 9: 1, 14: 1, 18: 1, 21: 1, 25: 1, 29: 1, 32: 1, 37: 1}],
@@ -2994,7 +2987,7 @@ dfas:
         [[162, 6]],
         [[0, 4]],
         [[43, 4]],
-        [[42, 4]]],
+        [[47, 4]]],
        {29: 1, 32: 1, 120: 1}],
  336: [[[[15, 1]],
         [[70, 2]],
@@ -3043,17 +3036,17 @@ states:
 [[[[1, 1], [2, 1], [3, 2]], [[0, 1]], [[2, 1]]],
  [[[38, 1]], [[39, 0], [0, 1]]],
  [[[40, 1]], [[25, 0], [37, 0], [0, 1]]],
- [[[18, 1], [8, 2], [9, 5], [29, 4], [32, 3], [14, 6], [21, 2]],
-  [[18, 1], [0, 1]],
-  [[0, 2]],
-  [[41, 7], [42, 2]],
-  [[43, 2], [44, 8], [45, 8]],
-  [[46, 9], [47, 2]],
+ [[[21, 1], [8, 1], [32, 4], [29, 3], [9, 2], [14, 5], [18, 6]],
+  [[0, 1]],
+  [[41, 7], [42, 1]],
+  [[43, 1], [44, 8], [45, 8]],
+  [[46, 9], [47, 1]],
   [[48, 10]],
-  [[42, 2]],
-  [[43, 2]],
-  [[47, 2]],
-  [[14, 2]]],
+  [[18, 6], [0, 6]],
+  [[42, 1]],
+  [[43, 1]],
+  [[47, 1]],
+  [[14, 1]]],
  [[[49, 1]], [[50, 0], [0, 1]]],
  [[[51, 1]], [[52, 0], [0, 1]]],
  [[[53, 1]], [[54, 0], [0, 1]]],
@@ -3272,7 +3265,7 @@ states:
   [[162, 6]],
   [[0, 4]],
   [[43, 4]],
-  [[42, 4]]],
+  [[47, 4]]],
  [[[15, 1]],
   [[70, 2]],
   [[96, 3]],
@@ -3349,13 +3342,13 @@ labels:
  [271, null],
  [1, 'and'],
  [266, null],
- [316, null],
- [10, null],
+ [290, null],
+ [27, null],
  [8, null],
  [333, null],
  [276, null],
- [290, null],
- [27, null],
+ [316, null],
+ [10, null],
  [332, null],
  [275, null],
  [19, null],
@@ -3518,7 +3511,7 @@ tokens:
  7: 29,
  8: 43,
  9: 32,
- 10: 42,
+ 10: 47,
  11: 70,
  12: 57,
  13: 147,
@@ -3535,7 +3528,7 @@ tokens:
  24: 65,
  25: 14,
  26: 9,
- 27: 47,
+ 27: 42,
  28: 99,
  29: 97,
  30: 101,
@@ -4554,29 +4547,10 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
      * @param {string} fileName
      * @param {Array.<number>=} begin
      * @param {Array.<number>=} end
-     * @param {string=} text
      */
-    function parseError(message, fileName, begin, end, text)
+    function parseError(message, fileName, begin, end)
     {
-        var msg = function()
-        {
-            var ret = "";
-
-            if (message)
-                ret += message;
-            if (base.isDef(begin))
-                ret += " on line " + begin[0];
-
-            if (base.isDef(begin) && base.isDef(begin) && base.isDef(begin))
-            {
-                ret += "\n" + text + "\n";
-                for (var i = 0; i < begin[1]; ++i) ret += " ";
-                ret += "^\n";
-            }
-
-            return ret;
-        };
-        var e = new SyntaxError(msg(), fileName);
+        var e = new SyntaxError(message, fileName);
         e.name = "ParseError";
         e.fileName = fileName;
         if (base.isDef(begin))
@@ -4722,7 +4696,7 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
             else
             {
                 // no transition
-                throw parseError("bad input", this.filename, context[0], context[1], context[2]);
+                throw parseError("bad input", this.filename, context[0], context[1]);
             }
         }
     };
@@ -4743,7 +4717,7 @@ define('davinci-py/parser',['davinci-py/tables', 'davinci-py/tokenize', 'davinci
         ilabel = this.grammar.tokens.hasOwnProperty(type) && this.grammar.tokens[type];
         if (!ilabel)
         {
-            throw parseError("bad token", this.filename, context[0], context[1], context[2]);
+            throw parseError("bad token", this.filename, context[0], context[1]);
         }
         return ilabel;
     };
@@ -5034,17 +5008,7 @@ define(
         asserts.assert(base.isString(message), "message must be a string");
         asserts.assert(base.isString(fileName), "fileName must be a string");
         asserts.assert(base.isNumber(lineNumber), "lineNumber must be a number");
-        var msg = function()
-        {
-            var ret = "";
-
-            if (message)
-                ret += message;
-            ret += " on line " + lineNumber;
-
-            return ret;
-        };
-        var e = new SyntaxError(msg(), fileName);
+        var e = new SyntaxError(message, fileName);
         e.fileName = fileName;
         e.lineNumber = lineNumber;
         return e;
@@ -7112,18 +7076,7 @@ define('davinci-py/symtable',['davinci-py/astnodes', 'davinci-py/base', 'davinci
         {
             asserts.assert(base.isNumber(lineNumber), "lineNumber must be a number");
         }
-        var msg = function()
-        {
-            var ret = "";
-
-            if (message)
-                ret += message;
-            if (base.isDef(lineNumber))
-                ret += " on line " + lineNumber;
-
-            return ret;
-        };
-        var e = new SyntaxError(msg(), fileName);
+        var e = new SyntaxError(message, fileName);
         e.fileName = fileName;
         if (typeof lineNumber === 'number')
         {

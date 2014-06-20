@@ -1,0 +1,122 @@
+---
+layout: master
+title: Geometric Physics • DaVinci • Tutorial
+---
+<script src="/vendor/ace-builds/src-noconflict/ace.js"></script>
+<script src="/vendor/bladejs/dist/bladejs.min.js"></script>
+<script src="/vendor/davinci/davinci.min.js"></script>
+<script src="/vendor/davinci/davinci-stdlib.js"></script>
+<script src="/js/samples-manager.js"></script>
+
+<article>
+  <div class="page-header">
+    <h1>DaVinci Python Tutorial</h1>
+  </div>
+  <section>
+    <h3>Introduction</h3>
+    <p>
+      DaVinci Python is a version of Python 2.x that runs directly in your web browser. The DaVinci Python implementation is bundled with modules for Physics modeling.
+    </p>
+  </section>
+  <section>
+    <h3>Hello World</h3>
+    <div id="editor000" style="height: 400px;"># This is a single-line comment.
+
+# This is a print statement.
+print "Hello, World!"
+</div>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="samples['000'].run()">Run</button>
+    <button type="button" class="btn btn-default" onclick="samples['000'].clear()">Clear</button>
+    <button type="button" class="btn btn-danger"  onclick="samples['000'].reset()">Reset</button>
+    <br/>
+    <br/>
+    <pre id="output000" style=""></pre>
+    <!-- canvas id="mycanvas000" width="600" height="400"></canvas -->
+    <script>
+      samples['000'] = sample('000');
+    </script>
+  </section>
+  <section>
+    <h3>Arithmetic</h3>
+    <div id="editor010" style="height: 400px;"># This is a single-line comment.
+
+# This is a print statement.
+print 3 + (4 / 2) * 5
+</div>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="samples['010'].run()">Run</button>
+    <button type="button" class="btn btn-default" onclick="samples['010'].clear()">Clear</button>
+    <button type="button" class="btn btn-danger"  onclick="samples['010'].reset()">Reset</button>
+    <br/>
+    <br/>
+    <pre id="output010" style=""></pre>
+    <!-- canvas id="mycanvas010" width="600" height="400"></canvas -->
+    <script>
+      samples['010'] = sample('010');
+    </script>
+  </section>
+  <section>
+    <h3>Variables</h3>
+    <div id="editor020" style="height: 400px;">x = 7
+
+print "x=" + str(x)
+print "The value of 3 times x is " + str(3 * x)
+</div>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="samples['020'].run()">Run</button>
+    <button type="button" class="btn btn-default" onclick="samples['020'].clear()">Clear</button>
+    <button type="button" class="btn btn-danger"  onclick="samples['020'].reset()">Reset</button>
+    <br/>
+    <br/>
+    <pre id="output020" style=""></pre>
+    <!-- canvas id="mycanvas020" width="600" height="400"></canvas -->
+    <script>
+      samples['020'] = sample('020');
+    </script>
+  </section>
+  <section>
+    <h3>Functions</h3>
+    <div id="editor030" style="height: 400px;"># How to declare and call a function.
+
+def f(x, y):
+    return 2 * x + y
+
+print f(1,3)
+</div>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="samples['030'].run()">Run</button>
+    <button type="button" class="btn btn-default" onclick="samples['030'].clear()">Clear</button>
+    <button type="button" class="btn btn-danger"  onclick="samples['030'].reset()">Reset</button>
+    <br/>
+    <br/>
+    <pre id="output030" style=""></pre>
+    <!-- canvas id="mycanvas030" width="600" height="400"></canvas -->
+    <script>
+      samples['030'] = sample('030');
+    </script>
+  </section>
+  <section>
+    <h3>Conditional Statements</h3>
+    <div id="editor040" style="height: 400px;"># How to branch program execution.
+
+x = 1
+
+if (x &gt; 3):
+    print "x is greater than three"
+else:
+    print "x is less than or equal to 3"
+</div>
+    <br/>
+    <button type="button" class="btn btn-primary" onclick="samples['040'].run()">Run</button>
+    <button type="button" class="btn btn-default" onclick="samples['040'].clear()">Clear</button>
+    <button type="button" class="btn btn-danger"  onclick="samples['040'].reset()">Reset</button>
+    <br/>
+    <br/>
+    <pre id="output040" style=""></pre>
+    <!-- canvas id="mycanvas040" width="600" height="400"></canvas -->
+    <script>
+      samples['040'] = sample('040');
+    </script>
+  </section>
+</article>

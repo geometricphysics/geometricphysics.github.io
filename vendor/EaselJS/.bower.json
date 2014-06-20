@@ -27,11 +27,11 @@
     "src",
     "tutorials"
   ],
-  "_release": "14eb78900b",
+  "_release": "f21d1f5cba",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "14eb78900b939d10031feb9a050b0290e8a67f37"
+    "commit": "f21d1f5cba2ed56196bfa1cd2d20044427da4180"
   },
   "_source": "git://github.com/CreateJS/EaselJS.git",
   "_target": "*",

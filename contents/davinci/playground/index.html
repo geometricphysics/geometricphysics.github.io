@@ -1,0 +1,57 @@
+---
+layout: playground
+title: Geometric Physics • DaVinci • TypeScript
+---
+<script src="/vendor/bladejs/dist/bladejs.min.js"></script>
+<script src="/vendor/eightjs/dist/eight.min.js"></script>
+<script src="/vendor/gl-matrix/dist/gl-matrix-min.js"></script>
+<script src="/vendor/stats.js/build/stats.min.js"></script>
+
+<div class="fluid-container" style="padding:5px">
+    <div class="editor-area">
+        <div class="warp-container">
+            <div class="langauge-title" style="float:left">
+                <div style="float:left">
+                    <h2>typescript</h2>
+                </div>
+                <div style="float:left;padding-top:5px;padding-left:20px">
+                    <select id="select-sample">
+                        <option selected="selected" value="greeter.ts">Greeter</option>
+                        <option value="raytracer.ts">Raytracer</option>
+                        <option value="animal.ts">Animal</option>
+                        <option value="eight.ts">Eight</option>
+                    </select>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="editor-container">
+                <div id="editor"></div>
+            </div>
+        </div>
+        <div class="warp-container">
+            <div class="langauge-title" style="float:right">
+                <div style="float:left">
+                    <div id="javascript-run">Run</div>
+                </div>
+                <div style="float:left;margin-left:10px">
+                    <h2>javascript</h2>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+            <div class="editor-container" style="float:right">
+                <div id="output"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+  var require = {
+      // The base path for all require calls. If this is absent it is assumed to be same as the location of require.js
+      baseUrl: window.location.protocol + "//" + window.location.host + window.location.pathname.split("/").slice(0, -1).join("/")+'/scripts',
+      paths: {
+          ace: "./lib/ace" // path of ace relative to baseUrl
+      }
+  };
+</script>
+<script type="text/javascript" src="./scripts/lib/jquery.js"></script>
+<script src="./scripts/lib/require.js" data-main="main" type="text/javascript"></script>
