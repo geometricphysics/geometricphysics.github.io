@@ -1,5 +1,6 @@
 // Workaround for recent upgrade to 1.0.1 is to use this for window.
-var glwin = this.open("","","width=800, height=600");
+var w: Window = this;
+var glwin = w.open("","","width=800, height=600");
 
 glwin.document.body.style.backgroundColor = "202020";
 glwin.document.body.style.overflow = "hidden";
@@ -74,6 +75,7 @@ function onContextLoss() {
 function onContextGain(gl) {
     scene.onContextGain(gl);
     renderer.onContextGain(gl);
+    renderer.context.clearColor(32/256,32/256,32/256,1)
     runner.start();
 }
 

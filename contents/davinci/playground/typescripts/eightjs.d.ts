@@ -1,4 +1,4 @@
-// declare var EIGHT: any;
+///<reference path='lib.d.ts'/>
 
 declare module EIGHT
 {
@@ -20,15 +20,9 @@ declare module EIGHT
     add(mesh: Mesh): void;
     tearDown(): void;
     onContextLoss(): void;
-    onContextGain(context: WebGLContext): void;
-  }
-  interface Canvas
-  {
+    onContextGain(context: WebGLRenderingContext): void;
   }
   interface Camera
-  {
-  }
-  interface WebGLContext
   {
   }
   interface Geometry
@@ -46,10 +40,10 @@ declare module EIGHT
   }
   interface WebGLRenderer
   {
-    canvas: Canvas;
-    context: WebGLContext;
+    canvas: HTMLCanvasElement;
+    context: WebGLRenderingContext;
     onContextLoss(): void;
-    onContextGain(context: WebGLContext): void;
+    onContextGain(context: WebGLRenderingContext): void;
     render(scene: Scene, camera: Camera): void;
   }
   interface WindowAnimationRunner
@@ -71,7 +65,7 @@ declare module EIGHT
   static scalarE3(w: number): Euclidean3;
   static vectorE3(x: number, y: number, z: number): Euclidean3;
   static bivectorE3(xy: number, yz: number, zx: number): Euclidean3;
-  static workbench3D(canvas: Canvas, renderer: WebGLRenderer, camera: Camera, window): Workbench3D;
-  static windowAnimationRunner(tick: {(time: number): void;}, terminate: {(time: number): boolean;}, setUp: {(time: number): boolean;}, tearDown, window): WindowAnimationRunner;
-  static webGLContextMonitor(canvas: Canvas, contextLoss: {(): void;}, contextGain: {(context: WebGLContext): void;}): WebGLContextMonitor;
+  static workbench3D(canvas: HTMLCanvasElement, renderer: WebGLRenderer, camera: Camera, window: Window): Workbench3D;
+  static windowAnimationRunner(tick: {(time: number): void;}, terminate: {(time: number): boolean;}, setUp: {(time: number): boolean;}, tearDown, window: Window): WindowAnimationRunner;
+  static webGLContextMonitor(canvas: HTMLCanvasElement, contextLoss: {(): void;}, contextGain: {(context: WebGLRenderingContext): void;}): WebGLContextMonitor;
 }
