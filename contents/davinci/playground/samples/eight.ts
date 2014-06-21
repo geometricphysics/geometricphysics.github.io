@@ -1,32 +1,31 @@
-var eight = EIGHT;
-
-var glwin = window.open("","","width=800, height=600");
+// Workaround for recent upgrade to 1.0.1 is to use this for window.
+var glwin = this.open("","","width=800, height=600");
 
 glwin.document.body.style.backgroundColor = "202020";
 glwin.document.body.style.overflow = "hidden";
 glwin.document.title = "Visualizing Geometric Algebra with WebGL";
 
-var scene = eight.scene();
+var scene = EIGHT.scene();
 
-var camera = eight.perspectiveCamera(45, 1.0, 0.1, 100);
+var camera = EIGHT.perspectiveCamera(45, 1.0, 0.1, 100);
 
-var renderer = eight.webGLRenderer();
+var renderer = EIGHT.webGLRenderer();
 
-var box = eight.mesh(eight.boxGeometry());
+var box = EIGHT.mesh(EIGHT.boxGeometry());
 scene.add(box);
-box.position = eight.vectorE3(-1.0,-0.5,-5.0);
-var prism = eight.mesh(eight.prismGeometry());
+box.position = EIGHT.vectorE3(-1.0,-0.5,-5.0);
+var prism = EIGHT.mesh(EIGHT.prismGeometry());
 scene.add(prism);
-prism.position = eight.vectorE3(0.0,0.0,-5.0);
+prism.position = EIGHT.vectorE3(0.0,0.0,-5.0);
 
-var workbench3D = eight.workbench3D(renderer.canvas, renderer, camera, glwin);
+var workbench3D = EIGHT.workbench3D(renderer.canvas, renderer, camera, glwin);
 
 function setUp() {
   workbench3D.setUp();
   monitor.start();
 }
 
-var B = eight.bivectorE3(0,0,1);
+var B = EIGHT.bivectorE3(0,0,1);
 var angle = 0;
 
 var stats = new Stats();
@@ -36,10 +35,10 @@ stats.domElement.style.left = '0px';
 stats.domElement.style.top = '0px';
 glwin.document.body.appendChild(stats.domElement);
 
-function tick(t) {
+function tick(t: number) {
   stats.begin();
-  var c = eight.scalarE3(Math.cos(angle/2));
-  var s = eight.scalarE3(Math.sin(angle/2));
+  var c = EIGHT.scalarE3(Math.cos(angle/2));
+  var s = EIGHT.scalarE3(Math.sin(angle/2));
   var R = c.sub(B.mul(s));
   box.attitude = R;
   prism.attitude = R;
@@ -64,7 +63,7 @@ function tearDown(e) {
   }
 }
 
-var runner = eight.windowAnimationRunner(tick, terminate, setUp, tearDown, glwin);
+var runner = EIGHT.windowAnimationRunner(tick, terminate, setUp, tearDown, glwin);
 
 function onContextLoss() {
     runner.stop();
@@ -78,6 +77,6 @@ function onContextGain(gl) {
     runner.start();
 }
 
-var monitor = eight.webGLContextMonitor(renderer.canvas, onContextLoss, onContextGain);
+var monitor = EIGHT.webGLContextMonitor(renderer.canvas, onContextLoss, onContextGain);
 
 onContextGain(renderer.context);

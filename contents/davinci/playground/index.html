@@ -46,7 +46,7 @@ title: Geometric Physics • DaVinci • TypeScript
 </div>
 <script type="text/javascript">
   var require = {
-      // The base path for all require calls. If this is absent it is assumed to be same as the location of require.js
+      // The base path for all require calls. If this is absent it is assumed to be same as the location of RequireJS
       baseUrl: window.location.protocol + "//" + window.location.host + window.location.pathname.split("/").slice(0, -1).join("/")+'/scripts',
       paths: {
           ace: "./lib/ace" // path of ace relative to baseUrl
@@ -54,4 +54,4 @@ title: Geometric Physics • DaVinci • TypeScript
   };
 </script>
 <script type="text/javascript" src="./scripts/lib/jquery.js"></script>
-<script src="./scripts/lib/require.js" data-main="main" type="text/javascript"></script>
+<script src="/vendor/requirejs/require.js" data-main="main" type="text/javascript"></script>
