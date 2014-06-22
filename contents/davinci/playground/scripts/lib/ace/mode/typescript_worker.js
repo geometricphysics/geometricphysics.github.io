@@ -36,9 +36,12 @@ define(function(require, exports, module) {
     var lang = require("../lib/lang");
     var Document = require("../document").Document;
     var DocumentPositionUtil = require('./typescript/DocumentPositionUtil').DocumentPositionUtil;
-    var Services = require('./typescript/typescriptServices').Services;
-    var TypeScript = require('./typescript/typescriptServices').TypeScript;
-    var TypeScriptLS = require('./typescript/lightHarness').TypeScriptLS;
+    var useTSS = true;
+    var Services;
+    var TypeScript;
+    Services = useTSS ? require('./typescript/typescriptServices').Services : null;
+    TypeScript = useTSS ? require('./typescript/typescriptServices').TypeScript : null;
+    var TypeScriptLS = require('./typescript/harness').TypeScriptLS;
 
     var TypeScriptWorker = exports.TypeScriptWorker = function(sender) {
         this.sender = sender;
@@ -47,10 +50,12 @@ define(function(require, exports, module) {
         var deferredUpdate = this.deferredUpdate = lang.deferredCall(this.onUpdate.bind(this));
 
         this.typeScriptLS =  new TypeScriptLS();
-        this.ServicesFactory = new Services.TypeScriptServicesFactory();
-        this.serviceShim = this.ServicesFactory.createLanguageServiceShim(this.typeScriptLS);
-        this.languageService = this.serviceShim.languageService;
-
+        if (Services)
+        {
+            this.ServicesFactory = new Services.TypeScriptServicesFactory();
+            this.serviceShim = this.ServicesFactory.createLanguageServiceShim(this.typeScriptLS);
+            this.languageService = this.serviceShim.languageService;
+        }
 
         var self = this;
         sender.on("change", function(e) {
@@ -128,7 +133,11 @@ define(function(require, exports, module) {
             });
 
 
-        this.compile = function (typeScriptContent){
+        /**
+         * @param {string} typeScriptCode
+         */
+        this.compile = function (typeScriptCode)
+        {
             var output = "";
 
             var outfile = {
@@ -150,24 +159,32 @@ define(function(require, exports, module) {
                 Close: function () {
                 }
             };
-            var compiler = new TypeScript.TypeScriptCompiler(outfile, outerr, new TypeScript.NullLogger(), new TypeScript.CompilationSettings());
-            compiler.addUnit(typeScriptContent, "output.js", false);
-            compiler.typeCheck();
-            compiler.emit(false, function (name) {
-
-            });
-
+            if (TypeScript)
+            {
+                var compiler = new TypeScript.TypeScriptCompiler(outfile, outerr, new TypeScript.NullLogger(), new TypeScript.CompilationSettings());
+                compiler.addUnit(typeScriptCode, "output.js", false);
+                compiler.typeCheck();
+                compiler.emit(false, function (name) {
+                    console.log("emitting: " + name);
+                });
+            }
+            else
+            {
+                console.log("TypeScript is not available in typescript_worker.js");
+            }
             return output;
         };
 
-        this.onUpdate = function() {
+        this.onUpdate = function()
+        {
             this.typeScriptLS.updateScript("temp.ts",this.doc.getValue() , false);
-            var errors = this.serviceShim.languageService.getScriptErrors("temp.ts", 100);
+            var errors = this.serviceShim ? this.serviceShim.languageService.getScriptErrors("temp.ts", 100) : [];
             var annotations = [];
             var self = this;
             this.sender.emit("compiled", this.compile(this.doc.getValue()));
 
-            errors.forEach(function(error){
+            errors.forEach(function(error)
+            {
                 var pos = DocumentPositionUtil.getPosition(self.doc, error.minChar);
                 annotations.push({
                     row: pos.row,

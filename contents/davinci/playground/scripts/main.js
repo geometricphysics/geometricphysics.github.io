@@ -1,4 +1,6 @@
-define(function(require, exports, module) {
+// TODO: How to make the dependencies explicit.
+define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, module)
+{
     var ace = require('ace/ace');
     var AceRange = require('ace/range').Range;
     var AutoComplete= require('AutoComplete').AutoComplete;
@@ -8,9 +10,22 @@ define(function(require, exports, module) {
     var FileService =  require('FileService').FileService;
     var deferredCall = require("ace/lib/lang").deferredCall;
 
-    var Services = require('ace/mode/typescript/typescriptServices').Services;
-    var TypeScript = require('ace/mode/typescript/typescriptServices').TypeScript;
-    var TypeScriptLS = require('ace/mode/typescript/lightHarness').TypeScriptLS;
+    // Let's see if we can gracefully degrade then upgrade parts.
+    var useTSS = true;
+    var tss;
+    if (useTSS)
+    {
+       tss = useTSS ? require('ace/mode/typescript/typescriptServices') : null;
+    }
+
+    var Services = tss ? tss.Services : null;
+    var TypeScript = tss ? tss.TypeScript : null;
+
+    // This customized object was cloned from harness.ts.
+    // Although it is custom, it appears it has to be compatible with the shim below.
+    // It must implement ILanguageServiceShimHost, ILogger, and functions addScript, updateScript, editScript.
+    var harness = require('ace/mode/typescript/harness');
+    var typeScriptLS =  new harness.TypeScriptLS();
 
     var aceEditorPosition = null;
     var appFileService = null;
@@ -18,9 +33,9 @@ define(function(require, exports, module) {
     var outputEditor = null;
     var typeCompilationService = null;
     var docUpdateCount = 0;
-    var typeScriptLS =  new TypeScriptLS();
-    var ServicesFactory = new Services.TypeScriptServicesFactory();
-    var serviceShim = ServicesFactory.createLanguageServiceShim(typeScriptLS);
+    // TypeScriptServiceFactory does exist in version 1.0.1.
+    var ServicesFactory = Services ? new Services.TypeScriptServicesFactory() : null;
+    var serviceShim = ServicesFactory ? ServicesFactory.createLanguageServiceShim(typeScriptLS) : null;
 
     var selectFileName = "";
 
@@ -32,7 +47,8 @@ define(function(require, exports, module) {
     // This stuff seems to provide the code assist.
     function loadTypeScriptLibrary()
     {
-        var libnames = [
+        var libnames =
+        [
             "typescripts/lib.d.ts",
             "typescripts/eightjs.d.ts"
         ];
@@ -40,10 +56,12 @@ define(function(require, exports, module) {
         // Add a non network script to get the balls rolling more quickly
         // See https://typescript.codeplex.com/workitem/129
         var iArgs = "interface IArguments {           [index: number]: any;        length: number;        callee: Function;    }";
-        typeScriptLS.addScript('start.d.ts',iArgs,true);
+        typeScriptLS.addScript('start.d.ts', iArgs, true);
 
-        libnames.forEach(function(libname){
-            appFileService.readFile(libname, function(content){
+        libnames.forEach(function(libname)
+        {
+            appFileService.readFile(libname, function(content)
+            {
                 typeScriptLS.addScript(libname, content.replace(/\r\n?/g,"\n"), true);
             });
         });
@@ -61,8 +79,10 @@ define(function(require, exports, module) {
         });
     }
 
-    function startAutoComplete(editor){
-        if (autoComplete.isActive() == false){
+    function startAutoComplete(editor)
+    {
+        if (autoComplete.isActive() == false)
+        {
             autoComplete.setScriptName(selectFileName);
             autoComplete.active();
         }
@@ -226,21 +246,27 @@ define(function(require, exports, module) {
         });
     }
 
-    function showOccurrences(){
-        var references = serviceShim.languageService.getOccurrencesAtPosition(selectFileName, aceEditorPosition.getCurrentCharPosition());
+    function showOccurrences()
+    {
+        var references = serviceShim ? serviceShim.languageService.getOccurrencesAtPosition(selectFileName, aceEditorPosition.getCurrentCharPosition()) : null;
         var session = editor.getSession();
-        refMarkers.forEach(function (id){
+        refMarkers.forEach(function (id)
+        {
             session.removeMarker(id);
         });
-        references.forEach(function(ref){
-            //TODO check script name
-            // console.log(ref.unitIndex);
-            var getpos = aceEditorPosition.getAcePositionFromChars;
-            var start = getpos(ref.ast.minChar);
-            var end = getpos(ref.ast.limChar);
-            var range = new AceRange(start.row, start.column, end.row, end.column);
-            refMarkers.push(session.addMarker(range, "typescript-ref", "text", true));
-        });
+        if (references)
+        {
+            references.forEach(function(ref)
+            {
+                //TODO check script name
+                // console.log(ref.unitIndex);
+                var getpos = aceEditorPosition.getAcePositionFromChars;
+                var start = getpos(ref.ast.minChar);
+                var end = getpos(ref.ast.limChar);
+                var range = new AceRange(start.row, start.column, end.row, end.column);
+                refMarkers.push(session.addMarker(range, "typescript-ref", "text", true));
+            });
+        }
     }
 
     var deferredShowOccurrences = deferredCall(showOccurrences);

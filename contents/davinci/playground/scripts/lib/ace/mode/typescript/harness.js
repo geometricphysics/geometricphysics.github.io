@@ -1,9 +1,6 @@
-/// This is an extract of harness.js .
-///   Just the ScriptInfo and the
-///  TypeScriptLS classes.
-/// Notice the manual require calls for ./typescriptServices.
-define(function(require, exports, module) {
-
+// This is a lightweight version of harness.ts
+define(function(require, exports, module)
+{
     var __extends = this.__extends || function (d, b) {
         function __() {
             this.constructor = d;
@@ -12,11 +9,19 @@ define(function(require, exports, module) {
         d.prototype = new __();
     };
 
-    var Services = require('./typescriptServices').Services;
-    var TypeScript = require('./typescriptServices').TypeScript;
+    var Services;
+    var TypeScript;
+
+    var useTSS = true;
+    if (useTSS)
+    {
+        Services = require('./typescriptServices').Services;
+        TypeScript = require('./typescriptServices').TypeScript;
+    }
 
     var ScriptInfo = (function () {
-        function ScriptInfo(name, content, isResident, maxScriptVersions) {
+        function ScriptInfo(name, content, isResident, maxScriptVersions)
+        {
             this.name = name;
             this.content = content;
             this.isResident = isResident;

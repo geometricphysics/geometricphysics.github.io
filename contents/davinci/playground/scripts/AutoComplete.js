@@ -35,7 +35,8 @@ define(function(require, exports, module) {
             self.view.hide();
         }
 
-        this.compilation = function(cursor){
+        this.compilation = function(cursor)
+        {
             var compilationInfo = compilationService.getCursorCompilation(self.scriptName, cursor);
             var text  = compilationService.matchText;
             var coords = editor.renderer.textToScreenCoordinates(cursor.row, cursor.column - text.length);
@@ -43,10 +44,12 @@ define(function(require, exports, module) {
             self.view.setPosition(coords);
             self.inputText = text;
 
-            var compilations = compilationInfo.entries;
+            var compilations = compilationInfo ? compilationInfo.entries : null;
 
-            if (self.inputText.length > 0){
-                compilations = compilationInfo.entries.filter(function(elm){
+            if (self.inputText.length > 0)
+            {
+                compilations = compilationInfo.entries.filter(function(elm)
+                {
                     return elm.name.toLowerCase().indexOf(self.inputText.toLowerCase()) == 0 ;
                 });
             }
@@ -71,11 +74,11 @@ define(function(require, exports, module) {
                 return (ret != 0) ? ret : textCompare(a, b);
             };
 
-            compilations = compilations.sort(compare);
+            compilations = compilations ? compilations.sort(compare) : compilations;
 
             self.showCompilation(compilations);
 
-            return compilations.length;
+            return compilations ? compilations.length : 0;
         };
 
         this.refreshCompilation = function(e){
@@ -92,8 +95,10 @@ define(function(require, exports, module) {
             self.compilation(cursor);
         };
 
-        this.showCompilation = function(infos){
-            if (infos.length > 0){
+        this.showCompilation = function(infos)
+        {
+            if (infos && infos.length > 0)
+            {
                 self.view.show();
                 var html = '';
                 // TODO use template
@@ -107,7 +112,9 @@ define(function(require, exports, module) {
                 }
                 self.listElement.innerHTML = html;
                 self.view.ensureFocus();
-            }else{
+            }
+            else
+            {
                 self.view.hide();
             }
         };

@@ -27,5 +27,6 @@
   },
   "_source": "git://github.com/alawatthe/MathLib.git",
   "_target": "~0.7.2",
-  "_originalSource": "MathLib"
+  "_originalSource": "MathLib",
+  "_direct": true
 }

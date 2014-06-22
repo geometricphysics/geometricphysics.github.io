@@ -9,6 +9,7 @@
 // Also added exports at the bottom
 
 define(function(require, exports, module) {
+// BEGIN ORIGINAL SOURCE
         var TypeScript;
         (function (TypeScript) {
             function hasFlag(val, flag) {
@@ -30122,9 +30123,8 @@ define(function(require, exports, module) {
             })();
             Formatting.TokenSpan = TokenSpan;
         })(Formatting || (Formatting = {}));
-
-        exports.TypeScript = TypeScript;
-        exports.Formatting = Formatting;
-        exports.Services = Services;
-
+// END ORIGINAL SOURCE
+  exports.TypeScript = TypeScript;
+  exports.Formatting = Formatting;
+  exports.Services = Services;
 });
