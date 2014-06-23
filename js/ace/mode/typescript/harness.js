@@ -1,255 +1,264 @@
-// This is a lightweight version of harness.ts
 define(function(require, exports, module)
 {
-    var __extends = this.__extends || function (d, b) {
-        function __() {
-            this.constructor = d;
-        }
-        __.prototype = b.prototype;
-        d.prototype = new __();
-    };
-
-    var Services;
-    var TypeScript;
-
-    var useTSS = true;
-    if (useTSS)
-    {
-        TypeScript = require('./typescriptServices').TypeScript;
-        Services = TypeScript.Services;
-//      Services = require('./typescriptServices').Services;
-    }
+    var tsLib = require('./typescriptServices').TypeScript;
+    var Services = tsLib.Services;
+    var LineMap1 = tsLib.LineMap1;
+    var ScriptSnapshot = tsLib.ScriptSnapshot;
+    var TextChangeRange = tsLib.TextChangeRange;
+    var TextSpan = tsLib.TextSpan;
 
     var ScriptInfo = (function () {
-        function ScriptInfo(name, content, isResident, maxScriptVersions)
+        function ScriptInfo(fileName, content)
         {
-            this.name = name;
-            this.content = content;
-            this.isResident = isResident;
-            this.maxScriptVersions = maxScriptVersions;
-            this.editRanges = [];
+            this.fileName = fileName;
             this.version = 1;
-        }
-        ScriptInfo.prototype.updateContent = function (content, isResident) {
             this.editRanges = [];
+            this.setContent(content);
+        }
+
+        ScriptInfo.prototype.setContent = function (content)
+        {
             this.content = content;
-            this.isResident = isResident;
+            this.lineMap = null;
+        };
+        
+        ScriptInfo.prototype.getLineMap = function ()
+        {
+            if (!this.lineMap)
+            {
+                this.lineMap = LineMap1.fromString(this.content);
+            }
+            return this.lineMap;
+        };
+
+        ScriptInfo.prototype.updateContent = function (content)
+        {
+            this.editRanges = [];
+            this.setContent(content);
             this.version++;
         };
-        ScriptInfo.prototype.editContent = function (minChar, limChar, newText) {
+
+        ScriptInfo.prototype.editContent = function (minChar, limChar, newText)
+        {
+            // Apply edits
             var prefix = this.content.substring(0, minChar);
             var middle = newText;
             var suffix = this.content.substring(limChar);
-            this.content = prefix + middle + suffix;
-            this.editRanges.push({
-                length: this.content.length,
-                editRange: new TypeScript.ScriptEditRange(minChar, limChar, (limChar - minChar) + newText.length)
-            });
-            if(this.editRanges.length > this.maxScriptVersions) {
-                this.editRanges.splice(0, this.maxScriptVersions - this.editRanges.length);
-            }
+            this.setContent(prefix + middle + suffix);
+
+            // Store edit range and the length of the script.
+            var length = this.content.length;
+            var range = new TextChangeRange(TextSpan.fromBounds(minChar, limChar), newText.length);
+
+            this.editRanges.push({'length': length, 'textChangeRange': range});
+
+            // Bump the version.
             this.version++;
         };
-        ScriptInfo.prototype.getEditRangeSinceVersion = function (version) {
-            if(this.version == version) {
-                return null;
+
+        ScriptInfo.prototype.getTextChangeRangeSinceVersion = function (version)
+        {
+            if(this.version === version)
+            {
+                // No edits.
+                return TextChangeRange.unchanged;
             }
+
             var initialEditRangeIndex = this.editRanges.length - (this.version - version);
-            if(initialEditRangeIndex < 0 || initialEditRangeIndex >= this.editRanges.length) {
-                return TypeScript.ScriptEditRange.unknown();
-            }
+
             var entries = this.editRanges.slice(initialEditRangeIndex);
-            var minDistFromStart = entries.map(function (x) {
-                return x.editRange.minChar;
-            }).reduce(function (prev, current) {
-                    return Math.min(prev, current);
-                });
-            var minDistFromEnd = entries.map(function (x) {
-                return x.length - x.editRange.limChar;
-            }).reduce(function (prev, current) {
-                    return Math.min(prev, current);
-                });
-            var aggDelta = entries.map(function (x) {
-                return x.editRange.delta;
-            }).reduce(function (prev, current) {
-                    return prev + current;
-                });
-            return new TypeScript.ScriptEditRange(minDistFromStart, entries[0].length - minDistFromEnd, aggDelta);
+            
+            return TextChangeRange.collapseChangesAcrossMultipleVersions(entries.map(function (e) {
+                return e.textChangeRange;
+            }));
         };
         return ScriptInfo;
     })();
     exports.ScriptInfo = ScriptInfo;
 
-    var ScriptManager = (function ()
+    var LanguageServiceHost = (function ()
     {
-        function ScriptManager()
+        function LanguageServiceHost()
         {
-            this.ls = null;
-            this.scripts = [];
+            this.compilationSettings = null;
+            this.scripts = {};
             this.maxScriptVersions = 100;
         }
-        ScriptManager.prototype.addDefaultLibrary = function ()
-        {
-            /*
-            this.addScript("lib.d.ts", Harness.Compiler.libText, true);
-            */
-        };
-        ScriptManager.prototype.addFile = function (name, isResident)
-        {
-            console.log("ScriptManager.addFile");
-            /*
-            if (typeof isResident === "undefined") { isResident = false; }
-            var code = Harness.CollateralReader.read(name);
-            this.addScript(name, code, isResident);
-            */
-        };
-        ScriptManager.prototype.addScript = function (name, content, isResident)
-        {
-            console.log('ScriptManager.addScript(' + JSON.stringify({'name':name}) + ')');
 
-            if (typeof isResident === "undefined") { isResident = false; }
-            var script = new ScriptInfo(name, content, isResident, this.maxScriptVersions);
-            this.scripts.push(script);
-        };
-        ScriptManager.prototype.updateScript = function (name, content, isResident)
+        LanguageServiceHost.prototype.getScriptFileNames = function ()
         {
-            console.log('ScriptManager.updateScript(' + JSON.stringify({'name':name}) + ')');
+            return Object.keys(this.scripts);
+        };
 
-            if (typeof isResident === "undefined") { isResident = false; }
-            for(var i = 0; i < this.scripts.length; i++) {
-                if(this.scripts[i].name == name) {
-                    this.scripts[i].updateContent(content, isResident);
-                    return;
-                }
-            }
-            this.addScript(name, content, isResident);
-        };
-        ScriptManager.prototype.editScript = function (name, minChar, limChar, newText)
-        {
-            console.log("ScriptManager.editScript");
-            /*
-            for(var i = 0; i < this.scripts.length; i++) {
-                if(this.scripts[i].name == name) {
-                    this.scripts[i].editContent(minChar, limChar, newText);
-                    return;
-                }
-            }
-            throw new Error("No script with name '" + name + "'");
-            */
-        };
-        ScriptManager.prototype.getScript = function (scriptIndex)
-        {
-            return this.scripts[scriptIndex];
-        };
-        ScriptManager.prototype.getScriptContent = function (scriptIndex)
-        {
-            return "// Hello";
-            // return this.scripts[scriptIndex].content;
-        };
-        ScriptManager.prototype.information = function ()
+        LanguageServiceHost.prototype.getScriptIsOpen = function (fileName)
         {
             return true;
         };
-        ScriptManager.prototype.debug = function ()
-        {
-            return true;
-        };
-        ScriptManager.prototype.warning = function ()
-        {
-            return true;
-        };
-        ScriptManager.prototype.error = function ()
-        {
-            return true;
-        };
-        ScriptManager.prototype.fatal = function ()
-        {
-            return true;
-        };
-        ScriptManager.prototype.log = function (s)
-        {
 
+        LanguageServiceHost.prototype.getScriptByteOrderMark = function (fileName)
+        {
+            return null;
         };
-        ScriptManager.prototype.getCompilationSettings = function ()
+
+        LanguageServiceHost.prototype.getLocalizedDiagnosticMessages = function ()
         {
             return "";
         };
-        ScriptManager.prototype.getScriptFileNames = function ()
+
+        ///////////////////////////////////////////////////////////////////////
+        // IReferenceResolveHost implementation
+
+        LanguageServiceHost.prototype.fileExists = function (path)
         {
-            return JSON.stringify(this.scripts.map(function(scriptInfo) {return scriptInfo.name;}));
+            console.log('LanguageServiceHost.fileExists(' + path + ')')
+            return true;
         };
-        ScriptManager.prototype.getLocalizedDiagnosticMessages = function ()
+
+        LanguageServiceHost.prototype.directoryExists = function (path)
         {
+            console.log('LanguageServiceHost.directoryExists(' + path + ')')
+            return true;
+        };
+
+        LanguageServiceHost.prototype.getParentDirectory = function (path)
+        {
+            console.log('LanguageServiceHost.getParentDirectory(' + path + ')')
             return "";
         };
-        ScriptManager.prototype.getScriptCount = function ()
+
+        LanguageServiceHost.prototype.resolveRelativePath = function (path, directory)
         {
-            return this.scripts.length;
+            console.log('LanguageServiceHost.resolveRelativePath(' + path + " " + directory + ')')
+            return "";
         };
-        ScriptManager.prototype.getScriptSourceText = function (scriptIndex, start, end) {
-            return this.scripts[scriptIndex].content.substring(start, end);
-        };
-        ScriptManager.prototype.getScriptSourceLength = function (scriptIndex) {
-            return this.scripts[scriptIndex].content.length;
-        };
-        ScriptManager.prototype.getScriptId = function (scriptIndex) {
-            return this.scripts[scriptIndex].name;
-        };
-        ScriptManager.prototype.getScriptIsResident = function (scriptIndex) {
-            return this.scripts[scriptIndex].isResident;
-        };
-        ScriptManager.prototype.getScriptVersion = function (scriptIndex) {
-            return this.scripts[scriptIndex].version;
-        };
-        ScriptManager.prototype.getScriptEditRangeSinceVersion = function (scriptIndex, scriptVersion) {
-            var range = this.scripts[scriptIndex].getEditRangeSinceVersion(scriptVersion);
-            return (range.minChar + "," + range.limChar + "," + range.delta);
-        };
-        ScriptManager.prototype.getLanguageService = function () {
-            var ls = new Services.TypeScriptServicesFactory().createLanguageServiceShim(this);
-//          ls.refresh(true);
-            this.ls = ls;
-            return ls;
-        };
-        ScriptManager.prototype.parseSourceText = function (fileName, sourceText) {
-            var parser = new TypeScript.Parser();
-            parser.setErrorRecovery(null, -1, -1);
-            parser.errorCallback = function (a, b, c, d) {
+
+        LanguageServiceHost.prototype.getScriptSnapshot = function (fileName)
+        {
+            var script = this.scripts[fileName];
+            var result = ScriptSnapshot.fromString(script.content);
+
+            // Quick hack
+            result["getTextChangeRangeSinceVersion"] = function (version)
+            {
+                return null;
+                // return new TextChangeRange(new TextSpan(0, script.content.length),script.content.length);
             };
-            var script = parser.parse(sourceText, fileName, 0);
-            return script;
-        };
-        ScriptManager.prototype.parseFile = function (fileName) {
-            var sourceText = new TypeScript.StringSourceText(IO.readFile(fileName));
-            return this.parseSourceText(fileName, sourceText);
-        };
-        ScriptManager.prototype.lineColToPosition = function (fileName, line, col) {
-            var script = this.ls.languageService.getScriptAST(fileName);
-            assert.notNull(script);
-            assert(line >= 1);
-            assert(col >= 1);
-            assert(line < script.locationInfo.lineMap.length);
-            return TypeScript.getPositionFromLineColumn(script, line, col);
-        };
-        ScriptManager.prototype.positionToLineCol = function (fileName, position) {
-            var script = this.ls.languageService.getScriptAST(fileName);
-            assert.notNull(script);
-            var result = TypeScript.getLineColumnFromPosition(script, position);
-            assert(result.line >= 1);
-            assert(result.col >= 1);
+
             return result;
         };
-        ScriptManager.prototype.checkEdits = function (sourceFileName, baselineFileName, edits) {
-            var script = Harness.CollateralReader.read(sourceFileName);
-            var formattedScript = this.applyEdits(script, edits);
-            var baseline = Harness.CollateralReader.read(baselineFileName);
-            assert.noDiff(formattedScript, baseline);
-            assert.equal(formattedScript, baseline);
+
+        ///////////////////////////////////////////////////////////////////////
+        // local implementation
+
+        LanguageServiceHost.prototype.addScript = function (fileName, content)
+        {
+            console.log('LanguageServiceHost.addScript(' + JSON.stringify({'fileName':fileName}) + ')');
+
+            var script = new ScriptInfo(fileName, content);
+            this.scripts[fileName] = script;
         };
-        ScriptManager.prototype.applyEdits = function (content, edits) {
+
+        LanguageServiceHost.prototype.updateScript = function (fileName, content)
+        {
+            console.log('LanguageServiceHost.updateScript(' + JSON.stringify({'fileName':fileName}) + ')');
+
+            var script = this.scripts[fileName];
+            if (script)
+            {
+                script.updateContent(content);
+            }
+            else
+            {
+                this.addScript(fileName, content);
+            }
+        };
+
+        LanguageServiceHost.prototype.editScript = function (fileName, minChar, limChar, newText)
+        {
+            console.log("LanguageServiceHost.editScript");
+            
+            var script = this.scripts[fileName];
+            if (script)
+            {
+                script.editContent(minChar, limChar, newText);
+            }
+            else
+            {
+                throw new Error("No script with fileName '" + fileName + "'");
+            }
+        };
+
+        ///////////////////////////////////////////////////////////////////////
+        // ILogger implementation
+
+        LanguageServiceHost.prototype.information = function ()
+        {
+            return false;
+        };
+
+        LanguageServiceHost.prototype.debug = function ()
+        {
+            return false;
+        };
+
+        LanguageServiceHost.prototype.warning = function ()
+        {
+            return false;
+        };
+
+        LanguageServiceHost.prototype.error = function ()
+        {
+            return false;
+        };
+
+        LanguageServiceHost.prototype.fatal = function ()
+        {
+            return false;
+        };
+
+        LanguageServiceHost.prototype.log = function (s)
+        {
+
+        };
+
+        LanguageServiceHost.prototype.getDiagnosticsObject = function ()
+        {
+            var diagnostics = 
+            {
+                log: function (content) {}
+            };
+            return diagnostics;
+        };
+
+        ///////////////////////////////////////////////////////////////////////
+        // ILanguageServiceHost implementation
+
+        LanguageServiceHost.prototype.getCompilationSettings = function ()
+        {
+            return this.compilationSettings;
+        };
+
+        LanguageServiceHost.prototype.setCompilationSettings = function (value)
+        {
+            this.compilationSettings = value;
+        };
+
+        LanguageServiceHost.prototype.getScriptVersion = function (fileName)
+        {
+            var script = this.scripts[fileName];
+            return script.version;
+        };
+
+        /**
+         * Apply an array of text edits to a string, and return the resulting string.
+         */
+        LanguageServiceHost.prototype.applyEdits = function (content, edits)
+        {
             var result = content;
             edits = this.normalizeEdits(edits);
-            for(var i = edits.length - 1; i >= 0; i--) {
+
+            for(var i = edits.length - 1; i >= 0; i--)
+            {
                 var edit = edits[i];
                 var prefix = result.substring(0, edit.minChar);
                 var middle = edit.text;
@@ -258,53 +267,75 @@ define(function(require, exports, module)
             }
             return result;
         };
-        ScriptManager.prototype.normalizeEdits = function (edits) {
+
+        /**
+         *
+         * Normalize an array of edits by removing overlapping entries and sorting
+         * entries on the "minChar" position.
+         */
+        LanguageServiceHost.prototype.normalizeEdits = function (edits)
+        {
             var result = [];
-            function mapEdits(edits) {
+
+            function mapEdits(edits)
+            {
                 var result = [];
-                for(var i = 0; i < edits.length; i++) {
-                    result.push({
-                        edit: edits[i],
-                        index: i
-                    });
+                for(var i = 0; i < edits.length; i++)
+                {
+                    result.push({'edit': edits[i], 'index': i});
                 }
                 return result;
             }
             var temp = mapEdits(edits).sort(function (a, b) {
                 var result = a.edit.minChar - b.edit.minChar;
-                if(result == 0) {
+                if(result === 0)
+                {
                     result = a.index - b.index;
                 }
                 return result;
             });
+
             var current = 0;
             var next = 1;
-            while(current < temp.length) {
+            while(current < temp.length)
+            {
                 var currentEdit = temp[current].edit;
-                if(next >= temp.length) {
+
+                // Last edit.
+                if(next >= temp.length)
+                {
                     result.push(currentEdit);
                     current++;
                     continue;
                 }
                 var nextEdit = temp[next].edit;
+
                 var gap = nextEdit.minChar - currentEdit.limChar;
-                if(gap >= 0) {
+
+                // non-overlapping edits.
+                if(gap >= 0)
+                {
                     result.push(currentEdit);
                     current = next;
                     next++;
                     continue;
                 }
-                if(currentEdit.limChar >= nextEdit.limChar) {
+
+                  // overlapping edits: for now, we only support ignoring an next edit
+                    // entirely contained in the current edit.
+                if(currentEdit.limChar >= nextEdit.limChar)
+                {
                     next++;
                     continue;
-                } else {
+                }
+                else
+                {
                     throw new Error("Trying to apply overlapping edits");
                 }
             }
             return result;
         };
-        return ScriptManager;
+        return LanguageServiceHost;
     })();
-    exports.ScriptManager = ScriptManager;
-
+    exports.LanguageServiceHost = LanguageServiceHost;
 });

@@ -1,27 +1,17 @@
-define(["require", "exports", 'scripts/EditorPosition'], function(require, exports, __EditorPositionModule__)
+define(["require", "exports", 'scripts/EditorPosition'], function(require, exports, epLib)
 {
-    var EditorPositionModule = __EditorPositionModule__;
-
     var CompilationService = (function () {
-        function CompilationService(editor, serviceShim)
+        function CompilationService(editor, languageService)
         {
             this.editor = editor;
-            this.serviceShim = serviceShim;
-            this.editorPos = new EditorPositionModule.EditorPosition(editor);
+            this.languageService = languageService;
+            this.editorPos = new epLib.EditorPosition(editor);
         }
         CompilationService.prototype.getCompilation = function (script, charpos, isMemberCompletion)
         {
-            if (this.serviceShim)
-            {
-                var compInfo;
-                compInfo = this.serviceShim.languageService.getCompletionsAtPosition(script, charpos, isMemberCompletion);
-                return compInfo;
-            }
-            else
-            {
-                // TODO: Maybe we should return an empty array or something?
-                return;
-            }
+            var compInfo;
+            compInfo = this.languageService.getCompletionsAtPosition(script, charpos, isMemberCompletion);
+            return compInfo;
         };
         CompilationService.prototype.getCursorCompilation = function (script, cursor)
         {
@@ -40,10 +30,11 @@ define(["require", "exports", 'scripts/EditorPosition'], function(require, expor
             }
             return this.getCompilation(script, pos, isMemberCompletion);
         };
-        CompilationService.prototype.getCurrentPositionCompilation = function (script) {
+        CompilationService.prototype.getCurrentPositionCompilation = function (script)
+        {
             return this.getCursorCompilation(script, this.editor.getCursorPosition());
         };
         return CompilationService;
     })();
-    exports.CompilationService = CompilationService;    
+    exports.CompilationService = CompilationService;
 })

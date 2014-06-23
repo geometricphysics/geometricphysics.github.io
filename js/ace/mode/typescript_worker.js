@@ -1,34 +1,5 @@
-/* ***** BEGIN LICENSE BLOCK *****
- * Distributed under the BSD license:
- *
- * Copyright (c) 2010, Ajax.org B.V.
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of Ajax.org B.V. nor the
- *       names of its contributors may be used to endorse or promote products
- *       derived from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL AJAX.ORG B.V. BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * ***** END LICENSE BLOCK ***** */
-
-define(function(require, exports, module) {
+define(function(require, exports, module)
+{
     "no use strict";
 
     var oop = require("../lib/oop");
@@ -39,7 +10,8 @@ define(function(require, exports, module) {
 
     var TypeScript = require('./typescript/typescriptServices').TypeScript;
     var Services = TypeScript.Services;
-    var ScriptManager = require('./typescript/harness').ScriptManager;
+    var TypeScriptServicesFactory = Services.TypeScriptServicesFactory;
+    var LanguageServiceHost = require('./typescript/harness').LanguageServiceHost;
 
     var TypeScriptWorker = exports.TypeScriptWorker = function(sender)
     {
@@ -48,22 +20,24 @@ define(function(require, exports, module) {
 
         var deferredUpdate = this.deferredUpdate = lang.deferredCall(this.onUpdate.bind(this));
 
-        this.scriptManager =  new ScriptManager();
+        this.lsHost =  new LanguageServiceHost();
         if (typeof Services !== 'undefined')
         {
-            this.ServicesFactory = new Services.TypeScriptServicesFactory();
-            this.serviceShim = this.ServicesFactory.createLanguageServiceShim(this.scriptManager);
-            this.languageService = this.serviceShim.languageService;
+            this.ls = new TypeScriptServicesFactory().createPullLanguageService(this.lsHost);
         }
 
         var self = this;
-        sender.on("change", function(e) {
+        sender.on("change", function(e)
+        {
             doc.applyDeltas(e.data);
             deferredUpdate.schedule(self.$timeout);
         });
 
-        sender.on("addLibrary", function(e) {
-            self.addlibrary(e.data.name , e.data.content);
+        sender.on("addLibrary", function(message)
+        {
+            console.log("message.data.fileName: " + JSON.stringify(message.data.fileName));
+            // This call, in turn will add the library to the lsHost.
+            self.addlibrary(message.data.fileName , message.data.content);
         });
 
 
@@ -75,7 +49,9 @@ define(function(require, exports, module) {
     oop.inherits(TypeScriptWorker, Mirror);
 
     (function() {
+
         var proto = this;
+
         this.setOptions = function(options)
         {
             console.log('worker.setOptions(' + JSON.stringify(options) + ')');
@@ -89,19 +65,17 @@ define(function(require, exports, module) {
             this.deferredUpdate.schedule(100);
         };
 
-        this.addlibrary = function(name, content)
+        this.addlibrary = function(fileName, content)
         {
-            console.log('worker.addLibrary(' + name + ')');
-            this.scriptManager.addScript(name, content.replace(/\r\n?/g,"\n"), true);
+            console.log('worker.addLibrary(' + fileName + ')');
+            this.lsHost.addScript(fileName, content.replace(/\r\n?/g,"\n"));
         };
-
-
 
         this.getCompletionsAtPosition = function(fileName, pos, isMemberCompletion, id)
         {
             console.log("worker.getCompletionsAtPosition");
             /*
-            var ret = this.languageService.getCompletionsAtPosition(fileName, pos, isMemberCompletion);
+            var ret = this.ls.getCompletionsAtPosition(fileName, pos, isMemberCompletion);
             this.sender.callback(ret, id);
             */
         };
@@ -110,7 +84,7 @@ define(function(require, exports, module) {
             "getSignatureAtPosition",
             "getDefinitionAtPosition"].forEach(function(elm){
                 proto[elm] = function(fileName, pos,  id) {
-                    var ret = this.languageService[elm](fileName, pos);
+                    var ret = this.ls[elm](fileName, pos);
                     this.sender.callback(ret, id);
                 };
             });
@@ -120,7 +94,7 @@ define(function(require, exports, module) {
             "getImplementorsAtPosition"].forEach(function(elm){
 
                 proto[elm] = function(fileName, pos,  id) {
-                    var referenceEntries = this.languageService[elm](fileName, pos);
+                    var referenceEntries = this.ls[elm](fileName, pos);
                     var ret = referenceEntries.map(function (ref) {
                         return {
                             unitIndex: ref.unitIndex,
@@ -136,148 +110,28 @@ define(function(require, exports, module) {
             "getScriptLexicalStructure",
             "getOutliningRegions "].forEach(function(elm){
                 proto[elm] = function(value, id) {
-                    var navs = this.languageService[elm](value);
+                    var navs = this.ls[elm](value);
                     this.sender.callback(navs, id);
                 };
             });
 
 
         /**
-         * @param {string} typeScriptCode
+         * @param {string} code
          */
-        this.compile = function (typeScriptCode)
+        this.compile = function (code)
         {
             console.log("worker.compile");
-            console.log(typeScriptCode);
-            var output = "";
-            
-            var outfile = {
-                Write: function (s) {
-                    output  += s;
-                },
-                WriteLine: function (s) {
-                    output  += s + "\n";
-                },
-                Close: function () {
-                }
-            };
-            
-            var outerr = {
-                Write: function (s) {
-                },
-                WriteLine: function (s) {
-                },
-                Close: function () {
-                }
-            };
 
-            var compiler = new TypeScript.TypeScriptCompiler();
-            
-            var scriptSnapshot = {
-                getLength: function() {
-                    return typeScriptCode.length;
-                },
-                getText: function(begin, end) {
-                    console.log("begin: " + begin);
-                    console.log("end: " + end);
-                    return typeScriptCode.substring(begin, end);
-                }
-            };
+            var output = "// Hello, World!!!";
 
-            compiler.addFile("output.js", scriptSnapshot);
+            var scripts = this.ls.scripts;
 
-            function resolvePath(path)
+            for (var fileName in scripts)
             {
-                return path;
+                console.log("fileName: " + fileName);
             }
-            /*
-            try
-            {
-                for (var it = compiler.compile(function (path) {return resolvePath(path);}); it.moveNext();)
-                {
-//                    var result = it.current();
 
-//                        result.diagnostics.forEach(function (d)
-//                        {
-//                          return _this.addDiagnostic(d);
-//                        });
-
-//                        if (!this.tryWriteOutputFiles(result.outputFiles)) {
-//                            return;
-//                        }
-
-                }
-            }
-            catch(e)
-            {
-                console.log(e);
-            }
-            */
-            /*
-            if (typeof TypeScript !== 'undefined')
-            {
-                var logger = new TypeScript.NullLogger();
-                var settings = new TypeScript.CompilationSettings();
-                //var compiler = new TypeScript.TypeScriptCompiler();
-                var compiler = undefined;
-                if (typeof compiler === 'object')
-                {
-                    var scriptSnapshot =
-                    {
-                        getLength: function()
-                        {
-                            return typeScriptCode.length;
-                        },
-                        getText: function(begin, end)
-                        {
-                            console.log("begin: " begin);
-                            console.log("end: " end);
-                            return typeScriptCode;
-                        }
-                    };
-//                  compiler.addFile("output.js", scriptSnapshot);
-
-                    function resolvePath(path)
-                    {
-                        return path;
-                    }
-
-                    try
-                    {
-                        for (var it = compiler.compile(function (path) {return resolvePath(path);}); it.moveNext();)
-                        {
-                            var result = it.current();
-    
-    //                        result.diagnostics.forEach(function (d)
-    //                        {
-    //                          return _this.addDiagnostic(d);
-    //                        });
-    
-    //                        if (!this.tryWriteOutputFiles(result.outputFiles)) {
-    //                            return;
-    //                        }
-    
-                        }
-                    }
-                    catch(e)
-                    {
-                        console.log(e);
-                    }
-
-
-//                  compiler.addUnit(typeScriptCode, "output.js", false);
-//                  compiler.typeCheck();
-
-//                    compiler.emit(false, function (name) {
-//                        console.log("emitting: " + name);
-//                    });
-                }
-            }
-            else
-            {
-                console.log("TypeScript is not available in typescript_worker.js");
-            }
-            */
             return output;
         };
 
@@ -285,15 +139,15 @@ define(function(require, exports, module) {
         {
             console.log("worker.onUpdate");
             
-            this.scriptManager.updateScript("temp.ts", this.doc.getValue() , false);
+            this.lsHost.updateScript("temp.ts", this.doc.getValue() , false);
 
-            console.log("worker.getLanguageService: " + (typeof this.scriptManager.getLanguageService));
+            console.log("worker.getLanguageService: " + (typeof this.lsHost.getLanguageService));
 
             var annotations = [];
             var self = this;
             this.sender.emit("compiled", this.compile(this.doc.getValue()));
 
-//          var errors = this.scriptManager.getLanguageService().getScriptErrors("temp.ts", 100);
+//          var errors = this.lsHost.getLanguageService().getScriptErrors("temp.ts", 100);
             /*
             errors.forEach(function(error)
             {
