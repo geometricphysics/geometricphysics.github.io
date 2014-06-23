@@ -1,3 +1,5 @@
+define(function(require, exports, module) {
+// BEGIN ORIGINAL SOURCE
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved. 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -1707,7 +1709,7 @@ var TypeScript;
             };
         }
         ;
-
+        /*
         function getNodeEnvironment() {
             var _fs = require('fs');
             var _path = require('path');
@@ -1738,21 +1740,21 @@ var TypeScript;
                                     buffer[i + 1] = temp;
                                     i += 2;
                                 }
-                                return new FileInformation(buffer.toString("ucs2", 2), 2 /* Utf16BigEndian */);
+                                return new FileInformation(buffer.toString("ucs2", 2), 2);
                             }
                             break;
                         case 0xFF:
                             if (buffer[1] === 0xFE) {
-                                return new FileInformation(buffer.toString("ucs2", 2), 3 /* Utf16LittleEndian */);
+                                return new FileInformation(buffer.toString("ucs2", 2), 3);
                             }
                             break;
                         case 0xEF:
                             if (buffer[1] === 0xBB) {
-                                return new FileInformation(buffer.toString("utf8", 3), 1 /* Utf8 */);
+                                return new FileInformation(buffer.toString("utf8", 3), 1);
                             }
                     }
 
-                    return new FileInformation(buffer.toString("utf8", 0), 0 /* None */);
+                    return new FileInformation(buffer.toString("utf8", 0), 0);
                 },
                 writeFile: function (path, contents, writeByteOrderMark) {
                     function mkdirRecursiveSync(path) {
@@ -1839,13 +1841,59 @@ var TypeScript;
             };
         }
         ;
+        */
+        function getUnknownEnvironment() {
+            var env = {
+                supportsCodePage: function () {
+                    return false;
+                },
+                readFile: function (file, codepage) {
+                    return new FileInformation("", 0 /* None */);
+                },
+                writeFile: function (path, contents, writeByteOrderMark) {
+                },
+                deleteFile: function (path) {
+                },
+                fileExists: function (path) {
+                    return false;
+                },
+                directoryExists: function (path) {
+                    return false;
+                },
+                listFiles: function dir(path, re, options) {
+                    var paths = [];
+                    return paths;
+                },
+                arguments: [],
+                standardOut: {
+                    Write: function (str) {
+                        console.log(str);
+                    },
+                    WriteLine: function (str) {
+                        console.log(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                currentDirectory: function () {
+                    return "";
+                },
+                newLine: '\n'
+            };
+            return env;
+        }
 
-        if (typeof WScript !== "undefined" && typeof ActiveXObject === "function") {
+        if (typeof WScript !== "undefined" && typeof ActiveXObject === "function")
+        {
             return getWindowsScriptHostEnvironment();
-        } else if (typeof module !== 'undefined' && module.exports) {
-            return getNodeEnvironment();
-        } else {
-            return null;
+        }
+//      else if (typeof module !== 'undefined' && module.exports)
+//      {
+//          return getNodeEnvironment();
+//      }
+        else
+        {
+            return getUnknownEnvironment();
         }
     })();
 })(TypeScript || (TypeScript = {}));
@@ -69508,3 +69556,6 @@ var TypeScript;
     })(TypeScript.Services || (TypeScript.Services = {}));
     var Services = TypeScript.Services;
 })(TypeScript || (TypeScript = {}));
+// END ORIGINAL SOURCE
+  exports.TypeScript = TypeScript;
+});

@@ -37,6 +37,8 @@ var Tokenizer = require("../tokenizer").Tokenizer;
 var PythonHighlightRules = require("./python_highlight_rules").PythonHighlightRules;
 var PythonFoldMode = require("./folding/pythonic").FoldMode;
 var Range = require("../range").Range;
+// DGH
+var WorkerClient = require("../worker/worker_client").WorkerClient;
 
 var Mode = function() {
     this.$tokenizer = new Tokenizer(new PythonHighlightRules().getRules());
@@ -105,6 +107,28 @@ oop.inherits(Mode, TextMode);
         var tab = doc.getTabString();
         if (indent.slice(-tab.length) == tab)
             doc.remove(new Range(row, indent.length-tab.length, row, indent.length));
+    };
+
+    // DGH
+    this.createWorker = function(session) {
+        var worker = new WorkerClient(["ace"], "ace/mode/python_worker", "PythonWorker");
+        worker.attachToDocument(session.getDocument());
+
+        worker.on("terminate", function() {
+            session.clearAnnotations();
+        });
+
+        worker.on("compileErrors", function(results) {
+            session.setAnnotations(results.data);
+            session._emit("compileErrors", {data: results.data});
+
+        });
+
+        worker.on("compiled", function(result) {
+            session._emit("compiled", {data: result.data});
+        });
+
+        return worker;
     };
 
 }).call(Mode.prototype);

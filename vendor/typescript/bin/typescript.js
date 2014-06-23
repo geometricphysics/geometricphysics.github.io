@@ -1755,12 +1755,53 @@ var TypeScript;
         }
         ;
 
+        function getUnknownEnvironment() {
+            var env = {
+                supportsCodePage: function () {
+                    return false;
+                },
+                readFile: function (file, codepage) {
+                    return new FileInformation("", 0 /* None */);
+                },
+                writeFile: function (path, contents, writeByteOrderMark) {
+                },
+                deleteFile: function (path) {
+                },
+                fileExists: function (path) {
+                    return false;
+                },
+                directoryExists: function (path) {
+                    return false;
+                },
+                listFiles: function dir(path, re, options) {
+                    var paths = [];
+                    return paths;
+                },
+                arguments: [],
+                standardOut: {
+                    Write: function (str) {
+                        console.log(str);
+                    },
+                    WriteLine: function (str) {
+                        console.log(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                currentDirectory: function () {
+                    return "";
+                },
+                newLine: '\n'
+            };
+            return env;
+        }
+
         if (typeof WScript !== "undefined" && typeof ActiveXObject === "function") {
             return getWindowsScriptHostEnvironment();
         } else if (typeof module !== 'undefined' && module.exports) {
             return getNodeEnvironment();
         } else {
-            return null;
+            return getUnknownEnvironment();
         }
     })();
 })(TypeScript || (TypeScript = {}));

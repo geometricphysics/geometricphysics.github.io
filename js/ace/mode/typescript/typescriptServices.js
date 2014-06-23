@@ -1709,7 +1709,7 @@ var TypeScript;
             };
         }
         ;
-
+        /*
         function getNodeEnvironment() {
             var _fs = require('fs');
             var _path = require('path');
@@ -1740,21 +1740,21 @@ var TypeScript;
                                     buffer[i + 1] = temp;
                                     i += 2;
                                 }
-                                return new FileInformation(buffer.toString("ucs2", 2), 2 /* Utf16BigEndian */);
+                                return new FileInformation(buffer.toString("ucs2", 2), 2);
                             }
                             break;
                         case 0xFF:
                             if (buffer[1] === 0xFE) {
-                                return new FileInformation(buffer.toString("ucs2", 2), 3 /* Utf16LittleEndian */);
+                                return new FileInformation(buffer.toString("ucs2", 2), 3);
                             }
                             break;
                         case 0xEF:
                             if (buffer[1] === 0xBB) {
-                                return new FileInformation(buffer.toString("utf8", 3), 1 /* Utf8 */);
+                                return new FileInformation(buffer.toString("utf8", 3), 1);
                             }
                     }
 
-                    return new FileInformation(buffer.toString("utf8", 0), 0 /* None */);
+                    return new FileInformation(buffer.toString("utf8", 0), 0);
                 },
                 writeFile: function (path, contents, writeByteOrderMark) {
                     function mkdirRecursiveSync(path) {
@@ -1841,13 +1841,59 @@ var TypeScript;
             };
         }
         ;
+        */
+        function getUnknownEnvironment() {
+            var env = {
+                supportsCodePage: function () {
+                    return false;
+                },
+                readFile: function (file, codepage) {
+                    return new FileInformation("", 0 /* None */);
+                },
+                writeFile: function (path, contents, writeByteOrderMark) {
+                },
+                deleteFile: function (path) {
+                },
+                fileExists: function (path) {
+                    return false;
+                },
+                directoryExists: function (path) {
+                    return false;
+                },
+                listFiles: function dir(path, re, options) {
+                    var paths = [];
+                    return paths;
+                },
+                arguments: [],
+                standardOut: {
+                    Write: function (str) {
+                        console.log(str);
+                    },
+                    WriteLine: function (str) {
+                        console.log(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                currentDirectory: function () {
+                    return "";
+                },
+                newLine: '\n'
+            };
+            return env;
+        }
 
-        if (typeof WScript !== "undefined" && typeof ActiveXObject === "function") {
+        if (typeof WScript !== "undefined" && typeof ActiveXObject === "function")
+        {
             return getWindowsScriptHostEnvironment();
-        } else if (typeof module !== 'undefined' && module.exports) {
-            return getNodeEnvironment();
-        } else {
-            return null;
+        }
+//      else if (typeof module !== 'undefined' && module.exports)
+//      {
+//          return getNodeEnvironment();
+//      }
+        else
+        {
+            return getUnknownEnvironment();
         }
     })();
 })(TypeScript || (TypeScript = {}));
@@ -67142,31 +67188,39 @@ var TypeScript;
             function LanguageServiceShimHostAdapter(shimHost) {
                 this.shimHost = shimHost;
             }
-            LanguageServiceShimHostAdapter.prototype.information = function () {
+            LanguageServiceShimHostAdapter.prototype.information = function ()
+            {
+                console.log("LanguageServiceShimHostAdapter.information: " + typeof this.shimHost.information);
                 return this.shimHost.information();
             };
 
             LanguageServiceShimHostAdapter.prototype.debug = function () {
+                console.log("LanguageServiceShimHostAdapter.debug: " + typeof this.shimHost.debug);
                 return this.shimHost.debug();
             };
 
             LanguageServiceShimHostAdapter.prototype.warning = function () {
+                console.log("LanguageServiceShimHostAdapter.warning: " + typeof this.shimHost.warning);
                 return this.shimHost.warning();
             };
 
             LanguageServiceShimHostAdapter.prototype.error = function () {
+                console.log("LanguageServiceShimHostAdapter.error: " + typeof this.shimHost.error);
                 return this.shimHost.error();
             };
 
             LanguageServiceShimHostAdapter.prototype.fatal = function () {
+                console.log("LanguageServiceShimHostAdapter.fatal: " + typeof this.shimHost.fatal);
                 return this.shimHost.fatal();
             };
 
             LanguageServiceShimHostAdapter.prototype.log = function (s) {
+                console.log("LanguageServiceShimHostAdapter.log: " + typeof this.shimHost.log);
                 this.shimHost.log(s);
             };
 
             LanguageServiceShimHostAdapter.prototype.getCompilationSettings = function () {
+                console.log("LanguageServiceShimHostAdapter.getCompilationSettings: " + typeof this.shimHost.getCompilationSettings);
                 var settingsJson = this.shimHost.getCompilationSettings();
                 if (settingsJson == null || settingsJson == "") {
                     return null;
@@ -67176,31 +67230,38 @@ var TypeScript;
             };
 
             LanguageServiceShimHostAdapter.prototype.getScriptFileNames = function () {
+                console.log("LanguageServiceShimHostAdapter.getScriptFileNames: " + typeof this.shimHost.getScriptFileNames);
                 var encoded = this.shimHost.getScriptFileNames();
                 return JSON.parse(encoded);
             };
 
             LanguageServiceShimHostAdapter.prototype.getScriptSnapshot = function (fileName) {
+                console.log("LanguageServiceShimHostAdapter.getScriptSnapshot: " + typeof this.shimHost.getScriptSnapshot);
                 return new ScriptSnapshotShimAdapter(this.shimHost.getScriptSnapshot(fileName));
             };
 
             LanguageServiceShimHostAdapter.prototype.getScriptVersion = function (fileName) {
+                console.log("LanguageServiceShimHostAdapter.getScriptVersion: " + typeof this.shimHost.getScriptVersion);
                 return this.shimHost.getScriptVersion(fileName);
             };
 
             LanguageServiceShimHostAdapter.prototype.getScriptIsOpen = function (fileName) {
+                console.log("LanguageServiceShimHostAdapter.getScriptIsOpen: " + typeof this.shimHost.getScriptIsOpen);
                 return this.shimHost.getScriptIsOpen(fileName);
             };
 
             LanguageServiceShimHostAdapter.prototype.getScriptByteOrderMark = function (fileName) {
+                console.log("LanguageServiceShimHostAdapter.getScriptByteOrderMark: " + typeof this.shimHost.getScriptByteOrderMark);
                 return this.shimHost.getScriptByteOrderMark(fileName);
             };
 
             LanguageServiceShimHostAdapter.prototype.getDiagnosticsObject = function () {
+                console.log("LanguageServiceShimHostAdapter.getDiagnosticsObject: " + typeof this.shimHost.getDiagnosticsObject);
                 return this.shimHost.getDiagnosticsObject();
             };
 
             LanguageServiceShimHostAdapter.prototype.getLocalizedDiagnosticMessages = function () {
+                console.log("LanguageServiceShimHostAdapter.getLocalizedDiagnosticMessages: " + typeof this.shimHost.getLocalizedDiagnosticMessages);
                 var diagnosticMessagesJson = this.shimHost.getLocalizedDiagnosticMessages();
                 if (diagnosticMessagesJson == null || diagnosticMessagesJson == "") {
                     return null;
@@ -67214,18 +67275,22 @@ var TypeScript;
             };
 
             LanguageServiceShimHostAdapter.prototype.resolveRelativePath = function (path, directory) {
+                console.log("LanguageServiceShimHostAdapter.resolveRelativePath: " + typeof this.shimHost.resolverRelativePath);
                 return this.shimHost.resolveRelativePath(path, directory);
             };
 
             LanguageServiceShimHostAdapter.prototype.fileExists = function (path) {
+                console.log("LanguageServiceShimHostAdapter.fileExists: " + typeof this.shimHost.fileExists);
                 return this.shimHost.fileExists(path);
             };
 
             LanguageServiceShimHostAdapter.prototype.directoryExists = function (path) {
+                console.log("LanguageServiceShimHostAdapter.directoryExists: " + typeof this.shimHost.directoryExists);
                 return this.shimHost.directoryExists(path);
             };
 
             LanguageServiceShimHostAdapter.prototype.getParentDirectory = function (path) {
+                console.log("LanguageServiceShimHostAdapter.getParentDirectory: " + typeof this.shimHost.getParentDirectory);
                 return this.shimHost.getParentDirectory(path);
             };
             return LanguageServiceShimHostAdapter;
@@ -69337,14 +69402,21 @@ var TypeScript;
                 }
             };
 
-            TypeScriptServicesFactory.prototype.createLanguageServiceShim = function (host) {
-                try  {
+            TypeScriptServicesFactory.prototype.createLanguageServiceShim = function (host)
+            {
+                try
+                {
                     var hostAdapter = new Services.LanguageServiceShimHostAdapter(host);
                     var pullLanguageService = this.createPullLanguageService(hostAdapter);
                     return new Services.LanguageServiceShim(this, host, pullLanguageService);
-                } catch (err) {
+                }
+                catch (err)
+                {
+
                     TypeScript.Services.logInternalError(host, err);
+
                     throw err;
+
                 }
             };
 
@@ -69512,6 +69584,4 @@ var TypeScript;
 })(TypeScript || (TypeScript = {}));
 // END ORIGINAL SOURCE
   exports.TypeScript = TypeScript;
-  exports.Formatting = Formatting;
-  exports.Services = Services;
 });

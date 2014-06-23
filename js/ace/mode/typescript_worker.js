@@ -36,24 +36,23 @@ define(function(require, exports, module) {
     var lang = require("../lib/lang");
     var Document = require("../document").Document;
     var DocumentPositionUtil = require('./typescript/DocumentPositionUtil').DocumentPositionUtil;
-    var useTSS = true;
-    var Services;
-    var TypeScript;
-    Services = useTSS ? require('./typescript/typescriptServices').Services : null;
-    TypeScript = useTSS ? require('./typescript/typescriptServices').TypeScript : null;
-    var TypeScriptLS = require('./typescript/harness').TypeScriptLS;
 
-    var TypeScriptWorker = exports.TypeScriptWorker = function(sender) {
+    var TypeScript = require('./typescript/typescriptServices').TypeScript;
+    var Services = TypeScript.Services;
+    var ScriptManager = require('./typescript/harness').ScriptManager;
+
+    var TypeScriptWorker = exports.TypeScriptWorker = function(sender)
+    {
         this.sender = sender;
         var doc = this.doc = new Document("");
 
         var deferredUpdate = this.deferredUpdate = lang.deferredCall(this.onUpdate.bind(this));
 
-        this.typeScriptLS =  new TypeScriptLS();
-        if (Services)
+        this.scriptManager =  new ScriptManager();
+        if (typeof Services !== 'undefined')
         {
             this.ServicesFactory = new Services.TypeScriptServicesFactory();
-            this.serviceShim = this.ServicesFactory.createLanguageServiceShim(this.typeScriptLS);
+            this.serviceShim = this.ServicesFactory.createLanguageServiceShim(this.scriptManager);
             this.languageService = this.serviceShim.languageService;
         }
 
@@ -77,24 +76,34 @@ define(function(require, exports, module) {
 
     (function() {
         var proto = this;
-        this.setOptions = function(options) {
-            this.options = options || {
-            };
+        this.setOptions = function(options)
+        {
+            console.log('worker.setOptions(' + JSON.stringify(options) + ')');
+            this.options = options || {};
         };
-        this.changeOptions = function(newOptions) {
+
+        this.changeOptions = function(newOptions)
+        {
+            console.log("worker.changeOptions");
             oop.mixin(this.options, newOptions);
             this.deferredUpdate.schedule(100);
         };
 
-        this.addlibrary = function(name, content) {
-            this.typeScriptLS.addScript(name, content.replace(/\r\n?/g,"\n"), true);
+        this.addlibrary = function(name, content)
+        {
+            console.log('worker.addLibrary(' + name + ')');
+            this.scriptManager.addScript(name, content.replace(/\r\n?/g,"\n"), true);
         };
 
 
 
-        this.getCompletionsAtPosition = function(fileName, pos, isMemberCompletion, id){
+        this.getCompletionsAtPosition = function(fileName, pos, isMemberCompletion, id)
+        {
+            console.log("worker.getCompletionsAtPosition");
+            /*
             var ret = this.languageService.getCompletionsAtPosition(fileName, pos, isMemberCompletion);
             this.sender.callback(ret, id);
+            */
         };
 
         ["getTypeAtPosition",
@@ -138,8 +147,10 @@ define(function(require, exports, module) {
          */
         this.compile = function (typeScriptCode)
         {
+            console.log("worker.compile");
+            console.log(typeScriptCode);
             var output = "";
-
+            
             var outfile = {
                 Write: function (s) {
                     output  += s;
@@ -150,7 +161,7 @@ define(function(require, exports, module) {
                 Close: function () {
                 }
             };
-
+            
             var outerr = {
                 Write: function (s) {
                 },
@@ -159,30 +170,131 @@ define(function(require, exports, module) {
                 Close: function () {
                 }
             };
-            if (TypeScript)
+
+            var compiler = new TypeScript.TypeScriptCompiler();
+            
+            var scriptSnapshot = {
+                getLength: function() {
+                    return typeScriptCode.length;
+                },
+                getText: function(begin, end) {
+                    console.log("begin: " + begin);
+                    console.log("end: " + end);
+                    return typeScriptCode.substring(begin, end);
+                }
+            };
+
+            compiler.addFile("output.js", scriptSnapshot);
+
+            function resolvePath(path)
             {
-                var compiler = new TypeScript.TypeScriptCompiler(outfile, outerr, new TypeScript.NullLogger(), new TypeScript.CompilationSettings());
-                compiler.addUnit(typeScriptCode, "output.js", false);
-                compiler.typeCheck();
-                compiler.emit(false, function (name) {
-                    console.log("emitting: " + name);
-                });
+                return path;
+            }
+            /*
+            try
+            {
+                for (var it = compiler.compile(function (path) {return resolvePath(path);}); it.moveNext();)
+                {
+//                    var result = it.current();
+
+//                        result.diagnostics.forEach(function (d)
+//                        {
+//                          return _this.addDiagnostic(d);
+//                        });
+
+//                        if (!this.tryWriteOutputFiles(result.outputFiles)) {
+//                            return;
+//                        }
+
+                }
+            }
+            catch(e)
+            {
+                console.log(e);
+            }
+            */
+            /*
+            if (typeof TypeScript !== 'undefined')
+            {
+                var logger = new TypeScript.NullLogger();
+                var settings = new TypeScript.CompilationSettings();
+                //var compiler = new TypeScript.TypeScriptCompiler();
+                var compiler = undefined;
+                if (typeof compiler === 'object')
+                {
+                    var scriptSnapshot =
+                    {
+                        getLength: function()
+                        {
+                            return typeScriptCode.length;
+                        },
+                        getText: function(begin, end)
+                        {
+                            console.log("begin: " begin);
+                            console.log("end: " end);
+                            return typeScriptCode;
+                        }
+                    };
+//                  compiler.addFile("output.js", scriptSnapshot);
+
+                    function resolvePath(path)
+                    {
+                        return path;
+                    }
+
+                    try
+                    {
+                        for (var it = compiler.compile(function (path) {return resolvePath(path);}); it.moveNext();)
+                        {
+                            var result = it.current();
+    
+    //                        result.diagnostics.forEach(function (d)
+    //                        {
+    //                          return _this.addDiagnostic(d);
+    //                        });
+    
+    //                        if (!this.tryWriteOutputFiles(result.outputFiles)) {
+    //                            return;
+    //                        }
+    
+                        }
+                    }
+                    catch(e)
+                    {
+                        console.log(e);
+                    }
+
+
+//                  compiler.addUnit(typeScriptCode, "output.js", false);
+//                  compiler.typeCheck();
+
+//                    compiler.emit(false, function (name) {
+//                        console.log("emitting: " + name);
+//                    });
+                }
             }
             else
             {
                 console.log("TypeScript is not available in typescript_worker.js");
             }
+            */
             return output;
         };
 
         this.onUpdate = function()
         {
-            this.typeScriptLS.updateScript("temp.ts",this.doc.getValue() , false);
-            var errors = this.serviceShim ? this.serviceShim.languageService.getScriptErrors("temp.ts", 100) : [];
+            console.log("worker.onUpdate");
+            
+            this.scriptManager.updateScript("temp.ts", this.doc.getValue() , false);
+
+            console.log("worker.getLanguageService: " + (typeof this.scriptManager.getLanguageService));
+
             var annotations = [];
             var self = this;
             this.sender.emit("compiled", this.compile(this.doc.getValue()));
 
+//          var errors = this.scriptManager.getLanguageService().getScriptErrors("temp.ts", 100);
+            /*
             errors.forEach(function(error)
             {
                 var pos = DocumentPositionUtil.getPosition(self.doc, error.minChar);
@@ -198,6 +310,7 @@ define(function(require, exports, module) {
             });
 
             this.sender.emit("compileErrors", annotations);
+            */
         };
 
     }).call(TypeScriptWorker.prototype);

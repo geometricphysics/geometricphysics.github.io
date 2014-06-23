@@ -1755,12 +1755,53 @@ var TypeScript;
         }
         ;
 
+        function getUnknownEnvironment() {
+            var env = {
+                supportsCodePage: function () {
+                    return false;
+                },
+                readFile: function (file, codepage) {
+                    return new FileInformation("", 0 /* None */);
+                },
+                writeFile: function (path, contents, writeByteOrderMark) {
+                },
+                deleteFile: function (path) {
+                },
+                fileExists: function (path) {
+                    return false;
+                },
+                directoryExists: function (path) {
+                    return false;
+                },
+                listFiles: function dir(path, re, options) {
+                    var paths = [];
+                    return paths;
+                },
+                arguments: [],
+                standardOut: {
+                    Write: function (str) {
+                        console.log(str);
+                    },
+                    WriteLine: function (str) {
+                        console.log(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                currentDirectory: function () {
+                    return "";
+                },
+                newLine: '\n'
+            };
+            return env;
+        }
+
         if (typeof WScript !== "undefined" && typeof ActiveXObject === "function") {
             return getWindowsScriptHostEnvironment();
         } else if (typeof module !== 'undefined' && module.exports) {
             return getNodeEnvironment();
         } else {
-            return null;
+            return getUnknownEnvironment();
         }
     })();
 })(TypeScript || (TypeScript = {}));
@@ -61775,12 +61816,91 @@ var TypeScript;
         }
         ;
 
+        function getUnknownIO() {
+            var io = {
+                appendFile: function (path, content) {
+                },
+                readFile: function (file, codepage) {
+                    return TypeScript.Environment.readFile(file, codepage);
+                },
+                writeFile: function (path, contents, writeByteOrderMark) {
+                    TypeScript.Environment.writeFile(path, contents, writeByteOrderMark);
+                },
+                deleteFile: function (path) {
+                    IOUtils.throwIOError(TypeScript.getDiagnosticMessage(TypeScript.DiagnosticCode.Could_not_delete_file_0, [path]), new Error("not implemented"));
+                },
+                fileExists: function (path) {
+                    return false;
+                },
+                dir: function dir(path, spec, options) {
+                    options = options || {};
+
+                    var paths = [];
+
+                    return paths;
+                },
+                createDirectory: function (path) {
+                    IOUtils.throwIOError(TypeScript.getDiagnosticMessage(TypeScript.DiagnosticCode.Could_not_create_directory_0, [path]), new Error("not implemented"));
+                },
+                directoryExists: function (path) {
+                    return false;
+                },
+                resolvePath: function (path) {
+                    return "";
+                },
+                dirName: function (path) {
+                    return "";
+                },
+                findFile: function (rootPath, partialFilePath) {
+                    return null;
+                },
+                print: function (str) {
+                    console.log(str);
+                },
+                printLine: function (str) {
+                    console.log(str + '\n');
+                },
+                arguments: [],
+                stderr: {
+                    Write: function (str) {
+                        console.error(str);
+                    },
+                    WriteLine: function (str) {
+                        console.error(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                stdout: {
+                    Write: function (str) {
+                        console.log(str);
+                    },
+                    WriteLine: function (str) {
+                        console.log(str + '\n');
+                    },
+                    Close: function () {
+                    }
+                },
+                watchFile: function (fileName, callback) {
+                    return null;
+                },
+                run: function (source, fileName) {
+                },
+                getExecutingFilePath: function () {
+                    return "";
+                },
+                quit: function (code) {
+                }
+            };
+            return io;
+        }
+
         if (typeof WScript !== "undefined" && typeof ActiveXObject === "function")
             return getWindowsScriptHostIO();
         else if (typeof module !== 'undefined' && module.exports)
             return getNodeIO();
         else
-            return null;
+            return getUnknownIO();
     })();
 })(TypeScript || (TypeScript = {}));
 var TypeScript;
@@ -62516,7 +62636,7 @@ var TypeScript;
                 });
             }
 
-            opts.parse(this.ioHost.arguments);
+            opts.parse(this.ioHost ? this.ioHost.arguments : []);
 
             this.compilationSettings = TypeScript.ImmutableCompilationSettings.fromCompilationSettings(mutableSettings);
 

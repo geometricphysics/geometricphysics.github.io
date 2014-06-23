@@ -15,8 +15,9 @@ define(function(require, exports, module)
     var useTSS = true;
     if (useTSS)
     {
-        Services = require('./typescriptServices').Services;
         TypeScript = require('./typescriptServices').TypeScript;
+        Services = TypeScript.Services;
+//      Services = require('./typescriptServices').Services;
     }
 
     var ScriptInfo = (function () {
@@ -78,26 +79,42 @@ define(function(require, exports, module)
         return ScriptInfo;
     })();
     exports.ScriptInfo = ScriptInfo;
-    var TypeScriptLS = (function () {
-        function TypeScriptLS() {
+
+    var ScriptManager = (function ()
+    {
+        function ScriptManager()
+        {
             this.ls = null;
             this.scripts = [];
             this.maxScriptVersions = 100;
         }
-        TypeScriptLS.prototype.addDefaultLibrary = function () {
+        ScriptManager.prototype.addDefaultLibrary = function ()
+        {
+            /*
             this.addScript("lib.d.ts", Harness.Compiler.libText, true);
+            */
         };
-        TypeScriptLS.prototype.addFile = function (name, isResident) {
+        ScriptManager.prototype.addFile = function (name, isResident)
+        {
+            console.log("ScriptManager.addFile");
+            /*
             if (typeof isResident === "undefined") { isResident = false; }
             var code = Harness.CollateralReader.read(name);
             this.addScript(name, code, isResident);
+            */
         };
-        TypeScriptLS.prototype.addScript = function (name, content, isResident) {
+        ScriptManager.prototype.addScript = function (name, content, isResident)
+        {
+            console.log('ScriptManager.addScript(' + JSON.stringify({'name':name}) + ')');
+
             if (typeof isResident === "undefined") { isResident = false; }
             var script = new ScriptInfo(name, content, isResident, this.maxScriptVersions);
             this.scripts.push(script);
         };
-        TypeScriptLS.prototype.updateScript = function (name, content, isResident) {
+        ScriptManager.prototype.updateScript = function (name, content, isResident)
+        {
+            console.log('ScriptManager.updateScript(' + JSON.stringify({'name':name}) + ')');
+
             if (typeof isResident === "undefined") { isResident = false; }
             for(var i = 0; i < this.scripts.length; i++) {
                 if(this.scripts[i].name == name) {
@@ -107,7 +124,10 @@ define(function(require, exports, module)
             }
             this.addScript(name, content, isResident);
         };
-        TypeScriptLS.prototype.editScript = function (name, minChar, limChar, newText) {
+        ScriptManager.prototype.editScript = function (name, minChar, limChar, newText)
+        {
+            console.log("ScriptManager.editScript");
+            /*
             for(var i = 0; i < this.scripts.length; i++) {
                 if(this.scripts[i].name == name) {
                     this.scripts[i].editContent(minChar, limChar, newText);
@@ -115,60 +135,83 @@ define(function(require, exports, module)
                 }
             }
             throw new Error("No script with name '" + name + "'");
+            */
         };
-        TypeScriptLS.prototype.getScriptContent = function (scriptIndex) {
-            return this.scripts[scriptIndex].content;
+        ScriptManager.prototype.getScript = function (scriptIndex)
+        {
+            return this.scripts[scriptIndex];
         };
-        TypeScriptLS.prototype.information = function () {
+        ScriptManager.prototype.getScriptContent = function (scriptIndex)
+        {
+            return "// Hello";
+            // return this.scripts[scriptIndex].content;
+        };
+        ScriptManager.prototype.information = function ()
+        {
             return true;
         };
-        TypeScriptLS.prototype.debug = function () {
+        ScriptManager.prototype.debug = function ()
+        {
             return true;
         };
-        TypeScriptLS.prototype.warning = function () {
+        ScriptManager.prototype.warning = function ()
+        {
             return true;
         };
-        TypeScriptLS.prototype.error = function () {
+        ScriptManager.prototype.error = function ()
+        {
             return true;
         };
-        TypeScriptLS.prototype.fatal = function () {
+        ScriptManager.prototype.fatal = function ()
+        {
             return true;
         };
-        TypeScriptLS.prototype.log = function (s) {
+        ScriptManager.prototype.log = function (s)
+        {
 
         };
-        TypeScriptLS.prototype.getCompilationSettings = function () {
+        ScriptManager.prototype.getCompilationSettings = function ()
+        {
             return "";
         };
-        TypeScriptLS.prototype.getScriptCount = function () {
+        ScriptManager.prototype.getScriptFileNames = function ()
+        {
+            return JSON.stringify(this.scripts.map(function(scriptInfo) {return scriptInfo.name;}));
+        };
+        ScriptManager.prototype.getLocalizedDiagnosticMessages = function ()
+        {
+            return "";
+        };
+        ScriptManager.prototype.getScriptCount = function ()
+        {
             return this.scripts.length;
         };
-        TypeScriptLS.prototype.getScriptSourceText = function (scriptIndex, start, end) {
+        ScriptManager.prototype.getScriptSourceText = function (scriptIndex, start, end) {
             return this.scripts[scriptIndex].content.substring(start, end);
         };
-        TypeScriptLS.prototype.getScriptSourceLength = function (scriptIndex) {
+        ScriptManager.prototype.getScriptSourceLength = function (scriptIndex) {
             return this.scripts[scriptIndex].content.length;
         };
-        TypeScriptLS.prototype.getScriptId = function (scriptIndex) {
+        ScriptManager.prototype.getScriptId = function (scriptIndex) {
             return this.scripts[scriptIndex].name;
         };
-        TypeScriptLS.prototype.getScriptIsResident = function (scriptIndex) {
+        ScriptManager.prototype.getScriptIsResident = function (scriptIndex) {
             return this.scripts[scriptIndex].isResident;
         };
-        TypeScriptLS.prototype.getScriptVersion = function (scriptIndex) {
+        ScriptManager.prototype.getScriptVersion = function (scriptIndex) {
             return this.scripts[scriptIndex].version;
         };
-        TypeScriptLS.prototype.getScriptEditRangeSinceVersion = function (scriptIndex, scriptVersion) {
+        ScriptManager.prototype.getScriptEditRangeSinceVersion = function (scriptIndex, scriptVersion) {
             var range = this.scripts[scriptIndex].getEditRangeSinceVersion(scriptVersion);
             return (range.minChar + "," + range.limChar + "," + range.delta);
         };
-        TypeScriptLS.prototype.getLanguageService = function () {
+        ScriptManager.prototype.getLanguageService = function () {
             var ls = new Services.TypeScriptServicesFactory().createLanguageServiceShim(this);
-            ls.refresh(true);
+//          ls.refresh(true);
             this.ls = ls;
             return ls;
         };
-        TypeScriptLS.prototype.parseSourceText = function (fileName, sourceText) {
+        ScriptManager.prototype.parseSourceText = function (fileName, sourceText) {
             var parser = new TypeScript.Parser();
             parser.setErrorRecovery(null, -1, -1);
             parser.errorCallback = function (a, b, c, d) {
@@ -176,11 +219,11 @@ define(function(require, exports, module)
             var script = parser.parse(sourceText, fileName, 0);
             return script;
         };
-        TypeScriptLS.prototype.parseFile = function (fileName) {
+        ScriptManager.prototype.parseFile = function (fileName) {
             var sourceText = new TypeScript.StringSourceText(IO.readFile(fileName));
             return this.parseSourceText(fileName, sourceText);
         };
-        TypeScriptLS.prototype.lineColToPosition = function (fileName, line, col) {
+        ScriptManager.prototype.lineColToPosition = function (fileName, line, col) {
             var script = this.ls.languageService.getScriptAST(fileName);
             assert.notNull(script);
             assert(line >= 1);
@@ -188,7 +231,7 @@ define(function(require, exports, module)
             assert(line < script.locationInfo.lineMap.length);
             return TypeScript.getPositionFromLineColumn(script, line, col);
         };
-        TypeScriptLS.prototype.positionToLineCol = function (fileName, position) {
+        ScriptManager.prototype.positionToLineCol = function (fileName, position) {
             var script = this.ls.languageService.getScriptAST(fileName);
             assert.notNull(script);
             var result = TypeScript.getLineColumnFromPosition(script, position);
@@ -196,14 +239,14 @@ define(function(require, exports, module)
             assert(result.col >= 1);
             return result;
         };
-        TypeScriptLS.prototype.checkEdits = function (sourceFileName, baselineFileName, edits) {
+        ScriptManager.prototype.checkEdits = function (sourceFileName, baselineFileName, edits) {
             var script = Harness.CollateralReader.read(sourceFileName);
             var formattedScript = this.applyEdits(script, edits);
             var baseline = Harness.CollateralReader.read(baselineFileName);
             assert.noDiff(formattedScript, baseline);
             assert.equal(formattedScript, baseline);
         };
-        TypeScriptLS.prototype.applyEdits = function (content, edits) {
+        ScriptManager.prototype.applyEdits = function (content, edits) {
             var result = content;
             edits = this.normalizeEdits(edits);
             for(var i = edits.length - 1; i >= 0; i--) {
@@ -215,7 +258,7 @@ define(function(require, exports, module)
             }
             return result;
         };
-        TypeScriptLS.prototype.normalizeEdits = function (edits) {
+        ScriptManager.prototype.normalizeEdits = function (edits) {
             var result = [];
             function mapEdits(edits) {
                 var result = [];
@@ -260,8 +303,8 @@ define(function(require, exports, module)
             }
             return result;
         };
-        return TypeScriptLS;
+        return ScriptManager;
     })();
-    exports.TypeScriptLS = TypeScriptLS;
+    exports.ScriptManager = ScriptManager;
 
 });

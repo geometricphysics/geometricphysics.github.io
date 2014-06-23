@@ -14,7 +14,7 @@ define(["require", "exports", 'scripts/EditorPosition'], function(require, expor
             if (this.serviceShim)
             {
                 var compInfo;
-                compInfo = this.serviceShim.languageService.getCompletionsAtPosition(script, charpos, isMemberCompletion);
+                compInfo = this.serviceShim.getLanguageService().getCompletionsAtPosition(script, charpos, isMemberCompletion);
                 return compInfo;
             }
             else
@@ -45,5 +45,5 @@ define(["require", "exports", 'scripts/EditorPosition'], function(require, expor
         };
         return CompilationService;
     })();
-    exports.CompilationService = CompilationService;    
+    exports.CompilationService = CompilationService;
 })

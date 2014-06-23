@@ -3,29 +3,26 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
 {
     var ace = require('ace/ace');
     var AceRange = require('ace/range').Range;
-    var AutoComplete= require('AutoComplete').AutoComplete;
+    var AutoComplete= require('scripts/AutoComplete').AutoComplete;
     var lang = require("ace/lib/lang");
-    var EditorPosition = require('EditorPosition').EditorPosition;
-    var CompilationService =  require('CompilationService').CompilationService;
-    var FileService =  require('FileService').FileService;
+    var EditorPosition = require('scripts/EditorPosition').EditorPosition;
+    var CompilationService =  require('scripts/CompilationService').CompilationService;
+    var FileService =  require('scripts/FileService').FileService;
     var deferredCall = require("ace/lib/lang").deferredCall;
 
-    // Let's see if we can gracefully degrade then upgrade parts.
-    var useTSS = true;
-    var tss;
-    if (useTSS)
-    {
-       tss = useTSS ? require('ace/mode/typescript/typescriptServices') : null;
-    }
+    var pys = require('ace/mode/python/pythonServices');
 
-    var Services = tss ? tss.Services : null;
-    var TypeScript = tss ? tss.TypeScript : null;
+    // Don't really need this here, but proove we can load it.
+//  var davinciPy = require('vendor/davinci-py/dist/davinci-py');
+    var davinciPy = require('davinciPy');
+
+    var Services = pys.Services;
 
     // This customized object was cloned from harness.ts.
     // Although it is custom, it appears it has to be compatible with the shim below.
     // It must implement ILanguageServiceShimHost, ILogger, and functions addScript, updateScript, editScript.
-    var harness = require('ace/mode/typescript/harness');
-    var typeScriptLS =  new harness.TypeScriptLS();
+    var harness = require('ace/mode/python/harness');
+    var scriptManager =  new harness.ScriptManager();
 
     var aceEditorPosition = null;
     var appFileService = null;
@@ -33,9 +30,8 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
     var outputEditor = null;
     var typeCompilationService = null;
     var docUpdateCount = 0;
-    // TypeScriptServiceFactory does exist in version 1.0.1.
-    var ServicesFactory = Services ? new Services.TypeScriptServicesFactory() : null;
-    var serviceShim = ServicesFactory ? ServicesFactory.createLanguageServiceShim(typeScriptLS) : null;
+    var ServicesFactory = new Services.ServicesFactory();
+    var serviceShim = ServicesFactory.createLanguageServiceShim(scriptManager);
 
     var selectFileName = "";
 
@@ -44,29 +40,6 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
     var refMarkers = [];
     var errorMarkers =[];
 
-    // This stuff seems to provide the code assist.
-    function loadTypeScriptLibrary()
-    {
-        var libnames =
-        [
-            "typescripts/lib.d.ts",
-            "typescripts/eightjs.d.ts"
-        ];
-
-        // Add a non network script to get the balls rolling more quickly
-        // See https://typescript.codeplex.com/workitem/129
-        var iArgs = "interface IArguments {           [index: number]: any;        length: number;        callee: Function;    }";
-        typeScriptLS.addScript('start.d.ts', iArgs, true);
-
-        libnames.forEach(function(libname)
-        {
-            appFileService.readFile(libname, function(content)
-            {
-                typeScriptLS.addScript(libname, content.replace(/\r\n?/g,"\n"), true);
-            });
-        });
-    }
-
     function loadFile(filename) {
         appFileService.readFile(filename, function(content){
             selectFileName = filename;
@@ -74,7 +47,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
             var data= content.replace(/\r\n?/g,"\n");
             editor.setValue(data);
             editor.moveCursorTo(0, 0);
-            typeScriptLS.updateScript(filename, editor.getSession().getDocument().getValue() , false);
+            scriptManager.updateScript(filename, editor.getSession().getDocument().getValue() , false);
             syncStop = false;
         });
     }
@@ -88,14 +61,19 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
         }
     }
 
-    function onUpdateDocument(e){
-        if (selectFileName){
-            if (!syncStop){
-                try{
-                    syncTypeScriptServiceContent(selectFileName, e);
+    function onUpdateDocument(e)
+    {
+        if (selectFileName)
+        {
+            if (!syncStop)
+            {
+                try
+                {
+                    syncScriptServiceContent(selectFileName, e);
                     updateMarker(e);
-                }catch(ex){
-
+                }
+                catch(ex)
+                {
                 }
             }
         }
@@ -150,7 +128,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
     }
 
 //sync LanguageService content and ace editor content
-    function syncTypeScriptServiceContent(script, aceChangeEvent){
+    function syncScriptServiceContent(script, aceChangeEvent){
 
         var data = aceChangeEvent.data;
         var action = data.action;
@@ -178,7 +156,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
 
 
     function editLanguageService(name, textEdit){
-        typeScriptLS.editScript(name, textEdit.minChar, textEdit.limChar, textEdit.text);
+        scriptManager.editScript(name, textEdit.minChar, textEdit.limChar, textEdit.text);
     }
 
     function onChangeCursor(e){
@@ -248,7 +226,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
 
     function showOccurrences()
     {
-        var references = serviceShim ? serviceShim.languageService.getOccurrencesAtPosition(selectFileName, aceEditorPosition.getCurrentCharPosition()) : null;
+        var references = serviceShim.getLanguageService().getOccurrencesAtPosition(selectFileName, aceEditorPosition.getCurrentCharPosition());
         var session = editor.getSession();
         refMarkers.forEach(function (id)
         {
@@ -271,41 +249,14 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
 
     var deferredShowOccurrences = deferredCall(showOccurrences);
 
-    function Compile(typeScriptContent){
-        var output = "";
-
-        var outfile = {
-            Write: function (s) {
-                output  += s;
-            },
-            WriteLine: function (s) {
-                output  += s + "\n";
-            },
-            Close: function () {
-            }
-        };
-
-        var outerr = {
-            Write: function (s) {
-            },
-            WriteLine: function (s) {
-            },
-            Close: function () {
-            }
-        };
-        var compiler = new TypeScript.TypeScriptCompiler(outfile, outerr, new TypeScript.NullLogger(), new TypeScript.CompilationSettings());
-        compiler.addUnit(typeScriptContent, "output.js", false);
-        compiler.typeCheck();
-        compiler.emit(false, function (name) {
-
-        });
-        return output;
-    }
-
-    function workerOnCreate(func, timeout){
-        if(editor.getSession().$worker){
+    function workerOnCreate(func, timeout)
+    {
+        if(editor.getSession().$worker)
+        {
             func(editor.getSession().$worker);
-        }else{
+        }
+        else
+        {
             setTimeout(function(){
                 workerOnCreate(func, timeout);
             });
@@ -327,7 +278,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
         appFileService = new FileService($);
         editor = ace.edit("editor");
         editor.setTheme("ace/theme/twilight");
-        editor.getSession().setMode('ace/mode/typescript');
+        editor.getSession().setMode('ace/mode/python');
 
         outputEditor = ace.edit("output");
         outputEditor.setTheme("ace/theme/twilight");
@@ -335,10 +286,8 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
         document.getElementById('editor').style.fontSize='14px';
         document.getElementById('output').style.fontSize='14px';
 
-        loadTypeScriptLibrary();
-
         // TODO: Nice to make this data driven from the UI.
-        loadFile("samples/eight.ts");
+        loadFile("samples/eight.py");
 
         editor.addEventListener("change", onUpdateDocument);
         editor.addEventListener("changeSelection", onChangeCursor);
@@ -414,25 +363,8 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
             });
         });
 
-        workerOnCreate(function(){//TODO use worker init event
+        workerOnCreate(function() {
 
-            [
-                "typescripts/lib.d.ts",
-                "typescripts/eightjs.d.ts",
-                "typescripts/stats.js.d.ts"
-            ].forEach(function(libname)
-            {
-                appFileService.readFile(libname, function(content)
-                {
-                    var params = {
-                        data: {
-                            name:libname,
-                            content:content.replace(/\r\n?/g,"\n")
-                        }
-                    };
-                    editor.getSession().$worker.emit("addLibrary", params );
-                });
-            });
         }, 100);
 
         $("#javascript-run").click(function(e){
