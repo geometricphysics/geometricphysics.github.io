@@ -1,5 +1,3 @@
-///<reference path='lib.d.ts'/>
-
 declare module EIGHT
 {
   interface Euclidean3

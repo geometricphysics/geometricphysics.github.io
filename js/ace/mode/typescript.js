@@ -45,9 +45,7 @@ var MatchingBraceOutdent = require("./matching_brace_outdent").MatchingBraceOutd
 var WorkerClient = require("../worker/worker_client").WorkerClient;
 
 var Mode = function() {
-    var highlighter = new TypeScriptHighlightRules();
-    
-    this.$tokenizer = new Tokenizer(highlighter.getRules());
+    this.$tokenizer = new Tokenizer(new TypeScriptHighlightRules().getRules());
     this.$outdent = new MatchingBraceOutdent();
     this.$behaviour = new CstyleBehaviour();
     this.foldingRules = new CStyleFoldMode();
@@ -59,18 +57,21 @@ oop.inherits(Mode, jsMode);
         var worker = new WorkerClient(["ace"], "ace/mode/typescript_worker", "TypeScriptWorker");
         worker.attachToDocument(session.getDocument());
 
+        worker.on("tslint", function(event) {
+            session.setAnnotations(event.data);
+        });
+
         worker.on("terminate", function() {
             session.clearAnnotations();
         });
 
-        worker.on("compileErrors", function(results) {
-            session.setAnnotations(results.data);
-            session._emit("compileErrors", {data: results.data});
-
+        worker.on("compileErrors", function(event) {
+            session.setAnnotations(event.data);
+            session._emit("compileErrors", {data: event.data});
         });
 
-        worker.on("compiled", function(result) {
-            session._emit("compiled", {data: result.data});
+        worker.on("compiled", function(event) {
+            session._emit("compiled", {data: event.data});
         });
 
         return worker;

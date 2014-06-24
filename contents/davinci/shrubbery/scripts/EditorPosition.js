@@ -8,7 +8,7 @@ define(["require", "exports"], function(require, exports) {
                 doc = editor.getSession().getDocument();
                 return _this.getChars(doc, pos);
             };
-            this.getAcePositionFromChars = function (chars) {
+            this.getPositionFromChars = function (chars) {
                 var doc;
                 doc = editor.getSession().getDocument();
                 return _this.getPosition(doc, chars);

@@ -1,3 +1,14 @@
+/**
+ * LanguageServiceHost
+ *
+ * This is used by both the TypeScriptWorker as well as the client.
+ *
+ * It is essentially a repository of scripts organized by fileName and their content.
+ *
+ * The API is fairly neutral form the point of adding and removing scripts, but it 
+ * does support Microsoft TypeScript interfaces so that it can be decorated into
+ * a language service.
+ */
 define(function(require, exports, module)
 {
     var tsLib = require('./typescriptServices').TypeScript;
@@ -189,6 +200,21 @@ define(function(require, exports, module)
             }
         };
 
+        LanguageServiceHost.prototype.removeScript = function (fileName)
+        {
+            console.log('LanguageServiceHost.removeScript(' + JSON.stringify({'fileName':fileName}) + ')');
+
+            var script = this.scripts[fileName];
+            if (script)
+            {
+                delete this.scripts[fileName];
+            }
+            else
+            {
+                throw new Error("No script with fileName '" + fileName + "'");
+            }
+        };
+
         ///////////////////////////////////////////////////////////////////////
         // ILogger implementation
 
@@ -270,7 +296,6 @@ define(function(require, exports, module)
         };
 
         /**
-         *
          * Normalize an array of edits by removing overlapping entries and sorting
          * entries on the "minChar" position.
          */
@@ -287,9 +312,11 @@ define(function(require, exports, module)
                 }
                 return result;
             }
-            var temp = mapEdits(edits).sort(function (a, b) {
+
+            var temp = mapEdits(edits).sort(function (a, b)
+            {
                 var result = a.edit.minChar - b.edit.minChar;
-                if(result === 0)
+                if (result === 0)
                 {
                     result = a.index - b.index;
                 }
@@ -298,12 +325,12 @@ define(function(require, exports, module)
 
             var current = 0;
             var next = 1;
-            while(current < temp.length)
+            while (current < temp.length)
             {
                 var currentEdit = temp[current].edit;
 
                 // Last edit.
-                if(next >= temp.length)
+                if (next >= temp.length)
                 {
                     result.push(currentEdit);
                     current++;
@@ -314,7 +341,7 @@ define(function(require, exports, module)
                 var gap = nextEdit.minChar - currentEdit.limChar;
 
                 // non-overlapping edits.
-                if(gap >= 0)
+                if (gap >= 0)
                 {
                     result.push(currentEdit);
                     current = next;
@@ -322,9 +349,9 @@ define(function(require, exports, module)
                     continue;
                 }
 
-                  // overlapping edits: for now, we only support ignoring an next edit
-                    // entirely contained in the current edit.
-                if(currentEdit.limChar >= nextEdit.limChar)
+                // overlapping edits: for now, we only support ignoring an next edit
+                // entirely contained in the current edit.
+                if (currentEdit.limChar >= nextEdit.limChar)
                 {
                     next++;
                     continue;

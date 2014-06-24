@@ -216,7 +216,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
         var references = serviceShim.languageService.getOccurrencesAtPosition(selectFileName, aceEditorPosition.getCurrentCharPosition());
 
         references.forEach(function(ref){
-            var getpos = aceEditorPosition.getAcePositionFromChars;
+            var getpos = aceEditorPosition.getPositionFromChars;
             var start = getpos(ref.ast.minChar);
             var end = getpos(ref.ast.limChar);
             var range = new AceRange(start.row, start.column, end.row, end.column);
@@ -238,7 +238,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
             {
                 //TODO check script name
                 // console.log(ref.unitIndex);
-                var getpos = aceEditorPosition.getAcePositionFromChars;
+                var getpos = aceEditorPosition.getPositionFromChars;
                 var start = getpos(ref.ast.minChar);
                 var end = getpos(ref.ast.limChar);
                 var range = new AceRange(start.row, start.column, end.row, end.column);
@@ -355,7 +355,7 @@ define(/*'main', ['require', 'exports', 'module'],*/ function(require, exports, 
                 session.removeMarker(id);
             });
             e.data.forEach(function(error){
-                var getpos = aceEditorPosition.getAcePositionFromChars;
+                var getpos = aceEditorPosition.getPositionFromChars;
                 var start = getpos(error.minChar);
                 var end = getpos(error.limChar);
                 var range = new AceRange(start.row, start.column, end.row, end.column);

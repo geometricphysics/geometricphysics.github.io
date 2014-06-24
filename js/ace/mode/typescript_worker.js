@@ -1,3 +1,10 @@
+/**
+ * TypeScriptWorker
+ *
+ * N.B. Considered to be an ACE editor component and so all APIs should be in terms of ACE objects.
+ * i.e. The exposure of the (Microsoft) TypeScript implementation should be hidden.
+ * Since most communication is through events, ensure that event messages have an ACE flavor. 
+ */
 define(function(require, exports, module)
 {
     "no use strict";
@@ -11,7 +18,7 @@ define(function(require, exports, module)
     var TypeScript = require('./typescript/typescriptServices').TypeScript;
     var Services = TypeScript.Services;
     var TypeScriptServicesFactory = Services.TypeScriptServicesFactory;
-    var LanguageServiceHost = require('./typescript/harness').LanguageServiceHost;
+    var LanguageServiceHost = require('./typescript/LanguageServiceHost').LanguageServiceHost;
 
     var TypeScriptWorker = exports.TypeScriptWorker = function(sender)
     {
@@ -35,7 +42,6 @@ define(function(require, exports, module)
 
         sender.on("addLibrary", function(message)
         {
-//          console.log("message.data.fileName: " + JSON.stringify(message.data.fileName));
             // This call, in turn will add the library to the lsHost.
             self.addlibrary(message.data.fileName , message.data.content);
         });
@@ -54,21 +60,18 @@ define(function(require, exports, module)
 
         this.setOptions = function(options)
         {
-//          console.log('worker.setOptions(' + JSON.stringify(options) + ')');
             this.options = options || {};
         };
 
         this.changeOptions = function(newOptions)
         {
-            console.log("worker.changeOptions");
             oop.mixin(this.options, newOptions);
             this.deferredUpdate.schedule(100);
         };
 
         this.addlibrary = function(fileName, content)
         {
-//          console.log('worker.addLibrary(' + fileName + ')');
-            this.lsHost.addScript(fileName, content.replace(/\r\n?/g,"\n"));
+            this.lsHost.addScript(fileName, content.replace(/\r\n?/g, '\n'));
         };
 
         ["getTypeAtPosition",
@@ -106,78 +109,87 @@ define(function(require, exports, module)
                 };
             });
 
-
+        /**
+         * This method is called in a deferred manner as a result of a 'change' event in the sender. 
+         */
         this.onUpdate = function()
         {
-//          console.log("worker.onUpdate");
-
             var result = {};
-            var errors = {};
             var scripts = this.lsHost.scripts;
             var ls = this.ls;
+            var sender = this.sender;
+            var doc = this.doc;
 
             function compile(code)
             {
-//              console.log("worker.compile");
+                var annotations;
+
+                /**
+                 * Converts the error to an annotation as well as having 'minChar' and 'limChar' properties.
+                 */
+                function convertError(tsError)
+                {
+                    var minChar = tsError.start();
+                    var limChar = minChar + tsError.length();
+                    var error = {'minChar': minChar, 'limChar': limChar};
+                    // ACE annotation properties.
+                    var pos = DocumentPositionUtil.getPosition(doc, minChar);
+                    error.text = tsError.message();
+                    error.row = pos.row;
+                    error.column = pos.column;
+                    error.type = 'error'; // Determines the icon that appears for the annotation.
+                    return error;
+                }
 
                 for (var fileName in scripts)
                 {
-//                  console.log("fileName: " + fileName);
+                    annotations = [];
                     try
                     {
                         var emitOutput = ls.getEmitOutput(fileName);
 
-                        var fileErrors = ls.getSyntacticDiagnostics(fileName);
+                        var syntaxErrors = ls.getSyntacticDiagnostics(fileName);
+                        var semanticErrors = ls.getSemanticDiagnostics(fileName);
 
-                        if (fileErrors && fileErrors.length)
+                        if (syntaxErrors && syntaxErrors.length)
                         {
-                            console.log("errors in file " + fileName);
-//                          console.log(JSON.stringify(fileErrors));
-                            errors[fileName] = fileErrors;
+                            syntaxErrors.forEach(function(tsError)
+                            {
+                                annotations.push(convertError(tsError));
+                            });
                         }
 
-                        emitOutput.outputFiles.forEach(function(file) {
-//                          console.log(JSON.stringify(file));
+                        if (semanticErrors && semanticErrors.length)
+                        {
+                            semanticErrors.forEach(function(tsError)
+                            {
+                                annotations.push(convertError(tsError));
+                            });
+                        }
+
+                        if (fileName === 'temp.ts')
+                        {
+                            sender.emit("compileErrors", annotations);
+                        }
+
+                        emitOutput.outputFiles.forEach(function(file)
+                        {
                             result[file.name] = file.text;
                         });
                     }
-                    catch(err)
+                    catch(e)
                     {
-                        console.log("err: " + err);
                     }
                 }
 
                 var response ={'text': result['temp.js']};
-//              console.log(JSON.stringify(response));
                 return response;
             }
 
-            this.lsHost.updateScript("temp.ts", this.doc.getValue() , false);
+            this.lsHost.updateScript("temp.ts", this.doc.getValue());
 
-            var annotations = [];
-            var self = this;
             this.sender.emit("compiled", compile(this.doc.getValue()));
-
-//          var errors = this.lsHost.getLanguageService().getScriptErrors("temp.ts", 100);
-            /*
-            errors.forEach(function(error)
-            {
-                var pos = DocumentPositionUtil.getPosition(self.doc, error.minChar);
-                annotations.push({
-                    row: pos.row,
-                    column: pos.column,
-                    text: error.message,
-                    minChar:error.minChar,
-                    limChar:error.limChar,
-                    type: "error",
-                    raw: error.message
-                });
-            });
-
-            this.sender.emit("compileErrors", annotations);
-            */
         };
 
     }).call(TypeScriptWorker.prototype);
-
 });

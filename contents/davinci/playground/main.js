@@ -14,11 +14,11 @@ define(function(require, exports, module)
     var Services = tsLib.Services;
     var TextEdit = Services.TextEdit;
     var TypeScriptServicesFactory = Services.TypeScriptServicesFactory;
-    var LanguageServiceHost = require('ace/mode/typescript/harness').LanguageServiceHost;
+    var LanguageServiceHost = require('ace/mode/typescript/LanguageServiceHost').LanguageServiceHost;
 
     var lsHost =  new LanguageServiceHost();
 
-    var aceEditorPosition = null;
+    var editorPositionService = null;
     var appFileService = null;
     var editor = null;
     var outputEditor = null;
@@ -26,7 +26,7 @@ define(function(require, exports, module)
     var docUpdateCount = 0;
     var languageService = new TypeScriptServicesFactory().createPullLanguageService(lsHost);
 
-    var currentFileName = "";
+    var currentFileName = null;
 
     var syncStop = false; //for stop sync on loadfile
     var autoComplete = null;
@@ -38,29 +38,28 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-//          "typescripts/eightjs.d.ts",
+            "typescripts/eightjs.d.ts",
             "typescripts/lib.d.ts"
         ];
 
-        // Add a non network script to get the ball rolling.
-        // See https://typescript.codeplex.com/workitem/129.
-        var iArgs = "interface IArguments {[index: number]: any; length: number; callee: Function;}";
-        lsHost.addScript('start.d.ts', iArgs, true);
-
-        libnames.forEach(function(libname)
+        libnames.forEach(function(fileName)
         {
-            appFileService.readFile(libname, function(content)
+            appFileService.readFile(fileName, function(content)
             {
-                lsHost.addScript(libname, content.replace(/\r\n?/g, '\n'), true);
+                lsHost.addScript(fileName, content.replace(/\r\n?/g, '\n'), true);
             });
         });
     }
 
-    function loadFile(fileName)
+    function changeCurrentFile(fileName)
     {
-
         appFileService.readFile(fileName, function(content)
         {
+            if (currentFileName)
+            {
+                lsHost.removeScript(currentFileName);
+                currentFileName = null;
+            }
             currentFileName = fileName;
             syncStop = true;
             var data = content.replace(/\r\n?/g, '\n');
@@ -134,11 +133,11 @@ define(function(require, exports, module)
 
     function refactor()
     {
-        var references = languageService.getOccurrencesAtPosition(currentFileName, aceEditorPosition.getCurrentCharPosition());
+        var references = languageService.getOccurrencesAtPosition(currentFileName, editorPositionService.getCurrentCharPosition());
 
         references.forEach(function(reference)
         {
-            var getpos = aceEditorPosition.getAcePositionFromChars;
+            var getpos = editorPositionService.getPositionFromChars;
             var start = getpos(reference.minChar);
             var end = getpos(reference.limChar);
             var range = new AceRange(start.row, start.column, end.row, end.column);
@@ -148,7 +147,7 @@ define(function(require, exports, module)
 
     function showOccurrences()
     {
-        var references = languageService.getOccurrencesAtPosition(currentFileName, aceEditorPosition.getCurrentCharPosition());
+        var references = languageService.getOccurrencesAtPosition(currentFileName, editorPositionService.getCurrentCharPosition());
         var session = editor.getSession();
         refMarkers.forEach(function (id)
         {
@@ -158,7 +157,7 @@ define(function(require, exports, module)
         {
             references.forEach(function(reference)
             {
-                var getpos = aceEditorPosition.getAcePositionFromChars;
+                var getpos = editorPositionService.getPositionFromChars;
                 var start = getpos(reference.minChar);
                 var end = getpos(reference.limChar);
                 var range = new AceRange(start.row, start.column, end.row, end.column);
@@ -169,6 +168,8 @@ define(function(require, exports, module)
 
     var deferredShowOccurrences = deferredCall(showOccurrences);
 
+    // FIXME: We don't have to do this.
+    // The worker can send events during its lifecycle and we can respond.
     function workerOnCreate(callback, timeout)
     {
         if(editor.getSession().$worker)
@@ -211,7 +212,7 @@ define(function(require, exports, module)
         loadTypeScriptLibrary();
 
         // TODO: Nice to make this data driven from the UI.
-        loadFile("samples/eight.ts");
+        changeCurrentFile("samples/eight.ts");
 
         /**
          * When the text in the editor changes, the edit is applied to the local language service.
@@ -221,8 +222,10 @@ define(function(require, exports, module)
         editor.addEventListener("change", function(event)
         {
 //          console.log('editor.change(' + JSON.stringify(event) + ')');
-
-            function updateLanguageServiceScript(fileName)
+            /**
+             * Updates the script models.
+             */
+            function updateScriptModels(fileName)
             {
                 function editLanguageServiceScript(textEdit)
                 {
@@ -231,7 +234,7 @@ define(function(require, exports, module)
                 var data = event.data;
                 var action = data.action;
                 var range = data.range;
-                var start = aceEditorPosition.getPositionChars(range.start);
+                var start = editorPositionService.getPositionChars(range.start);
 
                 if (action == "insertText")
                 {
@@ -249,12 +252,15 @@ define(function(require, exports, module)
                 }
                 else if (action == "removeLines")
                 {
-                    var len = aceEditorPosition.getLinesChars(data.lines);
+                    var len = editorPositionService.getLinesChars(data.lines);
                     var end = start + len;
                     editLanguageServiceScript(new TextEdit(start, end, ""));
                 }
             };
-            function updateMarker()
+            /**
+             * Updates the maerker models.
+             */
+            function updateMarkerModels()
             {
                 var data = event.data;
                 var action = data.action;
@@ -307,6 +313,8 @@ define(function(require, exports, module)
 
                     errorMarkers.forEach(markerUpdate);
                     refMarkers.forEach(markerUpdate);
+                    // FIXME: This is the odd man out.
+                    // We should not be triggering a view refresh here?
                     editor.onChangeFrontMarker();
                 }
             }
@@ -316,12 +324,12 @@ define(function(require, exports, module)
                 {
                     try
                     {
-                        updateLanguageServiceScript(currentFileName);
-                        updateMarker();
+                        updateScriptModels(currentFileName);
+                        updateMarkerModels();
                     }
-                    catch(ex)
+                    catch(e)
                     {
-
+                        console.log("exception updating models: " + e)
                     }
                 }
             }
@@ -380,7 +388,7 @@ define(function(require, exports, module)
             multiSelectAction: "forEach"
         }]);
 
-        aceEditorPosition = new EditorPosition(editor);
+        editorPositionService = new EditorPosition(editor);
         completionService = new CompletionService(editor, languageService);
         autoComplete = new AutoComplete(editor, currentFileName, completionService);
 
@@ -419,31 +427,43 @@ define(function(require, exports, module)
 
         editor.getSession().on("compiled", function(event)
         {
-//          console.log("editor.compiled(" + JSON.stringify(event) + ")");
+//          console.log("editorSession.compiled(" + JSON.stringify(event) + ")");
             outputEditor.getSession().doc.setValue(event.data.text);
         });
 
         editor.getSession().on("compileErrors", function(event)
         {
-            console.log("editor.compileErrors(" + JSON.stringify(event) + ")");
+//          console.log("editorSession.compileErrors(" + JSON.stringify(event) + ")");
+
             var session = editor.getSession();
-            errorMarkers.forEach(function (id){
-                session.removeMarker(id);
-            });
-            event.data.forEach(function(error){
-                var getpos = aceEditorPosition.getAcePositionFromChars;
+
+            // Remove the existing error markers from the editor session.
+            // TODO: Why don't we clear the model (errorMarkers).
+            errorMarkers.forEach(function (id) {session.removeMarker(id);});
+
+            // Add the new compile errors to the editor session and the id(s) to the model.
+            event.data.forEach(function(error)
+            {
+                var getpos = editorPositionService.getPositionFromChars;
                 var start = getpos(error.minChar);
                 var end = getpos(error.limChar);
                 var range = new AceRange(start.row, start.column, end.row, end.column);
+                // Add a new marker to the given Range. The last argument (inFront) causes a
+                // front marker to be defined and the 'changeFrontMarker' event fires.
+                // The class parameter is a css stylesheet class so you must have it in your CSS.
+                // TODO: Remembering all these parameters is a nightmare. A fluent interface
+                // might help.
+                // var markerId = addMarker("typescript-error").toRange(range).ofType("text").inFront().getMarkerId();
                 errorMarkers.push(session.addMarker(range, "typescript-error", "text", true));
             });
+            session.setAnnotations(event.data);
         });
 
         workerOnCreate(function(worker)
         {
             [
                 "typescripts/lib.d.ts",
-//              "typescripts/eightjs.d.ts",
+                "typescripts/eightjs.d.ts",
                 "typescripts/stats.js.d.ts"
             ].forEach(function(fileName)
             {
@@ -459,14 +479,15 @@ define(function(require, exports, module)
             });
         }, 100);
 
-        $("#javascript-run").click(function(e){
+        $("#javascript-run").click(function(e)
+        {
             javascriptRun();
         });
 
         $("#select-sample").change(function(e)
         {
-            var path = "samples/" + $(this).val();
-            loadFile(path);
+            var path = "" + $(this).val();
+            changeCurrentFile(path);
         });
 
     });
