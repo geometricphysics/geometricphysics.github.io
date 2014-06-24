@@ -35,7 +35,7 @@ define(function(require, exports, module)
 
         sender.on("addLibrary", function(message)
         {
-            console.log("message.data.fileName: " + JSON.stringify(message.data.fileName));
+//          console.log("message.data.fileName: " + JSON.stringify(message.data.fileName));
             // This call, in turn will add the library to the lsHost.
             self.addlibrary(message.data.fileName , message.data.content);
         });
@@ -54,7 +54,7 @@ define(function(require, exports, module)
 
         this.setOptions = function(options)
         {
-            console.log('worker.setOptions(' + JSON.stringify(options) + ')');
+//          console.log('worker.setOptions(' + JSON.stringify(options) + ')');
             this.options = options || {};
         };
 
@@ -67,17 +67,8 @@ define(function(require, exports, module)
 
         this.addlibrary = function(fileName, content)
         {
-            console.log('worker.addLibrary(' + fileName + ')');
+//          console.log('worker.addLibrary(' + fileName + ')');
             this.lsHost.addScript(fileName, content.replace(/\r\n?/g,"\n"));
-        };
-
-        this.getCompletionsAtPosition = function(fileName, pos, isMemberCompletion, id)
-        {
-            console.log("worker.getCompletionsAtPosition");
-            /*
-            var ret = this.ls.getCompletionsAtPosition(fileName, pos, isMemberCompletion);
-            this.sender.callback(ret, id);
-            */
         };
 
         ["getTypeAtPosition",
@@ -116,36 +107,56 @@ define(function(require, exports, module)
             });
 
 
-        /**
-         * @param {string} code
-         */
-        this.compile = function (code)
-        {
-            console.log("worker.compile");
-
-            var output = "// Hello, World!!!";
-
-            var scripts = this.ls.scripts;
-
-            for (var fileName in scripts)
-            {
-                console.log("fileName: " + fileName);
-            }
-
-            return output;
-        };
-
         this.onUpdate = function()
         {
-            console.log("worker.onUpdate");
-            
-            this.lsHost.updateScript("temp.ts", this.doc.getValue() , false);
+//          console.log("worker.onUpdate");
 
-            console.log("worker.getLanguageService: " + (typeof this.lsHost.getLanguageService));
+            var result = {};
+            var errors = {};
+            var scripts = this.lsHost.scripts;
+            var ls = this.ls;
+
+            function compile(code)
+            {
+//              console.log("worker.compile");
+
+                for (var fileName in scripts)
+                {
+//                  console.log("fileName: " + fileName);
+                    try
+                    {
+                        var emitOutput = ls.getEmitOutput(fileName);
+
+                        var fileErrors = ls.getSyntacticDiagnostics(fileName);
+
+                        if (fileErrors && fileErrors.length)
+                        {
+                            console.log("errors in file " + fileName);
+//                          console.log(JSON.stringify(fileErrors));
+                            errors[fileName] = fileErrors;
+                        }
+
+                        emitOutput.outputFiles.forEach(function(file) {
+//                          console.log(JSON.stringify(file));
+                            result[file.name] = file.text;
+                        });
+                    }
+                    catch(err)
+                    {
+                        console.log("err: " + err);
+                    }
+                }
+
+                var response ={'text': result['temp.js']};
+//              console.log(JSON.stringify(response));
+                return response;
+            }
+
+            this.lsHost.updateScript("temp.ts", this.doc.getValue() , false);
 
             var annotations = [];
             var self = this;
-            this.sender.emit("compiled", this.compile(this.doc.getValue()));
+            this.sender.emit("compiled", compile(this.doc.getValue()));
 
 //          var errors = this.lsHost.getLanguageService().getScriptErrors("temp.ts", 100);
             /*

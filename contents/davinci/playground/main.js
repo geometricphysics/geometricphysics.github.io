@@ -5,7 +5,7 @@ define(function(require, exports, module)
     var AutoComplete= require('scripts/AutoComplete').AutoComplete;
     var lang = require("ace/lib/lang");
     var EditorPosition = require('scripts/EditorPosition').EditorPosition;
-    var CompilationService =  require('scripts/CompilationService').CompilationService;
+    var CompletionService =  require('scripts/CompletionService').CompletionService;
     var FileService =  require('scripts/FileService').FileService;
     var deferredCall = require("ace/lib/lang").deferredCall;
 
@@ -22,7 +22,7 @@ define(function(require, exports, module)
     var appFileService = null;
     var editor = null;
     var outputEditor = null;
-    var typeCompilationService = null;
+    var completionService = null;
     var docUpdateCount = 0;
     var languageService = new TypeScriptServicesFactory().createPullLanguageService(lsHost);
 
@@ -38,8 +38,8 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-            "typescripts/lib.d.ts",
-            "typescripts/eightjs.d.ts"
+//          "typescripts/eightjs.d.ts",
+            "typescripts/lib.d.ts"
         ];
 
         // Add a non network script to get the ball rolling.
@@ -79,129 +79,6 @@ define(function(require, exports, module)
             autoComplete.active();
         }
     }
-
-    function onChangeEditor(event)
-    {
-        function updateLanguageServiceScript(fileName)
-        {
-            function editLanguageServiceScript(textEdit)
-            {
-                lsHost.editScript(fileName, textEdit.minChar, textEdit.limChar, textEdit.text);
-            }
-            var data = event.data;
-            var action = data.action;
-            var range = data.range;
-            var start = aceEditorPosition.getPositionChars(range.start);
-
-            if (action == "insertText")
-            {
-                editLanguageServiceScript(new TextEdit(start , start, data.text));
-            }
-            else if (action == "insertLines")
-            {
-                var text = data.lines.map(function(line) {return line + '\n';}).join('');
-                editLanguageServiceScript(new TextEdit(start , start, text));
-            }
-            else if (action == "removeText")
-            {
-                var end = start + data.text.length;
-                editLanguageServiceScript(new TextEdit(start, end, ""));
-            }
-            else if (action == "removeLines")
-            {
-                var len = aceEditorPosition.getLinesChars(data.lines);
-                var end = start + len;
-                editLanguageServiceScript(new TextEdit(start, end, ""));
-            }
-        };
-        function updateMarker()
-        {
-            var data = event.data;
-            var action = data.action;
-            var range = data.range;
-            var markers = editor.getSession().getMarkers(true);
-            var line_count = 0;
-            var isNewLine = editor.getSession().getDocument().isNewLine;
-
-            if (action === "insertText")
-            {
-                if(isNewLine(data.text))
-                {
-                    line_count = 1;
-                }
-            }
-            else if (action === "insertLines")
-            {
-                line_count = data.lines.length;
-            }
-            else if (action === "removeText")
-            {
-                if(isNewLine(data.text))
-                {
-                    line_count = -1;
-                }
-            }
-            else if (action === "removeLines")
-            {
-                line_count = -data.lines.length;
-            }
-
-            if (line_count != 0)
-            {
-                var markerUpdate = function(id)
-                {
-                    var marker = markers[id];
-                    var row = range.start.row;
-
-                    if(line_count > 0)
-                    {
-                        row = +1;
-                    }
-
-                    if(marker && marker.range.start.row > row )
-                    {
-                        marker.range.start.row += line_count ;
-                        marker.range.end.row += line_count ;
-                    }
-                };
-
-                errorMarkers.forEach(markerUpdate);
-                refMarkers.forEach(markerUpdate);
-                editor.onChangeFrontMarker();
-            }
-        }
-        if (currentFileName)
-        {
-            if (!syncStop)
-            {
-                try
-                {
-                    updateLanguageServiceScript(currentFileName);
-                    updateMarker();
-                }
-                catch(ex)
-                {
-
-                }
-            }
-        }
-    }
-
-
-    function onChangeCursor(e)
-    {
-        if(!syncStop)
-        {
-            try
-            {
-                deferredShowOccurrences.schedule(200);
-            }
-            catch (ex)
-            {
-                //TODO
-            }
-        }
-    };
 
     function languageServiceIndent()
     {
@@ -336,8 +213,147 @@ define(function(require, exports, module)
         // TODO: Nice to make this data driven from the UI.
         loadFile("samples/eight.ts");
 
-        editor.addEventListener("change", onChangeEditor);
-        editor.addEventListener("changeSelection", onChangeCursor);
+        /**
+         * When the text in the editor changes, the edit is applied to the local language service.
+         *
+         * The onUpdate method of the worker is soon triggered followed by the compile method.
+         */
+        editor.addEventListener("change", function(event)
+        {
+//          console.log('editor.change(' + JSON.stringify(event) + ')');
+
+            function updateLanguageServiceScript(fileName)
+            {
+                function editLanguageServiceScript(textEdit)
+                {
+                    lsHost.editScript(fileName, textEdit.minChar, textEdit.limChar, textEdit.text);
+                }
+                var data = event.data;
+                var action = data.action;
+                var range = data.range;
+                var start = aceEditorPosition.getPositionChars(range.start);
+
+                if (action == "insertText")
+                {
+                    editLanguageServiceScript(new TextEdit(start , start, data.text));
+                }
+                else if (action == "insertLines")
+                {
+                    var text = data.lines.map(function(line) {return line + '\n';}).join('');
+                    editLanguageServiceScript(new TextEdit(start , start, text));
+                }
+                else if (action == "removeText")
+                {
+                    var end = start + data.text.length;
+                    editLanguageServiceScript(new TextEdit(start, end, ""));
+                }
+                else if (action == "removeLines")
+                {
+                    var len = aceEditorPosition.getLinesChars(data.lines);
+                    var end = start + len;
+                    editLanguageServiceScript(new TextEdit(start, end, ""));
+                }
+            };
+            function updateMarker()
+            {
+                var data = event.data;
+                var action = data.action;
+                var range = data.range;
+                var markers = editor.getSession().getMarkers(true);
+                var line_count = 0;
+                var isNewLine = editor.getSession().getDocument().isNewLine;
+
+                if (action === "insertText")
+                {
+                    if(isNewLine(data.text))
+                    {
+                        line_count = 1;
+                    }
+                }
+                else if (action === "insertLines")
+                {
+                    line_count = data.lines.length;
+                }
+                else if (action === "removeText")
+                {
+                    if(isNewLine(data.text))
+                    {
+                        line_count = -1;
+                    }
+                }
+                else if (action === "removeLines")
+                {
+                    line_count = -data.lines.length;
+                }
+
+                if (line_count != 0)
+                {
+                    var markerUpdate = function(id)
+                    {
+                        var marker = markers[id];
+                        var row = range.start.row;
+
+                        if(line_count > 0)
+                        {
+                            row = +1;
+                        }
+
+                        if(marker && marker.range.start.row > row )
+                        {
+                            marker.range.start.row += line_count ;
+                            marker.range.end.row += line_count ;
+                        }
+                    };
+
+                    errorMarkers.forEach(markerUpdate);
+                    refMarkers.forEach(markerUpdate);
+                    editor.onChangeFrontMarker();
+                }
+            }
+            if (currentFileName)
+            {
+                if (!syncStop)
+                {
+                    try
+                    {
+                        updateLanguageServiceScript(currentFileName);
+                        updateMarker();
+                    }
+                    catch(ex)
+                    {
+
+                    }
+                }
+            }
+        });
+
+        /**
+         * Changing the selection does not trigger any effort on behalf of the worker.
+         */
+        editor.addEventListener("changeSelection", function(event)
+        {
+            // There's not much in the event, just a 'type' property that is 'changeSelection'.
+//          console.log('editor.changeSelection(' + JSON.stringify(event) + ')');
+            if(!syncStop)
+            {
+                try
+                {
+                    deferredShowOccurrences.schedule(200);
+                }
+                catch (ex)
+                {
+                    //TODO
+                }
+            }
+        });
+
+        /**
+         * This event seems to be pretty rare.
+         */
+        editor.addEventListener("changeCursor", function(event)
+        {
+            console.log('editor.changeCursor(' + JSON.stringify(event) + ')');
+        });
 
         editor.commands.addCommands([{
             name:"autoComplete",
@@ -365,8 +381,8 @@ define(function(require, exports, module)
         }]);
 
         aceEditorPosition = new EditorPosition(editor);
-        typeCompilationService = new CompilationService(editor, languageService);
-        autoComplete = new AutoComplete(editor, currentFileName, typeCompilationService);
+        completionService = new CompletionService(editor, languageService);
+        autoComplete = new AutoComplete(editor, currentFileName, completionService);
 
         // override editor onTextInput
         var originalTextInput = editor.onTextInput;
@@ -382,15 +398,18 @@ define(function(require, exports, module)
                 var lineNumber = editor.getCursorPosition().row;
                 var option = new Services.EditorOptions();
                 option.NewLineCharacter = "\n";
+                // FIXME: Smart Indenting
+                /*
                 var indent = languageService.getSmartIndentAtLineNumber(currentFileName, lineNumber, option);
                 if(indent > 0)
                 {
                     editor.commands.exec("inserttext", editor, {text:" ", times:indent});
                 }
+                */
             }
         };
 
-        editor.addEventListener("mousedown", function(e)
+        editor.addEventListener("mousedown", function(event)
         {
             if(autoComplete.isActive())
             {
@@ -398,18 +417,20 @@ define(function(require, exports, module)
             }
         });
 
-        editor.getSession().on("compiled", function(e)
+        editor.getSession().on("compiled", function(event)
         {
-            outputEditor.getSession().doc.setValue(e.data);
+//          console.log("editor.compiled(" + JSON.stringify(event) + ")");
+            outputEditor.getSession().doc.setValue(event.data.text);
         });
 
-        editor.getSession().on("compileErrors", function(e)
+        editor.getSession().on("compileErrors", function(event)
         {
+            console.log("editor.compileErrors(" + JSON.stringify(event) + ")");
             var session = editor.getSession();
             errorMarkers.forEach(function (id){
                 session.removeMarker(id);
             });
-            e.data.forEach(function(error){
+            event.data.forEach(function(error){
                 var getpos = aceEditorPosition.getAcePositionFromChars;
                 var start = getpos(error.minChar);
                 var end = getpos(error.limChar);
@@ -422,7 +443,7 @@ define(function(require, exports, module)
         {
             [
                 "typescripts/lib.d.ts",
-                "typescripts/eightjs.d.ts",
+//              "typescripts/eightjs.d.ts",
                 "typescripts/stats.js.d.ts"
             ].forEach(function(fileName)
             {

@@ -1,6 +1,9 @@
-define(["require", "exports"], function(require, exports) {
-    var AutoCompleteView = (function () {
-        function AutoCompleteView(editor, autoComplete) {
+define(["require", "exports"], function(require, exports)
+{
+    var AutoCompleteView = (function ()
+    {
+        function AutoCompleteView(editor, autoComplete)
+        {
             this.editor = editor;
             this.autoComplete = autoComplete;
             this.selectedClassName = 'ace_autocomplete_selected';

@@ -1,13 +1,13 @@
-define(function(require, exports, module) {
-
+define(function(require, exports, module)
+{
     var HashHandler = require('ace/keyboard/hash_handler').HashHandler;
     var EventEmitter = require("ace/lib/event_emitter").EventEmitter;
     var AutoCompleteView = require('scripts/AutoCompleteView').AutoCompleteView;
 
     var oop = require("ace/lib/oop");
 
-    exports.AutoComplete = function(editor,script,  compilationService){
-
+    exports.AutoComplete = function(editor, script, completionService)
+    {
         var self = this;
 
         oop.implement(self, EventEmitter);
@@ -15,87 +15,103 @@ define(function(require, exports, module) {
         this.view = new AutoCompleteView(editor, self);
         this.scriptName = script;
         this._active = false;
-        this.inputText =''; //TODO imporve name
+        this.inputText ='';
 
-        this.isActive = function () {
+        this.isActive = function ()
+        {
             return self._active;
         };
 
-        this.setScriptName = function (name){
+        this.setScriptName = function (name)
+        {
             self.scriptName = name;
         };
 
-        this.show = function () {
+        this.show = function ()
+        {
             self.listElement = self.view.listElement;
             editor.container.appendChild(self.view.wrap);
             self.listElement.innerHTML = '';
         };
 
-        this.hide = function(){
+        this.hide = function()
+        {
             self.view.hide();
         }
 
-        this.compilation = function(cursor)
+        this.completionsAndCount = function(cursor)
         {
-            var compilationInfo = compilationService.getCursorCompilation(self.scriptName, cursor);
-            var text  = compilationService.matchText;
+            var completionInfo = completionService.getCursorCompletionInfo(self.scriptName, cursor);
+            var text  = completionService.matchText;
             var coords = editor.renderer.textToScreenCoordinates(cursor.row, cursor.column - text.length);
 
             self.view.setPosition(coords);
             self.inputText = text;
 
-            var compilations = compilationInfo ? compilationInfo.entries : null;
+            var completions = completionInfo ? completionInfo.entries : null;
 
             if (self.inputText.length > 0)
             {
-                compilations = compilationInfo.entries.filter(function(elm)
+                completions = completionInfo.entries.filter(function(elm)
                 {
                     return elm.name.toLowerCase().indexOf(self.inputText.toLowerCase()) == 0 ;
                 });
             }
 
-            var matchFunc = function(elm) {
+            var matchFunc = function(elm)
+            {
                 return elm.name.indexOf(self.inputText) == 0 ? 1 : 0;
             };
 
-            var matchCompare = function(a, b){
+            var matchCompare = function(a, b)
+            {
                 return matchFunc(b) - matchFunc(a);
             };
 
-            var textCompare = function(a, b){
-                 if (a.name == b.name){
+            var textCompare = function(a, b)
+            {
+                 if (a.name == b.name)
+                 {
                     return 0;
-                 }else{
+                 }
+                 else
+                 {
                      return (a.name > b.name) ? 1 : -1;
                  }
             };
-            var compare = function(a, b){
+            var compare = function(a, b)
+            {
                 var ret = matchCompare(a, b);
                 return (ret != 0) ? ret : textCompare(a, b);
             };
 
-            compilations = compilations ? compilations.sort(compare) : compilations;
+            completions = completions ? completions.sort(compare) : completions;
 
-            self.showCompilation(compilations);
+            self.showCompletions(completions);
 
-            return compilations ? compilations.length : 0;
+            return completions ? completions.length : 0;
         };
 
-        this.refreshCompilation = function(e){
+        this.refreshCompletions = function(e)
+        {
             var cursor = editor.getCursorPosition();
-            if(e.data.action  == "insertText"){
+            if(e.data.action  == "insertText")
+            {
                 cursor.column += 1;
-            } else if (e.data.action  == "removeText"){
-                if(e.data.text == '\n'){
+            }
+            else if (e.data.action  == "removeText")
+            {
+                if(e.data.text == '\n')
+                {
                     self.deactivate();
                     return;
                 }
             }
 
-            self.compilation(cursor);
+            self.completionsAndCount(cursor);
         };
 
-        this.showCompilation = function(infos)
+        this.showCompletions = function(infos)
         {
             if (infos && infos.length > 0)
             {
@@ -119,37 +135,44 @@ define(function(require, exports, module) {
             }
         };
 
-        this.active = function () {
+        this.active = function ()
+        {
             self.show();
-            var count = self.compilation(editor.getCursorPosition());
-            if(!(count > 0)){
+            var count = self.completionsAndCount(editor.getCursorPosition());
+            if(!(count > 0))
+            {
                 self.hide();
                 return;
             }
             editor.keyBinding.addKeyboardHandler(self.handler);
         };
 
-        this.deactivate = function() {
+        this.deactivate = function()
+        {
             editor.keyBinding.removeKeyboardHandler(self.handler);
         };
 
-        this.handler.attach = function(){
-            editor.addEventListener("change", self.refreshCompilation);
+        this.handler.attach = function()
+        {
+            editor.addEventListener("change", self.refreshCompletions);
             self._emit("attach", {sender: self});
             self._active = true;
         };
 
-        this.handler.detach = function(){
-            editor.removeEventListener("change", self.refreshCompilation);
+        this.handler.detach = function()
+        {
+            editor.removeEventListener("change", self.refreshCompletions);
             self.view.hide();
             self._emit("detach", {sender: self});
             self._active = false;
         };
 
-        this.handler.handleKeyboard = function(data, hashId, key, keyCode) {
-            if (hashId == -1) {
-
-                if(" -=,[]_/()!';:<>".indexOf(key) != -1){ //TODO
+        this.handler.handleKeyboard = function(data, hashId, key, keyCode)
+        {
+            if (hashId == -1)
+            {
+                if(" -=,[]_/()!';:<>".indexOf(key) != -1)
+                { //TODO
                     self.deactivate();
                 }
                 return null;
@@ -160,8 +183,10 @@ define(function(require, exports, module) {
             if (!command){
 
                 var defaultCommand = editor.commands.findKeyCommand(hashId, key);
-                if(defaultCommand){
-                    if(defaultCommand.name == "backspace"){
+                if(defaultCommand)
+                {
+                    if(defaultCommand.name == "backspace")
+                    {
                         return null;
                     }
                     self.deactivate();
@@ -169,16 +194,18 @@ define(function(require, exports, module) {
                 return null;
             }
 
-            if (typeof command != "string") {
+            if (typeof command != "string")
+            {
                 var args = command.args;
                 command = command.command;
             }
 
-            if (typeof command == "string") {
+            if (typeof command == "string")
+            {
                 command = this.commands[command];
             }
 
-            return {command: command, args: args};
+            return {'command': command, 'args': args};
         };
 
 
@@ -192,24 +219,30 @@ define(function(require, exports, module) {
         this.handler.bindKeys(exports.Keybinding);
 
         this.handler.addCommands({
-            focusnext:function(editor){
+            focusnext:function(editor)
+            {
                 self.view.focusNext();
             },
-            focusprev:function(editor){
+            focusprev:function(editor)
+            {
                 self.view.focusPrev();
             },
-            cancel:function(editor){
+            cancel:function(editor)
+            {
                 self.deactivate();
             },
-            insertComplete:function(editor){
-                editor.removeEventListener("change", self.refreshCompilation);
+            insertComplete:function(editor)
+            {
+                editor.removeEventListener("change", self.refreshCompletions);
                 var curr = self.view.current();
 
-                for(var i = 0; i<  self.inputText.length; i++){
+                for(var i = 0; i<  self.inputText.length; i++)
+                {
                     editor.remove("left");
                 }
 
-                if(curr){
+                if(curr)
+                {
                     editor.insert($(curr).data("name"));
                 }
                 self.deactivate();

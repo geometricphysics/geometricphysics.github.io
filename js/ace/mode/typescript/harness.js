@@ -7,7 +7,8 @@ define(function(require, exports, module)
     var TextChangeRange = tsLib.TextChangeRange;
     var TextSpan = tsLib.TextSpan;
 
-    var ScriptInfo = (function () {
+    var ScriptInfo = (function ()
+    {
         function ScriptInfo(fileName, content)
         {
             this.fileName = fileName;
@@ -152,7 +153,7 @@ define(function(require, exports, module)
 
         LanguageServiceHost.prototype.addScript = function (fileName, content)
         {
-            console.log('LanguageServiceHost.addScript(' + JSON.stringify({'fileName':fileName}) + ')');
+//          console.log('LanguageServiceHost.addScript(' + JSON.stringify({'fileName':fileName}) + ')');
 
             var script = new ScriptInfo(fileName, content);
             this.scripts[fileName] = script;
@@ -160,7 +161,7 @@ define(function(require, exports, module)
 
         LanguageServiceHost.prototype.updateScript = function (fileName, content)
         {
-            console.log('LanguageServiceHost.updateScript(' + JSON.stringify({'fileName':fileName}) + ')');
+//          console.log('LanguageServiceHost.updateScript(' + JSON.stringify({'fileName':fileName}) + ')');
 
             var script = this.scripts[fileName];
             if (script)
@@ -175,7 +176,7 @@ define(function(require, exports, module)
 
         LanguageServiceHost.prototype.editScript = function (fileName, minChar, limChar, newText)
         {
-            console.log("LanguageServiceHost.editScript");
+//          console.log("LanguageServiceHost.editScript");
             
             var script = this.scripts[fileName];
             if (script)
