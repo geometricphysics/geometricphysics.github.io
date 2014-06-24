@@ -207,10 +207,10 @@ class RayTracer {
 
     private intersections(ray: Ray, scene: Scene) {
         var closest = +Infinity;
-        var closestInter: Intersection = undefined;
+        var closestInter: Intersection;
         for (var i in scene.things) {
             var inter = scene.things[i].intersect(ray);
-            if (inter != null && inter.dist < closest) {
+            if (inter !== null && inter.dist < closest) {
                 closestInter = inter;
                 closest = inter.dist;
             }
@@ -220,7 +220,7 @@ class RayTracer {
 
     private testRay(ray: Ray, scene: Scene) {
         var isect = this.intersections(ray, scene);
-        if (isect != null) {
+        if (typeof isect !== 'undefined') {
             return isect.dist;
         } else {
             return undefined;
