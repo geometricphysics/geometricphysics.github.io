@@ -38,7 +38,7 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-            "typescripts/eightjs.d.ts",
+//          "typescripts/eightjs.d.ts",
             "typescripts/lib.d.ts"
         ];
 
@@ -147,22 +147,47 @@ define(function(require, exports, module)
 
     function showOccurrences()
     {
-        var references = languageService.getOccurrencesAtPosition(currentFileName, editorPositionService.getCurrentCharPosition());
+        // We avoid the following problem using the hack in LanguageServiceHost.
+        /*
+        Uncaught Error: Not yet implemented. typescriptServices.js:1267
+        Errors.notYetImplemented typescriptServices.js:1267
+        StringScriptSnapshot.getTextChangeRangeSinceVersion typescriptServices.js:4138
+        HostCache.getScriptTextChangeRangeSinceVersion typescriptServices.js:64510
+        LanguageServiceCompiler.tryUpdateFile typescriptServices.js:64675
+        LanguageServiceCompiler.synchronizeHostDataWorker typescriptServices.js:64657
+        (anonymous function) typescriptServices.js:64627
+        timeFunction typescriptServices.js:27531
+        LanguageServiceCompiler.synchronizeHostData typescriptServices.js:64626
+        LanguageServiceCompiler.getDocument typescriptServices.js:64717
+        LanguageService.getSymbolInfoAtPosition typescriptServices.js:65423
+        LanguageService.getOccurrencesAtPosition typescriptServices.js:65510
+        showOccurrences main.js:150
+        callback
+        */
+
         var session = editor.getSession();
         refMarkers.forEach(function (id)
         {
             session.removeMarker(id);
         });
-        if (references)
+        try
         {
-            references.forEach(function(reference)
+            var references = languageService.getOccurrencesAtPosition(currentFileName, editorPositionService.getCurrentCharPosition());
+            if (references)
             {
-                var getpos = editorPositionService.getPositionFromChars;
-                var start = getpos(reference.minChar);
-                var end = getpos(reference.limChar);
-                var range = new AceRange(start.row, start.column, end.row, end.column);
-                refMarkers.push(session.addMarker(range, "typescript-ref", "text", true));
-            });
+                references.forEach(function(reference)
+                {
+                    var getpos = editorPositionService.getPositionFromChars;
+                    var start = getpos(reference.minChar);
+                    var end = getpos(reference.limChar);
+                    var range = new AceRange(start.row, start.column, end.row, end.column);
+                    refMarkers.push(session.addMarker(range, "typescript-ref", "text", true));
+                });
+            }
+        }
+        catch(e)
+        {
+            console.log("" + e);
         }
     }
 
@@ -427,7 +452,6 @@ define(function(require, exports, module)
 
         editor.getSession().on("compiled", function(event)
         {
-//          console.log("editorSession.compiled(" + JSON.stringify(event) + ")");
             outputEditor.getSession().doc.setValue(event.data.text);
         });
 
@@ -462,9 +486,9 @@ define(function(require, exports, module)
         workerOnCreate(function(worker)
         {
             [
-                "typescripts/lib.d.ts",
-                "typescripts/eightjs.d.ts",
-                "typescripts/stats.js.d.ts"
+//              "typescripts/eightjs.d.ts",
+//              "typescripts/stats.js.d.ts",
+                "typescripts/lib.d.ts"
             ].forEach(function(fileName)
             {
                 // The FileService makes XML HTTP requests to retrieve the content.
