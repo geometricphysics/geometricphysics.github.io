@@ -42,6 +42,7 @@ define(function(require, exports, module)
         this.completionsAndCount = function(cursor)
         {
             var completionInfo = completionService.getCursorCompletionInfo(self.scriptName, cursor);
+            console.log(JSON.stringify("AutoComplete.completionInfo: " + completionInfo));
             var text  = completionService.matchText;
             var coords = editor.renderer.textToScreenCoordinates(cursor.row, cursor.column - text.length);
 
@@ -118,7 +119,10 @@ define(function(require, exports, module)
                 self.view.show();
                 var html = '';
                 // TODO use template
-                for(var n in infos) {
+                for(var n in infos)
+                {
+                    // {name, kind, kindModifiers}
+                    console.log(JSON.stringify(info));
                     var info = infos[n];
                     var name =  '<span class="label-name">' + info.name + '</span>';
                     var type =  '<span class="label-type">' + info.type + '</span>';

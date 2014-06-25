@@ -38,7 +38,8 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-//          "typescripts/eightjs.d.ts",
+            "typescripts/eightjs.d.ts",
+            "typescripts/davinci-blade.d.ts",
             "typescripts/lib.d.ts"
         ];
 
@@ -486,8 +487,9 @@ define(function(require, exports, module)
         workerOnCreate(function(worker)
         {
             [
-//              "typescripts/eightjs.d.ts",
-//              "typescripts/stats.js.d.ts",
+                "typescripts/eightjs.d.ts",
+                "typescripts/davinci-blade.d.ts",
+                "typescripts/stats.js.d.ts",
                 "typescripts/lib.d.ts"
             ].forEach(function(fileName)
             {

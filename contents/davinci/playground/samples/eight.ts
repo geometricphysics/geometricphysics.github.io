@@ -51,7 +51,7 @@ function tick(t: number) {
 
 function terminate(t: number) {return false;}
 
-function tearDown(e) {
+function tearDown(e: Error) {
   monitor.stop();
   glwin.close();
   if (e) {

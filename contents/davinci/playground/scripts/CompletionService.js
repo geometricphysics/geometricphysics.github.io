@@ -10,8 +10,8 @@ define(["require", "exports", 'scripts/EditorPosition'], function(require, expor
         }
         CompletionService.prototype.getCompletionsAtPosition = function(fileName, position, memberMode)
         {
-//          var args = {'fileName': fileName, 'position': position, 'memberMode': memberMode};
-//          console.log('CompletionService.getCompletionsAtPosition(' + JSON.stringify(args) + ')');
+            var args = {'fileName': fileName, 'position': position, 'memberMode': memberMode};
+            console.log('CompletionService.getCompletionsAtPosition(' + JSON.stringify(args) + ')');
             var compInfo;
             compInfo = this.ls.getCompletionsAtPosition(fileName, position, memberMode);
             return compInfo;
