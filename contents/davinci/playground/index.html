@@ -3,8 +3,10 @@ layout: playground
 title: Geometric Physics • Playground
 ---
 <script src="/vendor/davinci-blade/dist/davinci-blade.js"></script>
+<!-- We could load this as an AMD module -->
+<script src="/vendor/davinci-eight/dist/davinci-eight.js"></script>
 <script src="/vendor/bladejs/dist/bladejs.min.js"></script>
-<script src="/vendor/eightjs/dist/eight.min.js"></script>
+<!--script src="/vendor/eightjs/dist/eight.min.js"></script-->
 <script src="/vendor/gl-matrix/dist/gl-matrix-min.js"></script>
 <script src="/vendor/stats.js/build/stats.min.js"></script>
 
@@ -17,7 +19,7 @@ title: Geometric Physics • Playground
                 </div>
                 <div style="float:left;padding-top:5px;padding-left:20px">
                     <select id="select-sample">
-                        <option value="samples/eight.ts" selected="selected">Eight</option>
+                        <option value="samples/davinci-eight.ts" selected="selected">davinci-eight</option>
                         <option value="samples/animal.ts">Animal</option>
                         <option value="samples/greeter.ts">Greeter</option>
                         <option value="samples/raytracer.ts">Raytracer</option>

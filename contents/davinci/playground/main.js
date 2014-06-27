@@ -38,7 +38,7 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-            "typescripts/eightjs.d.ts",
+//          "../../../vendor/davinci-eight/src/eight.d.ts",
             "typescripts/davinci-blade.d.ts",
             "typescripts/lib.d.ts"
         ];
@@ -238,7 +238,7 @@ define(function(require, exports, module)
         loadTypeScriptLibrary();
 
         // TODO: Nice to make this data driven from the UI.
-        changeCurrentFile("samples/eight.ts");
+        changeCurrentFile("samples/davinci-eight.ts");
 
         /**
          * When the text in the editor changes, the edit is applied to the local language service.
@@ -487,7 +487,7 @@ define(function(require, exports, module)
         workerOnCreate(function(worker)
         {
             [
-                "typescripts/eightjs.d.ts",
+//              "../../../vendor/davinci-eight/src/eight.d.ts",
                 "typescripts/davinci-blade.d.ts",
                 "typescripts/stats.js.d.ts",
                 "typescripts/lib.d.ts"
