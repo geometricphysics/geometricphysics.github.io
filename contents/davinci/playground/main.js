@@ -229,11 +229,11 @@ define(function(require, exports, module)
     {
         appFileService = new FileService($);
         editor = ace.edit("editor");
-        editor.setTheme("ace/theme/twilight");
+//      editor.setTheme("ace/theme/twilight");
         editor.getSession().setMode('ace/mode/typescript');
 
         outputEditor = ace.edit("output");
-        outputEditor.setTheme("ace/theme/twilight");
+//      outputEditor.setTheme("ace/theme/twilight");
         outputEditor.getSession().setMode('ace/mode/javascript');
         document.getElementById('editor').style.fontSize='14px';
         document.getElementById('output').style.fontSize='14px';
