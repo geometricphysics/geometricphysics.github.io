@@ -39,7 +39,7 @@ define(function(require, exports, module)
         var libnames =
         [
             "../../../vendor/davinci-blade/dist/davinci-blade.d.ts",
-            "typescripts/davinci-eight.d.ts",
+            "../../../vendor/davinci-eight/dist/davinci-eight.d.ts",
             "typescripts/lib.d.ts",
             "typescripts/ace.d.ts",
             "typescripts/eagle.d.ts",
@@ -491,7 +491,7 @@ define(function(require, exports, module)
         {
             [
                 "../../../vendor/davinci-blade/dist/davinci-blade.d.ts",
-                "typescripts/davinci-eight.d.ts",
+                "../../../vendor/davinci-eight/dist/davinci-eight.d.ts",
                 "typescripts/stats.js.d.ts",
                 "typescripts/lib.d.ts",
                 "typescripts/ace.d.ts",

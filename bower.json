@@ -18,7 +18,7 @@
     "davinci": "~0.9.245",
     "davinci-ace": "latest",
     "davinci-blade": "~0.9.0",
-    "davinci-eight": "latest",
+    "davinci-eight": "~0.9.3",
     "stats.js": "latest",
     "MathLib": "~0.7.2"
   }

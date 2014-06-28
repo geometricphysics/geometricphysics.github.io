@@ -4,28 +4,28 @@ glwin.document.body.style.backgroundColor = "202020";
 glwin.document.body.style.overflow = "hidden";
 glwin.document.title = "Visualizing Geometric Algebra with davinci-eight and WebGL";
 
-var scene = EIGHT.scene();
+var scene = eight.scene();
 
-var camera = EIGHT.perspective(45, 1.0, 0.1, 100);
+var camera = eight.perspective(45, 1.0, 0.1, 100);
 
-var renderer = EIGHT.renderer();
+var renderer = eight.renderer();
 
-var box = EIGHT.mesh(EIGHT.box());
+var box = eight.mesh(eight.box());
 scene.add(box);
-box.position = EIGHT.vectorE3(-1.0,-0.5,-5.0);
-var prism = EIGHT.mesh(EIGHT.prism());
+box.position = eight.vectorE3(-1.0,-0.5,-5.0);
+var prism = eight.mesh(eight.prism());
 scene.add(prism);
-prism.position = EIGHT.vectorE3(0.0,0.0,-5.0);
+prism.position = eight.vectorE3(0.0,0.0,-5.0);
 
-var workbench = EIGHT.workbench(renderer.canvas, renderer, camera, glwin);
+var workbench = eight.workbench(renderer.canvas, renderer, camera, glwin);
 
 function setUp() {
   workbench.setUp();
   monitor.start();
 }
 
-var A = new EIGHT.Euclidean3(1,0,0,0,0,0,0,0);
-var B = EIGHT.bivectorE3(0,0,1);
+var A = new eight.Euclidean3(1,0,0,0,0,0,0,0);
+var B = eight.bivectorE3(0,0,1);
 var angle = 0;
 
 var stats = new Stats();
@@ -37,8 +37,8 @@ glwin.document.body.appendChild(stats.domElement);
 
 function tick(t: number) {
   stats.begin();
-  var c = EIGHT.scalarE3(Math.cos(angle/2));
-  var s = EIGHT.scalarE3(Math.sin(angle/2));
+  var c = eight.scalarE3(Math.cos(angle/2));
+  var s = eight.scalarE3(Math.sin(angle/2));
   var R = c.sub(B.mul(s));
   box.attitude = R;
   prism.attitude = R;
@@ -63,7 +63,7 @@ function tearDown(e: Error) {
   }
 }
 
-var runner = EIGHT.animationRunner(tick, terminate, setUp, tearDown, glwin);
+var runner = eight.animationRunner(tick, terminate, setUp, tearDown, glwin);
 
 function onContextLoss() {
     runner.stop();
@@ -78,6 +78,6 @@ function onContextGain(gl) {
     runner.start();
 }
 
-var monitor = EIGHT.contextMonitor(renderer.canvas, onContextLoss, onContextGain);
+var monitor = eight.contextMonitor(renderer.canvas, onContextLoss, onContextGain);
 
 onContextGain(renderer.context);
