@@ -1,10 +1,8 @@
-// Workaround for recent upgrade to 1.0.1 is to use this for window.
-var w: Window = this;
-var glwin = w.open("","","width=800, height=600");
+var glwin = window.open("","","width=800, height=600");
 
 glwin.document.body.style.backgroundColor = "202020";
 glwin.document.body.style.overflow = "hidden";
-glwin.document.title = "Visualizing Geometric Algebra with WebGL";
+glwin.document.title = "Visualizing Geometric Algebra with davinci-eight and WebGL";
 
 var scene = EIGHT.scene();
 
@@ -26,6 +24,7 @@ function setUp() {
   monitor.start();
 }
 
+var A = new EIGHT.Euclidean3(1,0,0,0,0,0,0,0);
 var B = EIGHT.bivectorE3(0,0,1);
 var angle = 0;
 

@@ -38,9 +38,12 @@ define(function(require, exports, module)
     {
         var libnames =
         [
-//          "../../../vendor/davinci-eight/src/eight.d.ts",
-            "typescripts/davinci-blade.d.ts",
-            "typescripts/lib.d.ts"
+            "../../../vendor/davinci-blade/dist/davinci-blade.d.ts",
+            "typescripts/davinci-eight.d.ts",
+            "typescripts/lib.d.ts",
+            "typescripts/ace.d.ts",
+            "typescripts/eagle.d.ts",
+            "typescripts/zoo.d.ts"
         ];
 
         libnames.forEach(function(fileName)
@@ -487,10 +490,13 @@ define(function(require, exports, module)
         workerOnCreate(function(worker)
         {
             [
-//              "../../../vendor/davinci-eight/src/eight.d.ts",
-                "typescripts/davinci-blade.d.ts",
+                "../../../vendor/davinci-blade/dist/davinci-blade.d.ts",
+                "typescripts/davinci-eight.d.ts",
                 "typescripts/stats.js.d.ts",
-                "typescripts/lib.d.ts"
+                "typescripts/lib.d.ts",
+                "typescripts/ace.d.ts",
+                "typescripts/zoo.d.ts",
+                "typescripts/eagle.d.ts"
             ].forEach(function(fileName)
             {
                 // The FileService makes XML HTTP requests to retrieve the content.

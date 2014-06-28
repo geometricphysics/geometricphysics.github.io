@@ -1,4 +1,7 @@
-declare module Blade {
+//
+// davinci-blade.d.ts
+//
+declare module blade {
     interface Field<T> {
         add(rhs: T): T;
         sub(rhs: T): T;
@@ -6,7 +9,7 @@ declare module Blade {
         div(rhs: T): T;
     }
 }
-declare module Blade {
+declare module blade {
     class Rational implements Field<Rational> {
         private _numer;
         private _denom;
@@ -26,7 +29,7 @@ declare module Blade {
         static ZERO: Rational;
     }
 }
-declare module Blade {
+declare module blade {
     class Dimensions {
         public L: any;
         public T: any;
@@ -47,7 +50,7 @@ declare module Blade {
         public toString(): string;
     }
 }
-declare module Blade {
+declare module blade {
     class Unit implements Field<Unit> {
         public scale: number;
         public dimensions: Dimensions;
@@ -63,7 +66,7 @@ declare module Blade {
         public toString(): string;
     }
 }
-declare module Blade {
+declare module blade {
     interface GeometricQuantity<T> extends Field<T> {
         wedge(rhs: T): T;
         lshift(rhs: T): T;
@@ -72,7 +75,7 @@ declare module Blade {
         quad(): T;
     }
 }
-declare module Blade {
+declare module blade {
     class Measure<T> implements GeometricQuantity<Measure<T>> {
         public quantity: any;
         public uom: Unit;
@@ -89,7 +92,7 @@ declare module Blade {
         public toString(): string;
     }
 }
-declare module Blade {
+declare module blade {
     class Euclidean2 implements GeometricQuantity<Euclidean2> {
         public w: number;
         public x: number;
@@ -122,7 +125,7 @@ declare module Blade {
         public toStringLATEX(): string;
     }
 }
-declare module Blade {
+declare module blade {
     class Euclidean3 implements GeometricQuantity<Euclidean3> {
         public w: number;
         public x: number;
@@ -155,7 +158,8 @@ declare module Blade {
         public toStringLATEX(): string;
     }
 }
-declare module Blade {
+declare module blade {
+    var VERSION: string;
     var UNIT_DIMLESS: Unit;
     var UNIT_KILOGRAM: Unit;
     var UNIT_METER: Unit;

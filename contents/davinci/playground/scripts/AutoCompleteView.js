@@ -95,5 +95,5 @@ define(["require", "exports"], function(require, exports)
         };
         return AutoCompleteView;
     })();
-    exports.AutoCompleteView = AutoCompleteView;    
+    exports.AutoCompleteView = AutoCompleteView;
 })
